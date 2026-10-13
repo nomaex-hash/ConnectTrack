@@ -1,0 +1,211 @@
+{
+  "riseUpDetails": [
+    {
+      "id": 0,
+      "winStreak": 2,
+      "rewards": [
+        {
+          "Type": 1,
+          "SpecificType": 1,
+          "Value": {
+            "m_Value": 50
+          }
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "winStreak": 2,
+      "rewards": [
+        {
+          "Type": 1,
+          "SpecificType": 1,
+          "Value": {
+            "m_Value": 50
+          }
+        },
+        {
+          "Type": 3,
+          "SpecificType": 3,
+          "Value": {
+            "m_Value": 900
+          }
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "winStreak": 2,
+      "rewards": [
+        {
+          "Type": 2,
+          "SpecificType": 4,
+          "Value": {
+            "m_Value": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "winStreak": 2,
+      "rewards": [
+        {
+          "Type": 1,
+          "SpecificType": 1,
+          "Value": {
+            "m_Value": 200
+          }
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "winStreak": 4,
+      "rewards": [
+        {
+          "Type": 2,
+          "SpecificType": 2,
+          "Value": {
+            "m_Value": 1
+          }
+        },
+        {
+          "Type": 3,
+          "SpecificType": 3,
+          "Value": {
+            "m_Value": 900
+          }
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "winStreak": 4,
+      "rewards": [
+        {
+          "Type": 1,
+          "SpecificType": 1,
+          "Value": {
+            "m_Value": 300
+          }
+        },
+        {
+          "Type": 3,
+          "SpecificType": 3,
+          "Value": {
+            "m_Value": 900
+          }
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "winStreak": 4,
+      "rewards": [
+        {
+          "Type": 2,
+          "SpecificType": 3,
+          "Value": {
+            "m_Value": 1
+          }
+        },
+        {
+          "Type": 3,
+          "SpecificType": 3,
+          "Value": {
+            "m_Value": 1800
+          }
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "winStreak": 5,
+      "rewards": [
+        {
+          "Type": 1,
+          "SpecificType": 1,
+          "Value": {
+            "m_Value": 500
+          }
+        },
+        {
+          "Type": 3,
+          "SpecificType": 3,
+          "Value": {
+            "m_Value": 1800
+          }
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "winStreak": 5,
+      "rewards": [
+        {
+          "Type": 2,
+          "SpecificType": 2,
+          "Value": {
+            "m_Value": 1
+          }
+        },
+        {
+          "Type": 1,
+          "SpecificType": 1,
+          "Value": {
+            "m_Value": 500
+          }
+        },
+        {
+          "Type": 3,
+          "SpecificType": 3,
+          "Value": {
+            "m_Value": 1800
+          }
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "winStreak": 10,
+      "rewards": [
+        {
+          "Type": 1,
+          "SpecificType": 1,
+          "Value": {
+            "m_Value": 2000
+          }
+        },
+        {
+          "Type": 2,
+          "SpecificType": 3,
+          "Value": {
+            "m_Value": 1
+          }
+        },
+        {
+          "Type": 2,
+          "SpecificType": 2,
+          "Value": {
+            "m_Value": 1
+          }
+        },
+        {
+          "Type": 2,
+          "SpecificType": 5,
+          "Value": {
+            "m_Value": 1
+          }
+        },
+        {
+          "Type": 2,
+          "SpecificType": 4,
+          "Value": {
+            "m_Value": 1
+          }
+        }
+      ]
+    }
+  ]
+}

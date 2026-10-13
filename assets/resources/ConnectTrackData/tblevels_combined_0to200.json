@@ -1,0 +1,1208 @@
+[
+ {
+  "id": 0,
+  "stage_level_id": 10000,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 1,
+  "stage_level_id": 10001,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 2,
+  "stage_level_id": 20002,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 3,
+  "stage_level_id": 50003,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 4,
+  "stage_level_id": 106062346,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 5,
+  "stage_level_id": 50005,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 6,
+  "stage_level_id": 20005,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 7,
+  "stage_level_id": 50007,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 8,
+  "stage_level_id": 50008,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 9,
+  "stage_level_id": 50009,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 10,
+  "stage_level_id": 50010,
+  "is_hard_level": true,
+  "difficulty": "hard"
+ },
+ {
+  "id": 11,
+  "stage_level_id": 50011,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 12,
+  "stage_level_id": 50012,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 13,
+  "stage_level_id": 50013,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 14,
+  "stage_level_id": 50014,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 15,
+  "stage_level_id": 50015,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 16,
+  "stage_level_id": 106061264,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 17,
+  "stage_level_id": 106061087,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 18,
+  "stage_level_id": 106062555,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 19,
+  "stage_level_id": 106061599,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 20,
+  "stage_level_id": 106061537,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 21,
+  "stage_level_id": 106061493,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 22,
+  "stage_level_id": 106061321,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 23,
+  "stage_level_id": 106062545,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 24,
+  "stage_level_id": 106061245,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 25,
+  "stage_level_id": 107071822,
+  "is_hard_level": true,
+  "difficulty": "hard"
+ },
+ {
+  "id": 26,
+  "stage_level_id": 106062422,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 27,
+  "stage_level_id": 106062553,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 28,
+  "stage_level_id": 107071161,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 29,
+  "stage_level_id": 106062153,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 30,
+  "stage_level_id": 110101376,
+  "is_hard_level": true,
+  "difficulty": "super_hard"
+ },
+ {
+  "id": 31,
+  "stage_level_id": 106061214,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 32,
+  "stage_level_id": 106062246,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 33,
+  "stage_level_id": 106061900,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 34,
+  "stage_level_id": 106061101,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 35,
+  "stage_level_id": 107072194,
+  "is_hard_level": true,
+  "difficulty": "hard"
+ },
+ {
+  "id": 36,
+  "stage_level_id": 106061097,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 37,
+  "stage_level_id": 106061227,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 38,
+  "stage_level_id": 106061483,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 39,
+  "stage_level_id": 106061512,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 40,
+  "stage_level_id": 109092163,
+  "is_hard_level": true,
+  "difficulty": "super_hard"
+ },
+ {
+  "id": 41,
+  "stage_level_id": 106062070,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 42,
+  "stage_level_id": 106062269,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 43,
+  "stage_level_id": 106061090,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 44,
+  "stage_level_id": 106062186,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 45,
+  "stage_level_id": 108081286,
+  "is_hard_level": true,
+  "difficulty": "hard"
+ },
+ {
+  "id": 46,
+  "stage_level_id": 106061443,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 47,
+  "stage_level_id": 106062503,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 48,
+  "stage_level_id": 106062367,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 49,
+  "stage_level_id": 106062473,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 50,
+  "stage_level_id": 108082403,
+  "is_hard_level": true,
+  "difficulty": "super_hard"
+ },
+ {
+  "id": 51,
+  "stage_level_id": 107071320,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 52,
+  "stage_level_id": 106061895,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 53,
+  "stage_level_id": 106061487,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 54,
+  "stage_level_id": 106061955,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 55,
+  "stage_level_id": 108081603,
+  "is_hard_level": true,
+  "difficulty": "hard"
+ },
+ {
+  "id": 56,
+  "stage_level_id": 106062243,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 57,
+  "stage_level_id": 106061605,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 58,
+  "stage_level_id": 106062695,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 59,
+  "stage_level_id": 107071114,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 60,
+  "stage_level_id": 109091510,
+  "is_hard_level": true,
+  "difficulty": "super_hard"
+ },
+ {
+  "id": 61,
+  "stage_level_id": 20003,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 62,
+  "stage_level_id": 106062591,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 63,
+  "stage_level_id": 106062688,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 64,
+  "stage_level_id": 106061362,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 65,
+  "stage_level_id": 108081253,
+  "is_hard_level": true,
+  "difficulty": "hard"
+ },
+ {
+  "id": 66,
+  "stage_level_id": 106062466,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 67,
+  "stage_level_id": 106061901,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 68,
+  "stage_level_id": 106061732,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 69,
+  "stage_level_id": 107071298,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 70,
+  "stage_level_id": 109091216,
+  "is_hard_level": true,
+  "difficulty": "super_hard"
+ },
+ {
+  "id": 71,
+  "stage_level_id": 106061354,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 72,
+  "stage_level_id": 106061476,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 73,
+  "stage_level_id": 106062600,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 74,
+  "stage_level_id": 106061725,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 75,
+  "stage_level_id": 107072271,
+  "is_hard_level": true,
+  "difficulty": "hard"
+ },
+ {
+  "id": 76,
+  "stage_level_id": 107071324,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 77,
+  "stage_level_id": 106061225,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 78,
+  "stage_level_id": 106061814,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 79,
+  "stage_level_id": 106061234,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 80,
+  "stage_level_id": 109091533,
+  "is_hard_level": true,
+  "difficulty": "super_hard"
+ },
+ {
+  "id": 81,
+  "stage_level_id": 106061771,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 82,
+  "stage_level_id": 106062773,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 83,
+  "stage_level_id": 106061740,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 84,
+  "stage_level_id": 106062273,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 85,
+  "stage_level_id": 107071462,
+  "is_hard_level": true,
+  "difficulty": "hard"
+ },
+ {
+  "id": 86,
+  "stage_level_id": 106061577,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 87,
+  "stage_level_id": 106062690,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 88,
+  "stage_level_id": 106061124,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 89,
+  "stage_level_id": 106062531,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 90,
+  "stage_level_id": 109091127,
+  "is_hard_level": true,
+  "difficulty": "super_hard"
+ },
+ {
+  "id": 91,
+  "stage_level_id": 106061976,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 92,
+  "stage_level_id": 106062135,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 93,
+  "stage_level_id": 106061291,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 94,
+  "stage_level_id": 107071222,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 95,
+  "stage_level_id": 107071561,
+  "is_hard_level": true,
+  "difficulty": "hard"
+ },
+ {
+  "id": 96,
+  "stage_level_id": 106061811,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 97,
+  "stage_level_id": 106061197,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 98,
+  "stage_level_id": 106062167,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 99,
+  "stage_level_id": 106061636,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 100,
+  "stage_level_id": 110101146,
+  "is_hard_level": true,
+  "difficulty": "super_hard"
+ },
+ {
+  "id": 101,
+  "stage_level_id": 106062736,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 102,
+  "stage_level_id": 106062324,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 103,
+  "stage_level_id": 106062303,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 104,
+  "stage_level_id": 107071147,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 105,
+  "stage_level_id": 108081691,
+  "is_hard_level": true,
+  "difficulty": "hard"
+ },
+ {
+  "id": 106,
+  "stage_level_id": 107071098,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 107,
+  "stage_level_id": 106061776,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 108,
+  "stage_level_id": 106062219,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 109,
+  "stage_level_id": 106061429,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 110,
+  "stage_level_id": 108082223,
+  "is_hard_level": true,
+  "difficulty": "super_hard"
+ },
+ {
+  "id": 111,
+  "stage_level_id": 106062479,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 112,
+  "stage_level_id": 106061178,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 113,
+  "stage_level_id": 106061129,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 114,
+  "stage_level_id": 106062391,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 115,
+  "stage_level_id": 108081831,
+  "is_hard_level": true,
+  "difficulty": "hard"
+ },
+ {
+  "id": 116,
+  "stage_level_id": 106061502,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 117,
+  "stage_level_id": 106062621,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 118,
+  "stage_level_id": 106061628,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 119,
+  "stage_level_id": 106061199,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 120,
+  "stage_level_id": 108082163,
+  "is_hard_level": true,
+  "difficulty": "super_hard"
+ },
+ {
+  "id": 121,
+  "stage_level_id": 107071085,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 122,
+  "stage_level_id": 107071312,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 123,
+  "stage_level_id": 107071108,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 124,
+  "stage_level_id": 106061242,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 125,
+  "stage_level_id": 107072359,
+  "is_hard_level": true,
+  "difficulty": "hard"
+ },
+ {
+  "id": 126,
+  "stage_level_id": 107071281,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 127,
+  "stage_level_id": 107071288,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 128,
+  "stage_level_id": 106061964,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 129,
+  "stage_level_id": 106062338,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 130,
+  "stage_level_id": 108082300,
+  "is_hard_level": true,
+  "difficulty": "super_hard"
+ },
+ {
+  "id": 131,
+  "stage_level_id": 106062746,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 132,
+  "stage_level_id": 106061783,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 133,
+  "stage_level_id": 106061369,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 134,
+  "stage_level_id": 106061794,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 135,
+  "stage_level_id": 108081200,
+  "is_hard_level": true,
+  "difficulty": "hard"
+ },
+ {
+  "id": 136,
+  "stage_level_id": 106061763,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 137,
+  "stage_level_id": 106061465,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 138,
+  "stage_level_id": 106062409,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 139,
+  "stage_level_id": 106061582,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 140,
+  "stage_level_id": 109092239,
+  "is_hard_level": true,
+  "difficulty": "super_hard"
+ },
+ {
+  "id": 141,
+  "stage_level_id": 106062474,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 142,
+  "stage_level_id": 106062436,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 143,
+  "stage_level_id": 106062364,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 144,
+  "stage_level_id": 106061182,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 145,
+  "stage_level_id": 107072433,
+  "is_hard_level": true,
+  "difficulty": "hard"
+ },
+ {
+  "id": 146,
+  "stage_level_id": 106062284,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 147,
+  "stage_level_id": 106062337,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 148,
+  "stage_level_id": 106061386,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 149,
+  "stage_level_id": 106062130,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 150,
+  "stage_level_id": 109091991,
+  "is_hard_level": true,
+  "difficulty": "super_hard"
+ },
+ {
+  "id": 151,
+  "stage_level_id": 106062530,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 152,
+  "stage_level_id": 107071328,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 153,
+  "stage_level_id": 106061370,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 154,
+  "stage_level_id": 106061982,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 155,
+  "stage_level_id": 107071367,
+  "is_hard_level": true,
+  "difficulty": "hard"
+ },
+ {
+  "id": 156,
+  "stage_level_id": 106061813,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 157,
+  "stage_level_id": 106061588,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 158,
+  "stage_level_id": 106062347,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 159,
+  "stage_level_id": 106062446,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 160,
+  "stage_level_id": 109091208,
+  "is_hard_level": true,
+  "difficulty": "super_hard"
+ },
+ {
+  "id": 161,
+  "stage_level_id": 106062177,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 162,
+  "stage_level_id": 106061485,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 163,
+  "stage_level_id": 106062439,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 164,
+  "stage_level_id": 106061700,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 165,
+  "stage_level_id": 108081272,
+  "is_hard_level": true,
+  "difficulty": "hard"
+ },
+ {
+  "id": 166,
+  "stage_level_id": 106062764,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 167,
+  "stage_level_id": 106062611,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 168,
+  "stage_level_id": 106062627,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 169,
+  "stage_level_id": 106061150,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 170,
+  "stage_level_id": 110101093,
+  "is_hard_level": true,
+  "difficulty": "super_hard"
+ },
+ {
+  "id": 171,
+  "stage_level_id": 106061505,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 172,
+  "stage_level_id": 106062721,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 173,
+  "stage_level_id": 107071316,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 174,
+  "stage_level_id": 106062686,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 175,
+  "stage_level_id": 107072391,
+  "is_hard_level": true,
+  "difficulty": "hard"
+ },
+ {
+  "id": 176,
+  "stage_level_id": 106061682,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 177,
+  "stage_level_id": 106061857,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 178,
+  "stage_level_id": 106061584,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 179,
+  "stage_level_id": 106061171,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 180,
+  "stage_level_id": 109092029,
+  "is_hard_level": true,
+  "difficulty": "super_hard"
+ },
+ {
+  "id": 181,
+  "stage_level_id": 106061468,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 182,
+  "stage_level_id": 106062198,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 183,
+  "stage_level_id": 107071128,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 184,
+  "stage_level_id": 106062507,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 185,
+  "stage_level_id": 108081155,
+  "is_hard_level": true,
+  "difficulty": "hard"
+ },
+ {
+  "id": 186,
+  "stage_level_id": 106061680,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 187,
+  "stage_level_id": 106061471,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 188,
+  "stage_level_id": 106062379,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 189,
+  "stage_level_id": 106062058,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 190,
+  "stage_level_id": 109092013,
+  "is_hard_level": true,
+  "difficulty": "super_hard"
+ },
+ {
+  "id": 191,
+  "stage_level_id": 106061846,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 192,
+  "stage_level_id": 107071145,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 193,
+  "stage_level_id": 106062353,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 194,
+  "stage_level_id": 106061975,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 195,
+  "stage_level_id": 107071829,
+  "is_hard_level": true,
+  "difficulty": "hard"
+ },
+ {
+  "id": 196,
+  "stage_level_id": 106061328,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 197,
+  "stage_level_id": 106061578,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 198,
+  "stage_level_id": 107071326,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 199,
+  "stage_level_id": 106061541,
+  "is_hard_level": false,
+  "difficulty": "normal"
+ },
+ {
+  "id": 200,
+  "stage_level_id": 109091820,
+  "is_hard_level": true,
+  "difficulty": "super_hard"
+ }
+]

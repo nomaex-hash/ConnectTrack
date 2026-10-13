@@ -1,0 +1,64 @@
+{
+    "dailyRewards": [
+        {
+            "adsRequire": 0,
+            "rewards": [
+                {
+                    "Type": 1,
+                    "SpecificType": 1,
+                    "Value": {
+                        "m_Value": 50
+                    }
+                }
+            ]
+        },
+        {
+            "adsRequire": 0,
+            "rewards": [
+                {
+                    "Type": 1,
+                    "SpecificType": 1,
+                    "Value": {
+                        "m_Value": 100
+                    }
+                }
+            ]
+        },
+        {
+            "adsRequire": 1,
+            "rewards": [
+                {
+                    "Type": 2,
+                    "SpecificType": 4,
+                    "Value": {
+                        "m_Value": 1
+                    }
+                }
+            ]
+        },
+        {
+            "adsRequire": 2,
+            "rewards": [
+                {
+                    "Type": 2,
+                    "SpecificType": 2,
+                    "Value": {
+                        "m_Value": 1
+                    }
+                }
+            ]
+        },
+        {
+            "adsRequire": 3,
+            "rewards": [
+                {
+                    "Type": 1,
+                    "SpecificType": 1,
+                    "Value": {
+                        "m_Value": 300
+                    }
+                }
+            ]
+        }
+    ]
+}

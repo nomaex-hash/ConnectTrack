@@ -1,0 +1,3256 @@
+{
+    "levelConfigModels": [
+      {
+        "levelOrder": "level_1",
+        "levelIndex": 1,
+        "seeds": [
+          "magicsort_magicsort1_difficulty1-1",
+          "magicsort_magicsort2_difficulty1-1",
+          "magicsort_magicsort3_difficulty1-1",
+          "magicsort_magicsort4_difficulty1-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": true
+      },
+      {
+        "levelOrder": "level_2",
+        "levelIndex": 2,
+        "seeds": [
+          "magicsort_magicsort2_difficulty1-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": true
+      },
+      {
+        "levelOrder": "level_3",
+        "levelIndex": 3,
+        "seeds": [
+          "magicsort_magicsort3_difficulty1-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": true
+      },
+      {
+        "levelOrder": "level_4",
+        "levelIndex": 4,
+        "seeds": [
+          "magicsort_magicsort4_difficulty1-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": true
+      },
+      {
+        "levelOrder": "level_5",
+        "levelIndex": 5,
+        "seeds": [
+          "v3magicsort_v3magicsort5_difficulty1-5",
+          "v3magicsort_v3magicsort5_difficulty1-4",
+          "v3magicsort_v3magicsort5_difficulty1-3",
+          "v3magicsort_v3magicsort5_difficulty1-2",
+          "v3magicsort_v3magicsort5_difficulty1-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_6",
+        "levelIndex": 6,
+        "seeds": [
+          "v3magicsort_v3magicsort6_difficulty1-5",
+          "v3magicsort_v3magicsort6_difficulty1-4",
+          "v3magicsort_v3magicsort6_difficulty1-3",
+          "v3magicsort_v3magicsort6_difficulty1-2",
+          "v3magicsort_v3magicsort6_difficulty1-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_7",
+        "levelIndex": 7,
+        "seeds": [
+          "v3magicsort_v3magicsort7_difficulty1-3",
+          "v3magicsort_v3magicsort7_difficulty1-5",
+          "v3magicsort_v3magicsort7_difficulty1-4",
+          "v3magicsort_v3magicsort7_difficulty1-1",
+          "v3magicsort_v3magicsort7_difficulty1-2"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_8",
+        "levelIndex": 8,
+        "seeds": [
+          "v3magicsort_v3magicsort8_difficulty1-14",
+          "v3magicsort_v3magicsort8_difficulty1-11",
+          "v3magicsort_v3magicsort8_difficulty1-13",
+          "v3magicsort_v3magicsort8_difficulty1-12",
+          "v3magicsort_v3magicsort8_difficulty1-15"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_9",
+        "levelIndex": 9,
+        "seeds": [
+          "v3magicsort_v3magicsort9_difficulty1-15",
+          "v3magicsort_v3magicsort9_difficulty1-11",
+          "v3magicsort_v3magicsort9_difficulty1-12",
+          "v3magicsort_v3magicsort9_difficulty1-13",
+          "v3magicsort_v3magicsort9_difficulty1-14"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_10",
+        "levelIndex": 10,
+        "seeds": [
+          "paywallms_paywallms10_difficulty1-11",
+          "paywallms_paywallms10_difficulty1-15",
+          "paywallms_paywallms10_difficulty1-14",
+          "paywallms_paywallms10_difficulty1-13",
+          "paywallms_paywallms10_difficulty1-12"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_11",
+        "levelIndex": 11,
+        "seeds": [
+          "iapmagicsort_iapmagicsort11_difficulty1-13",
+          "iapmagicsort_iapmagicsort11_difficulty1-12",
+          "iapmagicsort_iapmagicsort11_difficulty1-11",
+          "iapmagicsort_iapmagicsort11_difficulty1-10",
+          "iapmagicsort_iapmagicsort11_difficulty1-8"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_12",
+        "levelIndex": 12,
+        "seeds": [
+          "v3magicsort_v3magicsort12_difficulty1-5",
+          "v3magicsort_v3magicsort12_difficulty1-4",
+          "v3magicsort_v3magicsort12_difficulty1-1",
+          "v3magicsort_v3magicsort12_difficulty1-2",
+          "v3magicsort_v3magicsort12_difficulty1-3"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_13",
+        "levelIndex": 13,
+        "seeds": [
+          "iapmagicsort_iapmagicsort13_difficulty1-11",
+          "iapmagicsort_iapmagicsort13_difficulty1-12",
+          "iapmagicsort_iapmagicsort13_difficulty1-10",
+          "iapmagicsort_iapmagicsort13_difficulty1-9",
+          "iapmagicsort_iapmagicsort13_difficulty1-8"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_14",
+        "levelIndex": 14,
+        "seeds": [
+          "v3magicsort_v3magicsort14_difficulty2-6",
+          "v3magicsort_v3magicsort14_difficulty2-8",
+          "v3magicsort_v3magicsort14_difficulty2-7",
+          "v3magicsort_v3magicsort14_difficulty2-9",
+          "v3magicsort_v3magicsort14_difficulty2-10"
+        ],
+        "isHard": true,
+        "isSuperHard": false,
+        "cauldronReward": {
+          "levelType": "Hard",
+          "currencyType": 2,
+          "amount": 0,
+          "timeSpan": "00:30:00",
+          "currencyDetail": "30m Limitless Life"
+        },
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_15",
+        "levelIndex": 15,
+        "seeds": [
+          "v3magicsort_v3magicsort15_difficulty1-4",
+          "v3magicsort_v3magicsort15_difficulty1-3",
+          "v3magicsort_v3magicsort15_difficulty1-2",
+          "v3magicsort_v3magicsort15_difficulty1-5",
+          "v3magicsort_v3magicsort15_difficulty1-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_16",
+        "levelIndex": 16,
+        "seeds": [
+          "v3magicsort_v3magicsort16_difficulty1-5",
+          "v3magicsort_v3magicsort16_difficulty1-4",
+          "v3magicsort_v3magicsort16_difficulty1-2",
+          "v3magicsort_v3magicsort16_difficulty1-3",
+          "v3magicsort_v3magicsort16_difficulty1-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_17",
+        "levelIndex": 17,
+        "seeds": [
+          "v3magicsort_v3magicsort17_difficulty1-3",
+          "v3magicsort_v3magicsort17_difficulty1-4",
+          "v3magicsort_v3magicsort17_difficulty2-5",
+          "v3magicsort_v3magicsort17_difficulty1-1",
+          "v3magicsort_v3magicsort17_difficulty1-2"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_18",
+        "levelIndex": 18,
+        "seeds": [
+          "iapmagicsort_iapmagicsort18_difficulty1-10",
+          "iapmagicsort_iapmagicsort18_difficulty1-9",
+          "iapmagicsort_iapmagicsort18_difficulty1-8",
+          "iapmagicsort_iapmagicsort18_difficulty1-7",
+          "iapmagicsort_iapmagicsort18_difficulty2-6"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_19",
+        "levelIndex": 19,
+        "seeds": [
+          "paywallms_paywallms19_difficulty2-14",
+          "paywallms_paywallms19_difficulty2-15",
+          "paywallms_paywallms19_difficulty2-12",
+          "paywallms_paywallms19_difficulty2-13",
+          "paywallms_paywallms19_difficulty2-11"
+        ],
+        "isHard": false,
+        "isSuperHard": true,
+        "cauldronReward": {
+          "levelType": "Super Hard",
+          "currencyType": 6,
+          "amount": 1,
+          "timeSpan": "00:00:00",
+          "currencyDetail": "Extra Bottle"
+        },
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_20",
+        "levelIndex": 20,
+        "seeds": [
+          "v3magicsort_v3magicsort20_difficulty1-5",
+          "v3magicsort_v3magicsort20_difficulty1-3",
+          "v3magicsort_v3magicsort20_difficulty1-4",
+          "v3magicsort_v3magicsort20_difficulty1-1",
+          "v3magicsort_v3magicsort20_difficulty1-2"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_21",
+        "levelIndex": 21,
+        "seeds": [
+          "v3magicsort_v3magicsort21_difficulty1-7",
+          "v3magicsort_v3magicsort21_difficulty2-6",
+          "v3magicsort_v3magicsort21_difficulty2-10",
+          "v3magicsort_v3magicsort21_difficulty1-8",
+          "v3magicsort_v3magicsort21_difficulty1-9"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_22",
+        "levelIndex": 22,
+        "seeds": [
+          "v3magicsort_v3magicsort22_difficulty1-1",
+          "v3magicsort_v3magicsort22_difficulty1-5",
+          "v3magicsort_v3magicsort22_difficulty1-3",
+          "v3magicsort_v3magicsort22_difficulty1-4",
+          "v3magicsort_v3magicsort22_difficulty1-2"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_23",
+        "levelIndex": 23,
+        "seeds": [
+          "paywallms_paywallms23_difficulty1-5",
+          "paywallms_paywallms23_difficulty1-4",
+          "paywallms_paywallms23_difficulty1-3",
+          "paywallms_paywallms23_difficulty1-2",
+          "paywallms_paywallms23_difficulty1-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_24",
+        "levelIndex": 24,
+        "seeds": [
+          "v3magicsort_v3magicsort24_difficulty2-5",
+          "v3magicsort_v3magicsort24_difficulty2-4",
+          "v3magicsort_v3magicsort24_difficulty2-1",
+          "v3magicsort_v3magicsort24_difficulty2-3",
+          "v3magicsort_v3magicsort24_difficulty2-2"
+        ],
+        "dlbSeeds": [
+          "dlb_dlb24_difficulty1-1",
+          "dlb_dlb24_difficulty1-2",
+          "dlb_dlb24_difficulty1-3"
+        ],
+        "dlbCap": 2,
+        "isHard": true,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_25",
+        "levelIndex": 25,
+        "seeds": [
+          "v3magicsort_v3magicsort25_difficulty2-3",
+          "v3magicsort_v3magicsort25_difficulty1-5",
+          "v3magicsort_v3magicsort25_difficulty1-4",
+          "v3magicsort_v3magicsort25_difficulty1-2",
+          "v3magicsort_v3magicsort25_difficulty1-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_26",
+        "levelIndex": 26,
+        "seeds": [
+          "iapmagicsort_iapmagicsort26_difficulty2-5",
+          "iapmagicsort_iapmagicsort26_difficulty1-4",
+          "iapmagicsort_iapmagicsort26_difficulty1-3",
+          "iapmagicsort_iapmagicsort26_difficulty1-2",
+          "iapmagicsort_iapmagicsort26_difficulty2-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_27",
+        "levelIndex": 27,
+        "seeds": [
+          "iapmagicsort_iapmagicsort27_difficulty1-10",
+          "iapmagicsort_iapmagicsort27_difficulty1-9",
+          "iapmagicsort_iapmagicsort27_difficulty1-8",
+          "iapmagicsort_iapmagicsort27_difficulty1-7",
+          "iapmagicsort_iapmagicsort27_difficulty1-6"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_28",
+        "levelIndex": 28,
+        "seeds": [
+          "v3magicsort_v3magicsort28_difficulty2-5",
+          "v3magicsort_v3magicsort28_difficulty2-4",
+          "v3magicsort_v3magicsort28_difficulty2-1",
+          "v3magicsort_v3magicsort28_difficulty2-3",
+          "v3magicsort_v3magicsort28_difficulty1-2"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_29",
+        "levelIndex": 29,
+        "seeds": [
+          "v2paywallms_v2paywallms29_difficulty4-3",
+          "v2paywallms_v2paywallms29_difficulty3-2",
+          "v2paywallms_v2paywallms29_difficulty4-4",
+          "v2paywallms_v2paywallms29_difficulty4-1",
+          "v2paywallms_v2paywallms29_difficulty4-5"
+        ],
+        "dlbSeeds": [
+          "dlb_dlb29_difficulty2-1",
+          "dlb_dlb29_difficulty2-2",
+          "dlb_dlb29_difficulty1-3"
+        ],
+        "dlbCap": 2,
+        "isHard": false,
+        "isSuperHard": true,
+        "cauldronReward": {
+          "levelType": "Super Hard",
+          "currencyType": 4,
+          "amount": 1,
+          "timeSpan": "00:00:00",
+          "currencyDetail": "Undo"
+        },
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_30",
+        "levelIndex": 30,
+        "seeds": [
+          "iapmagicsort_iapmagicsort30_difficulty1-5",
+          "iapmagicsort_iapmagicsort30_difficulty1-3",
+          "iapmagicsort_iapmagicsort30_difficulty1-2",
+          "iapmagicsort_iapmagicsort30_difficulty1-4",
+          "iapmagicsort_iapmagicsort30_difficulty1-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_31",
+        "levelIndex": 31,
+        "seeds": [
+          "v2paywallms_v2paywallms31_difficulty1-3",
+          "v2paywallms_v2paywallms31_difficulty1-5",
+          "v2paywallms_v2paywallms31_difficulty1-2",
+          "v2paywallms_v2paywallms31_difficulty1-4",
+          "v2paywallms_v2paywallms31_difficulty1-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_32",
+        "levelIndex": 32,
+        "seeds": [
+          "iapmagicsort_iapmagicsort32_difficulty1-10",
+          "iapmagicsort_iapmagicsort32_difficulty1-9",
+          "iapmagicsort_iapmagicsort32_difficulty1-8",
+          "iapmagicsort_iapmagicsort32_difficulty1-7",
+          "iapmagicsort_iapmagicsort32_difficulty1-6"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_33",
+        "levelIndex": 33,
+        "seeds": [
+          "v3magicsort_v3magicsort33_difficulty2-5",
+          "v3magicsort_v3magicsort33_difficulty2-4",
+          "v3magicsort_v3magicsort33_difficulty2-1",
+          "v3magicsort_v3magicsort33_difficulty2-2",
+          "v3magicsort_v3magicsort33_difficulty2-3"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_34",
+        "levelIndex": 34,
+        "seeds": [
+          "paywallms_paywallms34_difficulty3-20",
+          "paywallms_paywallms34_difficulty2-19",
+          "paywallms_paywallms34_difficulty3-18",
+          "paywallms_paywallms34_difficulty3-17",
+          "paywallms_paywallms34_difficulty3-16"
+        ],
+        "dlbSeeds": [
+          "dlb_dlb34_difficulty2-1",
+          "dlb_dlb34_difficulty2-2",
+          "dlb_dlb34_difficulty1-3"
+        ],
+        "dlbCap": 2,
+        "isHard": true,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_35",
+        "levelIndex": 35,
+        "seeds": [
+          "v3magicsort_v3magicsort35_difficulty1-5",
+          "v3magicsort_v3magicsort35_difficulty2-4",
+          "v3magicsort_v3magicsort35_difficulty2-3",
+          "v3magicsort_v3magicsort35_difficulty1-2",
+          "v3magicsort_v3magicsort35_difficulty2-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_36",
+        "levelIndex": 36,
+        "seeds": [
+          "iapmagicsort_iapmagicsort36_difficulty1-4",
+          "iapmagicsort_iapmagicsort36_difficulty1-5",
+          "iapmagicsort_iapmagicsort36_difficulty1-3",
+          "iapmagicsort_iapmagicsort36_difficulty1-2",
+          "iapmagicsort_iapmagicsort36_difficulty1-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_37",
+        "levelIndex": 37,
+        "seeds": [
+          "iapmagicsort_iapmagicsort37_difficulty2-5",
+          "iapmagicsort_iapmagicsort37_difficulty2-4",
+          "iapmagicsort_iapmagicsort37_difficulty2-3",
+          "iapmagicsort_iapmagicsort37_difficulty2-2",
+          "iapmagicsort_iapmagicsort37_difficulty2-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_38",
+        "levelIndex": 38,
+        "seeds": [
+          "v3magicsort_v3magicsort38_difficulty2-5",
+          "v3magicsort_v3magicsort38_difficulty2-4",
+          "v3magicsort_v3magicsort38_difficulty2-3",
+          "v3magicsort_v3magicsort38_difficulty2-2",
+          "v3magicsort_v3magicsort38_difficulty2-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_39",
+        "levelIndex": 39,
+        "seeds": [
+          "v4pwms_v4pwms39_difficulty5-11",
+          "v4pwms_v4pwms39_difficulty5-13",
+          "v4pwms_v4pwms39_difficulty5-14",
+          "v4pwms_v4pwms39_difficulty5-12",
+          "v4pwms_v4pwms39_difficulty5-15"
+        ],
+        "dlbSeeds": [
+          "dlb_dlb39_difficulty2-1",
+          "dlb_dlb39_difficulty2-2",
+          "dlb_dlb39_difficulty2-3"
+        ],
+        "dlbCap": 4,
+        "isHard": false,
+        "isSuperHard": true,
+        "cauldronReward": {
+          "levelType": "Super Hard",
+          "currencyType": 6,
+          "amount": 1,
+          "timeSpan": "00:00:00",
+          "currencyDetail": "Extra Bottle"
+        },
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_40",
+        "levelIndex": 40,
+        "seeds": [
+          "v3magicsort_v3magicsort40_difficulty2-5",
+          "v3magicsort_v3magicsort40_difficulty1-3",
+          "v3magicsort_v3magicsort40_difficulty1-1",
+          "v3magicsort_v3magicsort40_difficulty2-2",
+          "v3magicsort_v3magicsort40_difficulty1-4"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_41",
+        "levelIndex": 41,
+        "seeds": [
+          "iapmagicsort_iapmagicsort41_difficulty1-10",
+          "iapmagicsort_iapmagicsort41_difficulty1-9",
+          "iapmagicsort_iapmagicsort41_difficulty1-7",
+          "iapmagicsort_iapmagicsort41_difficulty1-8",
+          "iapmagicsort_iapmagicsort41_difficulty1-6"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_42",
+        "levelIndex": 42,
+        "seeds": [
+          "v3magicsort_v3magicsort42_difficulty2-5",
+          "v3magicsort_v3magicsort42_difficulty2-4",
+          "v3magicsort_v3magicsort42_difficulty2-1",
+          "v3magicsort_v3magicsort42_difficulty2-2",
+          "v3magicsort_v3magicsort42_difficulty2-3"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_43",
+        "levelIndex": 43,
+        "seeds": [
+          "v3magicsort_v3magicsort43_difficulty2-2",
+          "v3magicsort_v3magicsort43_difficulty2-3",
+          "v3magicsort_v3magicsort43_difficulty2-5",
+          "v3magicsort_v3magicsort43_difficulty2-4",
+          "v3magicsort_v3magicsort43_difficulty2-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_44",
+        "levelIndex": 44,
+        "seeds": [
+          "v4pwms_v4pwms44_difficulty5-11",
+          "v4pwms_v4pwms44_difficulty5-6",
+          "v4pwms_v4pwms44_difficulty4-12",
+          "v4pwms_v4pwms44_difficulty4-9",
+          "v4pwms_v4pwms44_difficulty4-8"
+        ],
+        "isHard": true,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_45",
+        "levelIndex": 45,
+        "seeds": [
+          "iapmagicsort_iapmagicsort45_difficulty1-10",
+          "iapmagicsort_iapmagicsort45_difficulty1-9",
+          "iapmagicsort_iapmagicsort45_difficulty1-8",
+          "iapmagicsort_iapmagicsort45_difficulty1-6",
+          "iapmagicsort_iapmagicsort45_difficulty1-7"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_46",
+        "levelIndex": 46,
+        "seeds": [
+          "v3magicsort_v3magicsort46_difficulty2-5",
+          "v3magicsort_v3magicsort46_difficulty2-4",
+          "v3magicsort_v3magicsort46_difficulty2-2",
+          "v3magicsort_v3magicsort46_difficulty2-1",
+          "v3magicsort_v3magicsort46_difficulty2-3"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_47",
+        "levelIndex": 47,
+        "seeds": [
+          "v2iapmagicsort_v2iapmagicsort47_difficulty1-8",
+          "v2iapmagicsort_v2iapmagicsort47_difficulty1-9",
+          "v2iapmagicsort_v2iapmagicsort47_difficulty1-7",
+          "v2iapmagicsort_v2iapmagicsort47_difficulty1-10",
+          "v2iapmagicsort_v2iapmagicsort47_difficulty1-6"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_48",
+        "levelIndex": 48,
+        "seeds": [
+          "v3magicsort_v3magicsort48_difficulty2-4",
+          "v3magicsort_v3magicsort48_difficulty2-5",
+          "v3magicsort_v3magicsort48_difficulty2-3",
+          "v3magicsort_v3magicsort48_difficulty2-1",
+          "v3magicsort_v3magicsort48_difficulty2-2"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_49",
+        "levelIndex": 49,
+        "seeds": [
+          "v5pwms_v5pwms49_difficulty5-6",
+          "v5pwms_v5pwms49_difficulty4-3",
+          "v5pwms_v5pwms49_difficulty4-4",
+          "v5pwms_v5pwms49_difficulty4-2",
+          "v5pwms_v5pwms49_difficulty4-5"
+        ],
+        "dlbSeeds": [
+          "dlb_dlb49_difficulty1-1",
+          "dlb_dlb49_difficulty1-2",
+          "dlb_dlb49_difficulty1-3"
+        ],
+        "dlbCap": 6,
+        "isHard": false,
+        "isSuperHard": true,
+        "cauldronReward": {
+          "levelType": "Super Hard",
+          "currencyType": 2,
+          "amount": 0,
+          "timeSpan": "00:30:00",
+          "currencyDetail": "30m Limitless Life"
+        },
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_50",
+        "levelIndex": 50,
+        "seeds": [
+          "v3magicsort_v3magicsort50_difficulty1-5",
+          "v3magicsort_v3magicsort50_difficulty1-3",
+          "v3magicsort_v3magicsort50_difficulty1-4",
+          "v3magicsort_v3magicsort50_difficulty1-1",
+          "v3magicsort_v3magicsort50_difficulty1-2"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_51",
+        "levelIndex": 51,
+        "seeds": [
+          "iapmagicsort_iapmagicsort51_difficulty1-9",
+          "iapmagicsort_iapmagicsort51_difficulty1-10",
+          "iapmagicsort_iapmagicsort51_difficulty1-8",
+          "iapmagicsort_iapmagicsort51_difficulty1-7",
+          "iapmagicsort_iapmagicsort51_difficulty1-6"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_52",
+        "levelIndex": 52,
+        "seeds": [
+          "v3magicsort_v3magicsort52_difficulty2-3",
+          "v3magicsort_v3magicsort52_difficulty2-4",
+          "v3magicsort_v3magicsort52_difficulty2-5",
+          "v3magicsort_v3magicsort52_difficulty2-2",
+          "v3magicsort_v3magicsort52_difficulty3-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_53",
+        "levelIndex": 53,
+        "seeds": [
+          "v3magicsort_v3magicsort53_difficulty2-5",
+          "v3magicsort_v3magicsort53_difficulty2-2",
+          "v3magicsort_v3magicsort53_difficulty2-4",
+          "v3magicsort_v3magicsort53_difficulty2-3",
+          "v3magicsort_v3magicsort53_difficulty2-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_54",
+        "levelIndex": 54,
+        "seeds": [
+          "paywallms_paywallms54_difficulty3-20",
+          "paywallms_paywallms54_difficulty3-19",
+          "paywallms_paywallms54_difficulty3-18",
+          "paywallms_paywallms54_difficulty3-17",
+          "paywallms_paywallms54_difficulty3-16"
+        ],
+        "dlbSeeds": [
+          "dlb_dlb54_difficulty2-1",
+          "dlb_dlb54_difficulty2-2",
+          "dlb_dlb54_difficulty2-3"
+        ],
+        "dlbCap": 3,
+        "isHard": true,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_55",
+        "levelIndex": 55,
+        "seeds": [
+          "v3magicsort_v3magicsort55_difficulty2-5",
+          "v3magicsort_v3magicsort55_difficulty1-3",
+          "v3magicsort_v3magicsort55_difficulty1-4",
+          "v3magicsort_v3magicsort55_difficulty1-1",
+          "v3magicsort_v3magicsort55_difficulty1-2"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_56",
+        "levelIndex": 56,
+        "seeds": [
+          "v3magicsort_v3magicsort56_difficulty2-4",
+          "v3magicsort_v3magicsort56_difficulty2-3",
+          "v3magicsort_v3magicsort56_difficulty2-5",
+          "v3magicsort_v3magicsort56_difficulty2-1",
+          "v3magicsort_v3magicsort56_difficulty2-2"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_57",
+        "levelIndex": 57,
+        "seeds": [
+          "v2iapmagicsort_v2iapmagicsort57_difficulty2-10",
+          "v2iapmagicsort_v2iapmagicsort57_difficulty2-6",
+          "v2iapmagicsort_v2iapmagicsort57_difficulty2-7",
+          "v2iapmagicsort_v2iapmagicsort57_difficulty1-8",
+          "v2iapmagicsort_v2iapmagicsort57_difficulty1-9"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_58",
+        "levelIndex": 58,
+        "seeds": [
+          "v3magicsort_v3magicsort58_difficulty2-5",
+          "v3magicsort_v3magicsort58_difficulty2-3",
+          "v3magicsort_v3magicsort58_difficulty2-1",
+          "v3magicsort_v3magicsort58_difficulty2-4",
+          "v3magicsort_v3magicsort58_difficulty2-2"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_59",
+        "levelIndex": 59,
+        "seeds": [
+          "paywallms_paywallms59_difficulty5-30",
+          "paywallms_paywallms59_difficulty5-29",
+          "paywallms_paywallms59_difficulty5-28",
+          "paywallms_paywallms59_difficulty5-27",
+          "paywallms_paywallms59_difficulty5-26"
+        ],
+        "dlbSeeds": [
+          "dlb_dlb59_difficulty4-1",
+          "dlb_dlb59_difficulty1-2",
+          "dlb_dlb59_difficulty1-3"
+        ],
+        "dlbCap": 11,
+        "isHard": false,
+        "isSuperHard": true,
+        "cauldronReward": {
+          "levelType": "Super Hard",
+          "currencyType": 6,
+          "amount": 1,
+          "timeSpan": "00:00:00",
+          "currencyDetail": "Extra Bottle"
+        },
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_60",
+        "levelIndex": 60,
+        "seeds": [
+          "v3magicsort_v3magicsort60_difficulty1-5",
+          "v3magicsort_v3magicsort60_difficulty1-1",
+          "v3magicsort_v3magicsort60_difficulty1-3",
+          "v3magicsort_v3magicsort60_difficulty1-2",
+          "v3magicsort_v3magicsort60_difficulty1-4"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_61",
+        "levelIndex": 61,
+        "seeds": [
+          "v3magicsort_v3magicsort61_difficulty1-5",
+          "v3magicsort_v3magicsort61_difficulty1-4",
+          "v3magicsort_v3magicsort61_difficulty1-1",
+          "v3magicsort_v3magicsort61_difficulty2-3",
+          "v3magicsort_v3magicsort61_difficulty1-2"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_62",
+        "levelIndex": 62,
+        "seeds": [
+          "v3magicsort_v3magicsort62_difficulty2-5",
+          "v3magicsort_v3magicsort62_difficulty3-1",
+          "v3magicsort_v3magicsort62_difficulty2-4",
+          "v3magicsort_v3magicsort62_difficulty2-2",
+          "v3magicsort_v3magicsort62_difficulty3-3"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_63",
+        "levelIndex": 63,
+        "seeds": [
+          "v3magicsort_v3magicsort63_difficulty1-5",
+          "v3magicsort_v3magicsort63_difficulty1-2",
+          "v3magicsort_v3magicsort63_difficulty1-4",
+          "v3magicsort_v3magicsort63_difficulty1-3",
+          "v3magicsort_v3magicsort63_difficulty1-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_64",
+        "levelIndex": 64,
+        "seeds": [
+          "v3magicsort_v3magicsort64_difficulty1-5",
+          "v3magicsort_v3magicsort64_difficulty1-4",
+          "v3magicsort_v3magicsort64_difficulty1-3",
+          "v3magicsort_v3magicsort64_difficulty1-2",
+          "v3magicsort_v3magicsort64_difficulty2-1"
+        ],
+        "isHard": true,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_65",
+        "levelIndex": 65,
+        "seeds": [
+          "v3magicsort_v3magicsort65_difficulty2-5",
+          "v3magicsort_v3magicsort65_difficulty1-2",
+          "v3magicsort_v3magicsort65_difficulty2-4",
+          "v3magicsort_v3magicsort65_difficulty1-3",
+          "v3magicsort_v3magicsort65_difficulty2-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_66",
+        "levelIndex": 66,
+        "seeds": [
+          "v3magicsort_v3magicsort66_difficulty2-4",
+          "v3magicsort_v3magicsort66_difficulty2-5",
+          "v3magicsort_v3magicsort66_difficulty2-3",
+          "v3magicsort_v3magicsort66_difficulty2-2",
+          "v3magicsort_v3magicsort66_difficulty2-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_67",
+        "levelIndex": 67,
+        "seeds": [
+          "v3magicsort_v3magicsort67_difficulty2-4",
+          "v3magicsort_v3magicsort67_difficulty2-2",
+          "v3magicsort_v3magicsort67_difficulty2-5",
+          "v3magicsort_v3magicsort67_difficulty2-3",
+          "v3magicsort_v3magicsort67_difficulty2-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_68",
+        "levelIndex": 68,
+        "seeds": [
+          "v3magicsort_v3magicsort68_difficulty2-5",
+          "v3magicsort_v3magicsort68_difficulty2-4",
+          "v3magicsort_v3magicsort68_difficulty2-3",
+          "v3magicsort_v3magicsort68_difficulty2-2",
+          "v3magicsort_v3magicsort68_difficulty2-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_69",
+        "levelIndex": 69,
+        "seeds": [
+          "v4pwms_v4pwms69_difficulty5-5",
+          "v4pwms_v4pwms69_difficulty5-4",
+          "v4pwms_v4pwms69_difficulty5-3",
+          "v4pwms_v4pwms69_difficulty5-2",
+          "v4pwms_v4pwms69_difficulty5-1"
+        ],
+        "isHard": false,
+        "isSuperHard": true,
+        "cauldronReward": {
+          "levelType": "Super Hard",
+          "currencyType": 5,
+          "amount": 1,
+          "timeSpan": "00:00:00",
+          "currencyDetail": "Shuffle"
+        },
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_70",
+        "levelIndex": 70,
+        "seeds": [
+          "v3magicsort_v3magicsort70_difficulty2-4",
+          "v3magicsort_v3magicsort70_difficulty2-3",
+          "v3magicsort_v3magicsort70_difficulty1-5",
+          "v3magicsort_v3magicsort70_difficulty1-1",
+          "v3magicsort_v3magicsort70_difficulty1-2"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_71",
+        "levelIndex": 71,
+        "seeds": [
+          "iapmagicsort_iapmagicsort71_difficulty1-5",
+          "iapmagicsort_iapmagicsort71_difficulty1-4",
+          "iapmagicsort_iapmagicsort71_difficulty1-3",
+          "iapmagicsort_iapmagicsort71_difficulty1-2",
+          "iapmagicsort_iapmagicsort71_difficulty1-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_72",
+        "levelIndex": 72,
+        "seeds": [
+          "v3magicsort_v3magicsort72_difficulty1-4",
+          "v3magicsort_v3magicsort72_difficulty1-5",
+          "v3magicsort_v3magicsort72_difficulty1-2",
+          "v3magicsort_v3magicsort72_difficulty2-3",
+          "v3magicsort_v3magicsort72_difficulty1-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_73",
+        "levelIndex": 73,
+        "seeds": [
+          "iapmagicsort_iapmagicsort73_difficulty1-5",
+          "iapmagicsort_iapmagicsort73_difficulty1-4",
+          "iapmagicsort_iapmagicsort73_difficulty1-2",
+          "iapmagicsort_iapmagicsort73_difficulty1-3",
+          "iapmagicsort_iapmagicsort73_difficulty1-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_74",
+        "levelIndex": 74,
+        "seeds": [
+          "v2paywallms_v2paywallms74_difficulty5-6",
+          "v2paywallms_v2paywallms74_difficulty4-7",
+          "v2paywallms_v2paywallms74_difficulty4-3",
+          "v2paywallms_v2paywallms74_difficulty5-8",
+          "v2paywallms_v2paywallms74_difficulty5-9"
+        ],
+        "isHard": true,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_75",
+        "levelIndex": 75,
+        "seeds": [
+          "v3magicsort_v3magicsort75_difficulty1-5",
+          "v3magicsort_v3magicsort75_difficulty1-3",
+          "v3magicsort_v3magicsort75_difficulty1-4",
+          "v3magicsort_v3magicsort75_difficulty1-1",
+          "v3magicsort_v3magicsort75_difficulty1-2"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_76",
+        "levelIndex": 76,
+        "seeds": [
+          "v3magicsort_v3magicsort76_difficulty1-4",
+          "v3magicsort_v3magicsort76_difficulty1-5",
+          "v3magicsort_v3magicsort76_difficulty2-3",
+          "v3magicsort_v3magicsort76_difficulty1-2",
+          "v3magicsort_v3magicsort76_difficulty2-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_77",
+        "levelIndex": 77,
+        "seeds": [
+          "v3magicsort_v3magicsort77_difficulty2-4",
+          "v3magicsort_v3magicsort77_difficulty2-3",
+          "v3magicsort_v3magicsort77_difficulty2-5",
+          "v3magicsort_v3magicsort77_difficulty2-1",
+          "v3magicsort_v3magicsort77_difficulty3-2"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_78",
+        "levelIndex": 78,
+        "seeds": [
+          "v3magicsort_v3magicsort78_difficulty2-5",
+          "v3magicsort_v3magicsort78_difficulty2-4",
+          "v3magicsort_v3magicsort78_difficulty2-2",
+          "v3magicsort_v3magicsort78_difficulty2-3",
+          "v3magicsort_v3magicsort78_difficulty2-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_79",
+        "levelIndex": 79,
+        "seeds": [
+          "paywallms_paywallms79_difficulty5-35",
+          "paywallms_paywallms79_difficulty5-34",
+          "paywallms_paywallms79_difficulty5-33",
+          "paywallms_paywallms79_difficulty5-32",
+          "paywallms_paywallms79_difficulty5-31"
+        ],
+        "isHard": false,
+        "isSuperHard": true,
+        "cauldronReward": {
+          "levelType": "Super Hard",
+          "currencyType": 4,
+          "amount": 1,
+          "timeSpan": "00:00:00",
+          "currencyDetail": "Undo"
+        },
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_80",
+        "levelIndex": 80,
+        "seeds": [
+          "v3magicsort_v3magicsort80_difficulty2-5",
+          "v3magicsort_v3magicsort80_difficulty2-4",
+          "v3magicsort_v3magicsort80_difficulty1-1",
+          "v3magicsort_v3magicsort80_difficulty1-2",
+          "v3magicsort_v3magicsort80_difficulty2-3"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_81",
+        "levelIndex": 81,
+        "seeds": [
+          "paywallms_paywallms81_difficulty1-25",
+          "paywallms_paywallms81_difficulty2-24",
+          "paywallms_paywallms81_difficulty1-23",
+          "paywallms_paywallms81_difficulty2-22",
+          "paywallms_paywallms81_difficulty1-21"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_82",
+        "levelIndex": 82,
+        "seeds": [
+          "iapmagicsort_iapmagicsort82_difficulty1-9",
+          "iapmagicsort_iapmagicsort82_difficulty1-10",
+          "iapmagicsort_iapmagicsort82_difficulty1-7",
+          "iapmagicsort_iapmagicsort82_difficulty1-8",
+          "iapmagicsort_iapmagicsort82_difficulty1-6"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_83",
+        "levelIndex": 83,
+        "seeds": [
+          "iapmagicsort_iapmagicsort83_difficulty2-5",
+          "iapmagicsort_iapmagicsort83_difficulty2-4",
+          "iapmagicsort_iapmagicsort83_difficulty2-2",
+          "iapmagicsort_iapmagicsort83_difficulty2-3",
+          "iapmagicsort_iapmagicsort83_difficulty2-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_84",
+        "levelIndex": 84,
+        "seeds": [
+          "v4pwms_v4pwms84_difficulty5-17",
+          "v4pwms_v4pwms84_difficulty5-16",
+          "v4pwms_v4pwms84_difficulty4-15",
+          "v4pwms_v4pwms84_difficulty4-14",
+          "v4pwms_v4pwms84_difficulty4-13"
+        ],
+        "isHard": true,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_85",
+        "levelIndex": 85,
+        "seeds": [
+          "v3magicsort_v3magicsort85_difficulty2-4",
+          "v3magicsort_v3magicsort85_difficulty2-5",
+          "v3magicsort_v3magicsort85_difficulty1-2",
+          "v3magicsort_v3magicsort85_difficulty2-3",
+          "v3magicsort_v3magicsort85_difficulty2-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_86",
+        "levelIndex": 86,
+        "seeds": [
+          "v3magicsort_v3magicsort86_difficulty3-5",
+          "v3magicsort_v3magicsort86_difficulty2-4",
+          "v3magicsort_v3magicsort86_difficulty2-1",
+          "v3magicsort_v3magicsort86_difficulty3-3",
+          "v3magicsort_v3magicsort86_difficulty2-2"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_87",
+        "levelIndex": 87,
+        "seeds": [
+          "paywallms_paywallms87_difficulty1-10",
+          "paywallms_paywallms87_difficulty1-9",
+          "paywallms_paywallms87_difficulty2-8",
+          "paywallms_paywallms87_difficulty1-7",
+          "paywallms_paywallms87_difficulty1-6"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_88",
+        "levelIndex": 88,
+        "seeds": [
+          "v3magicsort_v3magicsort88_difficulty2-5",
+          "v3magicsort_v3magicsort88_difficulty2-4",
+          "v3magicsort_v3magicsort88_difficulty2-2",
+          "v3magicsort_v3magicsort88_difficulty2-3",
+          "v3magicsort_v3magicsort88_difficulty2-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_89",
+        "levelIndex": 89,
+        "seeds": [
+          "paywallms_paywallms89_difficulty5-25",
+          "paywallms_paywallms89_difficulty5-24",
+          "paywallms_paywallms89_difficulty5-23",
+          "paywallms_paywallms89_difficulty5-22",
+          "paywallms_paywallms89_difficulty5-21"
+        ],
+        "isHard": false,
+        "isSuperHard": true,
+        "cauldronReward": {
+          "levelType": "Super Hard",
+          "currencyType": 6,
+          "amount": 1,
+          "timeSpan": "00:00:00",
+          "currencyDetail": "Extra Bottle"
+        },
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_90",
+        "levelIndex": 90,
+        "seeds": [
+          "v3magicsort_v3magicsort90_difficulty2-5",
+          "v3magicsort_v3magicsort90_difficulty2-4",
+          "v3magicsort_v3magicsort90_difficulty1-2",
+          "v3magicsort_v3magicsort90_difficulty2-3",
+          "v3magicsort_v3magicsort90_difficulty1-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_91",
+        "levelIndex": 91,
+        "seeds": [
+          "iapmagicsort_iapmagicsort91_difficulty1-10",
+          "iapmagicsort_iapmagicsort91_difficulty1-8",
+          "iapmagicsort_iapmagicsort91_difficulty1-9",
+          "iapmagicsort_iapmagicsort91_difficulty1-6",
+          "iapmagicsort_iapmagicsort91_difficulty1-7"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_92",
+        "levelIndex": 92,
+        "seeds": [
+          "iapmagicsort_iapmagicsort92_difficulty3-7",
+          "iapmagicsort_iapmagicsort92_difficulty2-6",
+          "iapmagicsort_iapmagicsort92_difficulty2-5",
+          "iapmagicsort_iapmagicsort92_difficulty2-4",
+          "iapmagicsort_iapmagicsort92_difficulty3-3"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_93",
+        "levelIndex": 93,
+        "seeds": [
+          "v3magicsort_v3magicsort93_difficulty2-5",
+          "v3magicsort_v3magicsort93_difficulty2-4",
+          "v3magicsort_v3magicsort93_difficulty3-3",
+          "v3magicsort_v3magicsort93_difficulty3-2",
+          "v3magicsort_v3magicsort93_difficulty2-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_94",
+        "levelIndex": 94,
+        "seeds": [
+          "v4pwms_v4pwms94_difficulty4-11",
+          "v4pwms_v4pwms94_difficulty5-10",
+          "v4pwms_v4pwms94_difficulty4-9",
+          "v4pwms_v4pwms94_difficulty5-8",
+          "v4pwms_v4pwms94_difficulty4-7"
+        ],
+        "isHard": true,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_95",
+        "levelIndex": 95,
+        "seeds": [
+          "v3magicsort_v3magicsort95_difficulty2-3",
+          "v3magicsort_v3magicsort95_difficulty2-5",
+          "v3magicsort_v3magicsort95_difficulty1-2",
+          "v3magicsort_v3magicsort95_difficulty2-4",
+          "v3magicsort_v3magicsort95_difficulty1-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_96",
+        "levelIndex": 96,
+        "seeds": [
+          "v3magicsort_v3magicsort96_difficulty3-5",
+          "v3magicsort_v3magicsort96_difficulty3-2",
+          "v3magicsort_v3magicsort96_difficulty2-4",
+          "v3magicsort_v3magicsort96_difficulty3-1",
+          "v3magicsort_v3magicsort96_difficulty3-3"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_97",
+        "levelIndex": 97,
+        "seeds": [
+          "v3magicsort_v3magicsort97_difficulty4-4",
+          "v3magicsort_v3magicsort97_difficulty3-5",
+          "v3magicsort_v3magicsort97_difficulty3-3",
+          "v3magicsort_v3magicsort97_difficulty4-2",
+          "v3magicsort_v3magicsort97_difficulty3-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_98",
+        "levelIndex": 98,
+        "seeds": [
+          "v3magicsort_v3magicsort98_difficulty3-3",
+          "v3magicsort_v3magicsort98_difficulty3-4",
+          "v3magicsort_v3magicsort98_difficulty3-5",
+          "v3magicsort_v3magicsort98_difficulty3-1",
+          "v3magicsort_v3magicsort98_difficulty2-2"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_99",
+        "levelIndex": 99,
+        "seeds": [
+          "paywallms_paywallms99_difficulty5-34",
+          "paywallms_paywallms99_difficulty5-33",
+          "paywallms_paywallms99_difficulty5-32",
+          "paywallms_paywallms99_difficulty5-31",
+          "paywallms_paywallms99_difficulty5-25"
+        ],
+        "dlbSeeds": [
+          "dlb_dlb99_difficulty4-1",
+          "dlb_dlb99_difficulty2-2",
+          "dlb_dlb99_difficulty1-3"
+        ],
+        "dlbCap": 18,
+        "isHard": false,
+        "isSuperHard": true,
+        "cauldronReward": {
+          "levelType": "Super Hard",
+          "currencyType": 5,
+          "amount": 1,
+          "timeSpan": "00:00:00",
+          "currencyDetail": "Shuffle"
+        },
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_100",
+        "levelIndex": 100,
+        "seeds": [
+          "v3magicsort_v3magicsort100_difficulty1-5",
+          "v3magicsort_v3magicsort100_difficulty2-2",
+          "v3magicsort_v3magicsort100_difficulty2-3",
+          "v3magicsort_v3magicsort100_difficulty1-4",
+          "v3magicsort_v3magicsort100_difficulty1-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_101",
+        "levelIndex": 101,
+        "seeds": [
+          "v3magicsort_v3magicsort101_difficulty3-5",
+          "v3magicsort_v3magicsort101_difficulty3-3",
+          "v3magicsort_v3magicsort101_difficulty3-2",
+          "v3magicsort_v3magicsort101_difficulty3-4",
+          "v3magicsort_v3magicsort101_difficulty3-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_102",
+        "levelIndex": 102,
+        "seeds": [
+          "iapmagicsort_iapmagicsort102_difficulty1-4",
+          "iapmagicsort_iapmagicsort102_difficulty2-5",
+          "iapmagicsort_iapmagicsort102_difficulty1-3",
+          "iapmagicsort_iapmagicsort102_difficulty1-2",
+          "iapmagicsort_iapmagicsort102_difficulty1-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_103",
+        "levelIndex": 103,
+        "seeds": [
+          "v3magicsort_v3magicsort103_difficulty2-5",
+          "v3magicsort_v3magicsort103_difficulty2-4",
+          "v3magicsort_v3magicsort103_difficulty2-2",
+          "v3magicsort_v3magicsort103_difficulty3-3",
+          "v3magicsort_v3magicsort103_difficulty2-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_104",
+        "levelIndex": 104,
+        "seeds": [
+          "v4pwms_v4pwms104_difficulty5-15",
+          "v4pwms_v4pwms104_difficulty4-14",
+          "v4pwms_v4pwms104_difficulty4-13",
+          "v4pwms_v4pwms104_difficulty5-12",
+          "v4pwms_v4pwms104_difficulty5-11"
+        ],
+        "isHard": true,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_105",
+        "levelIndex": 105,
+        "seeds": [
+          "v3magicsort_v3magicsort105_difficulty2-5",
+          "v3magicsort_v3magicsort105_difficulty2-4",
+          "v3magicsort_v3magicsort105_difficulty2-2",
+          "v3magicsort_v3magicsort105_difficulty2-1",
+          "v3magicsort_v3magicsort105_difficulty2-3"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_106",
+        "levelIndex": 106,
+        "seeds": [
+          "v3magicsort_v3magicsort106_difficulty3-5",
+          "v3magicsort_v3magicsort106_difficulty3-4",
+          "v3magicsort_v3magicsort106_difficulty3-3",
+          "v3magicsort_v3magicsort106_difficulty4-1",
+          "v3magicsort_v3magicsort106_difficulty3-2"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_107",
+        "levelIndex": 107,
+        "seeds": [
+          "v3magicsort_v3magicsort107_difficulty3-4",
+          "v3magicsort_v3magicsort107_difficulty3-5",
+          "v3magicsort_v3magicsort107_difficulty2-2",
+          "v3magicsort_v3magicsort107_difficulty3-3",
+          "v3magicsort_v3magicsort107_difficulty2-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_108",
+        "levelIndex": 108,
+        "seeds": [
+          "v3magicsort_v3magicsort108_difficulty2-5",
+          "v3magicsort_v3magicsort108_difficulty2-1",
+          "v3magicsort_v3magicsort108_difficulty2-2",
+          "v3magicsort_v3magicsort108_difficulty2-4",
+          "v3magicsort_v3magicsort108_difficulty2-3"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_109",
+        "levelIndex": 109,
+        "seeds": [
+          "paywallms_paywallms109_difficulty5-11",
+          "paywallms_paywallms109_difficulty5-10",
+          "paywallms_paywallms109_difficulty5-9",
+          "paywallms_paywallms109_difficulty5-8",
+          "paywallms_paywallms109_difficulty5-7"
+        ],
+        "isHard": false,
+        "isSuperHard": true,
+        "cauldronReward": {
+          "levelType": "Super Hard",
+          "currencyType": 2,
+          "amount": 0,
+          "timeSpan": "00:30:00",
+          "currencyDetail": "30m Limitless Life"
+        },
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_110",
+        "levelIndex": 110,
+        "seeds": [
+          "iapmagicsort_iapmagicsort110_difficulty1-4",
+          "iapmagicsort_iapmagicsort110_difficulty1-5",
+          "iapmagicsort_iapmagicsort110_difficulty1-3",
+          "iapmagicsort_iapmagicsort110_difficulty1-2",
+          "iapmagicsort_iapmagicsort110_difficulty1-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_111",
+        "levelIndex": 111,
+        "seeds": [
+          "v3magicsort_v3magicsort111_difficulty4-4",
+          "v3magicsort_v3magicsort111_difficulty3-5",
+          "v3magicsort_v3magicsort111_difficulty4-3",
+          "v3magicsort_v3magicsort111_difficulty3-1",
+          "v3magicsort_v3magicsort111_difficulty4-2"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_112",
+        "levelIndex": 112,
+        "seeds": [
+          "v3magicsort_v3magicsort112_difficulty2-4",
+          "v3magicsort_v3magicsort112_difficulty3-5",
+          "v3magicsort_v3magicsort112_difficulty2-1",
+          "v3magicsort_v3magicsort112_difficulty3-2",
+          "v3magicsort_v3magicsort112_difficulty2-3"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_113",
+        "levelIndex": 113,
+        "seeds": [
+          "v3magicsort_v3magicsort113_difficulty2-4",
+          "v3magicsort_v3magicsort113_difficulty2-5",
+          "v3magicsort_v3magicsort113_difficulty3-3",
+          "v3magicsort_v3magicsort113_difficulty2-1",
+          "v3magicsort_v3magicsort113_difficulty2-2"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_114",
+        "levelIndex": 114,
+        "seeds": [
+          "v3magicsort_v3magicsort114_difficulty3-4",
+          "v3magicsort_v3magicsort114_difficulty3-5",
+          "v3magicsort_v3magicsort114_difficulty2-1",
+          "v3magicsort_v3magicsort114_difficulty3-2",
+          "v3magicsort_v3magicsort114_difficulty2-3"
+        ],
+        "isHard": true,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_115",
+        "levelIndex": 115,
+        "seeds": [
+          "v3magicsort_v3magicsort115_difficulty2-4",
+          "v3magicsort_v3magicsort115_difficulty2-5",
+          "v3magicsort_v3magicsort115_difficulty2-1",
+          "v3magicsort_v3magicsort115_difficulty1-2",
+          "v3magicsort_v3magicsort115_difficulty2-3"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_116",
+        "levelIndex": 116,
+        "seeds": [
+          "v3magicsort_v3magicsort116_difficulty2-4",
+          "v3magicsort_v3magicsort116_difficulty3-5",
+          "v3magicsort_v3magicsort116_difficulty2-1",
+          "v3magicsort_v3magicsort116_difficulty2-2",
+          "v3magicsort_v3magicsort116_difficulty2-3"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_117",
+        "levelIndex": 117,
+        "seeds": [
+          "v3magicsort_v3magicsort117_difficulty3-5",
+          "v3magicsort_v3magicsort117_difficulty4-3",
+          "v3magicsort_v3magicsort117_difficulty4-1",
+          "v3magicsort_v3magicsort117_difficulty3-4",
+          "v3magicsort_v3magicsort117_difficulty3-2"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_118",
+        "levelIndex": 118,
+        "seeds": [
+          "v3magicsort_v3magicsort118_difficulty2-5",
+          "v3magicsort_v3magicsort118_difficulty2-4",
+          "v3magicsort_v3magicsort118_difficulty2-1",
+          "v3magicsort_v3magicsort118_difficulty2-3",
+          "v3magicsort_v3magicsort118_difficulty2-2"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_119",
+        "levelIndex": 119,
+        "seeds": [
+          "v3paywallms_v3paywallms119_difficulty4-2",
+          "v3paywallms_v3paywallms119_difficulty4-3",
+          "v3paywallms_v3paywallms119_difficulty4-4",
+          "v3paywallms_v3paywallms119_difficulty4-5",
+          "v3paywallms_v3paywallms119_difficulty4-6"
+        ],
+        "isHard": false,
+        "isSuperHard": true,
+        "cauldronReward": {
+          "levelType": "Super Hard",
+          "currencyType": 4,
+          "amount": 1,
+          "timeSpan": "00:00:00",
+          "currencyDetail": "Undo"
+        },
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_120",
+        "levelIndex": 120,
+        "seeds": [
+          "v3magicsort_v3magicsort120_difficulty2-5",
+          "v3magicsort_v3magicsort120_difficulty1-2",
+          "v3magicsort_v3magicsort120_difficulty1-4",
+          "v3magicsort_v3magicsort120_difficulty2-1",
+          "v3magicsort_v3magicsort120_difficulty2-3"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_121",
+        "levelIndex": 121,
+        "seeds": [
+          "v3magicsort_v3magicsort121_difficulty3-5",
+          "v3magicsort_v3magicsort121_difficulty2-4",
+          "v3magicsort_v3magicsort121_difficulty3-3",
+          "v3magicsort_v3magicsort121_difficulty2-2",
+          "v3magicsort_v3magicsort121_difficulty3-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_122",
+        "levelIndex": 122,
+        "seeds": [
+          "v3magicsort_v3magicsort122_difficulty3-5",
+          "v3magicsort_v3magicsort122_difficulty4-4",
+          "v3magicsort_v3magicsort122_difficulty3-2",
+          "v3magicsort_v3magicsort122_difficulty4-3",
+          "v3magicsort_v3magicsort122_difficulty4-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_123",
+        "levelIndex": 123,
+        "seeds": [
+          "v3magicsort_v3magicsort123_difficulty3-2",
+          "v3magicsort_v3magicsort123_difficulty2-4",
+          "v3magicsort_v3magicsort123_difficulty2-3",
+          "v3magicsort_v3magicsort123_difficulty1-5",
+          "v3magicsort_v3magicsort123_difficulty3-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_124",
+        "levelIndex": 124,
+        "seeds": [
+          "v3magicsort_v3magicsort124_difficulty4-5",
+          "v3magicsort_v3magicsort124_difficulty3-3",
+          "v3magicsort_v3magicsort124_difficulty4-2",
+          "v3magicsort_v3magicsort124_difficulty3-4",
+          "v3magicsort_v3magicsort124_difficulty3-1"
+        ],
+        "isHard": true,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_125",
+        "levelIndex": 125,
+        "seeds": [
+          "v3magicsort_v3magicsort125_difficulty2-5",
+          "v3magicsort_v3magicsort125_difficulty2-4",
+          "v3magicsort_v3magicsort125_difficulty2-1",
+          "v3magicsort_v3magicsort125_difficulty2-2",
+          "v3magicsort_v3magicsort125_difficulty2-3"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_126",
+        "levelIndex": 126,
+        "seeds": [
+          "v3magicsort_v3magicsort126_difficulty2-5",
+          "v3magicsort_v3magicsort126_difficulty3-4",
+          "v3magicsort_v3magicsort126_difficulty3-3",
+          "v3magicsort_v3magicsort126_difficulty3-2",
+          "v3magicsort_v3magicsort126_difficulty3-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_127",
+        "levelIndex": 127,
+        "seeds": [
+          "v3magicsort_v3magicsort127_difficulty4-5",
+          "v3magicsort_v3magicsort127_difficulty4-3",
+          "v3magicsort_v3magicsort127_difficulty4-4",
+          "v3magicsort_v3magicsort127_difficulty4-2",
+          "v3magicsort_v3magicsort127_difficulty3-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_128",
+        "levelIndex": 128,
+        "seeds": [
+          "v3magicsort_v3magicsort128_difficulty4-5",
+          "v3magicsort_v3magicsort128_difficulty3-4",
+          "v3magicsort_v3magicsort128_difficulty3-3",
+          "v3magicsort_v3magicsort128_difficulty3-2",
+          "v3magicsort_v3magicsort128_difficulty2-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_129",
+        "levelIndex": 129,
+        "seeds": [
+          "v2paywallms_v2paywallms129_difficulty5-5",
+          "v2paywallms_v2paywallms129_difficulty5-4",
+          "v2paywallms_v2paywallms129_difficulty5-3",
+          "v2paywallms_v2paywallms129_difficulty5-2",
+          "v2paywallms_v2paywallms129_difficulty5-1"
+        ],
+        "isHard": false,
+        "isSuperHard": true,
+        "cauldronReward": {
+          "levelType": "Super Hard",
+          "currencyType": 5,
+          "amount": 1,
+          "timeSpan": "00:00:00",
+          "currencyDetail": "Shuffle"
+        },
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_130",
+        "levelIndex": 130,
+        "seeds": [
+          "v3magicsort_v3magicsort130_difficulty1-4",
+          "v3magicsort_v3magicsort130_difficulty2-5",
+          "v3magicsort_v3magicsort130_difficulty1-2",
+          "v3magicsort_v3magicsort130_difficulty1-3",
+          "v3magicsort_v3magicsort130_difficulty1-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_131",
+        "levelIndex": 131,
+        "seeds": [
+          "v3magicsort_v3magicsort131_difficulty2-5",
+          "v3magicsort_v3magicsort131_difficulty3-4",
+          "v3magicsort_v3magicsort131_difficulty3-2",
+          "v3magicsort_v3magicsort131_difficulty3-1",
+          "v3magicsort_v3magicsort131_difficulty3-3"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_132",
+        "levelIndex": 132,
+        "seeds": [
+          "v3magicsort_v3magicsort132_difficulty4-4",
+          "v3magicsort_v3magicsort132_difficulty4-5",
+          "v3magicsort_v3magicsort132_difficulty3-1",
+          "v3magicsort_v3magicsort132_difficulty4-2",
+          "v3magicsort_v3magicsort132_difficulty3-3"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_133",
+        "levelIndex": 133,
+        "seeds": [
+          "v3magicsort_v3magicsort133_difficulty3-5",
+          "v3magicsort_v3magicsort133_difficulty3-4",
+          "v3magicsort_v3magicsort133_difficulty3-1",
+          "v3magicsort_v3magicsort133_difficulty3-3",
+          "v3magicsort_v3magicsort133_difficulty3-2"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_134",
+        "levelIndex": 134,
+        "seeds": [
+          "iapmagicsort_iapmagicsort134_difficulty5-5",
+          "iapmagicsort_iapmagicsort134_difficulty4-4",
+          "iapmagicsort_iapmagicsort134_difficulty4-2",
+          "iapmagicsort_iapmagicsort134_difficulty4-3",
+          "iapmagicsort_iapmagicsort134_difficulty5-1"
+        ],
+        "isHard": true,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_135",
+        "levelIndex": 135,
+        "seeds": [
+          "v3magicsort_v3magicsort135_difficulty2-4",
+          "v3magicsort_v3magicsort135_difficulty2-5",
+          "v3magicsort_v3magicsort135_difficulty2-2",
+          "v3magicsort_v3magicsort135_difficulty2-3",
+          "v3magicsort_v3magicsort135_difficulty2-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_136",
+        "levelIndex": 136,
+        "seeds": [
+          "v3magicsort_v3magicsort136_difficulty3-4",
+          "v3magicsort_v3magicsort136_difficulty2-5",
+          "v3magicsort_v3magicsort136_difficulty3-2",
+          "v3magicsort_v3magicsort136_difficulty2-1",
+          "v3magicsort_v3magicsort136_difficulty3-3"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_137",
+        "levelIndex": 137,
+        "seeds": [
+          "v3magicsort_v3magicsort137_difficulty3-5",
+          "v3magicsort_v3magicsort137_difficulty3-1",
+          "v3magicsort_v3magicsort137_difficulty3-3",
+          "v3magicsort_v3magicsort137_difficulty3-4",
+          "v3magicsort_v3magicsort137_difficulty3-2"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_138",
+        "levelIndex": 138,
+        "seeds": [
+          "v3magicsort_v3magicsort138_difficulty2-4",
+          "v3magicsort_v3magicsort138_difficulty2-5",
+          "v3magicsort_v3magicsort138_difficulty2-3",
+          "v3magicsort_v3magicsort138_difficulty2-1",
+          "v3magicsort_v3magicsort138_difficulty2-2"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_139",
+        "levelIndex": 139,
+        "seeds": [
+          "v2paywallms_v2paywallms139_difficulty5-5",
+          "v2paywallms_v2paywallms139_difficulty5-4",
+          "v2paywallms_v2paywallms139_difficulty5-3",
+          "v2paywallms_v2paywallms139_difficulty5-2",
+          "v2paywallms_v2paywallms139_difficulty5-1"
+        ],
+        "isHard": false,
+        "isSuperHard": true,
+        "cauldronReward": {
+          "levelType": "Super Hard",
+          "currencyType": 4,
+          "amount": 1,
+          "timeSpan": "00:00:00",
+          "currencyDetail": "Undo"
+        },
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_140",
+        "levelIndex": 140,
+        "seeds": [
+          "v3magicsort_v3magicsort140_difficulty2-5",
+          "v3magicsort_v3magicsort140_difficulty2-4",
+          "v3magicsort_v3magicsort140_difficulty2-3",
+          "v3magicsort_v3magicsort140_difficulty2-1",
+          "v3magicsort_v3magicsort140_difficulty2-2"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_141",
+        "levelIndex": 141,
+        "seeds": [
+          "v3magicsort_v3magicsort141_difficulty3-5",
+          "v3magicsort_v3magicsort141_difficulty2-3",
+          "v3magicsort_v3magicsort141_difficulty2-2",
+          "v3magicsort_v3magicsort141_difficulty2-4",
+          "v3magicsort_v3magicsort141_difficulty3-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_142",
+        "levelIndex": 142,
+        "seeds": [
+          "v3magicsort_v3magicsort142_difficulty4-5",
+          "v3magicsort_v3magicsort142_difficulty4-1",
+          "v3magicsort_v3magicsort142_difficulty3-4",
+          "v3magicsort_v3magicsort142_difficulty4-2",
+          "v3magicsort_v3magicsort142_difficulty4-3"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_143",
+        "levelIndex": 143,
+        "seeds": [
+          "v3magicsort_v3magicsort143_difficulty3-5",
+          "v3magicsort_v3magicsort143_difficulty2-3",
+          "v3magicsort_v3magicsort143_difficulty3-4",
+          "v3magicsort_v3magicsort143_difficulty3-2",
+          "v3magicsort_v3magicsort143_difficulty3-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_144",
+        "levelIndex": 144,
+        "seeds": [
+          "v3magicsort_v3magicsort144_difficulty5-3",
+          "v3magicsort_v3magicsort144_difficulty5-4",
+          "v3magicsort_v3magicsort144_difficulty5-5",
+          "v3magicsort_v3magicsort144_difficulty5-2",
+          "v3magicsort_v3magicsort144_difficulty5-1"
+        ],
+        "isHard": true,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_145",
+        "levelIndex": 145,
+        "seeds": [
+          "v3magicsort_v3magicsort145_difficulty2-4",
+          "v3magicsort_v3magicsort145_difficulty2-5",
+          "v3magicsort_v3magicsort145_difficulty2-3",
+          "v3magicsort_v3magicsort145_difficulty2-1",
+          "v3magicsort_v3magicsort145_difficulty2-2"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_146",
+        "levelIndex": 146,
+        "seeds": [
+          "v3magicsort_v3magicsort146_difficulty4-4",
+          "v3magicsort_v3magicsort146_difficulty3-3",
+          "v3magicsort_v3magicsort146_difficulty4-5",
+          "v3magicsort_v3magicsort146_difficulty4-1",
+          "v3magicsort_v3magicsort146_difficulty3-2"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_147",
+        "levelIndex": 147,
+        "seeds": [
+          "v3magicsort_v3magicsort147_difficulty3-2",
+          "v3magicsort_v3magicsort147_difficulty4-1",
+          "v3magicsort_v3magicsort147_difficulty4-3",
+          "v3magicsort_v3magicsort147_difficulty4-4",
+          "v3magicsort_v3magicsort147_difficulty4-5"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_148",
+        "levelIndex": 148,
+        "seeds": [
+          "v3magicsort_v3magicsort148_difficulty2-4",
+          "v3magicsort_v3magicsort148_difficulty3-5",
+          "v3magicsort_v3magicsort148_difficulty2-2",
+          "v3magicsort_v3magicsort148_difficulty2-3",
+          "v3magicsort_v3magicsort148_difficulty3-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_149",
+        "levelIndex": 149,
+        "seeds": [
+          "v3magicsort_v3magicsort149_difficulty5-5",
+          "v3magicsort_v3magicsort149_difficulty5-4",
+          "v3magicsort_v3magicsort149_difficulty5-2",
+          "v3magicsort_v3magicsort149_difficulty5-3",
+          "v3magicsort_v3magicsort149_difficulty5-1"
+        ],
+        "isHard": false,
+        "isSuperHard": true,
+        "cauldronReward": {
+          "levelType": "Super Hard",
+          "currencyType": 6,
+          "amount": 1,
+          "timeSpan": "00:00:00",
+          "currencyDetail": "Extra Bottle"
+        },
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_150",
+        "levelIndex": 150,
+        "seeds": [
+          "v3magicsort_v3magicsort150_difficulty2-5",
+          "v3magicsort_v3magicsort150_difficulty2-3",
+          "v3magicsort_v3magicsort150_difficulty2-4",
+          "v3magicsort_v3magicsort150_difficulty1-2",
+          "v3magicsort_v3magicsort150_difficulty1-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_151",
+        "levelIndex": 151,
+        "seeds": [
+          "paywallms_paywallms151_difficulty2-5",
+          "paywallms_paywallms151_difficulty2-4",
+          "paywallms_paywallms151_difficulty2-3",
+          "paywallms_paywallms151_difficulty2-2",
+          "paywallms_paywallms151_difficulty2-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_152",
+        "levelIndex": 152,
+        "seeds": [
+          "v3magicsort_v3magicsort152_difficulty4-4",
+          "v3magicsort_v3magicsort152_difficulty4-5",
+          "v3magicsort_v3magicsort152_difficulty4-2",
+          "v3magicsort_v3magicsort152_difficulty4-3",
+          "v3magicsort_v3magicsort152_difficulty4-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_153",
+        "levelIndex": 153,
+        "seeds": [
+          "v3magicsort_v3magicsort153_difficulty4-3",
+          "v3magicsort_v3magicsort153_difficulty3-4",
+          "v3magicsort_v3magicsort153_difficulty4-5",
+          "v3magicsort_v3magicsort153_difficulty4-1",
+          "v3magicsort_v3magicsort153_difficulty3-2"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_154",
+        "levelIndex": 154,
+        "seeds": [
+          "v3magicsort_v3magicsort154_difficulty5-4",
+          "v3magicsort_v3magicsort154_difficulty5-5",
+          "v3magicsort_v3magicsort154_difficulty5-3",
+          "v3magicsort_v3magicsort154_difficulty5-1",
+          "v3magicsort_v3magicsort154_difficulty4-2"
+        ],
+        "isHard": true,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_155",
+        "levelIndex": 155,
+        "seeds": [
+          "v3magicsort_v3magicsort155_difficulty2-4",
+          "v3magicsort_v3magicsort155_difficulty2-5",
+          "v3magicsort_v3magicsort155_difficulty2-1",
+          "v3magicsort_v3magicsort155_difficulty2-3",
+          "v3magicsort_v3magicsort155_difficulty2-2"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_156",
+        "levelIndex": 156,
+        "seeds": [
+          "v3magicsort_v3magicsort156_difficulty2-4",
+          "v3magicsort_v3magicsort156_difficulty1-5",
+          "v3magicsort_v3magicsort156_difficulty1-3",
+          "v3magicsort_v3magicsort156_difficulty1-1",
+          "v3magicsort_v3magicsort156_difficulty1-2"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_157",
+        "levelIndex": 157,
+        "seeds": [
+          "v3magicsort_v3magicsort157_difficulty3-5",
+          "v3magicsort_v3magicsort157_difficulty4-4",
+          "v3magicsort_v3magicsort157_difficulty3-1",
+          "v3magicsort_v3magicsort157_difficulty3-2",
+          "v3magicsort_v3magicsort157_difficulty4-3"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_158",
+        "levelIndex": 158,
+        "seeds": [
+          "paywallms_paywallms158_difficulty2-17",
+          "paywallms_paywallms158_difficulty1-16",
+          "paywallms_paywallms158_difficulty2-15",
+          "paywallms_paywallms158_difficulty1-14",
+          "paywallms_paywallms158_difficulty2-13"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_159",
+        "levelIndex": 159,
+        "seeds": [
+          "paywallms_paywallms159_difficulty6-21",
+          "paywallms_paywallms159_difficulty5-30",
+          "paywallms_paywallms159_difficulty5-29",
+          "paywallms_paywallms159_difficulty5-27",
+          "paywallms_paywallms159_difficulty5-26"
+        ],
+        "isHard": false,
+        "isSuperHard": true,
+        "cauldronReward": {
+          "levelType": "Super Hard",
+          "currencyType": 5,
+          "amount": 1,
+          "timeSpan": "00:00:00",
+          "currencyDetail": "Shuffle"
+        },
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_160",
+        "levelIndex": 160,
+        "seeds": [
+          "v3magicsort_v3magicsort160_difficulty2-4",
+          "v3magicsort_v3magicsort160_difficulty2-5",
+          "v3magicsort_v3magicsort160_difficulty2-3",
+          "v3magicsort_v3magicsort160_difficulty2-2",
+          "v3magicsort_v3magicsort160_difficulty2-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_161",
+        "levelIndex": 161,
+        "seeds": [
+          "v5ms_v5ms161_difficulty3-3",
+          "v5ms_v5ms161_difficulty3-1",
+          "v5ms_v5ms161_difficulty3-4",
+          "v5ms_v5ms161_difficulty3-5",
+          "v5ms_v5ms161_difficulty3-2"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_162",
+        "levelIndex": 162,
+        "seeds": [
+          "v3magicsort_v3magicsort162_difficulty4-5",
+          "v3magicsort_v3magicsort162_difficulty3-4",
+          "v3magicsort_v3magicsort162_difficulty4-2",
+          "v3magicsort_v3magicsort162_difficulty3-3",
+          "v3magicsort_v3magicsort162_difficulty4-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_163",
+        "levelIndex": 163,
+        "seeds": [
+          "v3magicsort_v3magicsort163_difficulty4-5",
+          "v3magicsort_v3magicsort163_difficulty2-2",
+          "v3magicsort_v3magicsort163_difficulty5-4",
+          "v3magicsort_v3magicsort163_difficulty5-1",
+          "v3magicsort_v3magicsort163_difficulty5-3"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_164",
+        "levelIndex": 164,
+        "seeds": [
+          "v3magicsort_v3magicsort164_difficulty5-5",
+          "v3magicsort_v3magicsort164_difficulty5-3",
+          "v3magicsort_v3magicsort164_difficulty5-2",
+          "v3magicsort_v3magicsort164_difficulty5-4",
+          "v3magicsort_v3magicsort164_difficulty5-1"
+        ],
+        "isHard": true,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_165",
+        "levelIndex": 165,
+        "seeds": [
+          "v3magicsort_v3magicsort165_difficulty2-5",
+          "v3magicsort_v3magicsort165_difficulty3-4",
+          "v3magicsort_v3magicsort165_difficulty2-3",
+          "v3magicsort_v3magicsort165_difficulty2-2",
+          "v3magicsort_v3magicsort165_difficulty3-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_166",
+        "levelIndex": 166,
+        "seeds": [
+          "v3magicsort_v3magicsort166_difficulty3-5",
+          "v3magicsort_v3magicsort166_difficulty4-4",
+          "v3magicsort_v3magicsort166_difficulty4-2",
+          "v3magicsort_v3magicsort166_difficulty3-3",
+          "v3magicsort_v3magicsort166_difficulty3-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_167",
+        "levelIndex": 167,
+        "seeds": [
+          "v3magicsort_v3magicsort167_difficulty3-5",
+          "v3magicsort_v3magicsort167_difficulty3-2",
+          "v3magicsort_v3magicsort167_difficulty3-4",
+          "v3magicsort_v3magicsort167_difficulty3-1",
+          "v3magicsort_v3magicsort167_difficulty3-3"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_168",
+        "levelIndex": 168,
+        "seeds": [
+          "v3magicsort_v3magicsort168_difficulty3-5",
+          "v3magicsort_v3magicsort168_difficulty3-2",
+          "v3magicsort_v3magicsort168_difficulty3-3",
+          "v3magicsort_v3magicsort168_difficulty3-1",
+          "v3magicsort_v3magicsort168_difficulty2-4"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_169",
+        "levelIndex": 169,
+        "seeds": [
+          "v3magicsort_v3magicsort169_difficulty5-5",
+          "v3magicsort_v3magicsort169_difficulty4-4",
+          "v3magicsort_v3magicsort169_difficulty5-1",
+          "v3magicsort_v3magicsort169_difficulty5-2",
+          "v3magicsort_v3magicsort169_difficulty5-3"
+        ],
+        "isHard": false,
+        "isSuperHard": true,
+        "cauldronReward": {
+          "levelType": "Super Hard",
+          "currencyType": 5,
+          "amount": 1,
+          "timeSpan": "00:00:00",
+          "currencyDetail": "Shuffle"
+        },
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_170",
+        "levelIndex": 170,
+        "seeds": [
+          "v3magicsort_v3magicsort170_difficulty3-5",
+          "v3magicsort_v3magicsort170_difficulty2-4",
+          "v3magicsort_v3magicsort170_difficulty2-3",
+          "v3magicsort_v3magicsort170_difficulty2-2",
+          "v3magicsort_v3magicsort170_difficulty3-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_171",
+        "levelIndex": 171,
+        "seeds": [
+          "v5ms_v5ms171_difficulty3-3",
+          "v5ms_v5ms171_difficulty3-2",
+          "v5ms_v5ms171_difficulty3-1",
+          "v5ms_v5ms171_difficulty3-5",
+          "v5ms_v5ms171_difficulty3-4"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_172",
+        "levelIndex": 172,
+        "seeds": [
+          "v3magicsort_v3magicsort172_difficulty4-5",
+          "v3magicsort_v3magicsort172_difficulty4-3",
+          "v3magicsort_v3magicsort172_difficulty4-4",
+          "v3magicsort_v3magicsort172_difficulty4-2",
+          "v3magicsort_v3magicsort172_difficulty4-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_173",
+        "levelIndex": 173,
+        "seeds": [
+          "v3magicsort_v3magicsort173_difficulty4-4",
+          "v3magicsort_v3magicsort173_difficulty4-5",
+          "v3magicsort_v3magicsort173_difficulty5-2",
+          "v3magicsort_v3magicsort173_difficulty4-1",
+          "v3magicsort_v3magicsort173_difficulty5-3"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_174",
+        "levelIndex": 174,
+        "seeds": [
+          "v3magicsort_v3magicsort174_difficulty5-5",
+          "v3magicsort_v3magicsort174_difficulty5-4",
+          "v3magicsort_v3magicsort174_difficulty5-1",
+          "v3magicsort_v3magicsort174_difficulty4-2",
+          "v3magicsort_v3magicsort174_difficulty5-3"
+        ],
+        "isHard": true,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_175",
+        "levelIndex": 175,
+        "seeds": [
+          "v3magicsort_v3magicsort175_difficulty2-4",
+          "v3magicsort_v3magicsort175_difficulty2-5",
+          "v3magicsort_v3magicsort175_difficulty2-2",
+          "v3magicsort_v3magicsort175_difficulty3-3",
+          "v3magicsort_v3magicsort175_difficulty3-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_176",
+        "levelIndex": 176,
+        "seeds": [
+          "v3magicsort_v3magicsort176_difficulty3-4",
+          "v3magicsort_v3magicsort176_difficulty4-5",
+          "v3magicsort_v3magicsort176_difficulty4-1",
+          "v3magicsort_v3magicsort176_difficulty3-3",
+          "v3magicsort_v3magicsort176_difficulty3-2"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_177",
+        "levelIndex": 177,
+        "seeds": [
+          "paywallms_paywallms177_difficulty2-10",
+          "paywallms_paywallms177_difficulty2-9",
+          "paywallms_paywallms177_difficulty2-8",
+          "paywallms_paywallms177_difficulty1-7",
+          "paywallms_paywallms177_difficulty2-6"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_178",
+        "levelIndex": 178,
+        "seeds": [
+          "v3magicsort_v3magicsort178_difficulty2-5",
+          "v3magicsort_v3magicsort178_difficulty3-3",
+          "v3magicsort_v3magicsort178_difficulty2-4",
+          "v3magicsort_v3magicsort178_difficulty2-1",
+          "v3magicsort_v3magicsort178_difficulty3-2"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_179",
+        "levelIndex": 179,
+        "seeds": [
+          "v2paywallms_v2paywallms179_difficulty5-5",
+          "v2paywallms_v2paywallms179_difficulty5-4",
+          "v2paywallms_v2paywallms179_difficulty5-3",
+          "v2paywallms_v2paywallms179_difficulty5-2",
+          "v2paywallms_v2paywallms179_difficulty5-1"
+        ],
+        "isHard": false,
+        "isSuperHard": true,
+        "cauldronReward": {
+          "levelType": "Super Hard",
+          "currencyType": 4,
+          "amount": 1,
+          "timeSpan": "00:00:00",
+          "currencyDetail": "Undo"
+        },
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_180",
+        "levelIndex": 180,
+        "seeds": [
+          "v4msprod3row_v4msprod3row180_difficulty1-5",
+          "v4msprod3row_v4msprod3row180_difficulty1-4",
+          "v4msprod3row_v4msprod3row180_difficulty1-3",
+          "v4msprod3row_v4msprod3row180_difficulty1-2",
+          "v4msprod3row_v4msprod3row180_difficulty1-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_181",
+        "levelIndex": 181,
+        "seeds": [
+          "msprod3row_msprod3row181_difficulty1-5",
+          "msprod3row_msprod3row181_difficulty1-4",
+          "msprod3row_msprod3row181_difficulty1-3",
+          "msprod3row_msprod3row181_difficulty1-2",
+          "msprod3row_msprod3row181_difficulty1-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_182",
+        "levelIndex": 182,
+        "seeds": [
+          "msprod3row_msprod3row182_difficulty2-2",
+          "msprod3row_msprod3row182_difficulty1-1",
+          "msprod3row_msprod3row182_difficulty1-5",
+          "msprod3row_msprod3row182_difficulty1-4",
+          "msprod3row_msprod3row182_difficulty1-3"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_183",
+        "levelIndex": 183,
+        "seeds": [
+          "msprod3row_msprod3row183_difficulty1-1",
+          "msprod3row_msprod3row183_difficulty1-5",
+          "msprod3row_msprod3row183_difficulty1-4",
+          "msprod3row_msprod3row183_difficulty1-3",
+          "msprod3row_msprod3row183_difficulty1-2"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_184",
+        "levelIndex": 184,
+        "seeds": [
+          "msprod3row_msprod3row184_difficulty4-1",
+          "msprod3row_msprod3row184_difficulty4-2",
+          "msprod3row_msprod3row184_difficulty4-3",
+          "msprod3row_msprod3row184_difficulty4-4",
+          "msprod3row_msprod3row184_difficulty4-5"
+        ],
+        "isHard": true,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_185",
+        "levelIndex": 185,
+        "seeds": [
+          "msprod3row_msprod3row185_difficulty1-1",
+          "msprod3row_msprod3row185_difficulty1-2",
+          "msprod3row_msprod3row185_difficulty1-3",
+          "msprod3row_msprod3row185_difficulty1-4",
+          "msprod3row_msprod3row185_difficulty1-5"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_186",
+        "levelIndex": 186,
+        "seeds": [
+          "msprod3row_msprod3row186_difficulty1-1",
+          "msprod3row_msprod3row186_difficulty1-2", 
+          "msprod3row_msprod3row186_difficulty1-3",
+          "msprod3row_msprod3row186_difficulty1-4",
+          "msprod3row_msprod3row186_difficulty1-5"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_187",
+        "levelIndex": 187,
+        "seeds": [
+          "msprod3row_msprod3row187_difficulty1-1",
+          "msprod3row_msprod3row187_difficulty1-2",
+          "msprod3row_msprod3row187_difficulty1-3",
+          "msprod3row_msprod3row187_difficulty1-4",
+          "msprod3row_msprod3row187_difficulty1-5"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_188",
+        "levelIndex": 188,
+        "seeds": [
+          "msprod3row_msprod3row188_difficulty1-1",
+          "msprod3row_msprod3row188_difficulty1-2",
+          "msprod3row_msprod3row188_difficulty1-3",
+          "msprod3row_msprod3row188_difficulty1-4",
+          "msprod3row_msprod3row188_difficulty1-5"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_189",
+        "levelIndex": 189,
+        "seeds": [
+          "msprod3row_msprod3row189_difficulty5-1",
+          "msprod3row_msprod3row189_difficulty5-2",
+          "msprod3row_msprod3row189_difficulty5-3",
+          "msprod3row_msprod3row189_difficulty5-4",
+          "msprod3row_msprod3row189_difficulty5-5"
+        ],
+        "isHard": false,
+        "isSuperHard": true,
+        "cauldronReward": {
+          "levelType": "Super Hard",
+          "currencyType": 5,
+          "amount": 1,
+          "timeSpan": "00:00:00",
+          "currencyDetail": "Shuffle"
+        },
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_190",
+        "levelIndex": 190,
+        "seeds": [
+          "v2msprod3row_v2msprod3row190_difficulty1-2",
+          "v2msprod3row_v2msprod3row190_difficulty1-3",
+          "v2msprod3row_v2msprod3row190_difficulty1-4",
+          "v2msprod3row_v2msprod3row190_difficulty1-5",
+          "v2msprod3row_v2msprod3row190_difficulty2-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_191",
+        "levelIndex": 191,
+        "seeds": [
+          "v2msprod3row_v2msprod3row191_difficulty1-1",
+          "v2msprod3row_v2msprod3row191_difficulty1-2",
+          "v2msprod3row_v2msprod3row191_difficulty1-3",
+          "v2msprod3row_v2msprod3row191_difficulty1-4",
+          "v2msprod3row_v2msprod3row191_difficulty1-5"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_192",
+        "levelIndex": 192,
+        "seeds": [
+          "v2msprod3row_v2msprod3row192_difficulty1-5",
+          "v2msprod3row_v2msprod3row192_difficulty1-4",
+          "v2msprod3row_v2msprod3row192_difficulty1-3",
+          "v2msprod3row_v2msprod3row192_difficulty1-2",
+          "v2msprod3row_v2msprod3row192_difficulty1-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_193",
+        "levelIndex": 193,
+        "seeds": [
+          "v2msprod3row_v2msprod3row193_difficulty1-1",
+          "v2msprod3row_v2msprod3row193_difficulty1-2",
+          "v2msprod3row_v2msprod3row193_difficulty1-3",
+          "v2msprod3row_v2msprod3row193_difficulty1-4",
+          "v2msprod3row_v2msprod3row193_difficulty1-5"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_194",
+        "levelIndex": 194,
+        "seeds": [
+          "v2msprod3row_v2msprod3row194_difficulty4-1",
+          "v2msprod3row_v2msprod3row194_difficulty4-2",
+          "v2msprod3row_v2msprod3row194_difficulty4-3",
+          "v2msprod3row_v2msprod3row194_difficulty5-4",
+          "v2msprod3row_v2msprod3row194_difficulty5-5"
+        ],
+        "isHard": true,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_195",
+        "levelIndex": 195,
+        "seeds": [
+          "v2msprod3row_v2msprod3row195_difficulty1-3",
+          "v2msprod3row_v2msprod3row195_difficulty1-5",
+          "v2msprod3row_v2msprod3row195_difficulty2-1",
+          "v2msprod3row_v2msprod3row195_difficulty2-2",
+          "v2msprod3row_v2msprod3row195_difficulty2-4"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_196",
+        "levelIndex": 196,
+        "seeds": [
+          "v2msprod3row_v2msprod3row196_difficulty1-1",
+          "v2msprod3row_v2msprod3row196_difficulty1-2",
+          "v2msprod3row_v2msprod3row196_difficulty1-3",
+          "v2msprod3row_v2msprod3row196_difficulty1-4",
+          "v2msprod3row_v2msprod3row196_difficulty1-5"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_197",
+        "levelIndex": 197,
+        "seeds": [
+          "v2msprod3row_v2msprod3row197_difficulty1-1",
+          "v2msprod3row_v2msprod3row197_difficulty1-2",
+          "v2msprod3row_v2msprod3row197_difficulty1-3",
+          "v2msprod3row_v2msprod3row197_difficulty1-4",
+          "v2msprod3row_v2msprod3row197_difficulty1-5"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_198",
+        "levelIndex": 198,
+        "seeds": [
+          "v2msprod3row_v2msprod3row198_difficulty1-1",
+          "v2msprod3row_v2msprod3row198_difficulty1-2",
+          "v2msprod3row_v2msprod3row198_difficulty1-3",
+          "v2msprod3row_v2msprod3row198_difficulty1-4",
+          "v2msprod3row_v2msprod3row198_difficulty1-5"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_199",
+        "levelIndex": 199,
+        "seeds": [
+          "v2msprod3row_v2msprod3row199_difficulty5-2",
+          "v2msprod3row_v2msprod3row199_difficulty5-3",
+          "v2msprod3row_v2msprod3row199_difficulty5-4",
+          "v2msprod3row_v2msprod3row199_difficulty6-5",
+          "v2msprod3row_v2msprod3row199_difficulty7-1"
+        ],
+        "isHard": false,
+        "isSuperHard": true,
+        "cauldronReward": {
+          "levelType": "Super Hard",
+          "currencyType": 6,
+          "amount": 1,
+          "timeSpan": "00:00:00",
+          "currencyDetail": "Extra Bottle"
+        },
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_200",
+        "levelIndex": 200,
+        "seeds": [
+          "v2msprod3row_v2msprod3row200_difficulty1-5",
+          "v2msprod3row_v2msprod3row200_difficulty1-4",
+          "v2msprod3row_v2msprod3row200_difficulty1-3",
+          "v2msprod3row_v2msprod3row200_difficulty1-2",
+          "v2msprod3row_v2msprod3row200_difficulty1-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_201",
+        "levelIndex": 201,
+        "seeds": [
+          "v2msprod3row_v2msprod3row201_difficulty1-1",
+          "v2msprod3row_v2msprod3row201_difficulty1-2",
+          "v2msprod3row_v2msprod3row201_difficulty1-3",
+          "v2msprod3row_v2msprod3row201_difficulty1-4",
+          "v2msprod3row_v2msprod3row201_difficulty1-5"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_202",
+        "levelIndex": 202,
+        "seeds": [
+          "v2msprod3row_v2msprod3row202_difficulty1-2",
+          "v2msprod3row_v2msprod3row202_difficulty1-3",
+          "v2msprod3row_v2msprod3row202_difficulty1-4",
+          "v2msprod3row_v2msprod3row202_difficulty1-5",
+          "v2msprod3row_v2msprod3row202_difficulty2-1"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_203",
+        "levelIndex": 203,
+        "seeds": [
+          "v2msprod3row_v2msprod3row203_difficulty1-1",
+          "v2msprod3row_v2msprod3row203_difficulty1-2",
+          "v2msprod3row_v2msprod3row203_difficulty1-3",
+          "v2msprod3row_v2msprod3row203_difficulty1-4",
+          "v2msprod3row_v2msprod3row203_difficulty1-5"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_204",
+        "levelIndex": 204,
+        "seeds": [
+          "v5msprod3row_v5msprod3row204_difficulty5-1",
+          "v5msprod3row_v5msprod3row204_difficulty5-2",
+          "v5msprod3row_v5msprod3row204_difficulty5-3",
+          "v5msprod3row_v5msprod3row204_difficulty5-4",
+          "v5msprod3row_v5msprod3row204_difficulty5-5"
+        ],
+        "isHard": true,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_205",
+        "levelIndex": 205,
+        "seeds": [
+          "v2msprod3row_v2msprod3row205_difficulty1-1",
+          "v2msprod3row_v2msprod3row205_difficulty1-2",
+          "v2msprod3row_v2msprod3row205_difficulty1-4",
+          "v2msprod3row_v2msprod3row205_difficulty2-3",
+          "v2msprod3row_v2msprod3row205_difficulty2-5"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_206",
+        "levelIndex": 206,
+        "seeds": [
+          "v2msprod3row_v2msprod3row206_difficulty1-1",
+          "v2msprod3row_v2msprod3row206_difficulty1-2",
+          "v2msprod3row_v2msprod3row206_difficulty1-3",
+          "v2msprod3row_v2msprod3row206_difficulty1-4",
+          "v2msprod3row_v2msprod3row206_difficulty1-5"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_207",
+        "levelIndex": 207,
+        "seeds": [
+          "v2msprod3row_v2msprod3row207_difficulty1-1",
+          "v2msprod3row_v2msprod3row207_difficulty1-2",
+          "v2msprod3row_v2msprod3row207_difficulty1-3",
+          "v2msprod3row_v2msprod3row207_difficulty1-4",
+          "v2msprod3row_v2msprod3row207_difficulty1-5"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_208",
+        "levelIndex": 208,
+        "seeds": [
+          "v2msprod3row_v2msprod3row208_difficulty1-1",
+          "v2msprod3row_v2msprod3row208_difficulty1-2",
+          "v2msprod3row_v2msprod3row208_difficulty1-3",
+          "v2msprod3row_v2msprod3row208_difficulty1-4",
+          "v2msprod3row_v2msprod3row208_difficulty1-5"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_209",
+        "levelIndex": 209,
+        "seeds": [
+          "v4msprod3row_v4msprod3row209_difficulty5-12",
+          "v4msprod3row_v4msprod3row209_difficulty5-13",  
+          "v4msprod3row_v4msprod3row209_difficulty5-14",
+          "v4msprod3row_v4msprod3row209_difficulty5-15",
+          "v4msprod3row_v4msprod3row209_difficulty5-16"
+        ],
+        "isHard": false,
+        "isSuperHard": true,
+        "cauldronReward": {
+          "levelType": "Super Hard",
+          "currencyType": 2,
+          "amount": 0,
+          "timeSpan": "00:30:00",
+          "currencyDetail": "30m Limitless Life"
+        },
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_210",
+        "levelIndex": 210,
+        "seeds": [
+          "v2msprod3row_v2msprod3row210_difficulty1-1",
+          "v2msprod3row_v2msprod3row210_difficulty1-2",
+          "v2msprod3row_v2msprod3row210_difficulty1-3",
+          "v2msprod3row_v2msprod3row210_difficulty1-4",
+          "v2msprod3row_v2msprod3row210_difficulty1-5"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_211",
+        "levelIndex": 211,
+        "seeds": [
+          "v2msprod3row_v2msprod3row211_difficulty1-1",
+          "v2msprod3row_v2msprod3row211_difficulty1-2",
+          "v2msprod3row_v2msprod3row211_difficulty1-3",
+          "v2msprod3row_v2msprod3row211_difficulty1-4",
+          "v2msprod3row_v2msprod3row211_difficulty1-5"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_212",
+        "levelIndex": 212,
+        "seeds": [
+          "v2msprod3row_v2msprod3row212_difficulty1-1",
+          "v2msprod3row_v2msprod3row212_difficulty1-2",
+          "v2msprod3row_v2msprod3row212_difficulty1-3",
+          "v2msprod3row_v2msprod3row212_difficulty1-4",
+          "v2msprod3row_v2msprod3row212_difficulty1-5"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_213",
+        "levelIndex": 213,
+        "seeds": [
+          "v2msprod3row_v2msprod3row213_difficulty1-1",
+          "v2msprod3row_v2msprod3row213_difficulty1-2",
+          "v2msprod3row_v2msprod3row213_difficulty1-3",
+          "v2msprod3row_v2msprod3row213_difficulty1-4",
+          "v2msprod3row_v2msprod3row213_difficulty1-5"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_214",
+        "levelIndex": 214,
+        "seeds": [
+          "v5msprod3row_v5msprod3row214_difficulty5-6",
+          "v5msprod3row_v5msprod3row214_difficulty5-7",
+          "v5msprod3row_v5msprod3row214_difficulty5-8",
+          "v5msprod3row_v5msprod3row214_difficulty5-9",
+          "v5msprod3row_v5msprod3row214_difficulty5-10"
+        ],
+        "isHard": true,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_215",
+        "levelIndex": 215,
+        "seeds": [
+          "v2msprod3row_v2msprod3row215_difficulty1-1",
+          "v2msprod3row_v2msprod3row215_difficulty1-2",
+          "v2msprod3row_v2msprod3row215_difficulty1-3",
+          "v2msprod3row_v2msprod3row215_difficulty1-4",
+          "v2msprod3row_v2msprod3row215_difficulty1-5"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_216",
+        "levelIndex": 216,
+        "seeds": [
+          "v2msprod3row_v2msprod3row216_difficulty1-1",
+          "v2msprod3row_v2msprod3row216_difficulty1-2",
+          "v2msprod3row_v2msprod3row216_difficulty1-3",
+          "v2msprod3row_v2msprod3row216_difficulty1-4",
+          "v2msprod3row_v2msprod3row216_difficulty1-5"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_217",
+        "levelIndex": 217,
+        "seeds": [
+          "v2msprod3row_v2msprod3row217_difficulty1-1",
+          "v2msprod3row_v2msprod3row217_difficulty1-2",
+          "v2msprod3row_v2msprod3row217_difficulty1-3",
+          "v2msprod3row_v2msprod3row217_difficulty1-4",
+          "v2msprod3row_v2msprod3row217_difficulty1-5"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_218",
+        "levelIndex": 218,
+        "seeds": [
+          "v2msprod3row_v2msprod3row218_difficulty1-1",
+          "v2msprod3row_v2msprod3row218_difficulty1-2",
+          "v2msprod3row_v2msprod3row218_difficulty1-3",
+          "v2msprod3row_v2msprod3row218_difficulty1-4",
+          "v2msprod3row_v2msprod3row218_difficulty1-5"
+        ],
+        "isHard": false,
+        "isSuperHard": false,
+        "isTutorial": false
+      },
+      {
+        "levelOrder": "level_219",
+        "levelIndex": 219,
+        "seeds": [
+          "v5msprod3row_v5msprod3row219_difficulty7-1",
+          "v5msprod3row_v5msprod3row219_difficulty7-2"
+        ],
+        "isHard": false,
+        "isSuperHard": true,
+        "cauldronReward": {
+          "levelType": "Super Hard",
+          "currencyType": 4,
+          "amount": 1,
+          "timeSpan": "00:00:00",
+          "currencyDetail": "Undo"
+        },
+        "isTutorial": false
+      }
+    ]
+  }

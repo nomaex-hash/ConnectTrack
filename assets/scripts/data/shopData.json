@@ -1,0 +1,321 @@
+{
+    "shopPackages": [
+        {
+            "packageName": 101,
+            "nonConsume": false,
+            "packageNameToUI": "Small Coins",
+            "packageTag": "",
+            "packageId": "coin1",
+            "priceType": 0,
+            "price": "$1.99",
+            "price_amount_cents": 199,
+            "GameResources": [
+                {
+                    "Type": 1,
+                    "SpecificType": 1,
+                    "Value": {
+                        "m_Value": 1000
+                    }
+                }
+            ]
+        },
+        {
+            "packageName": 102,
+            "nonConsume": false,
+            "packageNameToUI": "Medium Coins",
+            "packageTag": "",
+            "packageId": "coin2",
+            "priceType": 0,
+            "price": "$7.99",
+            "price_amount_cents": 799,
+            "GameResources": [
+                {
+                    "Type": 1,
+                    "SpecificType": 1,
+                    "Value": {
+                        "m_Value": 5000
+                    }
+                }
+            ]
+        },
+        {
+            "packageName": 103,
+            "nonConsume": false,
+            "packageNameToUI": "Big Coins",
+            "packageTag": "",
+            "packageId": "coin3",
+            "priceType": 0,
+            "price": "$14.99",
+            "price_amount_cents": 1499,
+            "GameResources": [
+                {
+                    "Type": 1,
+                    "SpecificType": 1,
+                    "Value": {
+                        "m_Value": 10000
+                    }
+                }
+            ]
+        },
+        {
+            "packageName": 104,
+            "nonConsume": false,
+            "packageNameToUI": "Super Coins",
+            "packageTag": "",
+            "packageId": "coin4",
+            "priceType": 0,
+            "price": "$29.99",
+            "price_amount_cents": 2999,
+            "GameResources": [
+                {
+                    "Type": 1,
+                    "SpecificType": 1,
+                    "Value": {
+                        "m_Value": 25000
+                    }
+                }
+            ]
+        },
+        {
+            "packageName": 105,
+            "nonConsume": false,
+            "packageNameToUI": "Mega Coins",
+            "packageTag": "",
+            "packageId": "coin5",
+            "priceType": 0,
+            "price": "$54.99",
+            "price_amount_cents": 5499,
+            "GameResources": [
+                {
+                    "Type": 1,
+                    "SpecificType": 1,
+                    "Value": {
+                        "m_Value": 50000
+                    }
+                }
+            ]
+        },
+        {
+            "packageName": 106,
+            "nonConsume": false,
+            "packageNameToUI": "Ultra Coins",
+            "packageTag": "",
+            "packageId": "coin6",
+            "priceType": 0,
+            "price": "$99.99",
+            "price_amount_cents": 9999,
+            "GameResources": [
+                {
+                    "Type": 1,
+                    "SpecificType": 1,
+                    "Value": {
+                        "m_Value": 100000
+                    }
+                }
+            ]
+        },
+        {
+            "packageName": 201,
+            "nonConsume": false,
+            "packageNameToUI": "Starter Bundle",
+            "packageTag": "",
+            "packageId": "starterbundle",
+            "priceType": 0,
+            "price": "$0.99",
+            "price_amount_cents": 99,
+            "GameResources": [
+                {
+                    "Type": 2,
+                    "SpecificType": 5,
+                    "Value": {
+                        "m_Value": 2
+                    }
+                },
+                {
+                    "Type": 2,
+                    "SpecificType": 4,
+                    "Value": {
+                        "m_Value": 3
+                    }
+                }
+            ]
+        },
+        {
+            "packageName": 301,
+            "nonConsume": false,
+            "packageNameToUI": "Small Bundle",
+            "packageTag": "",
+            "packageId": "smallbundle",
+            "priceType": 0,
+            "price": "$4.99",
+            "price_amount_cents": 499,
+            "GameResources": [
+                {
+                    "Type": 2,
+                    "SpecificType": 5,
+                    "Value": {
+                        "m_Value": 1
+                    }
+                },
+                {
+                    "Type": 2,
+                    "SpecificType": 4,
+                    "Value": {
+                        "m_Value": 1
+                    }
+                }
+            ]
+        },
+        {
+            "packageName": 302,
+            "nonConsume": false,
+            "packageNameToUI": "Medium Bundle",
+            "packageTag": "",
+            "packageId": "mediumbundle",
+            "priceType": 0,
+            "price": "$9.99",
+            "price_amount_cents": 999,
+            "GameResources": [
+                {
+                    "Type": 2,
+                    "SpecificType": 5,
+                    "Value": {
+                        "m_Value": 3
+                    }
+                },
+                {
+                    "Type": 2,
+                    "SpecificType": 4,
+                    "Value": {
+                        "m_Value": 3
+                    }
+                }
+            ]
+        },
+        {
+            "packageName": 303,
+            "nonConsume": false,
+            "packageNameToUI": "Large Bundle",
+            "packageTag": "",
+            "packageId": "largebundle",
+            "priceType": 0,
+            "price": "$19.99",
+            "price_amount_cents": 1999,
+            "GameResources": [
+                {
+                    "Type": 2,
+                    "SpecificType": 5,
+                    "Value": {
+                        "m_Value": 8
+                    }
+                },
+                {
+                    "Type": 2,
+                    "SpecificType": 4,
+                    "Value": {
+                        "m_Value": 8
+                    }
+                }
+            ]
+        },
+        {
+            "packageName": 304,
+            "nonConsume": false,
+            "packageNameToUI": "Big Bundle",
+            "packageTag": "",
+            "packageId": "bigbundle",
+            "priceType": 0,
+            "price": "$49.99",
+            "price_amount_cents": 4999,
+            "GameResources": [
+                {
+                    "Type": 2,
+                    "SpecificType": 5,
+                    "Value": {
+                        "m_Value": 18
+                    }
+                },
+                {
+                    "Type": 2,
+                    "SpecificType": 4,
+                    "Value": {
+                        "m_Value": 18
+                    }
+                }
+            ]
+        },
+        {
+            "packageName": 305,
+            "nonConsume": false,
+            "packageNameToUI": "Mega Bundle",
+            "packageTag": "",
+            "packageId": "megabundle",
+            "priceType": 0,
+            "price": "$99.99",
+            "price_amount_cents": 9999,
+            "GameResources": [
+                {
+                    "Type": 2,
+                    "SpecificType": 5,
+                    "Value": {
+                        "m_Value": 36
+                    }
+                },
+                {
+                    "Type": 2,
+                    "SpecificType": 4,
+                    "Value": {
+                        "m_Value": 36
+                    }
+                }
+            ]
+        },
+        {
+            "packageName": 401,
+            "nonConsume": false,
+            "packageNameToUI": "Battle Pass",
+            "packageTag": "",
+            "packageId": "battlepass",
+            "priceType": 0,
+            "price": "$9.99",
+            "price_amount_cents": 999,
+            "GameResources": [
+                {
+                    "Type": 1,
+                    "SpecificType": 1,
+                    "Value": {
+                        "m_Value": 1000
+                    }
+                },
+                {
+                    "Type": 2,
+                    "SpecificType": 3,
+                    "Value": {
+                        "m_Value": 1
+                    }
+                },
+                {
+                    "Type": 2,
+                    "SpecificType": 2,
+                    "Value": {
+                        "m_Value": 1
+                    }
+                },
+                {
+                    "Type": 2,
+                    "SpecificType": 1,
+                    "Value": {
+                        "m_Value": 1
+                    }
+                },
+                {
+                    "Type": 3,
+                    "SpecificType": 3,
+                    "Value": {
+                        "m_Value": 3600
+                    }
+                }
+            ]
+        }
+    ]
+}

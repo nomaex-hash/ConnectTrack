@@ -1,0 +1,806 @@
+{
+ "0": {
+  "stageLevelId": 10000,
+  "file": "level_01"
+ },
+ "1": {
+  "stageLevelId": 10001,
+  "file": "level_01"
+ },
+ "2": {
+  "stageLevelId": 20002,
+  "file": "level_01"
+ },
+ "3": {
+  "stageLevelId": 50003,
+  "file": "level_01"
+ },
+ "4": {
+  "stageLevelId": 106062346,
+  "file": "level_02"
+ },
+ "5": {
+  "stageLevelId": 50005,
+  "file": "level_01"
+ },
+ "6": {
+  "stageLevelId": 20005,
+  "file": "level_01"
+ },
+ "7": {
+  "stageLevelId": 50007,
+  "file": "level_01"
+ },
+ "8": {
+  "stageLevelId": 50008,
+  "file": "level_01"
+ },
+ "9": {
+  "stageLevelId": 50009,
+  "file": "level_01"
+ },
+ "10": {
+  "stageLevelId": 50010,
+  "file": "level_01"
+ },
+ "11": {
+  "stageLevelId": 50011,
+  "file": "level_01"
+ },
+ "12": {
+  "stageLevelId": 50012,
+  "file": "level_01"
+ },
+ "13": {
+  "stageLevelId": 50013,
+  "file": "level_01"
+ },
+ "14": {
+  "stageLevelId": 50014,
+  "file": "level_01"
+ },
+ "15": {
+  "stageLevelId": 50015,
+  "file": "level_01"
+ },
+ "16": {
+  "stageLevelId": 106061264,
+  "file": "level_01"
+ },
+ "17": {
+  "stageLevelId": 106061087,
+  "file": "level_01"
+ },
+ "18": {
+  "stageLevelId": 106062555,
+  "file": "level_02"
+ },
+ "19": {
+  "stageLevelId": 106061599,
+  "file": "level_01"
+ },
+ "20": {
+  "stageLevelId": 106061537,
+  "file": "level_01"
+ },
+ "21": {
+  "stageLevelId": 106061493,
+  "file": "level_01"
+ },
+ "22": {
+  "stageLevelId": 106061321,
+  "file": "level_01"
+ },
+ "23": {
+  "stageLevelId": 106062545,
+  "file": "level_02"
+ },
+ "24": {
+  "stageLevelId": 106061245,
+  "file": "level_01"
+ },
+ "25": {
+  "stageLevelId": 107071822,
+  "file": "level_03"
+ },
+ "26": {
+  "stageLevelId": 106062422,
+  "file": "level_02"
+ },
+ "27": {
+  "stageLevelId": 106062553,
+  "file": "level_02"
+ },
+ "28": {
+  "stageLevelId": 107071161,
+  "file": "level_02"
+ },
+ "29": {
+  "stageLevelId": 106062153,
+  "file": "level_02"
+ },
+ "30": {
+  "stageLevelId": 110101376,
+  "file": "level_06"
+ },
+ "31": {
+  "stageLevelId": 106061214,
+  "file": "level_01"
+ },
+ "32": {
+  "stageLevelId": 106062246,
+  "file": "level_02"
+ },
+ "33": {
+  "stageLevelId": 106061900,
+  "file": "level_01"
+ },
+ "34": {
+  "stageLevelId": 106061101,
+  "file": "level_01"
+ },
+ "35": {
+  "stageLevelId": 107072194,
+  "file": "level_03"
+ },
+ "36": {
+  "stageLevelId": 106061097,
+  "file": "level_01"
+ },
+ "37": {
+  "stageLevelId": 106061227,
+  "file": "level_01"
+ },
+ "38": {
+  "stageLevelId": 106061483,
+  "file": "level_01"
+ },
+ "39": {
+  "stageLevelId": 106061512,
+  "file": "level_01"
+ },
+ "40": {
+  "stageLevelId": 109092163,
+  "file": "level_06"
+ },
+ "41": {
+  "stageLevelId": 106062070,
+  "file": "level_02"
+ },
+ "42": {
+  "stageLevelId": 106062269,
+  "file": "level_02"
+ },
+ "43": {
+  "stageLevelId": 106061090,
+  "file": "level_01"
+ },
+ "44": {
+  "stageLevelId": 106062186,
+  "file": "level_02"
+ },
+ "45": {
+  "stageLevelId": 108081286,
+  "file": "level_04"
+ },
+ "46": {
+  "stageLevelId": 106061443,
+  "file": "level_01"
+ },
+ "47": {
+  "stageLevelId": 106062503,
+  "file": "level_02"
+ },
+ "48": {
+  "stageLevelId": 106062367,
+  "file": "level_02"
+ },
+ "49": {
+  "stageLevelId": 106062473,
+  "file": "level_02"
+ },
+ "50": {
+  "stageLevelId": 108082403,
+  "file": "level_05"
+ },
+ "51": {
+  "stageLevelId": 107071320,
+  "file": "level_02"
+ },
+ "52": {
+  "stageLevelId": 106061895,
+  "file": "level_01"
+ },
+ "53": {
+  "stageLevelId": 106061487,
+  "file": "level_01"
+ },
+ "54": {
+  "stageLevelId": 106061955,
+  "file": "level_01"
+ },
+ "55": {
+  "stageLevelId": 108081603,
+  "file": "level_04"
+ },
+ "56": {
+  "stageLevelId": 106062243,
+  "file": "level_02"
+ },
+ "57": {
+  "stageLevelId": 106061605,
+  "file": "level_01"
+ },
+ "58": {
+  "stageLevelId": 106062695,
+  "file": "level_02"
+ },
+ "59": {
+  "stageLevelId": 107071114,
+  "file": "level_02"
+ },
+ "60": {
+  "stageLevelId": 109091510,
+  "file": "level_05"
+ },
+ "61": {
+  "stageLevelId": 20003,
+  "file": "level_01"
+ },
+ "62": {
+  "stageLevelId": 106062591,
+  "file": "level_02"
+ },
+ "63": {
+  "stageLevelId": 106062688,
+  "file": "level_02"
+ },
+ "64": {
+  "stageLevelId": 106061362,
+  "file": "level_01"
+ },
+ "65": {
+  "stageLevelId": 108081253,
+  "file": "level_04"
+ },
+ "66": {
+  "stageLevelId": 106062466,
+  "file": "level_02"
+ },
+ "67": {
+  "stageLevelId": 106061901,
+  "file": "level_01"
+ },
+ "68": {
+  "stageLevelId": 106061732,
+  "file": "level_01"
+ },
+ "69": {
+  "stageLevelId": 107071298,
+  "file": "level_02"
+ },
+ "70": {
+  "stageLevelId": 109091216,
+  "file": "level_05"
+ },
+ "71": {
+  "stageLevelId": 106061354,
+  "file": "level_01"
+ },
+ "72": {
+  "stageLevelId": 106061476,
+  "file": "level_01"
+ },
+ "73": {
+  "stageLevelId": 106062600,
+  "file": "level_02"
+ },
+ "74": {
+  "stageLevelId": 106061725,
+  "file": "level_01"
+ },
+ "75": {
+  "stageLevelId": 107072271,
+  "file": "level_03"
+ },
+ "76": {
+  "stageLevelId": 107071324,
+  "file": "level_02"
+ },
+ "77": {
+  "stageLevelId": 106061225,
+  "file": "level_01"
+ },
+ "78": {
+  "stageLevelId": 106061814,
+  "file": "level_01"
+ },
+ "79": {
+  "stageLevelId": 106061234,
+  "file": "level_01"
+ },
+ "80": {
+  "stageLevelId": 109091533,
+  "file": "level_05"
+ },
+ "81": {
+  "stageLevelId": 106061771,
+  "file": "level_01"
+ },
+ "82": {
+  "stageLevelId": 106062773,
+  "file": "level_02"
+ },
+ "83": {
+  "stageLevelId": 106061740,
+  "file": "level_01"
+ },
+ "84": {
+  "stageLevelId": 106062273,
+  "file": "level_02"
+ },
+ "85": {
+  "stageLevelId": 107071462,
+  "file": "level_03"
+ },
+ "86": {
+  "stageLevelId": 106061577,
+  "file": "level_01"
+ },
+ "87": {
+  "stageLevelId": 106062690,
+  "file": "level_02"
+ },
+ "88": {
+  "stageLevelId": 106061124,
+  "file": "level_01"
+ },
+ "89": {
+  "stageLevelId": 106062531,
+  "file": "level_02"
+ },
+ "90": {
+  "stageLevelId": 109091127,
+  "file": "level_05"
+ },
+ "91": {
+  "stageLevelId": 106061976,
+  "file": "level_01"
+ },
+ "92": {
+  "stageLevelId": 106062135,
+  "file": "level_02"
+ },
+ "93": {
+  "stageLevelId": 106061291,
+  "file": "level_01"
+ },
+ "94": {
+  "stageLevelId": 107071222,
+  "file": "level_02"
+ },
+ "95": {
+  "stageLevelId": 107071561,
+  "file": "level_03"
+ },
+ "96": {
+  "stageLevelId": 106061811,
+  "file": "level_01"
+ },
+ "97": {
+  "stageLevelId": 106061197,
+  "file": "level_01"
+ },
+ "98": {
+  "stageLevelId": 106062167,
+  "file": "level_02"
+ },
+ "99": {
+  "stageLevelId": 106061636,
+  "file": "level_01"
+ },
+ "100": {
+  "stageLevelId": 110101146,
+  "file": "level_06"
+ },
+ "101": {
+  "stageLevelId": 106062736,
+  "file": "level_02"
+ },
+ "102": {
+  "stageLevelId": 106062324,
+  "file": "level_02"
+ },
+ "103": {
+  "stageLevelId": 106062303,
+  "file": "level_02"
+ },
+ "104": {
+  "stageLevelId": 107071147,
+  "file": "level_02"
+ },
+ "105": {
+  "stageLevelId": 108081691,
+  "file": "level_04"
+ },
+ "106": {
+  "stageLevelId": 107071098,
+  "file": "level_02"
+ },
+ "107": {
+  "stageLevelId": 106061776,
+  "file": "level_01"
+ },
+ "108": {
+  "stageLevelId": 106062219,
+  "file": "level_02"
+ },
+ "109": {
+  "stageLevelId": 106061429,
+  "file": "level_01"
+ },
+ "110": {
+  "stageLevelId": 108082223,
+  "file": "level_05"
+ },
+ "111": {
+  "stageLevelId": 106062479,
+  "file": "level_02"
+ },
+ "112": {
+  "stageLevelId": 106061178,
+  "file": "level_01"
+ },
+ "113": {
+  "stageLevelId": 106061129,
+  "file": "level_01"
+ },
+ "114": {
+  "stageLevelId": 106062391,
+  "file": "level_02"
+ },
+ "115": {
+  "stageLevelId": 108081831,
+  "file": "level_04"
+ },
+ "116": {
+  "stageLevelId": 106061502,
+  "file": "level_01"
+ },
+ "117": {
+  "stageLevelId": 106062621,
+  "file": "level_02"
+ },
+ "118": {
+  "stageLevelId": 106061628,
+  "file": "level_01"
+ },
+ "119": {
+  "stageLevelId": 106061199,
+  "file": "level_01"
+ },
+ "120": {
+  "stageLevelId": 108082163,
+  "file": "level_05"
+ },
+ "121": {
+  "stageLevelId": 107071085,
+  "file": "level_02"
+ },
+ "122": {
+  "stageLevelId": 107071312,
+  "file": "level_02"
+ },
+ "123": {
+  "stageLevelId": 107071108,
+  "file": "level_02"
+ },
+ "124": {
+  "stageLevelId": 106061242,
+  "file": "level_01"
+ },
+ "125": {
+  "stageLevelId": 107072359,
+  "file": "level_04"
+ },
+ "126": {
+  "stageLevelId": 107071281,
+  "file": "level_02"
+ },
+ "127": {
+  "stageLevelId": 107071288,
+  "file": "level_02"
+ },
+ "128": {
+  "stageLevelId": 106061964,
+  "file": "level_01"
+ },
+ "129": {
+  "stageLevelId": 106062338,
+  "file": "level_02"
+ },
+ "130": {
+  "stageLevelId": 108082300,
+  "file": "level_05"
+ },
+ "131": {
+  "stageLevelId": 106062746,
+  "file": "level_02"
+ },
+ "132": {
+  "stageLevelId": 106061783,
+  "file": "level_01"
+ },
+ "133": {
+  "stageLevelId": 106061369,
+  "file": "level_01"
+ },
+ "134": {
+  "stageLevelId": 106061794,
+  "file": "level_01"
+ },
+ "135": {
+  "stageLevelId": 108081200,
+  "file": "level_04"
+ },
+ "136": {
+  "stageLevelId": 106061763,
+  "file": "level_01"
+ },
+ "137": {
+  "stageLevelId": 106061465,
+  "file": "level_01"
+ },
+ "138": {
+  "stageLevelId": 106062409,
+  "file": "level_02"
+ },
+ "139": {
+  "stageLevelId": 106061582,
+  "file": "level_01"
+ },
+ "140": {
+  "stageLevelId": 109092239,
+  "file": "level_06"
+ },
+ "141": {
+  "stageLevelId": 106062474,
+  "file": "level_02"
+ },
+ "142": {
+  "stageLevelId": 106062436,
+  "file": "level_02"
+ },
+ "143": {
+  "stageLevelId": 106062364,
+  "file": "level_02"
+ },
+ "144": {
+  "stageLevelId": 106061182,
+  "file": "level_01"
+ },
+ "145": {
+  "stageLevelId": 107072433,
+  "file": "level_04"
+ },
+ "146": {
+  "stageLevelId": 106062284,
+  "file": "level_02"
+ },
+ "147": {
+  "stageLevelId": 106062337,
+  "file": "level_02"
+ },
+ "148": {
+  "stageLevelId": 106061386,
+  "file": "level_01"
+ },
+ "149": {
+  "stageLevelId": 106062130,
+  "file": "level_02"
+ },
+ "150": {
+  "stageLevelId": 109091991,
+  "file": "level_06"
+ },
+ "151": {
+  "stageLevelId": 106062530,
+  "file": "level_02"
+ },
+ "152": {
+  "stageLevelId": 107071328,
+  "file": "level_02"
+ },
+ "153": {
+  "stageLevelId": 106061370,
+  "file": "level_01"
+ },
+ "154": {
+  "stageLevelId": 106061982,
+  "file": "level_01"
+ },
+ "155": {
+  "stageLevelId": 107071367,
+  "file": "level_03"
+ },
+ "156": {
+  "stageLevelId": 106061813,
+  "file": "level_01"
+ },
+ "157": {
+  "stageLevelId": 106061588,
+  "file": "level_01"
+ },
+ "158": {
+  "stageLevelId": 106062347,
+  "file": "level_02"
+ },
+ "159": {
+  "stageLevelId": 106062446,
+  "file": "level_02"
+ },
+ "160": {
+  "stageLevelId": 109091208,
+  "file": "level_05"
+ },
+ "161": {
+  "stageLevelId": 106062177,
+  "file": "level_02"
+ },
+ "162": {
+  "stageLevelId": 106061485,
+  "file": "level_01"
+ },
+ "163": {
+  "stageLevelId": 106062439,
+  "file": "level_02"
+ },
+ "164": {
+  "stageLevelId": 106061700,
+  "file": "level_01"
+ },
+ "165": {
+  "stageLevelId": 108081272,
+  "file": "level_04"
+ },
+ "166": {
+  "stageLevelId": 106062764,
+  "file": "level_02"
+ },
+ "167": {
+  "stageLevelId": 106062611,
+  "file": "level_02"
+ },
+ "168": {
+  "stageLevelId": 106062627,
+  "file": "level_02"
+ },
+ "169": {
+  "stageLevelId": 106061150,
+  "file": "level_01"
+ },
+ "170": {
+  "stageLevelId": 110101093,
+  "file": "level_06"
+ },
+ "171": {
+  "stageLevelId": 106061505,
+  "file": "level_01"
+ },
+ "172": {
+  "stageLevelId": 106062721,
+  "file": "level_02"
+ },
+ "173": {
+  "stageLevelId": 107071316,
+  "file": "level_02"
+ },
+ "174": {
+  "stageLevelId": 106062686,
+  "file": "level_02"
+ },
+ "175": {
+  "stageLevelId": 107072391,
+  "file": "level_04"
+ },
+ "176": {
+  "stageLevelId": 106061682,
+  "file": "level_01"
+ },
+ "177": {
+  "stageLevelId": 106061857,
+  "file": "level_01"
+ },
+ "178": {
+  "stageLevelId": 106061584,
+  "file": "level_01"
+ },
+ "179": {
+  "stageLevelId": 106061171,
+  "file": "level_01"
+ },
+ "180": {
+  "stageLevelId": 109092029,
+  "file": "level_06"
+ },
+ "181": {
+  "stageLevelId": 106061468,
+  "file": "level_01"
+ },
+ "182": {
+  "stageLevelId": 106062198,
+  "file": "level_02"
+ },
+ "183": {
+  "stageLevelId": 107071128,
+  "file": "level_02"
+ },
+ "184": {
+  "stageLevelId": 106062507,
+  "file": "level_02"
+ },
+ "185": {
+  "stageLevelId": 108081155,
+  "file": "level_04"
+ },
+ "186": {
+  "stageLevelId": 106061680,
+  "file": "level_01"
+ },
+ "187": {
+  "stageLevelId": 106061471,
+  "file": "level_01"
+ },
+ "188": {
+  "stageLevelId": 106062379,
+  "file": "level_02"
+ },
+ "189": {
+  "stageLevelId": 106062058,
+  "file": "level_02"
+ },
+ "190": {
+  "stageLevelId": 109092013,
+  "file": "level_06"
+ },
+ "191": {
+  "stageLevelId": 106061846,
+  "file": "level_01"
+ },
+ "192": {
+  "stageLevelId": 107071145,
+  "file": "level_02"
+ },
+ "193": {
+  "stageLevelId": 106062353,
+  "file": "level_02"
+ },
+ "194": {
+  "stageLevelId": 106061975,
+  "file": "level_01"
+ },
+ "195": {
+  "stageLevelId": 107071829,
+  "file": "level_03"
+ },
+ "196": {
+  "stageLevelId": 106061328,
+  "file": "level_01"
+ },
+ "197": {
+  "stageLevelId": 106061578,
+  "file": "level_01"
+ },
+ "198": {
+  "stageLevelId": 107071326,
+  "file": "level_02"
+ },
+ "199": {
+  "stageLevelId": 106061541,
+  "file": "level_01"
+ },
+ "200": {
+  "stageLevelId": 109091820,
+  "file": "level_06"
+ }
+}

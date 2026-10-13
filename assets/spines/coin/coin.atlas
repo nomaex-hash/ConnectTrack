@@ -1,0 +1,8 @@
+coin.png
+size:128,100
+filter:Linear,Linear
+scale:0.7
+coin1
+bounds:2,2,95,95
+coin2
+bounds:99,6,25,91

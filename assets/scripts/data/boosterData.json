@@ -1,0 +1,58 @@
+[
+  {
+    "BoosterType": 2,
+    "BoosterName": "Storage",
+    "Description": "Storage skewer combo",
+    "Price": 250,
+    "Effect": 1,
+    "UnlockLevel": 4
+  },
+  {
+    "BoosterType": 4,
+    "BoosterName": "Refresh",
+    "Description": "Readjust all skewer position",
+    "Price": 250,
+    "Effect": 1,
+    "UnlockLevel": 6
+  },
+  {
+    "BoosterType": 5,
+    "BoosterName": "Target Storage",
+    "Description": "Pick a skewer to store full combo",
+    "Price": 350,
+    "Effect": 30,
+    "UnlockLevel": 8
+  },
+  {
+    "BoosterType": 3,
+    "BoosterName": "Rolling Pin",
+    "Description": "Break frozen skewer",
+    "Price": 250,
+    "Effect": 20,
+    "UnlockLevel": 19
+  },
+  {
+    "BoosterType": 1,
+    "BoosterName": "Ice Cube",
+    "Description": "Freezes time for {0} seconds",
+    "Price": 250,
+    "Effect": 20,
+    "UnlockLevel": 20
+  },
+  {
+    "BoosterType": 6,
+    "BoosterName": "Extra Pack",
+    "Description": "Start the game with\na pre-packed skewer combo",
+    "Price": 250,
+    "Effect": 1,
+    "UnlockLevel": 16
+  },
+  {
+    "BoosterType": 7,
+    "BoosterName": "Extra Time",
+    "Description": "Start the game with\n+30s extra time",
+    "Price": 350,
+    "Effect": 30,
+    "UnlockLevel": 21
+  }
+]

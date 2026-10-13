@@ -1,0 +1,100 @@
+{
+    "questDataConfigs": [
+        {
+            "icon": "trophy",
+            "scale": 1.0,
+            "questID": 1,
+            "questType":0,
+            "questDes": "Pass {0} levels",
+            "reward": {
+                "Type": 1,
+                "SpecificType": 1,
+                "Value": {
+                    "m_Value": 40
+                }
+            },
+            "questRequire": 3,
+            "questName": "Level"
+        },
+        {
+            "icon": "booster_pack_2",
+            "scale": 0.3,
+            "questID": 6,
+            "questType":2,
+            "questDes": "Use {0} Storage",
+            "reward": {
+                "Type": 1,
+                "SpecificType": 1,
+                "Value": {
+                    "m_Value": 40
+                }
+            },
+            "questRequire": 2,
+            "questName": "Pack"
+        },
+        {
+            "icon": "booster_wand_2",
+            "scale": 0.3,
+            "questID": 7,
+            "questType":3,
+            "questDes": "Use {0} Hammer",
+            "reward": {
+                "Type": 1,
+                "SpecificType": 1,
+                "Value": {
+                    "m_Value": 40
+                }
+            },
+            "questRequire": 2,
+            "questName": "Torch"
+        },
+        {
+            "icon": "booster_indicated_pack_2",
+            "scale": 0.3,
+            "questID": 8,
+            "questType":5,
+            "questDes": "Use {0} Target Storage",
+            "reward": {
+                "Type": 1,
+                "SpecificType": 1,
+                "Value": {
+                    "m_Value": 40
+                }
+            },
+            "questRequire": 2,
+            "questName": "Target Storage"
+        },
+        {
+            "icon": "booster_swap_2",
+            "scale": 0.3,
+            "questID": 9,
+            "questType":4,
+            "questDes": "Use {0} Refresh",
+            "reward": {
+                "Type": 1,
+                "SpecificType": 1,
+                "Value": {
+                    "m_Value": 40
+                }
+            },
+            "questRequire": 2,
+            "questName": "Refresh"
+        },
+        {
+            "icon": "delivery",
+            "scale": 0.8,
+            "questID": 10,
+            "questType":8,
+            "questDes": "Skip {0} order",
+            "reward": {
+                "Type": 1,
+                "SpecificType": 1,
+                "Value": {
+                    "m_Value": 40
+                }
+            },
+            "questRequire": 1,
+            "questName": "Delivery"
+        }
+    ]
+}

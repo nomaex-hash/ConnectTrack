@@ -1,0 +1,20 @@
+[
+  {
+    "BoosterType": 15,
+    "BoosterName": "Extra Pack",
+    "Description": "Start the game with a pre-packed skewer combo",
+    "Price": 250,
+    "Effect": 1,
+    "UnlockLevel": 16,
+    "Time": 900
+  },
+  {
+    "BoosterType": 14,
+    "BoosterName": "Extra Time",
+    "Description": "Start the game with +30s extra time",
+    "Price": 350,
+    "Effect": 30,
+    "UnlockLevel": 21,
+    "Time": 900
+  }
+]

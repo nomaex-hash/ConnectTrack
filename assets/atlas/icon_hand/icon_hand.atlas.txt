@@ -1,0 +1,14 @@
+icon_hand.png
+size:956,340
+filter:Linear,Linear
+pma:true
+hand/1
+bounds:734,12,152,199
+rotate:90
+hand/1s
+bounds:734,166,170,217
+rotate:90
+hand/2
+bounds:377,20,355,316
+hand/2s
+bounds:2,2,373,334

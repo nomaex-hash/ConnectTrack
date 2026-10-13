@@ -1,0 +1,30 @@
+{
+    "avatarDatas": [
+        { "Id": 0, "requireToUnlock":0, "levelRequire":0, "HowToCollect":"" },
+        { "Id": 1, "requireToUnlock":0, "levelRequire":0, "HowToCollect":"" },
+        { "Id": 2, "requireToUnlock":0, "levelRequire":0, "HowToCollect":"" },
+        { "Id": 3, "requireToUnlock":0, "levelRequire":0, "HowToCollect":"" },
+        { "Id": 4, "requireToUnlock":0, "levelRequire":0, "HowToCollect":"" },
+        { "Id": 5, "requireToUnlock":0, "levelRequire":0, "HowToCollect":"" },
+        { "Id": 6, "requireToUnlock":0, "levelRequire":0, "HowToCollect":"" },
+        { "Id": 7, "requireToUnlock":0, "levelRequire":0, "HowToCollect":"" },
+        { "Id": 8, "requireToUnlock":0, "levelRequire":0, "HowToCollect":"" },
+        { "Id": 9, "requireToUnlock":0, "levelRequire":0, "HowToCollect":"" },
+        { "Id": 10, "requireToUnlock":0, "levelRequire":0, "HowToCollect":"" },
+        { "Id": 11, "requireToUnlock":0, "levelRequire":0, "HowToCollect":"" }
+    ],
+    "frameDatas": [
+        { "Id": 0, "requireToUnlock":0, "levelRequire":0, "HowToCollect":"" },
+        { "Id": 9, "requireToUnlock":0, "levelRequire":0, "HowToCollect":"" },
+        { "Id": 10, "requireToUnlock":0, "levelRequire":0, "HowToCollect":"" },
+        { "Id": 8, "requireToUnlock":0, "levelRequire":0, "HowToCollect":"" },
+        { "Id": 11, "requireToUnlock":1, "levelRequire":15, "HowToCollect":"" },
+        { "Id": 5, "requireToUnlock":1, "levelRequire":30, "HowToCollect":"" },
+        { "Id": 3, "requireToUnlock":1, "levelRequire":56, "HowToCollect":"" },
+        { "Id": 1, "requireToUnlock":1, "levelRequire":72, "HowToCollect":"" },
+        { "Id": 2, "requireToUnlock":1, "levelRequire":93, "HowToCollect":"" },
+        { "Id": 6, "requireToUnlock":1, "levelRequire":115, "HowToCollect":"" },
+        { "Id": 4, "requireToUnlock":1, "levelRequire":150, "HowToCollect":"" },
+        { "Id": 7, "requireToUnlock":1, "levelRequire":200, "HowToCollect":"" }
+    ]
+}

@@ -1,0 +1,15 @@
+export enum PopupId {
+    Pause = 'Pause',
+    Result = 'Result',
+    DailyResult = 'DailyResult',
+    Settings = 'Settings',
+    HowToPlay = 'HowToPlay',
+    Reward = 'Reward',
+    StarterPack = 'StarterPack',
+    LeaderboardPreview = 'LeaderboardPreview',
+    TournamentResult = 'TournamentResult',
+    TournamentReset = 'TournamentReset',
+    TournamentActivation = 'TournamentActivation',
+    Leaderboard = 'Leaderboard',
+    ConnectTracksLose = 'ConnectTracksLose',
+}

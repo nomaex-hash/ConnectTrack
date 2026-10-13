@@ -1,0 +1,44 @@
+{
+  "leaderboardRewards": [
+    {
+      "rewards": [
+        {
+          "Type": 2,
+          "SpecificType": 5,
+          "Value": {
+            "m_Value": 1
+          }
+        },
+        {
+          "Type": 2,
+          "SpecificType": 4,
+          "Value": {
+            "m_Value": 1
+          }
+        }
+      ]
+    },
+    {
+      "rewards": [
+        {
+          "Type": 2,
+          "SpecificType": 5,
+          "Value": {
+            "m_Value": 1
+          }
+        }
+      ]
+    },
+    {
+      "rewards": [
+        {
+          "Type": 2,
+          "SpecificType": 4,
+          "Value": {
+            "m_Value": 1
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1230 @@
+{
+    "battlePassDetailConfigs": [
+        {
+            "requireFoodieStar": 0,
+            "freeBattlePassDetail": {
+                "battlePassType": 1,
+                "rewardIndex": 0,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 40
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            },
+            "premiumBattlePassDetail": {
+                "battlePassType": 2,
+                "rewardIndex": 0,
+                "rewards": [
+                    {
+                        "Type": 3,
+                        "SpecificType": 3,
+                        "Value": {
+                            "m_Value": 3600
+                        }
+                    },
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 500
+                        }
+                    }
+                ],
+                "isButton": true,
+                "icon":"Treasure3"
+            }
+        },
+        {
+            "requireFoodieStar": 1,
+            "freeBattlePassDetail": {
+                "battlePassType": 1,
+                "rewardIndex": 1,
+                "rewards": [
+                    {
+                        "Type": 3,
+                        "SpecificType": 3,
+                        "Value": {
+                            "m_Value": 900
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            },
+            "premiumBattlePassDetail": {
+                "battlePassType": 2,
+                "rewardIndex": 1,
+                "rewards": [
+                    {
+                        "Type": 2,
+                        "SpecificType": 2,
+                        "Value": {
+                            "m_Value": 1
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            }
+        },
+        {
+            "requireFoodieStar": 1,
+            "freeBattlePassDetail": {
+                "battlePassType": 1,
+                "rewardIndex": 2,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 40
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            },
+            "premiumBattlePassDetail": {
+                "battlePassType": 2,
+                "rewardIndex": 2,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 100
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            }
+        },
+        {
+            "requireFoodieStar": 2,
+            "freeBattlePassDetail": {
+                "battlePassType": 1,
+                "rewardIndex": 3,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 80
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            },
+            "premiumBattlePassDetail": {
+                "battlePassType": 2,
+                "rewardIndex": 3,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 100
+                        }
+                    },
+                    {
+                        "Type": 2,
+                        "SpecificType": 5,
+                        "Value": {
+                            "m_Value": 1
+                        }
+                    }
+                ],
+                "isButton": true,
+                "icon":"Treasure1"
+            }
+        },
+        {
+            "requireFoodieStar": 2,
+            "freeBattlePassDetail": {
+                "battlePassType": 1,
+                "rewardIndex": 4,
+                "rewards": [
+                    {
+                        "Type": 2,
+                        "SpecificType": 2,
+                        "Value": {
+                            "m_Value": 1
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            },
+            "premiumBattlePassDetail": {
+                "battlePassType": 2,
+                "rewardIndex": 4,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 200
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            }
+        },
+        {
+            "requireFoodieStar": 3,
+            "freeBattlePassDetail": {
+                "battlePassType": 1,
+                "rewardIndex": 5,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 40
+                        }
+                    },
+                    {
+                        "Type": 3,
+                        "SpecificType": 3,
+                        "Value": {
+                            "m_Value": 900
+                        }
+                    }
+                ],
+                "isButton": true,
+                "icon":"Treasure1"
+            },
+            "premiumBattlePassDetail": {
+                "battlePassType": 2,
+                "rewardIndex": 5,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 100
+                        }
+                    },
+                    {
+                        "Type": 2,
+                        "SpecificType": 2,
+                        "Value": {
+                            "m_Value": 1
+                        }
+                    },
+                    {
+                        "Type": 2,
+                        "SpecificType": 3,
+                        "Value": {
+                            "m_Value": 1
+                        }
+                    }
+                ],
+                "isButton": true,
+                "icon":"Treasure1"
+            }
+        },
+        {
+            "requireFoodieStar": 3,
+            "freeBattlePassDetail": {
+                "battlePassType": 1,
+                "rewardIndex": 6,
+                "rewards": [
+                    {
+                        "Type": 3,
+                        "SpecificType": 3,
+                        "Value": {
+                            "m_Value": 900
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            },
+            "premiumBattlePassDetail": {
+                "battlePassType": 2,
+                "rewardIndex": 6,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 200
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            }
+        },
+        {
+            "requireFoodieStar": 4,
+            "freeBattlePassDetail": {
+                "battlePassType": 1,
+                "rewardIndex": 7,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 80
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            },
+            "premiumBattlePassDetail": {
+                "battlePassType": 2,
+                "rewardIndex": 7,
+                "rewards": [
+                    {
+                        "Type": 3,
+                        "SpecificType": 3,
+                        "Value": {
+                            "m_Value": 1800
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            }
+        },
+        {
+            "requireFoodieStar": 4,
+            "freeBattlePassDetail": {
+                "battlePassType": 1,
+                "rewardIndex": 8,
+                "rewards": [
+                    {
+                        "Type": 2,
+                        "SpecificType": 4,
+                        "Value": {
+                            "m_Value": 1
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            },
+            "premiumBattlePassDetail": {
+                "battlePassType": 2,
+                "rewardIndex": 8,
+                "rewards": [
+                    {
+                        "Type": 2,
+                        "SpecificType": 4,
+                        "Value": {
+                            "m_Value": 1
+                        }
+                    },
+                    {
+                        "Type": 2,
+                        "SpecificType": 5,
+                        "Value": {
+                            "m_Value": 1
+                        }
+                    }
+                ],
+                "isButton": true,
+                "icon":"Treasure1"
+            }
+        },
+        {
+            "requireFoodieStar": 5,
+            "freeBattlePassDetail": {
+                "battlePassType": 1,
+                "rewardIndex": 9,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 200
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            },
+            "premiumBattlePassDetail": {
+                "battlePassType": 2,
+                "rewardIndex": 9,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 400
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            }
+        },
+        {
+            "requireFoodieStar": 5,
+            "freeBattlePassDetail": {
+                "battlePassType": 1,
+                "rewardIndex": 10,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 80
+                        }
+                    },
+                    {
+                        "Type": 3,
+                        "SpecificType": 3,
+                        "Value": {
+                            "m_Value": 900
+                        }
+                    }
+                ],
+                "isButton": true,
+                "icon":"Treasure1"
+            },
+            "premiumBattlePassDetail": {
+                "battlePassType": 2,
+                "rewardIndex": 10,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 200
+                        }
+                    },
+                    {
+                        "Type": 2,
+                        "SpecificType": 2,
+                        "Value": {
+                            "m_Value": 1
+                        }
+                    },
+                    {
+                        "Type": 2,
+                        "SpecificType": 4,
+                        "Value": {
+                            "m_Value": 1
+                        }
+                    },
+                    {
+                        "Type": 2,
+                        "SpecificType": 3,
+                        "Value": {
+                            "m_Value": 1
+                        }
+                    }
+                ],
+                "isButton": true,
+                "icon":"Treasure2"
+            }
+        },
+        {
+            "requireFoodieStar": 6,
+            "freeBattlePassDetail": {
+                "battlePassType": 1,
+                "rewardIndex": 11,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 80
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            },
+            "premiumBattlePassDetail": {
+                "battlePassType": 2,
+                "rewardIndex": 11,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 200
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            }
+        },
+        {
+            "requireFoodieStar": 6,
+            "freeBattlePassDetail": {
+                "battlePassType": 1,
+                "rewardIndex": 12,
+                "rewards": [
+                    {
+                        "Type": 3,
+                        "SpecificType": 3,
+                        "Value": {
+                            "m_Value": 1800
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            },
+            "premiumBattlePassDetail": {
+                "battlePassType": 2,
+                "rewardIndex": 12,
+                "rewards": [
+                    {
+                        "Type": 2,
+                        "SpecificType": 2,
+                        "Value": {
+                            "m_Value": 1
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            }
+        },
+        {
+            "requireFoodieStar": 7,
+            "freeBattlePassDetail": {
+                "battlePassType": 1,
+                "rewardIndex": 13,
+                "rewards": [
+                    {
+                        "Type": 2,
+                        "SpecificType": 5,
+                        "Value": {
+                            "m_Value": 1
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            },
+            "premiumBattlePassDetail": {
+                "battlePassType": 2,
+                "rewardIndex": 13,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 200
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            }
+        },
+        {
+            "requireFoodieStar": 7,
+            "freeBattlePassDetail": {
+                "battlePassType": 1,
+                "rewardIndex": 14,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 80
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            },
+            "premiumBattlePassDetail": {
+                "battlePassType": 2,
+                "rewardIndex": 14,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 250
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            }
+        },
+        {
+            "requireFoodieStar": 7,
+            "freeBattlePassDetail": {
+                "battlePassType": 1,
+                "rewardIndex": 15,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 40
+                        }
+                    },
+                    {
+                        "Type": 3,
+                        "SpecificType": 3,
+                        "Value": {
+                            "m_Value": 900
+                        }
+                    }
+                ],
+                "isButton": true,
+                "icon":"Treasure1"
+            },
+            "premiumBattlePassDetail": {
+                "battlePassType": 2,
+                "rewardIndex": 15,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 150
+                        }
+                    },
+                    {
+                        "Type": 2,
+                        "SpecificType": 3,
+                        "Value": {
+                            "m_Value": 1
+                        }
+                    },
+                    {
+                        "Type": 2,
+                        "SpecificType": 2,
+                        "Value": {
+                            "m_Value": 2
+                        }
+                    }
+                ],
+                "isButton": true,
+                "icon":"Treasure2"
+            }
+        },
+        {
+            "requireFoodieStar": 8,
+            "freeBattlePassDetail": {
+                "battlePassType": 1,
+                "rewardIndex": 16,
+                "rewards": [
+                    {
+                        "Type": 2,
+                        "SpecificType": 3,
+                        "Value": {
+                            "m_Value": 1
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            },
+            "premiumBattlePassDetail": {
+                "battlePassType": 2,
+                "rewardIndex": 16,
+                "rewards": [
+                    {
+                        "Type": 2,
+                        "SpecificType": 3,
+                        "Value": {
+                            "m_Value": 2
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            }
+        },
+        {
+            "requireFoodieStar": 8,
+            "freeBattlePassDetail": {
+                "battlePassType": 1,
+                "rewardIndex": 17,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 50
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            },
+            "premiumBattlePassDetail": {
+                "battlePassType": 2,
+                "rewardIndex": 17,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 200
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            }
+        },
+        {
+            "requireFoodieStar": 8,
+            "freeBattlePassDetail": {
+                "battlePassType": 1,
+                "rewardIndex": 18,
+                "rewards": [
+                    {
+                        "Type": 3,
+                        "SpecificType": 3,
+                        "Value": {
+                            "m_Value": 1800
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            },
+            "premiumBattlePassDetail": {
+                "battlePassType": 2,
+                "rewardIndex": 18,
+                "rewards": [
+                    {
+                        "Type": 2,
+                        "SpecificType": 4,
+                        "Value": {
+                            "m_Value": 2
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            }
+        },
+        {
+            "requireFoodieStar": 8,
+            "freeBattlePassDetail": {
+                "battlePassType": 1,
+                "rewardIndex": 19,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 100
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            },
+            "premiumBattlePassDetail": {
+                "battlePassType": 2,
+                "rewardIndex": 19,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 300
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            }
+        },
+        {
+            "requireFoodieStar": 9,
+            "freeBattlePassDetail": {
+                "battlePassType": 1,
+                "rewardIndex": 20,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 50
+                        }
+                    },
+                    {
+                        "Type": 2,
+                        "SpecificType": 3,
+                        "Value": {
+                            "m_Value": 1
+                        }
+                    }
+                ],
+                "isButton": true,
+                "icon":"Treasure1"
+            },
+            "premiumBattlePassDetail": {
+                "battlePassType": 2,
+                "rewardIndex": 20,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 150
+                        }
+                    },
+                    {
+                        "Type": 3,
+                        "SpecificType": 3,
+                        "Value": {
+                            "m_Value": 1800
+                        }
+                    },
+                    {
+                        "Type": 2,
+                        "SpecificType": 2,
+                        "Value": {
+                            "m_Value": 2
+                        }
+                    }
+                ],
+                "isButton": true,
+                "icon":"Treasure2"
+            }
+        },
+        {
+            "requireFoodieStar": 9,
+            "freeBattlePassDetail": {
+                "battlePassType": 1,
+                "rewardIndex": 21,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 200
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            },
+            "premiumBattlePassDetail": {
+                "battlePassType": 2,
+                "rewardIndex": 21,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 500
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            }
+        },
+        {
+            "requireFoodieStar": 9,
+            "freeBattlePassDetail": {
+                "battlePassType": 1,
+                "rewardIndex": 22,
+                "rewards": [
+                    {
+                        "Type": 2,
+                        "SpecificType": 2,
+                        "Value": {
+                            "m_Value": 1
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            },
+            "premiumBattlePassDetail": {
+                "battlePassType": 2,
+                "rewardIndex": 22,
+                "rewards": [
+                    {
+                        "Type": 3,
+                        "SpecificType": 3,
+                        "Value": {
+                            "m_Value": 3600
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            }
+        },
+        {
+            "requireFoodieStar": 10,
+            "freeBattlePassDetail": {
+                "battlePassType": 1,
+                "rewardIndex": 23,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 150
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            },
+            "premiumBattlePassDetail": {
+                "battlePassType": 2,
+                "rewardIndex": 23,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 300
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            }
+        },
+        {
+            "requireFoodieStar": 10,
+            "freeBattlePassDetail": {
+                "battlePassType": 1,
+                "rewardIndex": 24,
+                "rewards": [
+                    {
+                        "Type": 3,
+                        "SpecificType": 3,
+                        "Value": {
+                            "m_Value": 3600
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            },
+            "premiumBattlePassDetail": {
+                "battlePassType": 2,
+                "rewardIndex": 24,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 100
+                        }
+                    },
+                    {
+                        "Type": 2,
+                        "SpecificType": 2,
+                        "Value": {
+                            "m_Value": 1
+                        }
+                    },
+                    {
+                        "Type": 2,
+                        "SpecificType": 5,
+                        "Value": {
+                            "m_Value": 1
+                        }
+                    }
+                ],
+                "isButton": true,
+                "icon":"Treasure3"
+            }
+        },
+        {
+            "requireFoodieStar": 10,
+            "freeBattlePassDetail": {
+                "battlePassType": 1,
+                "rewardIndex": 25,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 200
+                        }
+                    },
+                    {
+                        "Type": 3,
+                        "SpecificType": 3,
+                        "Value": {
+                            "m_Value": 1800
+                        }
+                    }
+                ],
+                "isButton": true,
+                "icon":"Treasure1"
+            },
+            "premiumBattlePassDetail": {
+                "battlePassType": 2,
+                "rewardIndex": 25,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 300
+                        }
+                    },
+                    {
+                        "Type": 2,
+                        "SpecificType": 4,
+                        "Value": {
+                            "m_Value": 2
+                        }
+                    }
+                ],
+                "isButton": true,
+                "icon":"Treasure1"
+            }
+        },
+        {
+            "requireFoodieStar": 11,
+            "freeBattlePassDetail": {
+                "battlePassType": 1,
+                "rewardIndex": 26,
+                "rewards": [
+                    {
+                        "Type": 2,
+                        "SpecificType": 5,
+                        "Value": {
+                            "m_Value": 1
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            },
+            "premiumBattlePassDetail": {
+                "battlePassType": 2,
+                "rewardIndex": 26,
+                "rewards": [
+                    {
+                        "Type": 2,
+                        "SpecificType": 3,
+                        "Value": {
+                            "m_Value": 3
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            }
+        },
+        {
+            "requireFoodieStar": 11,
+            "freeBattlePassDetail": {
+                "battlePassType": 1,
+                "rewardIndex": 27,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 200
+                        }
+                    },
+                    {
+                        "Type": 2,
+                        "SpecificType": 3,
+                        "Value": {
+                            "m_Value": 1
+                        }
+                    }
+                ],
+                "isButton": true,
+                "icon":"Treasure1"
+            },
+            "premiumBattlePassDetail": {
+                "battlePassType": 2,
+                "rewardIndex": 27,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 250
+                        }
+                    },
+                    {
+                        "Type": 3,
+                        "SpecificType": 3,
+                        "Value": {
+                            "m_Value": 1800
+                        }
+                    }
+                ],
+                "isButton": true,
+                "icon":"Treasure2"
+            }
+        },
+        {
+            "requireFoodieStar": 11,
+            "freeBattlePassDetail": {
+                "battlePassType": 1,
+                "rewardIndex": 28,
+                "rewards": [
+                    {
+                        "Type": 2,
+                        "SpecificType": 4,
+                        "Value": {
+                            "m_Value": 1
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            },
+            "premiumBattlePassDetail": {
+                "battlePassType": 2,
+                "rewardIndex": 28,
+                "rewards": [
+                    {
+                        "Type": 2,
+                        "SpecificType": 5,
+                        "Value": {
+                            "m_Value": 1
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            }
+        },
+        {
+            "requireFoodieStar": 12,
+            "freeBattlePassDetail": {
+                "battlePassType": 1,
+                "rewardIndex": 29,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 200
+                        }
+                    }
+                ],
+                "isButton": false,
+                "icon":""
+            },
+            "premiumBattlePassDetail": {
+                "battlePassType": 2,
+                "rewardIndex": 29,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 500
+                        }
+                    },
+                    {
+                        "Type": 2,
+                        "SpecificType": 3,
+                        "Value": {
+                            "m_Value": 1
+                        }
+                    }
+                ],
+                "isButton": true,
+                "icon":"Treasure2"
+            }
+        },
+        {
+            "requireFoodieStar": 14,
+            "freeBattlePassDetail": {
+                "battlePassType": 1,
+                "rewardIndex": 30,
+                "rewards": [
+                    {
+                        "Type": 2,
+                        "SpecificType": 2,
+                        "Value": {
+                            "m_Value": 1
+                        }
+                    },
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 500
+                        }
+                    },
+                    {
+                        "Type": 3,
+                        "SpecificType": 3,
+                        "Value": {
+                            "m_Value": 1800
+                        }
+                    }
+                ],
+                "isButton": true,
+                "icon":"Treasure2"
+            },
+            "premiumBattlePassDetail": {
+                "battlePassType": 2,
+                "rewardIndex": 30,
+                "rewards": [
+                    {
+                        "Type": 1,
+                        "SpecificType": 1,
+                        "Value": {
+                            "m_Value": 2000
+                        }
+                    },
+                    {
+                        "Type": 2,
+                        "SpecificType": 3,
+                        "Value": {
+                            "m_Value": 1
+                        }
+                    },
+                    {
+                        "Type": 2,
+                        "SpecificType": 2,
+                        "Value": {
+                            "m_Value": 1
+                        }
+                    },
+                    {
+                        "Type": 2,
+                        "SpecificType": 5,
+                        "Value": {
+                            "m_Value": 1
+                        }
+                    },
+                    {
+                        "Type": 2,
+                        "SpecificType": 4,
+                        "Value": {
+                            "m_Value": 1
+                        }
+                    }
+                ],
+                "isButton": true,
+                "icon":"Treasure3"
+            }
+        }
+    ]
+}

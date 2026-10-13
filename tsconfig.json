@@ -1,0 +1,19 @@
+{
+  /* Base configuration. Do not edit this field. */
+  "extends": "./temp/tsconfig.cocos.json",
+
+  /* Add your custom configuration here. */
+  "compilerOptions": {
+    /* CLAUDE.md yêu cầu TypeScript Strict Mode. */
+    "strict": true,
+
+    /* Typings của chính Cocos (cc.d.ts, jsb.d.ts) không strict-clean — bỏ qua kiểm tra
+       file .d.ts của thư viện, chỉ strict với code của dự án. */
+    "skipLibCheck": true
+  },
+
+  /* Reference/ chỉ để đọc tham khảo — Cocos Editor không quét thư mục này, và nó chứa cả 1 dự
+     án Cocos khác nguyên vẹn (kể cả file khai báo global riêng) nên phải loại khỏi TS program,
+     tránh xung đột ambient declaration (vd FBInstant) với code thật trong assets/. */
+  "exclude": ["Reference"]
+}

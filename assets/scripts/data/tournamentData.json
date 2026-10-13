@@ -1,0 +1,72 @@
+{
+  "tournamentRewards": [
+    {
+      "rewards": [
+        {
+          "Type": 1,
+          "SpecificType": 1,
+          "Value": {
+            "m_Value": 2000
+          }
+        },
+              {
+          "Type": 2,
+          "SpecificType": 3,
+          "Value": {
+            "m_Value": 2
+          }
+        },
+        {
+          "Type": 2,
+          "SpecificType": 2,
+          "Value": {
+            "m_Value": 1
+          }
+        }
+      ]
+    },
+    {
+      "rewards": [
+        {
+          "Type": 1,
+          "SpecificType": 1,
+          "Value": {
+            "m_Value": 1000
+          }
+        },
+        {
+          "Type": 2,
+          "SpecificType": 2,
+          "Value": {
+            "m_Value": 1
+          }
+        },
+        {
+          "Type": 2,
+          "SpecificType": 3,
+          "Value": {
+            "m_Value": 1
+          }
+        }
+      ]
+    },
+    {
+      "rewards": [
+        {
+          "Type": 1,
+          "SpecificType": 1,
+          "Value": {
+            "m_Value": 500
+          }
+        },
+        {
+          "Type": 2,
+          "SpecificType": 1,
+          "Value": {
+            "m_Value": 1
+          }
+        }
+      ]
+    }
+  ]
+}

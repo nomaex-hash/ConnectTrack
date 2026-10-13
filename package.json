@@ -1,0 +1,22 @@
+{
+  "name": "Dogdoku",
+  "uuid": "7334a7bf-09bd-47ff-8844-00c79a55c063",
+  "creator": {
+    "version": "3.8.6",
+    "registry": {
+      "remote": {}
+    },
+    "dependencies": {
+      "localization-editor": "1.0.4"
+    }
+  },
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "validate:puzzles": "node tools/validate-puzzles.mjs"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.10"
+  }
+}

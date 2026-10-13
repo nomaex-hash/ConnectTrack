@@ -1,0 +1,16 @@
+{
+  "__version__": "1.0.4",
+  "L10nEnable": false,
+  "ProjectConfig": {
+    "localLanguage": "en",
+    "scanOptions": [
+      {
+        "dirs": [
+          ""
+        ],
+        "extNames": [],
+        "excludes": []
+      }
+    ]
+  }
+}

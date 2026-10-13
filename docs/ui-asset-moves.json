@@ -1,0 +1,2995 @@
+﻿[
+  {
+    "from": "assets/textures/ui/1.png",
+    "to": "assets/textures/ui/shared/1.png",
+    "uuid": "3f3d339b-5534-4fe2-946f-a01588a5d9ae",
+    "sha": "0f44ff47909444f023180cef3e1b8dfc261252e8ce9e269692f09f8657805dae",
+    "metaSha": "1a1f057fd9a6e119dd7f0a9a54ecb0485c573fdb4818111fea72377f8f08385a",
+    "references": [
+      "assets/home-tabs/LeaderboardTabGroup.prefab",
+      "assets/prefabs/popup/HowToPlayPopup.prefab",
+      "assets/prefabs/popup/LeaderboardPreviewPopup.prefab",
+      "assets/prefabs/popup/ProfileEditPopup.prefab",
+      "assets/prefabs/popup/ResultPopup.prefab",
+      "assets/prefabs/popup/rewardTop3.prefab",
+      "assets/prefabs/popup/SettingsPopup.prefab",
+      "assets/prefabs/popup/TournamentResetPopup.prefab",
+      "assets/prefabs/screen/MainMenuScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/2.png",
+    "to": "assets/textures/ui/shared/2.png",
+    "uuid": "11ded2a5-a39f-4c70-a957-f44520166e35",
+    "sha": "26436b323809c9c15d47a30fe825813e034ff6b03425b930175265cdb0bc2f89",
+    "metaSha": "fdd07062f1968c18df8b5153c82501c10f7a53ffec69a455f2cb0cc4b880704e",
+    "references": [
+      "assets/home-tabs/LeaderboardTabGroup.prefab",
+      "assets/prefabs/popup/LeaderboardPreviewPopup.prefab",
+      "assets/prefabs/popup/rewardTop3.prefab",
+      "assets/prefabs/popup/SettingsPopup.prefab",
+      "assets/prefabs/popup/ShowLeaderboardInfoPopup.prefab",
+      "assets/prefabs/screen/MainMenuScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/26862.png",
+    "to": "assets/textures/ui/unassigned/26862.png",
+    "uuid": "38e6b876-ed17-440a-aef7-bbadb465d55d",
+    "sha": "498e53aecc5577aa8d2004c21e07dc1ce29aed9d0e68930b1956b953178c02a6",
+    "metaSha": "e083e20811af59b74b699a2b9c02da4a408fda0ea566969c9bb21fd63e989f21",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/2nut_01.png",
+    "to": "assets/textures/ui/unassigned/2nut_01.png",
+    "uuid": "ef7e5214-169d-4cb1-9676-98fa5e763ac2",
+    "sha": "c93b8d5f3ed82e0229a86e91e4304fceabb3cf7dff807bbf9a6d9d596dc7fc12",
+    "metaSha": "6d7b74fd93f23935bb24e1d9eb9211b729f532153dc39877389df777327e1b11",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/2nut_02.png",
+    "to": "assets/textures/ui/unassigned/2nut_02.png",
+    "uuid": "2cee6e3e-960e-4c63-baf5-01912c841d98",
+    "sha": "91ec677dd3e7e8f5e9e1c40c6af1a75fbc95dc22bb437d3985cdf468d7f4d368",
+    "metaSha": "9ac28cd0fc6505156f5ba8e9a9216e4616714baf5c84bd824dceff37d66ab024",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/3.png",
+    "to": "assets/textures/ui/shared/3.png",
+    "uuid": "0204e513-e424-45e0-a2a7-0ed7c344b675",
+    "sha": "91841c0a739af775ea800c22dc37a34b8f0627240daf874ee87e9625c3cb1b3b",
+    "metaSha": "f7e59e3b87e0fb7160ad0413003caf800f86e2e2f1aa575ecb7276734ce9dc8b",
+    "references": [
+      "assets/home-tabs/LeaderboardTabGroup.prefab",
+      "assets/prefabs/popup/LeaderboardPreviewPopup.prefab",
+      "assets/prefabs/popup/rewardTop3.prefab",
+      "assets/prefabs/popup/ShowLeaderboardInfoPopup.prefab",
+      "assets/prefabs/screen/MainMenuScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/4.png",
+    "to": "assets/textures/ui/shared/4.png",
+    "uuid": "d2f5674e-83e5-4119-b251-8afc61904190",
+    "sha": "b8e93b74dd35e0548326e578fc0e79e3c3495231901cea28f837856be67c4d6d",
+    "metaSha": "c0dbda0310c23f5671948e77035bbd94a808aa1e78ac3894d9e257734c661ec9",
+    "references": [
+      "assets/home-tabs/LeaderboardTabGroup.prefab",
+      "assets/prefabs/popup/LeaderboardPreviewPopup.prefab",
+      "assets/prefabs/popup/rewardTop3.prefab",
+      "assets/prefabs/popup/SettingsPopup.prefab",
+      "assets/prefabs/popup/ShowLeaderboardInfoPopup.prefab",
+      "assets/prefabs/screen/MainMenuScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/497.png",
+    "to": "assets/textures/ui/unassigned/497.png",
+    "uuid": "227d427a-b898-4781-8e2f-af2145a1c2e4",
+    "sha": "399c5c7043982494ad8914552138e86c639e054ac2d706c4bb7da66136ed29d5",
+    "metaSha": "14dfe5df175e3bc5e849e407ae44c0bb5ffad3de277db0e6f31e361ff097170f",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/4e9606ce-50cc-4969-b356-deb61b672e5b (1).png",
+    "to": "assets/textures/ui/unassigned/4e9606ce-50cc-4969-b356-deb61b672e5b (1).png",
+    "uuid": "5e91709f-d03e-420a-9fc4-f1a171851607",
+    "sha": "128b2301f9e1311e27b7f4aa551cdec7eab5e2e58f7eeb3c09d56e1ba4bc4243",
+    "metaSha": "7458e40331698fd9bcddda11ab288fa87f116247b8512dd8d24f746f639adca9",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/4e9606ce-50cc-4969-b356-deb61b672e5b.png",
+    "to": "assets/textures/ui/unassigned/4e9606ce-50cc-4969-b356-deb61b672e5b.png",
+    "uuid": "9367e486-d7fa-42c2-9988-1a845e062815",
+    "sha": "875ee95497bbdeabaded783864bc046ac9432fb4850003c6a0e922386070fccd",
+    "metaSha": "bab5064ed05ff5818e4947842da4f0d268e9ede0106912b53cace7984691a010",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/4x4px.png",
+    "to": "assets/textures/ui/unassigned/4x4px.png",
+    "uuid": "a0b93d6d-296d-49db-9120-e86833aa79d6",
+    "sha": "9d705f87e834095860e5b7a172fa043816307ba8312d63d48c2cdc6bb9f67b3e",
+    "metaSha": "3334fee0a69ed5b3e76aa2d542521f7742ee770270fa842cd37c9742f24dc03f",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/86a4a901-7d16-4002-a8ec-155815d8fc3d (1).png",
+    "to": "assets/textures/ui/unassigned/86a4a901-7d16-4002-a8ec-155815d8fc3d (1).png",
+    "uuid": "0183c59a-9588-4af2-9f04-2f014e82e050",
+    "sha": "678f8bf482f747bb0e2e8ac3353f3625f04f4ace1ab2417b3e5dafc396c8d18a",
+    "metaSha": "cd66a3952b98b879a04bae9dcad2ab11e3128c3145da38b4cd901445dc965734",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/86a4a901-7d16-4002-a8ec-155815d8fc3d.png",
+    "to": "assets/textures/ui/unassigned/86a4a901-7d16-4002-a8ec-155815d8fc3d.png",
+    "uuid": "fc168f2b-69ac-49f5-b32f-e607b64891bd",
+    "sha": "d28117d41b5bfeb47ffc5abd08885ba346e6b6cf97d9840c9810c1dc08401c90",
+    "metaSha": "618097ccd42e72e2793c1183344bcfdfb2c24d35869f2b6ef1f85ed2eefeb596",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/8875841 (1).png",
+    "to": "assets/textures/ui/shared/8875841 (1).png",
+    "uuid": "174f1ac3-e7fc-4b5e-acb8-6f2b8e182a69",
+    "sha": "cb58a1b707ef810f76ece0a08b5880093d625b1d0d394b3c20ed68879488be75",
+    "metaSha": "f2675ffdd88917ade3ce7d3f3a1b3d222ebf3b6d266e36c77523ae6758d6bb42",
+    "references": [
+      "assets/prefabs/popup/HowToPlayPopup.prefab",
+      "assets/prefabs/screen/DailyStreakScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/8875841.png",
+    "to": "assets/textures/ui/tutorial/8875841.png",
+    "uuid": "b20b99c5-d789-4acf-af34-33e9c56b587e",
+    "sha": "88a15c1977c18420ef50c076fcc5ca4a4e11f78f4cbb5acc7fe04456bb223aff",
+    "metaSha": "eef2f72de45f24f1bfedca837ab954008502cc14e980a21a1b8163ebc36f4eb0",
+    "references": [
+      "assets/prefabs/popup/HowToPlayPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/add_icon.png",
+    "to": "assets/textures/ui/shop/add_icon.png",
+    "uuid": "e9497a69-cb6e-4372-8852-4b9f5d77ff36",
+    "sha": "81c740dfd46392c13353012787e2ada7a738981f0d8444a7312c129ac00fd625",
+    "metaSha": "2c240f77b1525d2c5ea79a56ca49e6ec9ea5f2f0b1921c67151278825b92895d",
+    "references": [
+      "assets/home-tabs/ShopTabGroup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/Amazing-001.png",
+    "to": "assets/textures/ui/gameplay/Amazing-001.png",
+    "uuid": "b6d950a5-60cd-48f6-91b8-4800f8671013",
+    "sha": "4a1b3f7c289b802e89cdea0197a68d02df4543306abe0d8c594f1948f236ac80",
+    "metaSha": "830a1a441ab66efa0af9aef3df7c8a20a2558242656453747f3ecb05bdb1c682",
+    "references": [
+      "assets/prefabs/board/Board.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/Amazing.png",
+    "to": "assets/textures/ui/gameplay/Amazing.png",
+    "uuid": "ef091057-eea8-49e8-b7b9-169d7d1776a9",
+    "sha": "4a4fa4f64fab7f29bd59ebd33a4b0ef378c402635f571d5270661b426ee16a8c",
+    "metaSha": "fa93beaba719aa6c446b941eb084582594fc2c95d829ac8ca03be1e5baf755eb",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/avatar_0.png",
+    "to": "assets/textures/ui/profile/avatar_0.png",
+    "uuid": "692236d7-95fa-451e-8b79-ace18321922c",
+    "sha": "272baa163311d815d7688715ffc450df1576f2dcdd0a1603c6b6d761641366fa",
+    "metaSha": "59dd84f884482c0727fd95c35dc903197696e36f3671a8151152d887f49b3309",
+    "references": [
+      "assets/prefabs/popup/ItemLeaderBoard.prefab",
+      "assets/prefabs/popup/ItemLeaderBoardReward.prefab",
+      "assets/prefabs/popup/ItemLeaderBoardRewardTournament.prefab",
+      "assets/prefabs/popup/ProfilePopup.prefab",
+      "assets/scenes/Boot.scene"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/avatar_1.png",
+    "to": "assets/textures/ui/profile/avatar_1.png",
+    "uuid": "b25121ec-cb61-43d3-87d2-b883d4ef397d",
+    "sha": "affe88e938d22185d0da57bf61249ad76ed7e19cbdd31c3b6d640af381a3192c",
+    "metaSha": "2a354d22ea83ecad1313d8d0a5771aa7a340b4f085165b4d67aba8d3d49b0fab",
+    "references": [
+      "assets/scenes/Boot.scene"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/avatar_2.png",
+    "to": "assets/textures/ui/profile/avatar_2.png",
+    "uuid": "9fc9c01c-bba0-44aa-a355-9327ed5d61b3",
+    "sha": "d17a57ed321f480e0319a37edea51a3778089894f34e009a8785d86bdb40e2de",
+    "metaSha": "4bfd146eb6cf401335b23fff23be119777241c084e76b460a2b6f4006379fde4",
+    "references": [
+      "assets/scenes/Boot.scene"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/avatar_3.png",
+    "to": "assets/textures/ui/profile/avatar_3.png",
+    "uuid": "c3cf6345-1f24-4bcb-9ae9-d2cd79141a2e",
+    "sha": "d4623842ee9ec249f2f77d801aefd651a50b960f6c0bb47be188e28102456d64",
+    "metaSha": "1bb9d0986a9af8843da5bfde843fdac314e97dcc7ce705a0ecc0fbf0b3ff8161",
+    "references": [
+      "assets/scenes/Boot.scene"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/avatar_4.png",
+    "to": "assets/textures/ui/profile/avatar_4.png",
+    "uuid": "b91c577c-ddde-4e75-9983-e89476ff08ea",
+    "sha": "aa99c6929f2c12140135401d286968881c3d6642388605ffe76fe09c716bf272",
+    "metaSha": "72e23dc380fa42b9d22c86774257c9e8365b17b1295a57a81621c898b3af3e3b",
+    "references": [
+      "assets/scenes/Boot.scene"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/avatar_5.png",
+    "to": "assets/textures/ui/profile/avatar_5.png",
+    "uuid": "bc4f3435-eaaf-4c87-a55f-2bc91420edb6",
+    "sha": "0132f3fb95af4d3994df1f69c880018b0c8ccd570027b88f8e7976d163ffc70c",
+    "metaSha": "03e607a9abacdcc31279b9a12e2b965b5f8436ef4d5036d6a0a614acfa3582db",
+    "references": [
+      "assets/scenes/Boot.scene"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/avatar_6.png",
+    "to": "assets/textures/ui/profile/avatar_6.png",
+    "uuid": "0af3ae9e-1a87-475c-9831-771590314fb1",
+    "sha": "1682eb19e5a5d9b81f1cc8d9f0b5c8a3c099bcb3a0da9453ca5527279abb71c2",
+    "metaSha": "0b8a4125eca8181efb71e7ca077bca3cb76de34133bfd6173a6a68aa6f68bd28",
+    "references": [
+      "assets/scenes/Boot.scene"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/avatar_7.png",
+    "to": "assets/textures/ui/profile/avatar_7.png",
+    "uuid": "4b572cb4-c167-4f9e-8776-e16483fb1aa9",
+    "sha": "f5483d0b831420c43f22be41d76260944cf2b405201945adcb95888f736c2350",
+    "metaSha": "e9b3c793e19723e973f8f28b6303841f177841d1770fb19d6eb81597c020474f",
+    "references": [
+      "assets/scenes/Boot.scene"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/avatar_8.png",
+    "to": "assets/textures/ui/profile/avatar_8.png",
+    "uuid": "50acce4a-580b-44c5-9da6-a88e7c132a50",
+    "sha": "b1e1a8941112f2ed7cfac0e9adf043ef737165da002c0092d8a39a4bea00aebd",
+    "metaSha": "531df34dee8da12f4059a9f8314f27fdce27792b00bfd1fd420be7b7f46f69cf",
+    "references": [
+      "assets/scenes/Boot.scene"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/BalooDa-Regular Atlas.png",
+    "to": "assets/textures/ui/large-textures/BalooDa-Regular Atlas.png",
+    "uuid": "f59e6bca-0089-40cb-96ec-7cc5182a82fb",
+    "sha": "7955951b7f6a613ece7f687d5f1cc22d03f64289480a906e3bfe7cc8ff3a46bd",
+    "metaSha": "0e631f4260ebb0fc5ce64c8e19baa5214b6621c018d615ddb8c84ee29dde6c03",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/banner_leaderboard.png",
+    "to": "assets/textures/ui/leaderboard/banner_leaderboard.png",
+    "uuid": "1c801d05-0ffc-46e5-b863-c57899a3e27a",
+    "sha": "6a01d342c3ec3e444e7e1cb264dec9dfd76a79801a1fe5f3d311fdb99ebfe8c0",
+    "metaSha": "d44de9b1bc7b59ac3111b22083f0f6bbcf1651909179867226df5628de8fe405",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/bar_bundle.png",
+    "to": "assets/textures/ui/shop/bar_bundle.png",
+    "uuid": "e91e9586-cfa3-4a98-83f1-9a619fe60e29",
+    "sha": "fe97cc6c8ba8a4e9efd3f01fbd04aa773e02c09822a5629cf444ef29c3d5b3a4",
+    "metaSha": "9402c5c74a1e44a1b0743d7dedcf9269b81d63f626ea908f70b305fd3bb59ae5",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/bd_done_red.png",
+    "to": "assets/textures/ui/unassigned/bd_done_red.png",
+    "uuid": "77507e3e-3c13-4b32-9ce6-66f564f6f9a2",
+    "sha": "388fc8f2ed88450c978c16baee36fe5da78a5567b7745aaf578016b043acfdc4",
+    "metaSha": "51b6442f6403ca2fcd674d6f922fdac6bca9b2d871656739eb1ac9735b82ef17",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/BGPatterns.png",
+    "to": "assets/textures/ui/main-menu/BGPatterns.png",
+    "uuid": "496380a9-beca-447f-b671-8c71b247d55a",
+    "sha": "9f9ad83f7ee28853492df7b38409038ac493e00129aba6169b58ecdd2c49917c",
+    "metaSha": "77e0d4899ce585afd30c4f8fbda4bb6b7356af54731089a0e637e467acf9eee9",
+    "references": [
+      "assets/prefabs/screen/MainMenuScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/bg_coin.png",
+    "to": "assets/textures/ui/shop/bg_coin.png",
+    "uuid": "03406eeb-db98-4f30-8a6a-c40301ca5fcc",
+    "sha": "8cd8391e15eb1374a660e3852a21fcc6aeb9e9b6e9e6e14f6e7d62f6629c8276",
+    "metaSha": "815e52d62b02942a1fbdafb1ba073283fc897a2dd6efbe3db98c8179ff994c1b",
+    "references": [
+      "assets/home-tabs/ShopTabGroup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/bg_glow.png",
+    "to": "assets/textures/ui/effects/bg_glow.png",
+    "uuid": "92212355-88df-4595-b69b-1de59f062970",
+    "sha": "98f41e5813ece8c5caef654fd5f31a826b9609332e5fd2850a6280cdcd04ed90",
+    "metaSha": "f907302b0dcb023bbca6f3a115ca32e628ac9ffe3a2319a195ac58e94d507215",
+    "references": [
+      "assets/prefabs/board/PenguinHead.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/bg_image.png",
+    "to": "assets/textures/ui/shared/bg_image.png",
+    "uuid": "f9d858ed-031f-47c7-8650-8f9fd26073b8",
+    "sha": "b7e9d4451c2453214351000f02177ff122047dd6a4443d99f2cc15991cbb8d56",
+    "metaSha": "6fcc07ec9254380967d818086446c3e21a036437c7bc72aff120a45d6fd4ecff",
+    "references": [
+      "assets/scenes/Boot.scene"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/bg_shop.png",
+    "to": "assets/textures/ui/shop/bg_shop.png",
+    "uuid": "20aefd41-2a44-4634-ae9c-db4744f55595",
+    "sha": "890948537da8de2fa8f9393ad9ad048be66d271f025a4a7de7b88d3ac2ab6454",
+    "metaSha": "0a89fa040a42ca2bbc53e22939eb2d475567af966212e4c4dd65ff165fcdbc62",
+    "references": [
+      "assets/home-tabs/ShopTabGroup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/bg_text.png",
+    "to": "assets/textures/ui/gameplay/bg_text.png",
+    "uuid": "c6d90cad-fb54-4293-9599-3538b9c52165",
+    "sha": "fa1ec597372ac9978454e3978dd3590d6a702ec3c4625c0fb97faeba499689e5",
+    "metaSha": "3e40d71b9f5d24e649af560dd95e4d56e8614cf81ac5b625a567d513967b57a9",
+    "references": [
+      "assets/prefabs/board/Praise.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/big_box.png",
+    "to": "assets/textures/ui/daily/big_box.png",
+    "uuid": "2a8441bf-69ce-4812-8ea6-9515ed807e5d",
+    "sha": "3fde9696106c6381ed57d395ebd397cce3eab2fea48326b6f5503d7fd18c6726",
+    "metaSha": "08de09aea30e15496f8e4e57ce895ff2137e8ab39b4ac45931938d07e8861a43",
+    "references": [
+      "assets/prefabs/screen/DailyStreakScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/board.png",
+    "to": "assets/textures/ui/unassigned/board.png",
+    "uuid": "604d0ba6-52d1-4d08-a2d2-af593e8241a0",
+    "sha": "57b6173ec7cb27b82837c57caf2443dc1174c0c567915732ac0a27a111fe334c",
+    "metaSha": "aaf82abb8ca2a3d4458cdd038441b6323f2a2220268a90211834afe47f5d1a3a",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/booster_box.png",
+    "to": "assets/textures/ui/shared/booster_box.png",
+    "uuid": "bf4dd806-7d5f-4e16-b29d-52e98c88dfea",
+    "sha": "9309ba2ee274b4c5ada3e3b47603048cedac85fd7bdf1b258417e5404918494c",
+    "metaSha": "2e510f850d68048933291aca48e6b87d61491cbfe72ee30dea3b0cbbf0510d6d",
+    "references": [
+      "assets/prefabs/popup/ItemRewardBox.prefab",
+      "assets/prefabs/popup/ItemRewardReceive.prefab",
+      "assets/prefabs/screen/GameplayScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/booster_slot.png",
+    "to": "assets/textures/ui/unassigned/booster_slot.png",
+    "uuid": "cb76e660-b69f-4b49-b508-db9786d1d427",
+    "sha": "8f1201df45e8c0a58f7f2537653badcf407079529dd6b63175f9261db420d73c",
+    "metaSha": "621fce34ef4cdb2f66178ca155cbb389f803ff9ea692ebd8cf855fa6843f87a5",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/booster_slot_reward.png",
+    "to": "assets/textures/ui/shop/booster_slot_reward.png",
+    "uuid": "6db6654d-f679-44ad-9c55-2656a1bebcc1",
+    "sha": "8f1201df45e8c0a58f7f2537653badcf407079529dd6b63175f9261db420d73c",
+    "metaSha": "e0fa866eb838260163e3cc097e06c477ad198b8e48b53d831b475bb2f05d5c83",
+    "references": [
+      "assets/prefabs/popup/ItemRewardShop.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/box.png",
+    "to": "assets/textures/ui/leaderboard/box.png",
+    "uuid": "9f6be29c-c375-4201-9e5a-f6aaae1505be",
+    "sha": "3685c037034cd34cca980e233369f582cf78a31ded52af6b188090f8976fa66d",
+    "metaSha": "46f26427fe57a5d120cc1a7af13e72d8a0507960dc80d3c792e427081d63018f",
+    "references": [
+      "assets/prefabs/popup/ShowLeaderboardInfoPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/box_popup.png",
+    "to": "assets/textures/ui/shared/box_popup.png",
+    "uuid": "e933e4d6-124d-4625-bd11-a6f0e2a772af",
+    "sha": "04d62d625ad1639b547dc43678036ea3e82bd67178036de75d205a4ed9c582b2",
+    "metaSha": "9b931b662d3f80ae556291e5892a7b6fbfcf76bf93d99b5f84ca441dc683b884",
+    "references": [
+      "assets/prefabs/popup/HowToPlayPopup.prefab",
+      "assets/prefabs/popup/ProfileEditPopup.prefab",
+      "assets/prefabs/popup/SettingsPopup.prefab",
+      "assets/prefabs/popup/TournamentResetPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/Brow 2L.png",
+    "to": "assets/textures/ui/unassigned/Brow 2L.png",
+    "uuid": "ec08443c-fbbb-4b57-9ffc-7e6057fa8819",
+    "sha": "ebdf11956870dc93791be63f3907a50bbd3420ee821569a1c9ec92795e02657b",
+    "metaSha": "6c27583341461d8af4ac675ed25261378f547d03fd9ad513d8a69b3c08ae2f8b",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/Brow 2R.png",
+    "to": "assets/textures/ui/unassigned/Brow 2R.png",
+    "uuid": "c4921030-b8c9-44fc-bc2a-f53dd78973af",
+    "sha": "3a8b08baeed67a2a4b4374d96fdbbf3effe241b88a9d2bf36a5daead8c54f60a",
+    "metaSha": "1f5415fa62f6f8af71f84128ffb4bc2f64cb812dea920a40a90c6255ad93318e",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/btnBG.png",
+    "to": "assets/textures/ui/unassigned/btnBG.png",
+    "uuid": "0504675a-ef91-489c-975c-944e0be6bf43",
+    "sha": "d59dc1c26cc28dc943d48a6c1c3b9f8d4e2b0759177a96e9f213d41779c477f2",
+    "metaSha": "8bc316df3b630335d68da981a789d959755d510aa3bb6e2ce7a5ab46b5d02677",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/btn_blue-001.png",
+    "to": "assets/textures/ui/shared/btn_blue-001.png",
+    "uuid": "00e3096e-0888-45ac-80bc-ffa53c445ccf",
+    "sha": "574043ee6f66938ea2bd0da0741e7a5fde7bb4c6bcea49ebcf21a70ad1e1bd90",
+    "metaSha": "c58f6f458ff3a87296a8c4c182a6ef5884514e263a435ebfad912d73ec46c60f",
+    "references": [
+      "assets/prefabs/popup/SettingsPopup.prefab",
+      "assets/prefabs/screen/MainMenuScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/btn_blue.png",
+    "to": "assets/textures/ui/unassigned/btn_blue.png",
+    "uuid": "37ca271d-4914-40c7-947a-1c83ef3b17f5",
+    "sha": "d12490aa6bc327212d4ce73904972dab3269d9dc6ef6df6def3dee457727041f",
+    "metaSha": "005a058131b51310be79ef21820c0d4c5eb5cc7d6277007641562a640a75a517",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/btn_edit.png",
+    "to": "assets/textures/ui/profile/btn_edit.png",
+    "uuid": "f3061e43-40b6-4e33-923e-1aaeb3c9349e",
+    "sha": "6bd6b67b1111214648df654ed9d63b76095d64e15cd7c5b26c431db82c8268fd",
+    "metaSha": "04261aac6de0684652ad28a314d8c4f04930d15c743e8526aebf0f63b90cfb57",
+    "references": [
+      "assets/prefabs/popup/ProfileEditPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/btn_gray.png",
+    "to": "assets/textures/ui/main-menu/btn_gray.png",
+    "uuid": "ee926429-58c5-4ff2-816f-91c83bbe2734",
+    "sha": "0357eff04c4a5d9ed832f80514cdd7ade0c5046ae8b4aace66754e932d67747c",
+    "metaSha": "05b5378d8d1f5d707956dcf0dc7146162d1538da69fc5d562bc0cc5d4a0be5b9",
+    "references": [
+      "assets/prefabs/screen/MainMenuScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/btn_green-001.png",
+    "to": "assets/textures/ui/shared/btn_green-001.png",
+    "uuid": "c6da6918-b3cd-42b1-82d4-cd84405ffaa1",
+    "sha": "7a2631f0fa8b7f1d39c273638af01c615d6b4e8109321369c5d647ac3b1dabae",
+    "metaSha": "75782bfaaa92b9e9c0bb2a91c2c0e00d0860c85c21ff8ecc2899df5a54e8ad01",
+    "references": [
+      "assets/home-tabs/ShopTabGroup.prefab",
+      "assets/prefabs/popup/ProfileEditPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/btn_green-002.png",
+    "to": "assets/textures/ui/shared/btn_green-002.png",
+    "uuid": "96fb116f-ccf4-4794-8bf9-6e776503ae7e",
+    "sha": "60f361a3ed156d66b9aa14008d4a6e5cc8b13aed44d5b1aefafbb25d505a9d0c",
+    "metaSha": "ade3e54144996a445cb5c212cc624ea6f2d337aae629751d8a265d068ef4dfcf",
+    "references": [
+      "assets/prefabs/popup/HowToPlayPopup.prefab",
+      "assets/prefabs/popup/ResultPopup.prefab",
+      "assets/prefabs/popup/SettingsPopup.prefab",
+      "assets/prefabs/popup/TournamentResetPopup.prefab",
+      "assets/prefabs/popup/TournamentResultPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/btn_green-003.png",
+    "to": "assets/textures/ui/main-menu/btn_green-003.png",
+    "uuid": "a61c30d5-9464-4e41-af81-9bab3d0cf4a3",
+    "sha": "60f361a3ed156d66b9aa14008d4a6e5cc8b13aed44d5b1aefafbb25d505a9d0c",
+    "metaSha": "c189f8c571bcaa567c6cf43962d3fdd6e18a032cf5d758e16a518f13ef112de5",
+    "references": [
+      "assets/prefabs/screen/MainMenuScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/btn_green.png",
+    "to": "assets/textures/ui/shared/btn_green.png",
+    "uuid": "f8a032ba-e3aa-492b-8908-e069c62d877e",
+    "sha": "7af7749f90f2cc08a915d50abfa0a2dca5adecfc8f8d0e4d79f7da22644eb37e",
+    "metaSha": "312b15dcb7ff3f65c8d76355c033f6c5d96c6073f137872aa5f2e3ad01ddc52d",
+    "references": [
+      "assets/prefabs/popup/DailyResultPopup.prefab",
+      "assets/prefabs/popup/rewardTop3.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/btn_grey.png",
+    "to": "assets/textures/ui/unassigned/btn_grey.png",
+    "uuid": "9c73a583-ae9c-4f02-8152-89c388752e94",
+    "sha": "f7494e61fb6539934f81c6d8dd2670397aceb84b1a1b8fcdeb500fb1533e4294",
+    "metaSha": "2881e52349b161c648e313e5f1cac0798d3528c4b7e32a25067801baa09115a8",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/btn_hide.png",
+    "to": "assets/textures/ui/profile/btn_hide.png",
+    "uuid": "4f06c865-3c0f-4977-b522-e78cb465cb93",
+    "sha": "1508fb7233435e34854f542da9478f992bf38d85dd9d2f74b63bf9bb1f7a73a0",
+    "metaSha": "44024f67a69e4bb0112507f8414f332a2af38d83a550a3111f32417d403f8c79",
+    "references": [
+      "assets/prefabs/popup/ProfileEditPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/btn_on.png",
+    "to": "assets/textures/ui/settings/btn_on.png",
+    "uuid": "4bc9ba22-0e54-4183-a147-84f60bce875b",
+    "sha": "81c5562e813c7599f9b5eea4cf07f106fc6b074ff915d167ba1e3fac6158e83f",
+    "metaSha": "90d84ba9fe7b7bfac1f09df1c329ce20877a42d63f2a0d69752abfe1b477a77e",
+    "references": [
+      "assets/prefabs/popup/SettingsPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/btn_orange-001.png",
+    "to": "assets/textures/ui/shared/btn_orange-001.png",
+    "uuid": "9ccd71b4-87ab-4cee-80f2-0ca4c5343a11",
+    "sha": "6adbeecbedb78a6fb5145107e1a6c464dfa9d3c7544531b91e1bf14937335d5f",
+    "metaSha": "bfeb31b86b1e0bcf6f4d9dc9dab8ea027bf857835c04fdb1abc54c8a33c7f664",
+    "references": [
+      "assets/prefabs/popup/SettingsPopup.prefab",
+      "assets/prefabs/screen/MainMenuScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/btn_orange-002.png",
+    "to": "assets/textures/ui/shared/btn_orange-002.png",
+    "uuid": "21d56d2a-ac44-4ff6-a9c8-7b28464c097d",
+    "sha": "101f05a10a5d95600ed761bada38632e89d8d7d84beb8da11c61515d4995477e",
+    "metaSha": "1676e40dd1bdedb74dff602f4c3072face63dc782e550fa28fe76a35ddda6440",
+    "references": [
+      "assets/home-tabs/LeaderboardTabGroup.prefab",
+      "assets/prefabs/popup/ProfileEditPopup.prefab",
+      "assets/prefabs/screen/DailyStreakScreen.prefab",
+      "assets/prefabs/screen/GameplayScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/btn_Orange.png",
+    "to": "assets/textures/ui/main-menu/btn_Orange.png",
+    "uuid": "99c22277-a4e2-4220-98db-22b64f5ef067",
+    "sha": "1ab1b5c7989924ae2283d063430b9db673e46e002eb77f5a2867b1ac0d50aff9",
+    "metaSha": "2b67fc9b0074554196aa54f8b02f70431369387a393a06fce36429421f79544a",
+    "references": [
+      "assets/prefabs/screen/MainMenuScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/btn_picked.png",
+    "to": "assets/textures/ui/profile/btn_picked.png",
+    "uuid": "231cabf8-35df-4da9-bf47-966fd3d0a8f9",
+    "sha": "df907d3694653a6daa3f54cc0d19965a823c1279de1d9d730971591edb33ba64",
+    "metaSha": "dcc429b14040094d97f2c08b7dc45a7e3d8f1c5bd7f836fff76a653bf0bb56b3",
+    "references": [
+      "assets/prefabs/popup/ProfileEditPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/btn_play.png",
+    "to": "assets/textures/ui/unassigned/btn_play.png",
+    "uuid": "727b7210-a6e7-4a48-baaf-6ad1c91e6699",
+    "sha": "73aef02d99df8b531acac4850f9119c0bd7656ce97d69537ed539176ec2042ab",
+    "metaSha": "cce64c53bcd672dc96c7f32c1028ac270bde4e8e8d6648d310abee6c975a9a20",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/btn_red-001.png",
+    "to": "assets/textures/ui/shared/btn_red-001.png",
+    "uuid": "57d08b95-1634-48ad-8370-572e8b58881d",
+    "sha": "c1fccc145609c6538f619c506c7e17efc6b252ae47ebc33a43a1c7a877ebd8b9",
+    "metaSha": "ce7a788be8122e96df500408ea6bc1acdc050ce53ffb1f98cdfa6b61301fdb89",
+    "references": [
+      "assets/prefabs/popup/ResultPopup.prefab",
+      "assets/prefabs/screen/MainMenuScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/btn_Red.png",
+    "to": "assets/textures/ui/daily/btn_Red.png",
+    "uuid": "7ad229ea-2766-459b-b810-367952809bf3",
+    "sha": "f2894267837d529849a2fa26db1f3f71fd7fcae94d0703086eb465b135de5a2b",
+    "metaSha": "1fbbf0771a75c842c2a5cc96120b0f9335ff0e47fc531c8c830440da121025e9",
+    "references": [
+      "assets/prefabs/popup/DailyResultPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/btn_screen.png",
+    "to": "assets/textures/ui/unassigned/btn_screen.png",
+    "uuid": "dc20f5ab-31d8-43d2-a8ae-3519ed9421a1",
+    "sha": "d1014eb1e350b97f0f416ab23b8e7fe294fc61ba411783b52649b34222d11397",
+    "metaSha": "2d57d0c71ec6237ad3cf2cf194e40cb70ecc99d04dfeb6a624d176a55725dbf1",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/btn_x.png",
+    "to": "assets/textures/ui/shared/btn_x.png",
+    "uuid": "44379aaa-d77a-4303-80fa-605de0915057",
+    "sha": "68a93f8cc894b84480e251ee41928d8a3b0118f34690246999310ecb29301485",
+    "metaSha": "dbaed79efd0e8e40335b76159b82a7de6f65cc4dde88f9283908c1801437bcca",
+    "references": [
+      "assets/home-tabs/LeaderboardTabGroup.prefab",
+      "assets/prefabs/popup/HowToPlayPopup.prefab",
+      "assets/prefabs/popup/ProfileEditPopup.prefab",
+      "assets/prefabs/popup/SettingsPopup.prefab",
+      "assets/prefabs/popup/TournamentResetPopup.prefab",
+      "assets/prefabs/screen/DailyStreakScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/btn_yellow.png",
+    "to": "assets/textures/ui/unassigned/btn_yellow.png",
+    "uuid": "181eddb5-ecbe-4d7e-b60b-16df644edbdf",
+    "sha": "c61349037b666128f504f453353d2e5d98d5d3809c49c8459140150f6f6f0687",
+    "metaSha": "91264db1eb5656b0866ad85015a588b83218549fbd0fd53dc521fe7055e8029b",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/bulb 1 (1).png",
+    "to": "assets/textures/ui/unassigned/bulb 1 (1).png",
+    "uuid": "9641b3e5-551f-4407-a252-b79518816bd6",
+    "sha": "3bcb051b48316877d4d19e263c934d58117490eaf7e5f2e26951dff16d212a1d",
+    "metaSha": "6b2f1be798512078cd9bc94e9e3a376283aaa4c053b3bb92a17bed903f4b34e3",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/bundles_bg.png",
+    "to": "assets/textures/ui/shop/bundles_bg.png",
+    "uuid": "2f8b3f4d-e1a4-405d-ad4e-c2f7ae6cd4a0",
+    "sha": "c9f85044b3c0c4854b868661c149854f17e6781eda2c8baa3e3464297a45838e",
+    "metaSha": "e5c8c65894d75f303e100f4de963a166c3c48bf7188c8179bbda967ce5e6d554",
+    "references": [
+      "assets/home-tabs/ShopTabGroup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/bundles_title.png",
+    "to": "assets/textures/ui/shop/bundles_title.png",
+    "uuid": "612427fb-210e-4382-be86-8001393398d5",
+    "sha": "37b507efbbe43718b1f4321afd6b568ae44127a98e4a5e12d1306163ec1b9363",
+    "metaSha": "adf800aa92fc1efe9d84788505093fa5f5cfaea40da8ec8abaa25bf38a3c3caa",
+    "references": [
+      "assets/home-tabs/ShopTabGroup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/butt_setting-001.png",
+    "to": "assets/textures/ui/unassigned/butt_setting-001.png",
+    "uuid": "3c6012ca-d458-4557-9659-6a8ea3b45b12",
+    "sha": "a4c706168dff7333e23d74cd689dd36c0d1c8248529d9ed579e60cb11de31cb0",
+    "metaSha": "65de8e5a3ae9c93c0b917653f6c702c70f6e9a37fe15bbc2954fd505c01a8d75",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/butt_setting.png",
+    "to": "assets/textures/ui/shared/butt_setting.png",
+    "uuid": "bd1b79ee-9a33-4239-ab1a-bee44d90e26e",
+    "sha": "a4c706168dff7333e23d74cd689dd36c0d1c8248529d9ed579e60cb11de31cb0",
+    "metaSha": "a18e2000d913900f1aa469b007b90a3c22d6d0aadbb5087d2551c9669f48c27f",
+    "references": [
+      "assets/prefabs/screen/GameplayScreen.prefab",
+      "assets/prefabs/screen/MainMenuScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/calendar.png",
+    "to": "assets/textures/ui/main-menu/calendar.png",
+    "uuid": "dd865e6f-251f-42a0-bf90-6bedebd6fe9c",
+    "sha": "7cb48780de5e7b717c919c31cf798c5cd1182e135c78091882288bb3b5659946",
+    "metaSha": "2eadc84609751ab63e338e513364739f04f4316655d231e2a0d91bdae1b6ab7b",
+    "references": [
+      "assets/prefabs/screen/MainMenuScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/CalendarIcon.png",
+    "to": "assets/textures/ui/unassigned/CalendarIcon.png",
+    "uuid": "879cb726-278d-4996-bdaf-76b2de1d3f4b",
+    "sha": "16abff61f1613e1be0da4dfdbf1dd62d2ccee8fa4f358240b42856104748203e",
+    "metaSha": "4595aee160bc0dc91b9fdb653351250c00fd1b073f23407299196dda9c42be2a",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/ChatGPT Image Aug 17, 2026, 02_37_15 PM.png",
+    "to": "assets/textures/ui/main-menu/ChatGPT Image Aug 17, 2026, 02_37_15 PM.png",
+    "uuid": "e19942f9-7539-4d81-9849-697790fddd24",
+    "sha": "254126fb7ec0646b5cd4304d62aea5eb7f4fd794739cc8d6846c739ca4c8f983",
+    "metaSha": "0a6b8b9cff0d4981a5f39feb6835a47883830e1790b14d3a165b161566604740",
+    "references": [
+      "assets/prefabs/screen/MainMenuScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/ChatGPT Image Aug 17, 2026, 03_48_09 PM.png",
+    "to": "assets/textures/ui/main-menu/ChatGPT Image Aug 17, 2026, 03_48_09 PM.png",
+    "uuid": "4adc7286-767e-4438-be86-0e2122ee771e",
+    "sha": "b5102696989e871891c194b854a93c705ec1f349a3148d6647bad2d20bdf29fb",
+    "metaSha": "c8a8e84baa6d7358ab23c38ab7a1309b16be5b9592aa36f7e82b678979824e95",
+    "references": [
+      "assets/prefabs/screen/MainMenuScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/ChatGPT Image Aug 17, 2026, 05_46_54 PM.png",
+    "to": "assets/textures/ui/main-menu/ChatGPT Image Aug 17, 2026, 05_46_54 PM.png",
+    "uuid": "d90e3403-4c29-4629-8322-f058ceba176b",
+    "sha": "a6deaaf23205721f15424d43c560a38c057eec69d15891031d3370089c52659a",
+    "metaSha": "9cb98085c2c024b50da74aacc358ddafdd865262ce427da75e44cbe1a4bcaca8",
+    "references": [
+      "assets/prefabs/screen/MainMenuScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/check.png",
+    "to": "assets/textures/ui/unassigned/check.png",
+    "uuid": "28ad6462-dd75-4b0b-a5d6-d36fc3fd8b74",
+    "sha": "951d6718ff5b3c54ddd3ac75035c6559ed1cb4d7a4eeedfd8b785ca98913f22f",
+    "metaSha": "54e6e3be1c37c25e381ca8a5b0ef85be0404891aa5d4caf896893cb65eca7b76",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/check_box.png",
+    "to": "assets/textures/ui/daily/check_box.png",
+    "uuid": "c4c207d4-59d4-414f-90e5-9ea11ce5face",
+    "sha": "8c49f0f3acfcf75a8a2ac6f72dfa8c13ebdbfbd9fee21486f7ee768a3ef72f82",
+    "metaSha": "504de5f4b390932588d4793dcf27794ad9d15a89eace6210ec3f3fe9234a99e9",
+    "references": [
+      "assets/prefabs/widget/StreakDayCell.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/circle.png",
+    "to": "assets/textures/ui/gameplay/circle.png",
+    "uuid": "1903c013-1e7a-44a6-8649-68c1c089c902",
+    "sha": "e6b36ef39a799c187d5c7497a75c71d0110504788801d874376398c88b10c91d",
+    "metaSha": "e67057f20739fc4e1d6c45d30421e616f626cc920a6b205acff2e4ae11b183ad",
+    "references": [
+      "assets/prefabs/board/HandAnim.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/Clear!.png",
+    "to": "assets/textures/ui/gameplay/Clear!.png",
+    "uuid": "14c665b7-bd09-46e4-b110-2143927fca2a",
+    "sha": "64aa0a340b892d8d800c258b8cc7d735ef602e9503c35b2815e370e682da748f",
+    "metaSha": "d2f5f3b19ea04bd55bb509c748c7affa82765288a9e49f6f3d2fb069a88d086d",
+    "references": [
+      "assets/prefabs/board/Board.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/ClockIcon.png",
+    "to": "assets/textures/ui/unassigned/ClockIcon.png",
+    "uuid": "e5c0db1d-379a-4247-8558-3f673e415a1b",
+    "sha": "c431898736538a73f8925f93aa88bc5af0bab66b6927445cb8414db10463cea4",
+    "metaSha": "4ca34105f7a95ec0f7c323ea2d34c790d357837cf9f26ad64ef0849ac6b135f6",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/coin-001.png",
+    "to": "assets/textures/ui/shared/coin-001.png",
+    "uuid": "590004b2-bfcc-4843-8017-4596e4f9d4dc",
+    "sha": "82d19ae8594d75b6888d87786c95abc18c94829edb1315339d0dff2cd364df3e",
+    "metaSha": "722ebd5036412dd281af2ce46f61e87339b6d8c27c6eb48cb883a1a614ef61f8",
+    "references": [
+      "assets/prefabs/popup/CoinBalance.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/coin.png",
+    "to": "assets/textures/ui/shop/coin.png",
+    "uuid": "afc9d43e-c7c6-41aa-b8a0-40fce5caa0fe",
+    "sha": "ac802442319ecb071080d95495bdd9abba5d333a62473829476c6f5fd34e0527",
+    "metaSha": "7cbf13180af2f288fe90a05273efc9f746da8eb42462ffd0294df3bdf1e1758e",
+    "references": [
+      "assets/home-tabs/ShopTabGroup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/coin2.png",
+    "to": "assets/textures/ui/shop/coin2.png",
+    "uuid": "da5f6a9b-c0ab-4fae-af23-a813266d40bd",
+    "sha": "20ab239cc01c0ea67fcd902fd53dd710329f2fb9910d906fa0411c1ff7d777fe",
+    "metaSha": "b3dcca21741c9171f02f6faac146c757b6b215d7d3f94f0d9ba3e035231a0792",
+    "references": [
+      "assets/home-tabs/ShopTabGroup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/coins_title.png",
+    "to": "assets/textures/ui/shop/coins_title.png",
+    "uuid": "fc9ae03c-743e-4d13-b499-ce5b0d14cba4",
+    "sha": "f57eaf368f5e7c511db94dd2bb20b7bfd1d00c127726b5a3633d9a2b68aed74b",
+    "metaSha": "6931a7ccf9e89ab9a7efc8160c5697f033632697892d2819acc02a50e71c2d68",
+    "references": [
+      "assets/home-tabs/ShopTabGroup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/coin_bg.png",
+    "to": "assets/textures/ui/shop/coin_bg.png",
+    "uuid": "2ba4d1da-baba-4356-ae20-0f3f5693e254",
+    "sha": "46f710e4bf2159527b9c4ab36fb54286f0e336474935990badd6d167ce543d16",
+    "metaSha": "a42a243de7cc7440dc5180752dd2b0a78d33ce0a5e3bb7b698b437cb839355fa",
+    "references": [
+      "assets/home-tabs/ShopTabGroup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/color=blue nhat.png",
+    "to": "assets/textures/ui/gameplay/color=blue nhat.png",
+    "uuid": "f306a7a7-ce2d-4b04-8e59-9f2ebf5e6277",
+    "sha": "bb888b9a5bae4d4c614ad0fd737ce408572668fda81ca1eb273404726268e617",
+    "metaSha": "ade50c3a1e29cff15be672c8faf2c093932ec88c846f38bbe8deafed99fcb809",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/color=blue.png",
+    "to": "assets/textures/ui/gameplay/color=blue.png",
+    "uuid": "e9934832-bf1d-4562-a3ef-a4d5a32ee138",
+    "sha": "068c270c893663a3917b33b64f3f562ae5068253a24522f5326762b06a004a62",
+    "metaSha": "443f7e5c279d1df337963d5c4f0bf945a4d52a5d853b129e169784a0109c8672",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/color=cam.png",
+    "to": "assets/textures/ui/gameplay/color=cam.png",
+    "uuid": "67c4959d-3bf8-46fa-b2eb-080030eb222c",
+    "sha": "b9d1d59fd5882d6c281ebfe80ffabe4b140a126959114423f79d249417b64271",
+    "metaSha": "5ee1cee88a26be2c417142382e5c366a3e409e0febb407d6d9bdbfcec6cf9b09",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/color=color12.png",
+    "to": "assets/textures/ui/gameplay/color=color12.png",
+    "uuid": "da1be44e-d92f-4986-afc4-98451a06a02d",
+    "sha": "4433e030c37de8b6b98018d88e3eac15b9d62cd0f38e402bc2646d31a4b991b4",
+    "metaSha": "d84adc05f58ee0377180172f00c677183ebdaa1e2b0ac89ba14cfb1198248111",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/color=green xanhla nhat.png",
+    "to": "assets/textures/ui/gameplay/color=green xanhla nhat.png",
+    "uuid": "4efdab8f-1fac-4774-bc33-731a24d8029e",
+    "sha": "be474ecba702fd02c36e719db76b7b5ab983e295e1476f6a6f8a314d262a5c0b",
+    "metaSha": "f8c25b908595798a261de2d71020ad68536e8d23696dfe3eca257413a8e269d8",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/color=hong dam.png",
+    "to": "assets/textures/ui/gameplay/color=hong dam.png",
+    "uuid": "f6d45a41-9a07-45c1-9daf-8e74f0e1e089",
+    "sha": "b338919446e6fd462c52dcb9277850418347fc64dddd9275400af37a4e6f3569",
+    "metaSha": "4a58fae0ecf86677eb34aa97fbf98b8bc303757e9e64cb5b281c1e42b5eb12e6",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/color=hong nhat.png",
+    "to": "assets/textures/ui/gameplay/color=hong nhat.png",
+    "uuid": "a1c20799-c722-4808-b3d5-24cc7a9c0525",
+    "sha": "db36ec08c5b0a168f06c4ddf577c689dffed43b22fa2c4e0317dde1316f96cba",
+    "metaSha": "7a8e3f26cd4c404ff842c9e99a3bb1b5c2476d0ba4666ecc3e48eeff7461529d",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/color=nau.png",
+    "to": "assets/textures/ui/gameplay/color=nau.png",
+    "uuid": "75f936dc-b635-48a1-b73f-edf902c4471a",
+    "sha": "43221595de37124908d859403315baf361abac40630ae4a7676e2f1ebe17de7b",
+    "metaSha": "85018b891c01fe5ec5eb60968b24eb1c83f159a9c4d238584ac23a556cf42644",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/color=pink.png",
+    "to": "assets/textures/ui/gameplay/color=pink.png",
+    "uuid": "73d7d3d4-4196-45c2-aa11-6763cb40e76b",
+    "sha": "5a82f3818b6e9f35676e0a987cb5b863804fa46190eabcca2d69466fb2d819c8",
+    "metaSha": "02a15ce235c355ed2849cb672be91c6a825e3175ced1610ae1c3ab380dacde53",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/color=purpel.png",
+    "to": "assets/textures/ui/gameplay/color=purpel.png",
+    "uuid": "37754590-ff45-4925-bece-e441fb6b3d2a",
+    "sha": "e0cf90ff2b4c35f3d42f742c95fb6247cfa27402b044ff9092a3be5094b28f03",
+    "metaSha": "125d36ba53c3f6250e1dbeb57bb4830e8652bd3a26f34639c95ee353dd89dc42",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/color=xanhla dam.png",
+    "to": "assets/textures/ui/gameplay/color=xanhla dam.png",
+    "uuid": "c4a12c5d-6c5a-47ab-8ce4-7594e03bf671",
+    "sha": "b89befe223333b5240580c2d5885dc3fd0ceaf4d3f7174c9dbc9f0d146d6d172",
+    "metaSha": "e4e2d472bee17c61a913cee43e5a069a17b9b27a762e1c88699d52ffc5c0e03d",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/color=yellow.png",
+    "to": "assets/textures/ui/gameplay/color=yellow.png",
+    "uuid": "718c5bd8-a7c7-4d6b-9437-87d34a221d5e",
+    "sha": "35b3ede8b235cd9d566dca2d99665723ef61e1138b16aa478cc47152f7567893",
+    "metaSha": "90b9b41f524f47dd267a90ca07fdd057078665da68637f86c913804b52aa77cb",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/color_top_bg-001.png",
+    "to": "assets/textures/ui/unassigned/color_top_bg-001.png",
+    "uuid": "b14a33ed-bc28-4036-b2a9-c13611fa931a",
+    "sha": "87e7dd8c4296ef2df2f5547e7797f9d81afc96943bb9b512204805a4b40633a3",
+    "metaSha": "1fe08ea23a4937cdffe474011e8b0165443db25f32890b9baaeadc2cea999f69",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/color_top_bg.png",
+    "to": "assets/textures/ui/main-menu/color_top_bg.png",
+    "uuid": "d755b770-cc89-4b32-afbf-e32b6ca79002",
+    "sha": "87e7dd8c4296ef2df2f5547e7797f9d81afc96943bb9b512204805a4b40633a3",
+    "metaSha": "e589f537245c7627f45c6e2fa44cd9234e9bd637f5058250e620ebaea7b58bb7",
+    "references": [
+      "assets/prefabs/screen/MainMenuScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/confetti.png",
+    "to": "assets/textures/ui/effects/confetti.png",
+    "uuid": "b5348bca-3468-4118-b6d2-40075f54f1ad",
+    "sha": "8c48019542ce1a28b3ff627467e932370cbf0e4f8eb610be40616abbfaa796b8",
+    "metaSha": "33cbc0f47926f83157e9efce7f9dce8fbe23c18f0d39093e849d372fbd639b31",
+    "references": [
+      "assets/Materials/celebrate.mtl",
+      "assets/Materials/wellDone.mtl",
+      "assets/prefabs/popup/DailyResultPopup.prefab",
+      "assets/prefabs/popup/ResultPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/crown.png",
+    "to": "assets/textures/ui/unassigned/crown.png",
+    "uuid": "08aa46e9-f643-4511-8531-be66e12460ec",
+    "sha": "f43e29ded7db112d9b34fac964cddef72f779f22a7de8e00937ca4cf688a6518",
+    "metaSha": "5d98e479037058e155aa4dd08ff6e62c8ce1a5e986733443b7daad287a6a12c2",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/daily_panel.png",
+    "to": "assets/textures/ui/daily/daily_panel.png",
+    "uuid": "3972f3e8-c3fc-4be9-ba6e-52a12db95aeb",
+    "sha": "a9f40fc41ae5c315f7c6810966a8b1844cf3825a9bc6ff67ce73b45762322bb9",
+    "metaSha": "4926a89eb781c992253dd889ddd3c88c6a2119878b428874083084c6a137cc85",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/Excellent!.png",
+    "to": "assets/textures/ui/gameplay/Excellent!.png",
+    "uuid": "8e679ce9-cfcc-45d0-bc3a-3deb08fc1f9e",
+    "sha": "c8b66bd90de31b6f32db83e18c68ebd0af58f0ff8c04bcb9095cb35e56bc29f9",
+    "metaSha": "4978604e74008526effc4579a7cbe63ef5a18750193c4e89303f5ad9d2e14564",
+    "references": [
+      "assets/prefabs/board/Board.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/Excellent.png",
+    "to": "assets/textures/ui/gameplay/Excellent.png",
+    "uuid": "4a1ceb50-bee2-43e7-988b-ef3983bad8f9",
+    "sha": "15122da3f58be620017a864369fbbf23eaed78d5d59841a334b7f1c19fad3de5",
+    "metaSha": "df043a0534379802f50ab21d12ec877895e1eb1e50ade90b52e3fa80030bfe5d",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/flame.png",
+    "to": "assets/textures/ui/gameplay/flame.png",
+    "uuid": "88fa1825-1ef6-425c-a945-009b025e77e8",
+    "sha": "1ede0779cc2444de9c218befa17cd71c3068b87ba7db806525305f1016ce1d5d",
+    "metaSha": "c07f6040cf8b16c9ba534b87defdc46960b0938c5a9d58d0a435ef1a483adb44",
+    "references": [
+      "assets/prefabs/screen/GameplayScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/frame_0.png",
+    "to": "assets/textures/ui/profile/frame_0.png",
+    "uuid": "5d93b39c-828b-4c3f-825c-3f09353430a3",
+    "sha": "3123525c5691f4856030646f19e656c332651cf8a9e9d2ad01688d714859c3b2",
+    "metaSha": "6dd9786986e434d1aadb687486b2b4552e934104c19ee133d65125ba9fd8e3a8",
+    "references": [
+      "assets/prefabs/popup/ItemLeaderBoard.prefab",
+      "assets/prefabs/popup/ItemLeaderBoardReward.prefab",
+      "assets/prefabs/popup/ItemLeaderBoardRewardTournament.prefab",
+      "assets/prefabs/popup/ProfilePopup.prefab",
+      "assets/scenes/Boot.scene"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/frame_1.png",
+    "to": "assets/textures/ui/profile/frame_1.png",
+    "uuid": "005b58a2-b7ad-40a8-b1b2-4414f58a1d7a",
+    "sha": "9bdd0cd754018f06c0059ff4c376af8d0336d54a1bea4f2c9f649ff53550b472",
+    "metaSha": "35d50864f54892cd574f4a554138c45a96310091b3d4c2f0c4104c90cd77967d",
+    "references": [
+      "assets/scenes/Boot.scene"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/frame_2.png",
+    "to": "assets/textures/ui/profile/frame_2.png",
+    "uuid": "50d7d4b1-a76c-458e-95a3-d8431fdbe493",
+    "sha": "37d2cd0372a86d514efd4bac610c71b1e6e020eb3700120bcc1ea6a35de55fd6",
+    "metaSha": "c167aeb6a7a5374930c03d6bccaeb8a6d240bd20775d5b8e31606bd7f9b3667f",
+    "references": [
+      "assets/scenes/Boot.scene"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/frame_3.png",
+    "to": "assets/textures/ui/profile/frame_3.png",
+    "uuid": "0c6c2e2d-ff55-4d17-8dcc-be29244da1f1",
+    "sha": "594682bf7f8ba74b25798fec170f6537cce6e8a13cbc3e9887434389ea3d80c3",
+    "metaSha": "984980d6ca2fa94f9b581b24a759db1f1b7e38be2e1b580f4141a3dfbebdc8b1",
+    "references": [
+      "assets/scenes/Boot.scene"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/fx_glow.png",
+    "to": "assets/textures/ui/effects/fx_glow.png",
+    "uuid": "c182e3af-30a8-4794-a82e-0eabd2561145",
+    "sha": "c05c7d168e6b6f0c42fbe8e868847f50084e722074abeb1b5dea6e67c41041d3",
+    "metaSha": "a8000e315c5dbee4088389630bcd2d96f8336d205ce76e4a83bcd7e600f30238",
+    "references": [
+      "assets/prefabs/popup/rewardTop3.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/fx_m.png",
+    "to": "assets/textures/ui/effects/fx_m.png",
+    "uuid": "7ecd58ab-c008-4ec2-a50a-8f54e8dad41c",
+    "sha": "f9fd19a4bf38e935d9b9c408a9bb4d77540849c2a1fae5d8d3ca9a1231d18f49",
+    "metaSha": "a17a7c449ec86d5e93bc6de0001221e5f395990089c6a612abb75a02ee64fa23",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/gamedplay_box.png",
+    "to": "assets/textures/ui/gameplay/gamedplay_box.png",
+    "uuid": "abe087b6-4216-47ee-a5a3-b8c3a0050fd4",
+    "sha": "ece4d105aff5e4605e04f0443c707cd139608293fc1a880d92bc180a4ba3d644",
+    "metaSha": "69e1a3a147980a9ab5e6ecb2d92e3b0873e3a0d2f00ce78c53b53e8d8054fdd5",
+    "references": [
+      "assets/prefabs/board/Board.prefab",
+      "assets/prefabs/screen/GameplayScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/gift-box.png",
+    "to": "assets/textures/ui/unassigned/gift-box.png",
+    "uuid": "6ce9e843-473d-401d-896a-237e5466054a",
+    "sha": "7da097eb731093a1c1f16ae8e8a9f4520ae82d852de153833e098ec76daffa89",
+    "metaSha": "a6a325acea964a948d17740a6db1c7f6880e91e045c23e45b873c01538cb2e99",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/giftbox_red_01.png",
+    "to": "assets/textures/ui/shared/giftbox_red_01.png",
+    "uuid": "e23a9997-0c45-4297-bd00-172f0dcaf60e",
+    "sha": "14b2cbac182e32b4ea9d76f20b4d0180faf6f984099719c6fb922268dfd3f0d7",
+    "metaSha": "e5ce6e4e1c82a15c1848e2c792ca198f390ef4a4843f220d9ae8f2540064712f",
+    "references": [
+      "assets/animations/Gift.anim",
+      "assets/animations/GiftIdle.anim",
+      "assets/prefabs/board/Gift.prefab",
+      "assets/prefabs/board/GiftOpen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/giftbox_red_02.png",
+    "to": "assets/textures/ui/shared/giftbox_red_02.png",
+    "uuid": "9bb85ef7-855d-4bc0-818d-5e4c06f996bd",
+    "sha": "40d2c2fb3659b5b64f4b3da2fc45941c0e1cb916b1387ba50654e0c2fb5051df",
+    "metaSha": "bbba7b054dbc9a66bde13cbed96095800272348034a1e391a2e737e7b4f22a44",
+    "references": [
+      "assets/animations/Gift.anim",
+      "assets/animations/GiftIdle.anim",
+      "assets/animations/GIftOpen.anim",
+      "assets/prefabs/board/Gift.prefab",
+      "assets/prefabs/board/GiftOpen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/glow1.png",
+    "to": "assets/textures/ui/effects/glow1.png",
+    "uuid": "3ec9ff08-4350-44d6-8cc3-405f548d34f8",
+    "sha": "2b14e8e8afb9fc9a789d3b03b9daba568f4934119ec2f56f5783a0d5dae197e2",
+    "metaSha": "b29afe975d0adbc77af83eb4844c2f1f929b1d02c42de2520244774be34562ac",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/glow4_.png",
+    "to": "assets/textures/ui/effects/glow4_.png",
+    "uuid": "df03de56-071b-4474-adaf-4a868909b9bf",
+    "sha": "6a981f77c71f3c5713ce89a0cccc6fbf40abbacd1f90c18902e98e0200d5bc83",
+    "metaSha": "44b5195b50a6fbccac94cd9ff3ae0b86f24e62e9dfa1ed285503e9e566dee90d",
+    "references": [
+      "assets/prefabs/popup/DailyResultPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/glow_lose.png",
+    "to": "assets/textures/ui/effects/glow_lose.png",
+    "uuid": "34e9019f-187c-465a-bd08-2cb2c9b1a0be",
+    "sha": "c63e9f9c0ba503c93a24c68acf8c5f3d6131bc357aa08aa01cfb725689004d7a",
+    "metaSha": "90ed1cdf07a06e14abf11be10ed7fe206b6bd67ecd1273564c6f6868637dca0e",
+    "references": [
+      "assets/prefabs/popup/ResultPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/glow_soft.png",
+    "to": "assets/textures/ui/effects/glow_soft.png",
+    "uuid": "bc54f593-2bd2-4603-97f7-20f23a3a1d06",
+    "sha": "b8595b81f036a79914bc7eeba20a0586343910628ea181b996762f307f31abd8",
+    "metaSha": "77878953ac32e891362e67c0bf7e6f9088875fa85546df6e32dc00b2a2bc9fc6",
+    "references": [
+      "assets/prefabs/popup/ResultPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/Good.png",
+    "to": "assets/textures/ui/gameplay/Good.png",
+    "uuid": "92335866-a878-4ecd-aa65-41b531afea75",
+    "sha": "49ae93e72f49c5fd749c26adec27457b46adc67cb33047bcf0a05f21ce29d7e6",
+    "metaSha": "e0c23819aac2f831f75a4c3734be74f92a613c0be117bcd24bc99b67ac3af0e9",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/Great.png",
+    "to": "assets/textures/ui/gameplay/Great.png",
+    "uuid": "e5935429-d5df-47f0-a100-c212010a40be",
+    "sha": "f4520df3fa594e48a047771be46acf0989eb2f9e1921c27c788660b785b02a18",
+    "metaSha": "af571694354e1d2a5608b3fa566290b8161000ebe28895dae47dd27e8e08f047",
+    "references": [
+      "assets/prefabs/board/Board.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/greenclock (1).png",
+    "to": "assets/textures/ui/unassigned/greenclock (1).png",
+    "uuid": "9d1f3fae-1e77-4231-8282-fc6e0208394b",
+    "sha": "da72aa16e187df4a202554eee9b5609b23451a0ee63672dea10cd02a1523c651",
+    "metaSha": "0a7b9a76574ed84c52490eb6523069a626988eb2a282fd2e3aeeb903412b3aac",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/greenclock.png",
+    "to": "assets/textures/ui/large-textures/greenclock.png",
+    "uuid": "33dfebc1-2141-4f6c-876f-0f7f3853b990",
+    "sha": "adab3e3d996742d192982db326f9c9cac0ce67ab9cf38893d62422132ce51534",
+    "metaSha": "028c86165bae30f4fcc1403e6beb4cd697c2407a08ea45cc0c29823245efa9b8",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/Group 1093.png",
+    "to": "assets/textures/ui/unassigned/Group 1093.png",
+    "uuid": "1a76272b-02ce-4bfa-80dc-d40057f036e9",
+    "sha": "08be3d1f0bcb878bb8fec307459944be89838b047ef148461ed40a4c6b6c5426",
+    "metaSha": "1e09db2920731f7abb76b13486ac89872504dd000a5f8d6bb5b6c7dceeb31bf1",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/Group 2045 (1)_0.png",
+    "to": "assets/textures/ui/unassigned/Group 2045 (1)_0.png",
+    "uuid": "919a0caf-dd78-4525-a34d-27700bbfc451",
+    "sha": "54bffd7e137bec9c5d618f3fa52d9d188253599bce3f9f130e503f8deca827bb",
+    "metaSha": "4452111543cf05048404484f9a2f4acffed4b17f4abc6f1d8945e7f7ee1254fd",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/Group 2045 (2).png",
+    "to": "assets/textures/ui/unassigned/Group 2045 (2).png",
+    "uuid": "84427c6c-510f-4b87-9837-370c189c79ca",
+    "sha": "d2fa2323cfce9c2b3cdaa52320e28d390b49812cd21e615aeb829416ffc92981",
+    "metaSha": "d3036f9e910a017c66bdbaf0234a17040944b75c863416cd453b1fd5c81f1b46",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/Group 2052.png",
+    "to": "assets/textures/ui/unassigned/Group 2052.png",
+    "uuid": "6ce445df-d21f-4574-9c51-a7912a0edbaa",
+    "sha": "dd7190a0ec8a25c0f266ea673b754a8d421afd867439cbe50fd2673706e6fb1c",
+    "metaSha": "0820e71df0887e4a58ba826e6aa7e1c5694fc5a044a975d05c85afcc9dd4c3c6",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/Group 2056.png",
+    "to": "assets/textures/ui/unassigned/Group 2056.png",
+    "uuid": "2abbdbaa-6ede-4522-81e2-3a4f4e9a79d7",
+    "sha": "77318065d082d9bb474484d10a1caa37410cc483dc84d626014057e458658d7c",
+    "metaSha": "64f67954ef474a99042d0eb7c111c45fb361644e10bfe33c8e3e7e315760b9fc",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/Group 2057.png",
+    "to": "assets/textures/ui/unassigned/Group 2057.png",
+    "uuid": "8b3b9ba6-48fa-4037-bc94-099baaa035e3",
+    "sha": "644a2e4dd263ba68f07752bc6c3ef0d69e233b25641ac9d492fe9a499925fbd3",
+    "metaSha": "f47ee064b98be130b295b95433420c496aac4047865d2c05e021bd8d23917bba",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/Group 2081.png",
+    "to": "assets/textures/ui/unassigned/Group 2081.png",
+    "uuid": "96829f6d-5f31-4af1-bee7-6e3f22c680c0",
+    "sha": "6ac338c8ced93862f2e401b3bea8358f90f46a4c6b7752b4decee3beef3a26e8",
+    "metaSha": "d0a1ec25ad001e92aa57120e10a42d8bf2e09e1536618dd55925c2c63253ab11",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/Group 2084.png",
+    "to": "assets/textures/ui/unassigned/Group 2084.png",
+    "uuid": "6dd13623-0407-443d-b0c3-0c0ef95804e7",
+    "sha": "f89b98bfd9b4a5961907fc00d71e33d6c4c233d61545d46b30d6f3ba70fea827",
+    "metaSha": "cbc5448728d7c87cc856d54943420b966d058780c43442cd327e8ff60f9ef182",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/header_popup.png",
+    "to": "assets/textures/ui/profile/header_popup.png",
+    "uuid": "a5de5a76-a7bd-49be-a611-4f35a1a0a4e1",
+    "sha": "bb90fd3d822e624e26c44c97e7537b8021c135cff4a5234e0330ae81c989d402",
+    "metaSha": "b45ba417c5a31c1968545c34d138c10e0046d74873f0750b603c4016316c9d9d",
+    "references": [
+      "assets/prefabs/popup/ProfilePopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/heart_big.png",
+    "to": "assets/textures/ui/unassigned/heart_big.png",
+    "uuid": "b3378148-4733-4fb8-8c13-8b95c3b00f2c",
+    "sha": "c1d14a932ab4dea4f88653f55c4b4a58a32808ea955450410b13c63efd7e893f",
+    "metaSha": "542877ce7e4dad3f75db3e7e79a13241495b3a114361909fdd3601bf4f08566f",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/heart_box.png",
+    "to": "assets/textures/ui/shared/heart_box.png",
+    "uuid": "f2ef4968-4fee-44a6-8af9-ecdf585a1d75",
+    "sha": "dff6faad5c0204d50a1dd6dd0d3e5540baa2281f4cdd366525992ab17a3cf597",
+    "metaSha": "7e1b8a2d37922a522f961b9e330c4d3650398067241c5c5f4f2cc245924a6f9c",
+    "references": [
+      "assets/home-tabs/LeaderboardTabGroup.prefab",
+      "assets/prefabs/screen/GameplayScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/heart_NUMBER.png",
+    "to": "assets/textures/ui/gameplay/heart_NUMBER.png",
+    "uuid": "882c93f5-097a-49d6-b931-472b80ef22a8",
+    "sha": "56c77573db868f7d6124c610621ccab2e9e21a5498452401125fc7e2781631b7",
+    "metaSha": "1e06618f5833be8f46114cd9538111ecdf78dcd313b70e86708b73a33f0a12b4",
+    "references": [
+      "assets/prefabs/screen/GameplayScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/home_icon.png",
+    "to": "assets/textures/ui/unassigned/home_icon.png",
+    "uuid": "d5737ac4-96a0-4f47-ba88-750c578d44d7",
+    "sha": "b20df48856e4e5a0f822a4df0fc1696d8412b8d88fd6268b82f96fc91ed0dd45",
+    "metaSha": "47a740bcc43586c6ca2548d4daebbf8fffe8b9330356225383d770932c57d596",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/i.png",
+    "to": "assets/textures/ui/unassigned/i.png",
+    "uuid": "803b9475-d712-4325-961b-82ba27c7aca9",
+    "sha": "96f992df1dc6c297839da9809671a2ea7d1aecfdbcfbe0a15a5ccd46cb8ee8d2",
+    "metaSha": "7b505b22c236b13079c7748d51361e5c921bc38296f8c64e654f59834604933a",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/icon_ads-001.png",
+    "to": "assets/textures/ui/unassigned/icon_ads-001.png",
+    "uuid": "47eaf6bf-a906-4a29-bdcc-2908b82e2975",
+    "sha": "dcb7a6be8e6243ad8671fc5356f471c488dbec4c378a35c38067769f6f87c4ad",
+    "metaSha": "dd30efa99c4423782dc66ae5180152322aac57517b619efb29d2b22eb4bdedaf",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/icon_ads.png",
+    "to": "assets/textures/ui/gameplay/icon_ads.png",
+    "uuid": "ec051a9f-0dfc-43f4-821d-1d82d21f528c",
+    "sha": "297beba642f0c20a32f340c2b45ede8f21d409238e8ebb1a3cf4bf2d96bacecf",
+    "metaSha": "d1e55f6c9f3e6c980449e25d795b003711c9bbb716b7712ecea3fef8c54877ed",
+    "references": [
+      "assets/prefabs/screen/GameplayScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/icon_bg_box-001.png",
+    "to": "assets/textures/ui/unassigned/icon_bg_box-001.png",
+    "uuid": "d345ff5c-2cfb-446d-938b-562e134d96b4",
+    "sha": "c7d2f3b1aa60374c1f953811fb9751b57f47033b0e48fc05e4bfeccbfffdd8b6",
+    "metaSha": "4931fa7f93767eb5bc17ad11c5861484782f8c4e86450aab1c5382bf191acf25",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/icon_bg_box.png",
+    "to": "assets/textures/ui/main-menu/icon_bg_box.png",
+    "uuid": "4aa03e28-e34e-457b-98bc-348bb937158b",
+    "sha": "c7d2f3b1aa60374c1f953811fb9751b57f47033b0e48fc05e4bfeccbfffdd8b6",
+    "metaSha": "08249703a75fbdeddb9c4b6efbce5df29e9f99457a6a252c2750901ba50306e5",
+    "references": [
+      "assets/prefabs/screen/MainMenuScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/Icon_Celebrate.png",
+    "to": "assets/textures/ui/unassigned/Icon_Celebrate.png",
+    "uuid": "2125eebd-6908-400e-804d-bb859720ce26",
+    "sha": "d87d9a1be501d19fd806d1f5f28d39b10446c985d975c720c8538f18ba92e83b",
+    "metaSha": "434c1378389fcb19471f97c71fb57da088cd0ba0053dac56b9cf37abeef32f55",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/icon_check.png",
+    "to": "assets/textures/ui/daily/icon_check.png",
+    "uuid": "0d8346fb-effb-4f89-84b9-c189276f7e67",
+    "sha": "006a96792bf46cf562eb87456505b391f676a1dffc57549451467037deeb6135",
+    "metaSha": "887f372e9031d1c42d5355272154c678913d06f40a5640512861759683ffe137",
+    "references": [
+      "assets/prefabs/widget/StreakDayCell.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/icon_checkbox.png",
+    "to": "assets/textures/ui/settings/icon_checkbox.png",
+    "uuid": "87400388-dc09-4101-9da4-fbd4d249c08a",
+    "sha": "d52006e0d807f8f8bdf1010452cb131536d0ba7d794d73424a5b72465032a025",
+    "metaSha": "d48bea793f365ab204e345cb098bff98bcc1cc4f139c3fd1e2fda621531e96ca",
+    "references": [
+      "assets/prefabs/popup/SettingsPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/icon_close_0.png",
+    "to": "assets/textures/ui/unassigned/icon_close_0.png",
+    "uuid": "a6f9b623-f7be-4c34-b534-d2e521f012cf",
+    "sha": "e6efcaa0b608d41a8842f53f94685b363105d3e987860a6ac5259a557fdf9452",
+    "metaSha": "c0b2917879de34d7645d5f60318670bbdb5d214005276db632eed1a129f027b8",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/icon_fire_lv.png",
+    "to": "assets/textures/ui/gameplay/icon_fire_lv.png",
+    "uuid": "2cabf262-9c25-46ae-9f92-d185da9762f6",
+    "sha": "1825b2a449c9905eb5e1f106a017daed28f668956c4726a00e943cf9315c5743",
+    "metaSha": "d92897b12a76bae9eac70c424c1ebd2f1d5c612690d0d13cb5101707350bbc32",
+    "references": [
+      "assets/prefabs/screen/GameplayScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/icon_gift_blue.png",
+    "to": "assets/textures/ui/leaderboard/icon_gift_blue.png",
+    "uuid": "527a87a1-64f1-4e7e-bbd7-7cbb388ea830",
+    "sha": "f05e88c127d1775430925f1c2840a235703472426fdcf1c742993ad15caed50d",
+    "metaSha": "f5b791fbc6438683bcfe49010e7a3c2c1a93ec6ac23563acad15c38a16b39743",
+    "references": [
+      "assets/prefabs/popup/ItemLeaderBoardReward.prefab",
+      "assets/prefabs/popup/ItemLeaderBoardRewardTournament.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/icon_gift_red.png",
+    "to": "assets/textures/ui/leaderboard/icon_gift_red.png",
+    "uuid": "997145de-018d-40a5-803f-fe380d691d62",
+    "sha": "14f5650ccd90b7bf4a96c4ae4f4bc38d2821f3e13f219807afa6939707f43b27",
+    "metaSha": "fa69a13a7a131e6a458f854c754e846e627fb22fddfab6814694b8f4e08301e7",
+    "references": [
+      "assets/prefabs/popup/ItemLeaderBoardReward.prefab",
+      "assets/prefabs/popup/ItemLeaderBoardRewardTournament.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/icon_gift_violet.png",
+    "to": "assets/textures/ui/leaderboard/icon_gift_violet.png",
+    "uuid": "3c5a9651-9a7c-4a67-a698-93f0e1ad4222",
+    "sha": "3b2dd2a452737c40e5b1a0744075be059830da490405a30c3e42f4a290f8ec03",
+    "metaSha": "1f2f8ff368469a62d6cb798c01a88dfa5788c11568b1bb634b3acaeb371802f7",
+    "references": [
+      "assets/prefabs/popup/ItemLeaderBoard.prefab",
+      "assets/prefabs/popup/ItemLeaderBoardNormal.prefab",
+      "assets/prefabs/popup/ItemLeaderBoardReward.prefab",
+      "assets/prefabs/popup/ItemLeaderBoardRewardTournament.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/icon_heart-001.png",
+    "to": "assets/textures/ui/shared/icon_heart-001.png",
+    "uuid": "b7cfdc5a-26c0-4b56-ab2f-91dd8d69ded1",
+    "sha": "56292e57e8685a65b9201e04c5234d0344cde2bd85b48210a5c5d68348b4526d",
+    "metaSha": "f3c6bfe8cfd8c5f9a7d30d23812b8bd8e7310985f2ace3e33b2daf53b7d2e48c",
+    "references": [
+      "assets/home-tabs/LeaderboardTabGroup.prefab",
+      "assets/prefabs/popup/ItemLeaderBoard.prefab",
+      "assets/prefabs/popup/ItemLeaderBoardNormal.prefab",
+      "assets/prefabs/popup/ItemLeaderBoardReward.prefab",
+      "assets/prefabs/popup/ItemLeaderBoardRewardTournament.prefab",
+      "assets/prefabs/popup/LeaderboardPreviewPopup.prefab",
+      "assets/prefabs/popup/ShowLeaderboardInfoPopup.prefab",
+      "assets/prefabs/screen/GameplayScreen.prefab",
+      "assets/prefabs/widget/Heart.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/icon_heart.png",
+    "to": "assets/textures/ui/unassigned/icon_heart.png",
+    "uuid": "11e193c1-b653-4014-8550-1beabfc9cce2",
+    "sha": "3cd2b1c4e363813c5750df586218ac71a61c60bf115c108a5b3e7435f7f3636d",
+    "metaSha": "6ec27cfa5b0d645319ab81603f4e44f4479f6c7dc8273d899c2e7203d4716d51",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/icon_hint1.png",
+    "to": "assets/textures/ui/gameplay/icon_hint1.png",
+    "uuid": "71fa4215-03fa-43aa-abe0-908a2e50cb1f",
+    "sha": "23bdcb798da2fd70d3aeb1510ce6ee4dfd13410776e127c508406fa91e28eba8",
+    "metaSha": "b05c8bc5d655b05cc0df135ffb4b4e3c4ce32b92404b16df20fb20d3dc0e3987",
+    "references": [
+      "assets/prefabs/screen/GameplayScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/icon_leaderbard.png",
+    "to": "assets/textures/ui/unassigned/icon_leaderbard.png",
+    "uuid": "d1282d67-8bfb-4a70-b420-5a03d50203f9",
+    "sha": "3e73c4badd48d3cce5d47dcf72a712224a7ecbfb20560201d22ebe0c86f48076",
+    "metaSha": "b50382fab527087f7ff730b950de2b45b702f34b0ef1ce9a4a90155711761561",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/icon_lock.png",
+    "to": "assets/textures/ui/unassigned/icon_lock.png",
+    "uuid": "6c4ba850-5b93-452e-8000-c1a9ebd0e0db",
+    "sha": "547f32e9da357ab7bebce404e5733068f478272922bda954f0bbcc7f0fe688db",
+    "metaSha": "f17f46867abec1a3d6407ce517cc2951c921bd315657c8a503b35cb26115a8d2",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/icon_lose_heart.png",
+    "to": "assets/textures/ui/gameplay/icon_lose_heart.png",
+    "uuid": "bf3677c4-afff-496c-87be-4f800b0f2e09",
+    "sha": "fcd0433c22159b96396da9730cd9493c433b79a9b8b165f542d10d0f5b92a945",
+    "metaSha": "9c63eb6facecc186c02100ba4524c80860a859d6e714ce51bce3fbcc3a43ba65",
+    "references": [
+      "assets/prefabs/screen/GameplayScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/icon_noti.png",
+    "to": "assets/textures/ui/unassigned/icon_noti.png",
+    "uuid": "baf51ecb-488e-40b6-8194-9dbfaf32bda5",
+    "sha": "f54f3057a719370feddf4eb82f28fb4dc565da3caef34be8873c731023341807",
+    "metaSha": "0e6db2c1e2a9aed1daaea467b9b7c4f2f86688ad11e8270bd61b36c8d6274612",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/icon_plus.png",
+    "to": "assets/textures/ui/unassigned/icon_plus.png",
+    "uuid": "3dfc0d90-7dac-4904-8f0b-e0c7f6a7f12f",
+    "sha": "1d2270cffc9f1e0046c3a0355a9d8090ff2fa96470dd8fc90bba303c5a8a22fc",
+    "metaSha": "e0af8deee77d1f938442cfa05b037ce4eda9bdfb11f7fde2a62a5cbdb10d4dad",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/icon_rank_01.png",
+    "to": "assets/textures/ui/leaderboard/icon_rank_01.png",
+    "uuid": "bb009102-41f4-4750-bf6c-f61dc6957fa4",
+    "sha": "d9158ec176e89cc8874d960aa3e651963a47796a0dac1bf4125a6a162e4ff6f0",
+    "metaSha": "ac215f29cce677be884ec5e61c3f1eaae08333335de3a94746a723f6586fee4d",
+    "references": [
+      "assets/prefabs/popup/ItemLeaderBoardNormal.prefab",
+      "assets/prefabs/popup/ItemLeaderBoardReward.prefab",
+      "assets/prefabs/popup/ItemLeaderBoardRewardTournament.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/icon_rank_02.png",
+    "to": "assets/textures/ui/leaderboard/icon_rank_02.png",
+    "uuid": "4ee72319-c4ad-488f-942e-aef82c4c1f0d",
+    "sha": "49ec6ee6d8b6217dbf2fa04198c6b5294829676dea28a8add6d502a029a6c7dd",
+    "metaSha": "2e6bbebb6e0d3922a300f504e662bcb9648b3c1c7afc11cacf23e3aa3735da30",
+    "references": [
+      "assets/prefabs/popup/ItemLeaderBoardNormal.prefab",
+      "assets/prefabs/popup/ItemLeaderBoardReward.prefab",
+      "assets/prefabs/popup/ItemLeaderBoardRewardTournament.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/icon_rank_03.png",
+    "to": "assets/textures/ui/leaderboard/icon_rank_03.png",
+    "uuid": "a717e818-3b7c-4925-8d80-bb2d93b8fa16",
+    "sha": "bca404ccc0dae9b6aa18244f17a14461177d16c62dfe98fb6cdd332bc196ee91",
+    "metaSha": "406a52dfe0b47c84a1ff7066d3f6369cdc1d7c83e0737561ecf419eeeed5fad9",
+    "references": [
+      "assets/prefabs/popup/ItemLeaderBoard.prefab",
+      "assets/prefabs/popup/ItemLeaderBoardNormal.prefab",
+      "assets/prefabs/popup/ItemLeaderBoardReward.prefab",
+      "assets/prefabs/popup/ItemLeaderBoardRewardTournament.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/icon_removeads.png",
+    "to": "assets/textures/ui/unassigned/icon_removeads.png",
+    "uuid": "2048270f-2234-4083-a038-1b4ed718e14f",
+    "sha": "e8326a4b1b451d3475aa8b5cceaea103740955c2983bc4219b7fb2fc67d7a000",
+    "metaSha": "5bee0faf9d68f686a290e801c21b1e48b91112e558b0e8c8c6bcf40445094049",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/icon_text_box-001.png",
+    "to": "assets/textures/ui/unassigned/icon_text_box-001.png",
+    "uuid": "86d5851e-1410-46c1-9ea9-e1ba506cf5ca",
+    "sha": "a4ce983dfce61f2405958169eda998312d30b1a7fc93176eed9d32100e12af18",
+    "metaSha": "2cd6b2d8389d9fddac0a45eb22626dae2e0591cfa8a4cb4a6aa415e43a83e907",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/icon_text_box.png",
+    "to": "assets/textures/ui/main-menu/icon_text_box.png",
+    "uuid": "26d2c9d2-38cf-4536-b271-35b1508b1118",
+    "sha": "a4ce983dfce61f2405958169eda998312d30b1a7fc93176eed9d32100e12af18",
+    "metaSha": "bb536981ac995a3b2817ae7916d655c90e226a786644517854b275bb4ed610ce",
+    "references": [
+      "assets/prefabs/screen/MainMenuScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/icon_time.png",
+    "to": "assets/textures/ui/shared/icon_time.png",
+    "uuid": "8a49fb3c-6c90-4e3a-ad68-165cf104caf2",
+    "sha": "5d7d176d3425c6561329c8ce14730864fff129840541132812982df623fa2473",
+    "metaSha": "e45afdd1a8a697e5ea11ce24fec77e8668f832309dd2688bb90fbd94bdb16b50",
+    "references": [
+      "assets/home-tabs/LeaderboardTabGroup.prefab",
+      "assets/prefabs/popup/LeaderboardPreviewPopup.prefab",
+      "assets/prefabs/popup/TournamentResetPopup.prefab",
+      "assets/prefabs/screen/MainMenuScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/ic_arrow.png",
+    "to": "assets/textures/ui/leaderboard/ic_arrow.png",
+    "uuid": "b7f44f4a-c5cb-4094-bd45-4536ff4eea7b",
+    "sha": "5a94a41ffb8c6e242750f9307930201c1b87c97db933f7a8f6e91e6d713c30ac",
+    "metaSha": "4e8b1f31a422c17c3d21edf77933f3b23d1a543679f24221f7b512ccf11c0a9c",
+    "references": [
+      "assets/prefabs/popup/ShowLeaderboardInfoPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/ic_clockcheck.png",
+    "to": "assets/textures/ui/main-menu/ic_clockcheck.png",
+    "uuid": "f2e200ef-aba9-4995-bd9a-fc8e485eb556",
+    "sha": "d2b5e1ee9486faf361c559c9d28fb74503a036fe9e11356dab5c2791a88d0331",
+    "metaSha": "160c392657bd106598d9f0b69b9f08fd0eac236b1452bc42258fede599495e3e",
+    "references": [
+      "assets/prefabs/screen/MainMenuScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/ic_leaderboard.png",
+    "to": "assets/textures/ui/main-menu/ic_leaderboard.png",
+    "uuid": "b08ce533-e918-411b-9652-05621733d032",
+    "sha": "01f6cbb49039b04300e938c149652d8e5a3584d3ef9571d85a6a5b185eb2c98b",
+    "metaSha": "32aa34390113f842d3d2dd2ad21d8e759db762234bea80130d295e8ebc0669c8",
+    "references": [
+      "assets/prefabs/screen/MainMenuScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/image 18.png",
+    "to": "assets/textures/ui/shared/image 18.png",
+    "uuid": "5ed16cb9-a1fe-484d-9f8e-c7983ecc53c8",
+    "sha": "e269fc37b9db6bad97403230028c16b8c451515a5876425a9dbde0acb76672da",
+    "metaSha": "62e80fe9c0cdff1d1d4607ac4720d6b1e3746e6bfcc59a5cd22a8f9e799a66f7",
+    "references": [
+      "assets/scenes/Boot.scene"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/image-001.png",
+    "to": "assets/textures/ui/leaderboard/image-001.png",
+    "uuid": "013ff2c0-e34d-439c-ad92-2506ac20e620",
+    "sha": "8a50c83f95870d927cc2d2ce34856698aa35f95592d545e45b072d2e262d9fd3",
+    "metaSha": "e40802abec32f51f4619dfcc7d3149c73897fec8d8a24c1b01b474cef550ffdc",
+    "references": [
+      "assets/prefabs/popup/TournamentResetPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/image.png",
+    "to": "assets/textures/ui/daily/image.png",
+    "uuid": "8e331cf8-9a37-4186-a44a-d07996b4061f",
+    "sha": "65c7fd5fde656c36885c8f4124e1761227476df286f04626abad022c898ff0a7",
+    "metaSha": "c380e2910eb7db8682309e203d2d5dd34b75a0ea2caccf4bfeaa164e3eab872e",
+    "references": [
+      "assets/prefabs/screen/DailyStreakScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/img_daily_winning_bg.png",
+    "to": "assets/textures/ui/large-textures/img_daily_winning_bg.png",
+    "uuid": "5f722b41-51fa-446c-b964-68485c456107",
+    "sha": "8029a95284bea8786f49bde5907391c4f25d1f278f57648cd591be2fd6f382cf",
+    "metaSha": "a106305a1610fab77c3ef428885b042b1ed9d718342dae4b871263875cb6706b",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/infor_box.png",
+    "to": "assets/textures/ui/shared/infor_box.png",
+    "uuid": "8c4b2c86-f818-4e23-8951-82179733e8ba",
+    "sha": "2ff6a8dfba5b53abeef35791c12d7b7a920abcf37299ab2e85711d8b9199d4ac",
+    "metaSha": "25b163c0ac80a74c1e4f83e7a38974df88185b31c074c7fe5693bf7f1197ac2d",
+    "references": [
+      "assets/home-tabs/LeaderboardTabGroup.prefab",
+      "assets/prefabs/popup/ItemLeaderBoard.prefab",
+      "assets/prefabs/popup/ItemLeaderBoardNormal.prefab",
+      "assets/prefabs/popup/ItemLeaderBoardReward.prefab",
+      "assets/prefabs/popup/ItemLeaderBoardRewardTournament.prefab",
+      "assets/prefabs/popup/ScrollView-001.prefab",
+      "assets/prefabs/popup/ShowLeaderboardInfoPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/in_box.png",
+    "to": "assets/textures/ui/profile/in_box.png",
+    "uuid": "12ec2846-41c0-43ff-afb9-e9483713856a",
+    "sha": "80bee5d19a34a2998c27cc6b783f51c7f75dced30f0800a50824ff4d4dacf825",
+    "metaSha": "49e31ff603da1261ef8d5f844282e217e3ade6a49e0a7f5a6f464f45fe12e064",
+    "references": [
+      "assets/prefabs/popup/ProfileEditPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/i_1k_coins.png",
+    "to": "assets/textures/ui/shop/i_1k_coins.png",
+    "uuid": "59191bbe-7f9b-461b-9bb0-1af701338c53",
+    "sha": "97386c26c4d523ed7d6fe8933b0696ff38adc9f0479690038c4d993e3d9eeb79",
+    "metaSha": "1cde52fdb4ac5d62cfaea9ac022de874e669864d0f17baef66317a501bd11d2c",
+    "references": [
+      "assets/home-tabs/ShopTabGroup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/i_20000coins.png",
+    "to": "assets/textures/ui/shop/i_20000coins.png",
+    "uuid": "390145fd-e09d-499b-94c3-836cdf473a8f",
+    "sha": "962379869c1d84ffef9fd24f0576e8c94e78e016954b01a60d9984131bd63a96",
+    "metaSha": "55d387488f577d2dbd37f00c5e93a693fac52499ea3f19784ed86282309d1f2e",
+    "references": [
+      "assets/home-tabs/ShopTabGroup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/i_2k_coins.png",
+    "to": "assets/textures/ui/shop/i_2k_coins.png",
+    "uuid": "21b0a719-309e-4788-a7c5-fadfe2b934a2",
+    "sha": "1aeeb44f3fc855b64a90351906fa4288236c40465ca3d525a54496fc2015f928",
+    "metaSha": "21c63a9238eaa5be4d07adf545eca8d13e24276f70f644a41e77212c306e3c95",
+    "references": [
+      "assets/home-tabs/ShopTabGroup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/i_4k_coins.png",
+    "to": "assets/textures/ui/shop/i_4k_coins.png",
+    "uuid": "e3d80e94-0900-43c3-a700-a3faa1dd3898",
+    "sha": "1b4f44a72be1d73eb8ab78cbecca71b68af8414ac3708af1a5980dd1036447b5",
+    "metaSha": "3521523bf49c689a7ddef5718aca39dce40b21f692a366d92083de3b1a518c1e",
+    "references": [
+      "assets/home-tabs/ShopTabGroup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/i_6k_coins.png",
+    "to": "assets/textures/ui/shop/i_6k_coins.png",
+    "uuid": "2c9ebc34-d641-446f-86a8-61a3ad4bbcfd",
+    "sha": "671de184dc5e8e8fba79880f33b6ebe3d92acfc7b41b79d13a4f588744c030dd",
+    "metaSha": "a5b52106ba650c093b1916943239b3d25f3aa2e301e285e9dcb9734051945f19",
+    "references": [
+      "assets/home-tabs/ShopTabGroup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/i_8k_coins.png",
+    "to": "assets/textures/ui/shop/i_8k_coins.png",
+    "uuid": "828688bd-cb5e-43ee-a893-71c7a424fc91",
+    "sha": "1672bc32356eb5b938255c973e6768718e835632efda8b870593e7ff3a415301",
+    "metaSha": "94049a4b5f18cbf3c888a4b4c094b13b187db8117130f73c4746181129625ec2",
+    "references": [
+      "assets/home-tabs/ShopTabGroup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/level_star.png",
+    "to": "assets/textures/ui/leaderboard/level_star.png",
+    "uuid": "8c55943f-48f1-449c-8e40-536850acc17b",
+    "sha": "a51412d0b5bc0b0c06134e8045e6b671b025b2e66b0647580200a356addaa030",
+    "metaSha": "0c4067b720cb1d8081c37416e6e4b1aadaffa073e00f29d240034b6fa060d170",
+    "references": [
+      "assets/prefabs/popup/ItemLeaderBoard.prefab",
+      "assets/prefabs/popup/ItemLeaderBoardNormal.prefab",
+      "assets/prefabs/popup/ItemLeaderBoardReward.prefab",
+      "assets/prefabs/popup/ItemLeaderBoardRewardTournament.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/light.png",
+    "to": "assets/textures/ui/shared/light.png",
+    "uuid": "43546bb6-809d-470e-a465-1ddf84ea0cc0",
+    "sha": "298998f4c539021f1679d0f14741c8ca3b321b2f9c587401cef0cab6d7138b15",
+    "metaSha": "ef21fecc29e85f35d34a0ad7d1b33d594687e46baff9863630328163d7e44608",
+    "references": [
+      "assets/prefabs/popup/RewardPopup.prefab",
+      "assets/prefabs/screen/MainMenuScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/light_under_avatar.png",
+    "to": "assets/textures/ui/leaderboard/light_under_avatar.png",
+    "uuid": "489f78d5-6e8c-429f-b53f-41052a7b2e09",
+    "sha": "f6fa0bcf25bfe6503546b9de8336fcd13f87e419ba3775041e2db27db4f220c6",
+    "metaSha": "98af1c0626261253cf437e7778c7d33947c0fd31e74a29dc179f5325ea2f50f8",
+    "references": [
+      "assets/prefabs/popup/ShowLeaderboardInfoPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/line.png",
+    "to": "assets/textures/ui/shop/line.png",
+    "uuid": "7026e046-e463-4426-bb45-8ac6222b877c",
+    "sha": "74a1705156357f324894597232d3741a5b7a5ae999cb5fea5c9498cdd527db3b",
+    "metaSha": "8d99e3457663b8baf50d7946070d1b20de6a5a7dec2e236d9c65cb4c26af1640",
+    "references": [
+      "assets/home-tabs/ShopTabGroup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/line_tab.png",
+    "to": "assets/textures/ui/unassigned/line_tab.png",
+    "uuid": "e04e73a4-0381-451d-952e-1ed617ac9227",
+    "sha": "9ee4ffb837cd72536e00f787f2b37a72fe8e6c9f5a174184b23778391e09549f",
+    "metaSha": "513c17c733a1f492e360590e3b6b9fae553ad20452ccd84da6e5c36ba9ea197a",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/loading_frame.png",
+    "to": "assets/textures/ui/unassigned/loading_frame.png",
+    "uuid": "fcf202ea-322b-4086-9666-a3aaa564ad33",
+    "sha": "2302ed90c29f7411c5705f9df3508fb79d435e02903fe2702cc204707a044534",
+    "metaSha": "581fdb53c82952b266f9f475097536d762f6a9462261d662ef1cca3ac1c7de70",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/LockIcon.png",
+    "to": "assets/textures/ui/unassigned/LockIcon.png",
+    "uuid": "0446a33d-a518-4f06-8cb2-dff4bf95e330",
+    "sha": "c8b895204bd19a7949bba9affcfdb435945b4b937435dee44cac991e0ad43a0d",
+    "metaSha": "f5438eab8e9c29ba273c3785578634dbf02c9d2fdfed593cb940cd4df72d6831",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/lose_cat.png",
+    "to": "assets/textures/ui/result-rewards/lose_cat.png",
+    "uuid": "bb97a9a4-4438-4e84-a4ea-16d5c0f01eb0",
+    "sha": "ebe57fa9383a32df47c1aea65cf4f86de2063cbd8fe8ab5860660180b5ddc24b",
+    "metaSha": "88f436883dc7a46106fce6ac54d93edd5dbe59a3e00d99ed0a29bda0a019d02d",
+    "references": [
+      "assets/prefabs/popup/ResultPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/lose_title.png",
+    "to": "assets/textures/ui/result-rewards/lose_title.png",
+    "uuid": "f840d075-83a5-44a6-ab2a-548ccf6b727c",
+    "sha": "78724e61046dd65f12df682ed9a9424055cba0596cafcef57a1ece4e53355eb8",
+    "metaSha": "6c0edf7527e0ae9e2dcbb64565c008597a712fcac6e16d2f2fe060ba9252f5cb",
+    "references": [
+      "assets/prefabs/popup/ResultPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/magic_line.png",
+    "to": "assets/textures/ui/unassigned/magic_line.png",
+    "uuid": "af2e76a4-5b1f-4107-a482-d6dbf665c97a",
+    "sha": "fb8177287c50be2ec89f37addcb97a4cd0190f6acea36cc8c588cb7245606638",
+    "metaSha": "bdd0d2c689b137786ef02bb8a2134d97a004bf6068c14e4e480520e2422f1251",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/mascot_bg-001.png",
+    "to": "assets/textures/ui/unassigned/mascot_bg-001.png",
+    "uuid": "3a24988d-0077-4c8d-b67a-5947f3286102",
+    "sha": "c5298ebc8115e7cb71d861772ee0db8fb7474141935de0ac0953544345edb9a7",
+    "metaSha": "0437369a4a2d7aa67b174f2b6a7fdb1344893fc9cd6fd2b5233167a1b6aaacad",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/mascot_bg.png",
+    "to": "assets/textures/ui/main-menu/mascot_bg.png",
+    "uuid": "83c988b1-5c30-439e-9295-1ca3130178e1",
+    "sha": "c5298ebc8115e7cb71d861772ee0db8fb7474141935de0ac0953544345edb9a7",
+    "metaSha": "9bba619b8e6eae327074f75c9ea9b6f621b9ee70f9650f8915ba70eb749a3343",
+    "references": [
+      "assets/prefabs/screen/MainMenuScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/medium_pack.png",
+    "to": "assets/textures/ui/shop/medium_pack.png",
+    "uuid": "f124a8ca-456d-4368-83d8-c15b458702b9",
+    "sha": "af674127ed4125eea040d7bd7b11c5f25ef67fe29e020ba4513d0f30f30afdaf",
+    "metaSha": "3a1d19ebd2f4027e4d9a9493f02df85e5f26d57af99ec08f7497069b89c50167",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/medium_slot.png",
+    "to": "assets/textures/ui/unassigned/medium_slot.png",
+    "uuid": "1dc7534a-fda0-4e59-b4bb-7e112a7e4664",
+    "sha": "4da72e271dbffae2d8f271763e39a07d37eb4781730420d5e010191f17ff1dcd",
+    "metaSha": "0b4910d679bc2e8822606fa3aed35f572cf5a2fadb4417bc63a63619436e09ed",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/me_infor_box.png",
+    "to": "assets/textures/ui/shared/me_infor_box.png",
+    "uuid": "19121380-adae-4b6f-a180-ca77597240dc",
+    "sha": "4414c24f1d96da13f0e75f751be8d4495932c36cc70ccd64df1be111144459f4",
+    "metaSha": "fcbd8cf9efde57e358d0667ec78a6b5f0774f37659078ffde0ccc14dc1501d77",
+    "references": [
+      "assets/home-tabs/LeaderboardTabGroup.prefab",
+      "assets/prefabs/popup/ItemLeaderBoardNormal.prefab",
+      "assets/prefabs/popup/ItemLeaderBoardReward.prefab",
+      "assets/prefabs/popup/ItemLeaderBoardRewardTournament.prefab",
+      "assets/prefabs/popup/ScrollView-001.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/me_level_star.png",
+    "to": "assets/textures/ui/leaderboard/me_level_star.png",
+    "uuid": "b8225d66-9a79-40ad-ad2f-02b4883e2d4e",
+    "sha": "378ac3cfcb3b07637f06063c2341b076db696a39aa68635d0fc178f2abf17c4f",
+    "metaSha": "6076773b961f88b91faa93b08c926987870d40f3434a5b0ffd4043a9ced95f13",
+    "references": [
+      "assets/prefabs/popup/ItemLeaderBoard.prefab",
+      "assets/prefabs/popup/ItemLeaderBoardNormal.prefab",
+      "assets/prefabs/popup/ItemLeaderBoardReward.prefab",
+      "assets/prefabs/popup/ItemLeaderBoardRewardTournament.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/music_off.png",
+    "to": "assets/textures/ui/settings/music_off.png",
+    "uuid": "44cadbb2-ef61-4755-b2f1-ad5cc03a5117",
+    "sha": "35b14d0a600b8a9b08ca6ef4e8748b32d0437afc0a9d5b21dfabcb974bdae3bb",
+    "metaSha": "faaffc953b2e4fd91e18e91daf3cf4f5fdb83b888e07d52b45847111cec105e9",
+    "references": [
+      "assets/prefabs/popup/SettingsPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/music_on.png",
+    "to": "assets/textures/ui/settings/music_on.png",
+    "uuid": "0a18d51f-429d-42d6-ad4e-2dc0d0f34abe",
+    "sha": "74b40d48602ae75354e65055e56069628b9744d92b70aeda49e72ad3c9a05a66",
+    "metaSha": "3abbd0130479b384c7dd906c3e37272b5d6aedaeda85c80502aa3a893808794b",
+    "references": [
+      "assets/prefabs/popup/SettingsPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/name_warning.png",
+    "to": "assets/textures/ui/unassigned/name_warning.png",
+    "uuid": "613033a5-d7f2-4992-9c4b-12de674a2cfb",
+    "sha": "e51bf65917a62a592f8d3382d1cb488489024eda75e75d72ed9d94a3ab7b9bf7",
+    "metaSha": "e7a306d6ca8966714c400259c7793f3dd9e41c11cf77ce4ac5912ef3ad79df15",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/Nice_.png",
+    "to": "assets/textures/ui/gameplay/Nice_.png",
+    "uuid": "aac45efe-9616-4f83-9e69-890f92943e6f",
+    "sha": "f84ce2dfc4518a01aa6bf8dbf0a1c4e0198c4401998ef8c3b2a858716919cc20",
+    "metaSha": "e489cf54d37202144b128122bfd6237bc90afb840c43ba1c86019e9ed5211923",
+    "references": [
+      "assets/prefabs/board/Board.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/normal_text_box.png",
+    "to": "assets/textures/ui/gameplay/normal_text_box.png",
+    "uuid": "8591cc21-7890-4c6c-810b-dc215cb9d2b4",
+    "sha": "edd01d8ba90fb2fbad3164b288aed3c73537e266f33badeb14aeeba2cde1b6ef",
+    "metaSha": "88488b145009e947a4104646fb15d5bfe52bb5076b3770d4de0f48db73cfa672",
+    "references": [
+      "assets/prefabs/screen/GameplayScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/number_box-001.png",
+    "to": "assets/textures/ui/gameplay/number_box-001.png",
+    "uuid": "28ed2eaa-0430-4ac7-9595-4aa44de31390",
+    "sha": "115ac866985f2b3b5fbaae2d17292d0a2a8068738c3de9eecf8db9c45977e209",
+    "metaSha": "eb8393e7a666e35f36cf1576614866cf9c0ab0ac06056c4ad367c6ca13677d64",
+    "references": [
+      "assets/prefabs/screen/GameplayScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/number_box.png",
+    "to": "assets/textures/ui/shared/number_box.png",
+    "uuid": "55831981-1c54-465e-98f0-a5c0dbe87e8a",
+    "sha": "7f1b169e4c24826fd74700e866380e50198523ab3cd18054afb4d925dbcd5b83",
+    "metaSha": "e33e09e2307b3b9036bebe16f0f11cfff03d13189317cd01b0279d127e2405ac",
+    "references": [
+      "assets/prefabs/popup/CoinBalance.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/off_btn.png",
+    "to": "assets/textures/ui/settings/off_btn.png",
+    "uuid": "c2e7041b-e5aa-4107-a4a6-0fc561c4c4ea",
+    "sha": "4f1607d44329948a82e6dd7214d564dba1ba3f98425a0ce030f03e55af2a9210",
+    "metaSha": "455850fc4cd4e83ef4186a751200c94374630b9afffe2266e4f46e30759026b7",
+    "references": [
+      "assets/prefabs/popup/SettingsPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/off_mode.png",
+    "to": "assets/textures/ui/settings/off_mode.png",
+    "uuid": "243a4a69-fe04-4420-b224-a98be99f3efd",
+    "sha": "d1f50bd06f4cca1c82b3fbaa7ca5baf95ce7834515718ae398e98353c185c545",
+    "metaSha": "ee5c763f600321aa64901031b1f51cbf52b6996c269bec199f3d083f146fba74",
+    "references": [
+      "assets/prefabs/popup/SettingsPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/on_going_loading.png",
+    "to": "assets/textures/ui/unassigned/on_going_loading.png",
+    "uuid": "1bda13c2-6ebb-4c8f-9224-9771aab7579e",
+    "sha": "de19aa089b117f9f0c0cdcd4cd7f6b25875ef9ba93cd53cf7ced4fd4a359d2f9",
+    "metaSha": "8f313d2532ef938706f3cb50d0bd7de9f89d2bdaf26cf4b2a12801706d99b05b",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/on_mode.png",
+    "to": "assets/textures/ui/settings/on_mode.png",
+    "uuid": "17dd70d4-af87-41f8-854e-46192136d3c3",
+    "sha": "424bd78ee1af98ed7c1b547272b8efc67d01519913bce6c8b406adf4abab76ad",
+    "metaSha": "64f375e9957071a1a58ebf9286eb4495762e76cea648e39f8951e5c2d5b98fd6",
+    "references": [
+      "assets/prefabs/popup/SettingsPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/Out of Heart.png",
+    "to": "assets/textures/ui/unassigned/Out of Heart.png",
+    "uuid": "865b19c7-9394-4268-a545-6176d162ce03",
+    "sha": "9baf45e60e9677b7d3e201ef65ee23fcef002cadf955e9948776a96a01c61e94",
+    "metaSha": "8bb00fe1f55fbab37bd2f1dcb74565b595308478bed92f90d49e757fa3d2cf27",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/padlock.png",
+    "to": "assets/textures/ui/main-menu/padlock.png",
+    "uuid": "c83e73d1-ed9e-4b00-8130-59a585f72115",
+    "sha": "d87f2c5d8e3290cde2a4dfc5048fd8e3042d9c821db5cb6ec893f9265ec80cf7",
+    "metaSha": "c91e7cc574b5a3d5739859dd631a920360eb470ac399d9c22b1e1faf54f54958",
+    "references": [
+      "assets/prefabs/screen/MainMenuScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/paw.png",
+    "to": "assets/textures/ui/shared/paw.png",
+    "uuid": "7bd563aa-4df0-4a80-accd-cd9895b864e6",
+    "sha": "ecb626488276b728b27e7fad0ed4f1ce3741dc434d6810588c384de124c99c05",
+    "metaSha": "f78739026a742cf65c44b8dea51bdf94b0cedc61d3941f6a74e55904420f011f",
+    "references": [
+      "assets/scenes/Boot.scene"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/Perfect.png",
+    "to": "assets/textures/ui/gameplay/Perfect.png",
+    "uuid": "c44f5896-6abe-4c19-ac9c-0227c6074458",
+    "sha": "8e2b036d662e24a73cdc3a4714a77602cf2d24230ff24664b3651c71375d9cb9",
+    "metaSha": "00d6ca747d0ed912b3142a84bc59be8921516e27c8b59e6092b52ec9eb60114b",
+    "references": [
+      "assets/prefabs/board/Board.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/picked_tab.png",
+    "to": "assets/textures/ui/main-menu/picked_tab.png",
+    "uuid": "711adde6-f8b2-47c9-8233-4314dbabdd78",
+    "sha": "0d378a935407382ebbac4cb1be3a3b4b45487a5b685711e737f71987dc9cf5bf",
+    "metaSha": "eb1001dda815445d1b21da8156e257018f592587ad68c81f8e7382a065e1b659",
+    "references": [
+      "assets/prefabs/screen/MainMenuScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/PlayButton.png",
+    "to": "assets/textures/ui/unassigned/PlayButton.png",
+    "uuid": "fe06b6b2-d74d-4f8f-9e96-e8f9a2ab4f0e",
+    "sha": "a41aa85e98c54c2c84d7ef2afff97b8e250e94ca7ea79dd2e7dc682e2754629e",
+    "metaSha": "fb8db381864d3c614dbe551228f30f7fb53bebd234ee7387611431160049b6a8",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/popup.png",
+    "to": "assets/textures/ui/unassigned/popup.png",
+    "uuid": "a008a458-3cfe-46c6-bff2-a1893bb33cd9",
+    "sha": "02bfe6c185fc83c1684ad85944386c2057813c8333e94b937207de1337dfe4df",
+    "metaSha": "0b1ea754045e74c0d445d887e3ce73862e7e52d586ede41348aa794f18d258f5",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/popup_gift_info2.png",
+    "to": "assets/textures/ui/result-rewards/popup_gift_info2.png",
+    "uuid": "14dcac9b-f689-4f15-9eef-f4c89121395e",
+    "sha": "5c702aeef755a234764434918ea8feb3ef62714990e5b678d12549774f43b77e",
+    "metaSha": "8a179f8b0cd43e33f82a42ee1a7a0a1d3484f8b95ebd0754d225054b716463c8",
+    "references": [
+      "assets/prefabs/popup/DetailRewardGroup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/popup_gift_info3.png",
+    "to": "assets/textures/ui/result-rewards/popup_gift_info3.png",
+    "uuid": "bc15647e-4377-467d-9036-441d572f0bdd",
+    "sha": "141cfe28c02e50afd67129f859c1c1589d4b9b41dbb16d89c46f8d5c3194fb15",
+    "metaSha": "f5e7f72429ce55e8f2dbbb3a56c07a63cb2b9bc669922444f67c12a215d89447",
+    "references": [
+      "assets/prefabs/popup/DetailRewardGroup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/pre_pack.png",
+    "to": "assets/textures/ui/shop/pre_pack.png",
+    "uuid": "6da07cca-ee81-401e-a442-96bf9b24a19b",
+    "sha": "2785e3cd4943e4e72ee4be21752476c98361593845caad6b99c66a646988c42f",
+    "metaSha": "fc3738ef349a1677bf5c1cac74a79a3d498dcc8c01697f7d5252037c02935412",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/rank_01.png",
+    "to": "assets/textures/ui/leaderboard/rank_01.png",
+    "uuid": "73b74595-4fd5-4adc-9c6f-63eafd46954e",
+    "sha": "043ace672e1ec049daa8ab0a3c575c4ccbb5494c4149fd46fd658f68baa641a7",
+    "metaSha": "9039eb39d45c2e2b1ce5656f9569b88de628bb102c48b0b762e77d59b759f6e4",
+    "references": [
+      "assets/prefabs/popup/ItemLeaderBoard.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/rank_02.png",
+    "to": "assets/textures/ui/leaderboard/rank_02.png",
+    "uuid": "ed8efb81-41f2-4b39-92e4-2000ed5acc6d",
+    "sha": "295cf4e0484e26465bc2a2308167edb09121dfb76b5e190f03fb64c3e275f408",
+    "metaSha": "cbba7fac180d9ab5d121bfff7bce86aa2490586eb7a7fecb1121954a1fad94ac",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/rank_score_bar_01.png",
+    "to": "assets/textures/ui/leaderboard/rank_score_bar_01.png",
+    "uuid": "b9e704e8-d7e3-406e-8671-eb479901d911",
+    "sha": "c335333d8f39fed284375631b2023a0228d9ef0aafa90e6c32d31dd8a2086dc8",
+    "metaSha": "cac4035b7178be3cea5ad2368de13c35ca757df8d0a6d702403bbad617113e4d",
+    "references": [
+      "assets/prefabs/popup/ItemLeaderBoardNormal.prefab",
+      "assets/prefabs/popup/ItemLeaderBoardReward.prefab",
+      "assets/prefabs/popup/ItemLeaderBoardRewardTournament.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/rank_score_bar_02.png",
+    "to": "assets/textures/ui/leaderboard/rank_score_bar_02.png",
+    "uuid": "a43a39cd-df78-45b7-8137-6cba7bb3664b",
+    "sha": "9a40c7f462078311111e1c73c3b9896d17fedd37c256d3b2cd048d6a148f4308",
+    "metaSha": "46bbdb9fb48cdf26b291e094443a4770cebe0dab3fe26d583fe3320a5873df03",
+    "references": [
+      "assets/prefabs/popup/ItemLeaderBoardNormal.prefab",
+      "assets/prefabs/popup/ItemLeaderBoardReward.prefab",
+      "assets/prefabs/popup/ItemLeaderBoardRewardTournament.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/Rectangle 482.png",
+    "to": "assets/textures/ui/unassigned/Rectangle 482.png",
+    "uuid": "2acaac70-ae71-4101-9baf-930d2b9861fc",
+    "sha": "70a35c187606f6dcd55cd638fb5fd44a0bd14fdc6704503bd09070b4ee1d890c",
+    "metaSha": "f2be85fe5aa297f8eaca053fef7e80a7ae7036fab4022cdefdee2fc0994ea017",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/Rectangle 486.png",
+    "to": "assets/textures/ui/unassigned/Rectangle 486.png",
+    "uuid": "d2fad7e7-1962-4d43-b567-98f8ad26ffa5",
+    "sha": "ddf693cf780e3ba36e3f9243d3d5e42cc91a42948aebea524d802f81f4785170",
+    "metaSha": "2590fc9148feea4bd58d8204c2591628795e7a78c6e5cfeb7ceb232150cd4ffb",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/Rectangle 487 (1).png",
+    "to": "assets/textures/ui/unassigned/Rectangle 487 (1).png",
+    "uuid": "5c231728-a440-4a6a-9d45-d476c031fdff",
+    "sha": "17ff658575e430b56347939291fe8ead2b167a4f47b9c46c18b23fab37a4ddea",
+    "metaSha": "18f20766cdacde02d953fc7e037ba44e56f5d9137ce00f44be0ba9609d4c8244",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/Rectangle 542.png",
+    "to": "assets/textures/ui/unassigned/Rectangle 542.png",
+    "uuid": "7162be4b-80fc-4db8-8ae6-6d5cf4be81c5",
+    "sha": "d8ae8529d69a73514507dddc0e99a17e5cb81950845c6861b0a096a921c74773",
+    "metaSha": "408cee57777239415ac36a470d86552f9873d0210beed4f487ba14e3d161c14d",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/Rectangle 542_0.png",
+    "to": "assets/textures/ui/unassigned/Rectangle 542_0.png",
+    "uuid": "d0a2153c-26e9-449f-b2c4-9aa8631d605a",
+    "sha": "c2689f1ac6e5920eef7cf6d3e56e5cf752b6d59b2af54a76d19a4318ad62ff7f",
+    "metaSha": "4c452c9d6d2011965775713370b42fc14fce9d020786e4eebbb70f83ec64e68a",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/Rectangle 551.png",
+    "to": "assets/textures/ui/unassigned/Rectangle 551.png",
+    "uuid": "38433079-8735-48e9-855b-b3dd22559672",
+    "sha": "bd17db36bc5d9d832e3391acfd30582022f798f826126918e4400e14a7dd4248",
+    "metaSha": "38b089cc5a5f03588627cf45ba60a6117a5f1649b487a4470492c448d7f9ac65",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/Rectangle 651.png",
+    "to": "assets/textures/ui/unassigned/Rectangle 651.png",
+    "uuid": "975aa566-1ad8-4471-8b5d-17acd55bab97",
+    "sha": "def5e4ab9cdfecc8dfca4017e6ce2c4b26c3293fff0ddf5912c85b32d4b7a72d",
+    "metaSha": "b802b47c497af426b5227ea97bcb9e158cec49dbaead20e2160bed901d8fafb1",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/Rectangle rounded.png",
+    "to": "assets/textures/ui/unassigned/Rectangle rounded.png",
+    "uuid": "04a3f080-e3f6-40dc-9076-c0ebdf08a7ac",
+    "sha": "31b1a48fe6cf085c4887550682ed619a948505c548bd346765985e22f67a3a54",
+    "metaSha": "18de260bb72307e6f8bf86aa2b38075dfbdedf6c1ceb23c7c9dd63d517a4544f",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/Rectangle rounded_0.png",
+    "to": "assets/textures/ui/shared/Rectangle rounded_0.png",
+    "uuid": "2fbe5b3b-4183-471e-9189-699ebecc949c",
+    "sha": "31b1a48fe6cf085c4887550682ed619a948505c548bd346765985e22f67a3a54",
+    "metaSha": "1b09f8393625f5496bf6be917bdf4724247eca18ec3dae35c33ef499d17c216d",
+    "references": [
+      "assets/prefabs/popup/ItemProfileDetail.prefab",
+      "assets/prefabs/screen/GameplayScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/removeads_bot2.png",
+    "to": "assets/textures/ui/shop/removeads_bot2.png",
+    "uuid": "fd5ff841-8a3d-48dc-b672-82eb47112c03",
+    "sha": "ab11e8abdb966bc5a8b19374a9cb6c5b1700e6540a4a56e2e448343758b5da94",
+    "metaSha": "d7ce684d2237fd0e11d67533a287813ede1985671fe993474eb792f3562e770b",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/remove_ads_bot1.png",
+    "to": "assets/textures/ui/shop/remove_ads_bot1.png",
+    "uuid": "80db8db4-bc71-4f15-be3a-9b634bcd67ae",
+    "sha": "d8bd8125e95a3c285f9a1a3eb510b9687f97e6f5874d0e79dd3137921aa51668",
+    "metaSha": "1969b5daa0883b285a4683944fbce0cd28c44d47cb378d54cb1f43c8ba7cdbbc",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/Ribbon-001.png",
+    "to": "assets/textures/ui/unassigned/Ribbon-001.png",
+    "uuid": "63d55bc9-eab4-493c-922d-4709337c96a8",
+    "sha": "6754b820ac2119e24de1296c7cba916512b73ca7fac6c6203d94f09e225b5c2b",
+    "metaSha": "08aeff9deda15c8fcb57af70fb17f494c846db4ede072f90cf4323cede04cf58",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/ribbon.png",
+    "to": "assets/textures/ui/unassigned/ribbon.png",
+    "uuid": "8bbfaf15-8061-4107-8fdf-f2b8bd5eeb07",
+    "sha": "06c71c21e5ef986691f992a246f3db6df1c80489af90d76df7ec20591b94e6c6",
+    "metaSha": "640cfb715200a83a7712cfe203fe044f9f65fe18277048bf48fdbdcecaf0c035",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/roof_shop.png",
+    "to": "assets/textures/ui/shop/roof_shop.png",
+    "uuid": "d7cb69e1-487b-4168-a9b2-7773ef422527",
+    "sha": "759754dbf47cbf89427153419298e02a56b730a0cd79906ecfea96f03c88d0fe",
+    "metaSha": "0334b306d6491a074455babb2d5f8a5c183815a3e3f5b41dd6c8973fa81defc7",
+    "references": [
+      "assets/home-tabs/ShopTabGroup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/rw_blue-001.png",
+    "to": "assets/textures/ui/leaderboard/rw_blue-001.png",
+    "uuid": "c5f8bdd9-e79f-4cf4-9055-b9a0af7bad7d",
+    "sha": "e47a41a7f14b5b914e83ff180528196a44776d378cef77f4df3750c36253d0cd",
+    "metaSha": "30a1ee13a7fada12a201a6c4bfdbefd3d1d7d68a59e6362a3c6db9fb58f1f4c5",
+    "references": [
+      "assets/prefabs/popup/rewardTop3.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/rw_blue.png",
+    "to": "assets/textures/ui/leaderboard/rw_blue.png",
+    "uuid": "1a366c4e-a620-413d-aede-13a6be63ecb6",
+    "sha": "0aa9c8d7537ed63afe468e5885a8b767d0d5c7175b4b2570aaefda1b212028e3",
+    "metaSha": "9295446faac3027cc1b4b61ec10da1256d398967e8dcc1c1d7002fc43ee95430",
+    "references": [
+      "assets/home-tabs/LeaderboardTabGroup.prefab",
+      "assets/prefabs/popup/LeaderboardPreviewPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/rw_brown-001.png",
+    "to": "assets/textures/ui/leaderboard/rw_brown-001.png",
+    "uuid": "ed35dee3-4b73-41d6-a660-89a371944da5",
+    "sha": "65d76ace902fd6ba9a76f4307db5c19742e4794ac6f79ae41009bdff1d3d3232",
+    "metaSha": "b0428f44edf6d90668d54dcc2fd42c0d451d3938dc4a8c66380aa7dcd63620c0",
+    "references": [
+      "assets/prefabs/popup/rewardTop3.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/rw_brown.png",
+    "to": "assets/textures/ui/leaderboard/rw_brown.png",
+    "uuid": "d040b3bb-37d0-4c4f-acb0-b0a3812eb2bc",
+    "sha": "f48e8c450c99a8cce833ae965e7f12086e9b282dabef69fbc1c09fe4c00b30de",
+    "metaSha": "0a1a68636ad19ee7cbee8ec268ae2d8229a341a102e3bc18490a2b374c205ff8",
+    "references": [
+      "assets/home-tabs/LeaderboardTabGroup.prefab",
+      "assets/prefabs/popup/LeaderboardPreviewPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/rw_gold-001.png",
+    "to": "assets/textures/ui/leaderboard/rw_gold-001.png",
+    "uuid": "3b7080cb-6a88-420a-aa20-6e7b6ec98c20",
+    "sha": "7ebc389846db4c5141e7c430a8773c03955ccc56518f0379ca2f5053585e2dc0",
+    "metaSha": "57254df141c2694d8f1b795e626f9529d5830db682e9f1484eee56c2e1ac4e2c",
+    "references": [
+      "assets/prefabs/popup/rewardTop3.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/rw_gold.png",
+    "to": "assets/textures/ui/leaderboard/rw_gold.png",
+    "uuid": "7a804d06-b490-4b73-9c54-5bca54d9dc0c",
+    "sha": "4a540f4ba226ceac2a60506c4b3246a15e86e0bacc77c14124d885dd8972115e",
+    "metaSha": "8a88459b6ceebd9c3a86c98db0d5c29a900a5bb19383db4d37e5ed78167c7004",
+    "references": [
+      "assets/home-tabs/LeaderboardTabGroup.prefab",
+      "assets/prefabs/popup/LeaderboardPreviewPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/rw_green.png",
+    "to": "assets/textures/ui/leaderboard/rw_green.png",
+    "uuid": "0a21b059-ce0f-4ba4-8202-910f59e70ced",
+    "sha": "8850628bbfae8b1218bc9e1af03f2f72791649bc89929b0372c318067919e71c",
+    "metaSha": "cce23b14473de698ff6b4c56b2b26df62408009e26d6def17b9f9f03d227d7ad",
+    "references": [
+      "assets/home-tabs/LeaderboardTabGroup.prefab",
+      "assets/prefabs/popup/LeaderboardPreviewPopup.prefab",
+      "assets/prefabs/popup/rewardTop3.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/rw_red.png",
+    "to": "assets/textures/ui/leaderboard/rw_red.png",
+    "uuid": "3d46d06e-9376-4524-9a55-95df1e056389",
+    "sha": "75122f9a5e8c8ad0624cc625392ea3dc5d8b9e2543eae73e20108427c75fb395",
+    "metaSha": "70c5aa95b24da1849bf68d8d232c86dbfe52afae7d6bff3ae1cc4f1d93ed5a7d",
+    "references": [
+      "assets/home-tabs/LeaderboardTabGroup.prefab",
+      "assets/prefabs/popup/LeaderboardPreviewPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/rw_yellow.png",
+    "to": "assets/textures/ui/leaderboard/rw_yellow.png",
+    "uuid": "e7c2222d-c0b5-4348-b98b-47853f318488",
+    "sha": "9ca7924d3782fff9b488d45840f818ad8d4b71ab8bc0e45fb90af72255703674",
+    "metaSha": "5ca11afac241ece26e036573c1cec1c287e7b467cb978df17ef0dbd2632e59ed",
+    "references": [
+      "assets/home-tabs/LeaderboardTabGroup.prefab",
+      "assets/prefabs/popup/LeaderboardPreviewPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/sactx-1-4096x2048-ETC2-UI-f8be9e07 (1).png",
+    "to": "assets/textures/ui/large-textures/sactx-1-4096x2048-ETC2-UI-f8be9e07 (1).png",
+    "uuid": "55f4edac-e32d-4394-a9a9-857d8e3abace",
+    "sha": "5ad028f930489b1628e037b427b4b5964a5245639aba006fd0528014020217bf",
+    "metaSha": "f27811835ebf74c7b0297ebcf85d5c1cc0eb0bb62d124606ed78422469d27ba8",
+    "references": [
+      "assets/animations/hand.anim"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/sactx-1-4096x2048-ETC2-UI-f8be9e07 (2)-001.png",
+    "to": "assets/textures/ui/large-textures/sactx-1-4096x2048-ETC2-UI-f8be9e07 (2)-001.png",
+    "uuid": "0ce5e9df-1a2b-4847-95b9-9bee1cb1038f",
+    "sha": "58c939a8cc2027fe1cb8687eb2e31d6167c6c175becf54cecd808f630b1b948c",
+    "metaSha": "f0ab397c35fb38b831c40f72f6b8e5ea1839ad5c1eb4a6007d47d068c91c0935",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/sactx-1-4096x2048-ETC2-UI-f8be9e07 (2).png",
+    "to": "assets/textures/ui/large-textures/sactx-1-4096x2048-ETC2-UI-f8be9e07 (2).png",
+    "uuid": "8120cc84-078b-4c59-8a07-0471c9ffbe65",
+    "sha": "53a5a9725027a98776e6213f52b633e6727b44b18c981d1e11d7a387643f4c73",
+    "metaSha": "065b9f6cdc6d4e12cf7fc99b6ae018820365d13efa2a93c7d081177996fa7a54",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/sactx-1-4096x2048-ETC2-UI-f8be9e07 (3).png",
+    "to": "assets/textures/ui/large-textures/sactx-1-4096x2048-ETC2-UI-f8be9e07 (3).png",
+    "uuid": "bb4ede9e-540f-4d05-a0b9-5408a12ca64b",
+    "sha": "f573321b2d0d520ec2f850a2e1dc042b3c939ba76972b70a9116b9eb7b061566",
+    "metaSha": "3f539045cbdc42928b0b1e6fef058305985a11d1605892eb1d30fdfbb80274b9",
+    "references": [
+      "assets/animations/hand.anim"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/sactx-1-4096x2048-ETC2-UI-f8be9e07.png",
+    "to": "assets/textures/ui/large-textures/sactx-1-4096x2048-ETC2-UI-f8be9e07.png",
+    "uuid": "5601ea82-d57e-47c3-8dfe-25055847ac88",
+    "sha": "081d4843144c52ee09aea3e3f3a8e1d944e5cf8509476e4a29dd78347cd7392b",
+    "metaSha": "24cf75bdc717a02019a49dd9d612ccd0615760f8798fa21a1fbdadef9bc51fae",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/sactx-1-4096x2048-ETC2-UI-f8be9e08.png",
+    "to": "assets/textures/ui/large-textures/sactx-1-4096x2048-ETC2-UI-f8be9e08.png",
+    "uuid": "dbf77adb-54cf-48e1-b701-7c7d84270d98",
+    "sha": "fb71f15495c40d94714847e93ac90dd4e541c9dd6cb7c5001399d3089b2728b2",
+    "metaSha": "3e92944b01ffd1781666d5a07884717d57b5287f8466d6a7518834246035e818",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/score_panel.png",
+    "to": "assets/textures/ui/unassigned/score_panel.png",
+    "uuid": "21d68726-519b-4bf9-abc7-fdbe66d52aab",
+    "sha": "5fe22b4b6385a0d5c0dc22276e72b37715d399f750560af289b025c4db7f719e",
+    "metaSha": "f8a6d176b5da730fc75a61fffa251673b0624eb0552b797a354a42011972574e",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/shop_icon.png",
+    "to": "assets/textures/ui/shop/shop_icon.png",
+    "uuid": "21c5ad90-4e1e-4400-b24f-ef4ee5796703",
+    "sha": "87191c5111e336b1f9adbdc021e91e5737b9fb205f7bd30780ca044f3ed5961a",
+    "metaSha": "ed8173feeab5b2560bd80b60cae4e7d130cb4eaf0bdb427d79069dce17419fee",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/shop_slot_blue1.png",
+    "to": "assets/textures/ui/shop/shop_slot_blue1.png",
+    "uuid": "bb6f9fa1-3b2a-47e7-a1cc-f6523ef293ca",
+    "sha": "4204e1f9bde36715f9f3daacaa724488d2dedfc42fcec9e0e665e991aa2dab68",
+    "metaSha": "2aae053e79fc763cb67a8329d7ddaeebfa9493aa0e2781aaa33f933897774f90",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/slider_gameplay.png",
+    "to": "assets/textures/ui/gameplay/slider_gameplay.png",
+    "uuid": "29e3ae75-341d-40a4-a36a-5533b994abe0",
+    "sha": "413f55ee9937dcdcc3aef66f3620fa3d0e7a0d619fee8b0bf63f850796bf7002",
+    "metaSha": "f3ec049464dcf857ee2412ed2d8360302a9c0c72addfd0a8290292f54e1d073e",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/slider_gameplay1.png",
+    "to": "assets/textures/ui/gameplay/slider_gameplay1.png",
+    "uuid": "08bfdd33-3a1d-4db2-b7a0-065411c91246",
+    "sha": "3733d1541cf16ff83b7d38c6bd7161e7da1dc03e679ac14c377b493365c9289e",
+    "metaSha": "4bd1ca5ace0cf7256d97a1d987342921cf70b69f93069032cea0ba5675ffa7a7",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/slot1_home.png",
+    "to": "assets/textures/ui/unassigned/slot1_home.png",
+    "uuid": "d7c3452d-8646-4554-a209-3aebc07e0059",
+    "sha": "8a4d3f6d255c95eb93acf12b56da39079526b2a22f82065a4755ac1468f34bb2",
+    "metaSha": "39aea41f057ffb10ed8c79038d01b2a178ebd7604ca7f8a6539b8756b3304c88",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/slot2_home.png",
+    "to": "assets/textures/ui/unassigned/slot2_home.png",
+    "uuid": "e2672a88-9feb-4474-bf71-524f26b8300d",
+    "sha": "656eb0bef0ccd1a93431ef7627d66109f1839699caf09822aaab72d56b611fbd",
+    "metaSha": "7def52fa841f969de0c703022c26c1581645f32b746a2a535ed258b27b7c6c70",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/slot_booster.png",
+    "to": "assets/textures/ui/unassigned/slot_booster.png",
+    "uuid": "d4775bb5-dcb7-4c0f-84b1-1401b6b4662b",
+    "sha": "85a9568c231d0f6e0a9bd2c40a75058f362b3fc12e0aecb87188fb49bbeb26be",
+    "metaSha": "54f9ee0ff617bebfe2c68f89aeb2dae48d2d7c8c222d7692011f435e07d3f776",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/slot_gameplay.png",
+    "to": "assets/textures/ui/gameplay/slot_gameplay.png",
+    "uuid": "8e87c13e-f899-4419-b16e-bd8aaf75d1bb",
+    "sha": "a3e2793e2eec86e7205eb3ea776b3f00467fd4a43fbaf5426d33ddaeb5963c79",
+    "metaSha": "753d3e3249b1f1473694f97403cb8fcecb66f6839022c4870d6c338df2938dda",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/slot_normal.png",
+    "to": "assets/textures/ui/unassigned/slot_normal.png",
+    "uuid": "2afd5f8e-3b35-41a0-8e5a-96f58850d8d7",
+    "sha": "a6cd4f6e41770a1aaee037594ad411a21a6dda785cb01de01e52984a397d526f",
+    "metaSha": "756bb73d9a08b536f075e494532ed95b6b940d8d4df57bc09dd6085b53c3c080",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/slot_premium.png",
+    "to": "assets/textures/ui/shop/slot_premium.png",
+    "uuid": "a56b8b1b-aa00-4d72-8d7f-10aaf2206983",
+    "sha": "523d620a3fced48a142881914d94c7877f6dd04a94115dffa6d2a02d67006ae2",
+    "metaSha": "357dc2ef052aabc353be1333eaa24fb0556f4399dbd7ea132417bf33a5a3e810",
+    "references": [
+      "assets/prefabs/popup/HowToPlayPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/slot_tut_gameplay.png",
+    "to": "assets/textures/ui/tutorial/slot_tut_gameplay.png",
+    "uuid": "f635acf1-f527-4b0f-a25f-188a774f8dd1",
+    "sha": "4ff3254a9ac08c6be2d1da4217cf3698c6b110862d91897a486625796e849390",
+    "metaSha": "f62b47b9ffabd1509558f728b7ab22296017b76be6b248a7731060ee96265280",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/slot_white.png",
+    "to": "assets/textures/ui/unassigned/slot_white.png",
+    "uuid": "66aa2dd3-9510-4185-b134-546ea1f9f67b",
+    "sha": "729e5cd41fbe30442dd6a70298053278df497f25e09b011d13838345fad3f6c5",
+    "metaSha": "d3fea4c1786f55379683fff9571a4d033f9c75131d05643d140514a3f5b2e93a",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/sl_041720_30040_07 (2).png",
+    "to": "assets/textures/ui/unassigned/sl_041720_30040_07 (2).png",
+    "uuid": "dfe96e0d-65ec-4ef5-b38d-c3a3f56736c7",
+    "sha": "d5169e3bd99a9ef8bfc6a1b20415b9a010a6eaf1de08ff06f7c4ca61db40e626",
+    "metaSha": "a5f4152f4cef1b651e42f095b4950f02090899f4de011d5acfcdaa86eb70477e",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/sl_041720_30040_07.png",
+    "to": "assets/textures/ui/unassigned/sl_041720_30040_07.png",
+    "uuid": "2d0f7817-f999-40cc-a3c7-ef1349b32bd0",
+    "sha": "5a920a50c6b9104f81869b375a56a27fb80f14b60e21c47671d51842fb4008dd",
+    "metaSha": "499a3ce78f16db7a209ba8bf2db60354d2c1c8fbbcc522fb60c4d8840a8cb986",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/sparkle.png",
+    "to": "assets/textures/ui/effects/sparkle.png",
+    "uuid": "69838d4f-4a4c-4797-8fd8-6fcdcf9bfa88",
+    "sha": "631fa0b037e91ef0b9f18fa676439409c2a33ce075a282df0e4572a923c18699",
+    "metaSha": "1de20a9bfd926e8b3eea9ba7c8fac53c6e0378ca017e91461a4d130c0c0525fc",
+    "references": [
+      "assets/Materials/Dust.mtl",
+      "assets/prefabs/board/Cell.prefab",
+      "assets/prefabs/popup/DailyResultPopup.prefab",
+      "assets/prefabs/popup/ResultPopup.prefab",
+      "assets/prefabs/popup/ShowLeaderboardInfoPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/sparkle3.png",
+    "to": "assets/textures/ui/effects/sparkle3.png",
+    "uuid": "5daab217-97cd-456a-b8a9-bf7d63a18bba",
+    "sha": "631fa0b037e91ef0b9f18fa676439409c2a33ce075a282df0e4572a923c18699",
+    "metaSha": "52a1590d8a266f2d18a83b8fccebc21a196cac7654274a5f3cfc8dd78909e301",
+    "references": [
+      "assets/Materials/Penguin.mtl",
+      "assets/prefabs/board/PenguinHead.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/Spark_02.png",
+    "to": "assets/textures/ui/effects/Spark_02.png",
+    "uuid": "e696108f-2808-4017-a5f9-7182c67a835e",
+    "sha": "8d701ea86c1c3fc7906814b7f8e75f3b9b6d2b43c36cbf66cc43fb6c26e69c38",
+    "metaSha": "308158aabaf99525db1633cf25805339629c807a6a77d8e87937a58c6b0d0b2a",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/specialoffer_title.png",
+    "to": "assets/textures/ui/shop/specialoffer_title.png",
+    "uuid": "66b862c0-1ab1-41ef-8b47-bb04a281c7ab",
+    "sha": "f71397614f5bba3881bcd84f91595ada0fad2da254677933916ff53ec0c58bb6",
+    "metaSha": "91cb85d7368145958edea16d02d484e812646caf1a7c7faf64da51877d71bf5e",
+    "references": [
+      "assets/home-tabs/ShopTabGroup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/Special_bg.png",
+    "to": "assets/textures/ui/shop/Special_bg.png",
+    "uuid": "64cdf184-d50c-4826-bc85-8f21d236056a",
+    "sha": "e8373bbf6535f6fd196f3b98c2ad5cf18626a5df01a040c952a022a67563f647",
+    "metaSha": "3800eb9655ab0121e197371b35741e79119e9b720f8e41dd2c5c503b085e0e40",
+    "references": [
+      "assets/home-tabs/ShopTabGroup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/starter_pack.png",
+    "to": "assets/textures/ui/shop/starter_pack.png",
+    "uuid": "5acae3b5-4f3a-420a-8cd5-4ce80648b98f",
+    "sha": "e12dd2ec035078876f4f33ede42a732fcd5f750ca689721c0104251f7eaf7fa0",
+    "metaSha": "8edd8b290916a6345b79520c0c4f5aecdd08fa802343c4bc670368c1cf285ae3",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/store.png",
+    "to": "assets/textures/ui/shop/store.png",
+    "uuid": "6933efb4-311c-4b29-b19a-e384683d79c2",
+    "sha": "c39997c8d7eacebebc8044739964ba3e11114d1a3190d474e895100d7c7ee7e4",
+    "metaSha": "fc7f08cc1ad9c420c08c9bcca1ca78bed4f8c2e1874fde962486e8fc5cbe592b",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/StreakPanel.png",
+    "to": "assets/textures/ui/daily/StreakPanel.png",
+    "uuid": "d4649def-6c52-45ff-90eb-1da5e23a9461",
+    "sha": "222d717d5ef848d89e1cf5f43ae02b41955dea3b478acdd04562c013be4f8304",
+    "metaSha": "42e68d1bf3b4087ceb46459bcf32dd31c2e3377d7602c9453c72c84b2af0064e",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/streak_icon-001.png",
+    "to": "assets/textures/ui/daily/streak_icon-001.png",
+    "uuid": "6fb24c30-1867-4ba2-8a6f-0227a82022ee",
+    "sha": "2e151726e71833231176e5cf061eb35a6052b24a6257af718bd877e423aa13fa",
+    "metaSha": "c406d77b1ce99739964f5b8b784f208dc6db5b6f010ef992524b058f74cc59c7",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/streak_icon.png",
+    "to": "assets/textures/ui/daily/streak_icon.png",
+    "uuid": "6bce7081-b031-4af5-a7df-07b8a783ef81",
+    "sha": "2e151726e71833231176e5cf061eb35a6052b24a6257af718bd877e423aa13fa",
+    "metaSha": "5581ff12aa3799e3228d9ea6f5dcb2c5b0be4c45abe91d2002452eb259e108ff",
+    "references": [
+      "assets/prefabs/screen/MainMenuScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/tab.png",
+    "to": "assets/textures/ui/unassigned/tab.png",
+    "uuid": "6f522139-02b8-4d61-9788-b5047caf9962",
+    "sha": "ef1aad9f78c1cf4a0069d3fe75479cba63b79635a2fe7807470912cdfb7bfaec",
+    "metaSha": "2103080d6494e4a61cdbd1a5aa996a09fffb943942db9364b9cba266cc4fdcaf",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/tab_selected.png",
+    "to": "assets/textures/ui/unassigned/tab_selected.png",
+    "uuid": "7cdade99-44aa-4170-85bf-0bd39bc441d9",
+    "sha": "cbf43612e3d8e22244d9003f46e06a73fb99aef49c34d2b6cc842b316bc84da2",
+    "metaSha": "10fd121ed06d1ee8406b8a690a43d60e1d1593d706889da8317e0c5194a8bbe1",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/tag_sale.png",
+    "to": "assets/textures/ui/shop/tag_sale.png",
+    "uuid": "b932c891-002d-48da-a4b8-95c857a852a7",
+    "sha": "4f939878bc60474d33b461d8c4f471fb5f46b1a3cc23af5837ace0d7539e97b2",
+    "metaSha": "80ba554dea49a6871eb14ae082ef0393494bdbbb89b93cbed00e0d6bd4e26aaa",
+    "references": [
+      "assets/home-tabs/ShopTabGroup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/texture.png",
+    "to": "assets/textures/ui/unassigned/texture.png",
+    "uuid": "38a9c260-68b8-4471-bdcb-ca419259bad6",
+    "sha": "d4d4217e165d940b8a48ce4fb97b185535146bfc40a21ddeea14dd4c8e39d482",
+    "metaSha": "82b8be1175afb3f3a986a4b4faf00effa0697f1b38a0d3552f673d4711fbb348",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/text_unlocked.png",
+    "to": "assets/textures/ui/unassigned/text_unlocked.png",
+    "uuid": "186d49a4-d4ca-4e5f-84d1-e0073825b8a8",
+    "sha": "9b8299ec1288bbfbe8cedf8cda6c8e53c01391d4aab314b68afd10aa9f4050c7",
+    "metaSha": "c789eae73ac09831953b8eaad8d4d6c3b443430eee35950b0cbc38923ae7a89b",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/tex_glow_15.png",
+    "to": "assets/textures/ui/effects/tex_glow_15.png",
+    "uuid": "9cee76aa-34cd-4205-9b62-d781099753ca",
+    "sha": "030b3210e27710e315107354bea566db900dc2eccd58bbd3486670f9ca83e668",
+    "metaSha": "6a96616ab7cb86db9c3c5d0f1cbe9cb165d9d07896e89c92eb741afe401a405d",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/tick.png",
+    "to": "assets/textures/ui/shared/tick.png",
+    "uuid": "2eecefdc-214b-4811-87f9-0f0fe7849ca5",
+    "sha": "8da8480974e6bd751813197e158bcda3df2fb1b12c8d39ddf54a8caf2b27c95d",
+    "metaSha": "4b377b8c5f4fe4716d3aa0417ec528fa5745933eb51f7b6fdac5489bd6ba150b",
+    "references": [
+      "assets/prefabs/popup/ItemProfileDetail.prefab",
+      "assets/prefabs/popup/SettingsPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/tick_box.png",
+    "to": "assets/textures/ui/daily/tick_box.png",
+    "uuid": "0ca0a267-80e2-40e0-ad88-c47ca12e2eda",
+    "sha": "22c5807439e058b4a34726962171df4ff2829347eeed55d133415885cb3b3ea2",
+    "metaSha": "f39a403d32cd628d27c6550504e34d45dde65d0b498fcb4c9fc206dae89ca012",
+    "references": [
+      "assets/prefabs/widget/StreakDayCell.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/TimerCapsule_2.png",
+    "to": "assets/textures/ui/unassigned/TimerCapsule_2.png",
+    "uuid": "97ecc4ba-dfee-4d7a-a4a9-124130299cfb",
+    "sha": "5a7f0d7eb3826e8f15723ba6f7a2722614af565423e7aae04c4d3a6d9182a294",
+    "metaSha": "7f91b8d229511b9fd2a2972e052cc55634ee95592324a84a59617e6837dcb509",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/timer_box-001.png",
+    "to": "assets/textures/ui/unassigned/timer_box-001.png",
+    "uuid": "c1dd0d45-db8e-4465-8998-c2e81cd56422",
+    "sha": "c0218e451c9066cde46ff5675997b0fd9d6592288bd341dc9f6d8cb9d9629ab2",
+    "metaSha": "b7bfa0472b1fb3474abc93a8e0db2987935421551418d0f255bf74209688cd3d",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/timer_box-002.png",
+    "to": "assets/textures/ui/leaderboard/timer_box-002.png",
+    "uuid": "3ab63ed5-fb65-4a95-b513-87b8b63faf09",
+    "sha": "1e4108736582822f45fa36b57af27d6d2114179396e7d8b5dbc2dd911239793f",
+    "metaSha": "e1083a39394ad0b8f58b8d2f00339afc949d0e94ed109977849b2ce034d9757c",
+    "references": [
+      "assets/prefabs/popup/LeaderboardPreviewPopup.prefab",
+      "assets/prefabs/popup/TournamentResetPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/timer_box.png",
+    "to": "assets/textures/ui/main-menu/timer_box.png",
+    "uuid": "bba7610d-4479-441f-970a-ac96d9bf18d5",
+    "sha": "c0218e451c9066cde46ff5675997b0fd9d6592288bd341dc9f6d8cb9d9629ab2",
+    "metaSha": "4fccce36261b72d2bb6352db75bdbc252bb107beb6499332f0363d982f1095b1",
+    "references": [
+      "assets/prefabs/screen/MainMenuScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/time_box_blue.png",
+    "to": "assets/textures/ui/main-menu/time_box_blue.png",
+    "uuid": "8b07b361-c217-4c54-902c-9fa298bfac91",
+    "sha": "a7c3f3c124bbaa6646df72c17f379822788982661d6726f12d82a45bc6008623",
+    "metaSha": "5ba564be32b97050cd2542f0de10798bec8e9edca69c365a476a50fd1a4865ae",
+    "references": [
+      "assets/prefabs/screen/MainMenuScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/time_box_red.png",
+    "to": "assets/textures/ui/shared/time_box_red.png",
+    "uuid": "135a2326-bb3d-4be0-9bdc-ec432fc5bf8f",
+    "sha": "9e2352b8df2de3f84c6371403038f787efcd1227dd759c854ac71d038b8c3b01",
+    "metaSha": "566d1835894db9eb149b107a3ead1d363ff0c3f6f1da93fe0be7d5d9bea09bac",
+    "references": [
+      "assets/prefabs/popup/ResultPopup.prefab",
+      "assets/prefabs/screen/MainMenuScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/trophy.png",
+    "to": "assets/textures/ui/unassigned/trophy.png",
+    "uuid": "7eb89d6d-56fd-4448-99bc-ebaee0ef30b1",
+    "sha": "210b4eb263f858d992d4f48bdc39bdf1bd5a8e7f5f3748046f4d2f0f1a359232",
+    "metaSha": "bfd7934df5fdc85a8f8ff92815b55096329796818034ac92cc71d7622a0d60ff",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/Trophy_1.png",
+    "to": "assets/textures/ui/daily/Trophy_1.png",
+    "uuid": "0965f84c-9f7d-4f51-87a5-d24adeddfe60",
+    "sha": "fbf90dfa4755fd298b9f689de93941f120b315c729647e3b75f44aac9217fd28",
+    "metaSha": "a5f3d8b2bad7a0594f3dace23e693ff7300776b4feaeb0c03c252980130465eb",
+    "references": [
+      "assets/prefabs/popup/DailyResultPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/Trophy_2.png",
+    "to": "assets/textures/ui/daily/Trophy_2.png",
+    "uuid": "85a005c4-ba2c-45a6-9f55-913e967b4cbb",
+    "sha": "9c76c2b1a8f67861f39bb5bc1b0db9659cb4820ae0500336bb3c4600794a28b4",
+    "metaSha": "aca1c209214955b798e512266934f207beaab11bf75fb92f92376385935c5b0b",
+    "references": [
+      "assets/prefabs/popup/DailyResultPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/Trophy_3.png",
+    "to": "assets/textures/ui/daily/Trophy_3.png",
+    "uuid": "654de56e-c276-427c-9408-d669607f33ac",
+    "sha": "cbc604548f060b0011903b9e4b954f5f30acf485e687fccb9f9ce1f7f4f7939e",
+    "metaSha": "a212d5884913170ad7edec41368bf3d067c2c6c8122eb3a1999bd843818340f1",
+    "references": [
+      "assets/prefabs/popup/DailyResultPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/tut_01.png",
+    "to": "assets/textures/ui/tutorial/tut_01.png",
+    "uuid": "b4251ef5-da3e-4071-884d-fb5f30abc677",
+    "sha": "11ece33b4272a28407a853d35b064714101980632edd9e9eecea3c5fd674dbb1",
+    "metaSha": "21d77c91ac63b3c817e023d7dacac9a6f31cd554f0fa1a5561166d7ca40ab798",
+    "references": [
+      "assets/prefabs/screen/GameplayScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/tut_02.png",
+    "to": "assets/textures/ui/tutorial/tut_02.png",
+    "uuid": "95ac0c81-fa27-4dba-be1c-7f63c5a1115d",
+    "sha": "f5750850beb37247b87ed3c47374c13a2e6eb3d9c120bd611ef3ba61a08ba806",
+    "metaSha": "d15076ec7eeab2f67aea2df6762c323633c1cbceabcb1d5a8e6ce403f1dbe7c8",
+    "references": [
+      "assets/prefabs/screen/GameplayScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/tut_03.png",
+    "to": "assets/textures/ui/tutorial/tut_03.png",
+    "uuid": "f1caa1de-205b-438b-b4fe-8bdd8f490b51",
+    "sha": "b2c2c5029c1446941fdcea0fe81ee0ca1811c26d7ec699c8282fcfada38602e9",
+    "metaSha": "d90bef389d41164dca0b010ed62acc8de156bfb3231f8a9409da525acf942020",
+    "references": [
+      "assets/prefabs/screen/GameplayScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/tut_box.png",
+    "to": "assets/textures/ui/tutorial/tut_box.png",
+    "uuid": "2309d3fb-f7b8-461e-bc8c-86c0c34fa4f2",
+    "sha": "8bd10cfd5b0c00b427a67477c93e745b155fd604e8d48da238b5edd438ce7bcf",
+    "metaSha": "e4bd1b1d12f30cf7b0337c9a7d459e9d0af571f95d80bd3019559386ceedf79b",
+    "references": [
+      "assets/home-tabs/LeaderboardTabGroup.prefab",
+      "assets/prefabs/popup/LeaderboardPreviewPopup.prefab",
+      "assets/prefabs/screen/GameplayScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/Unbelievable.png",
+    "to": "assets/textures/ui/gameplay/Unbelievable.png",
+    "uuid": "d4ac2f35-0b5d-4dfb-a559-e0940d0282d8",
+    "sha": "642d4dfe1a817d14d913091ac97d34c8b9d01342bed616d8e2cf7c53ce128c4e",
+    "metaSha": "4459ef8ce323ec0d6c14bbc44d633e36254932ce700de5b3cf8d0dada0528359",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/Unbelieveble.png",
+    "to": "assets/textures/ui/gameplay/Unbelieveble.png",
+    "uuid": "e3e8be5c-c63f-43cc-bd61-9a3ab0029064",
+    "sha": "4894d6d51cb9dced13bdd65aaebfcf4c02571e893cc7c66dcc13a1357fc5f929",
+    "metaSha": "e92c15379e080d7f80b3cdc92a42a2718e694da9d9bb45bede7d4a5e63808a2a",
+    "references": [
+      "assets/prefabs/board/Board.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/unckeck.png",
+    "to": "assets/textures/ui/unassigned/unckeck.png",
+    "uuid": "3ab73ea5-11ad-46fe-bd6f-5a5ebe2ba2c0",
+    "sha": "209829aa6fe7d4e86864a42123c7f7517337c309bc6f708a3b0a7d8609880cea",
+    "metaSha": "4059095a3a3e384d1245c935d77c189af05643cbad2d31433e99018bee5081f4",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/unlimit_heart.png",
+    "to": "assets/textures/ui/unassigned/unlimit_heart.png",
+    "uuid": "0aca489d-a93c-4958-a3af-43d9c80f68d2",
+    "sha": "515cd368993eccf4df6d9177342b710e489185e0ae38850af36a32a0b5c28604",
+    "metaSha": "eff5b773ab50866266dc8f68c8d7e734f5a470462d5b3c6be0e883b61a7c8897",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/UnlockCapsule.png",
+    "to": "assets/textures/ui/unassigned/UnlockCapsule.png",
+    "uuid": "6c33b3e3-32d2-4c80-9530-7c6312215dae",
+    "sha": "e9eec37d165868a3add4ded0b8469554ab169057c90de530d2ed53d8d5a170de",
+    "metaSha": "fc457e24e25c45f255cd74862533d146408507d329dcbeadda891a92d713b048",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/Unreal.png",
+    "to": "assets/textures/ui/gameplay/Unreal.png",
+    "uuid": "35386e94-30c6-4026-910b-8d980194e26f",
+    "sha": "452ae5b51054bb8cfd3fc428a97e08541e273b7cbc92a7d9804ca85dcd8f6da0",
+    "metaSha": "67c0b61b15103631a169e42e2745c114f5690a9ac8b9571dda0854c19afb2ab3",
+    "references": [
+      "assets/prefabs/board/Board.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/u_fg0tkeqgiy-red-7262301_640.png",
+    "to": "assets/textures/ui/unassigned/u_fg0tkeqgiy-red-7262301_640.png",
+    "uuid": "155c85be-b586-41a8-8d7f-bcad89b7d1c1",
+    "sha": "3cdb64120918ac29bf9e11899b97389658064bc94abf087e8d58a049754e4cfb",
+    "metaSha": "34cda81e7df1e59e22cec096c654a477ecaa4717e3a4f0348ee3931a82f11e03",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/VFX_Circle_out.png",
+    "to": "assets/textures/ui/effects/VFX_Circle_out.png",
+    "uuid": "ae813508-5839-42fc-8c24-461f94f24847",
+    "sha": "d8db25e0dc6765dbfb910f9ce1370a9a8f46974f0ef34e6b504eaefdb94aad79",
+    "metaSha": "631a7ff0e768d2ee0e0a5d3d9befd72c3fa2f9f9fba9ff196452ce1f64c90f81",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/VFX_Glare.png",
+    "to": "assets/textures/ui/effects/VFX_Glare.png",
+    "uuid": "89810b10-11c1-4009-a8a0-97c2469f07fc",
+    "sha": "441cb7c0851b21985627324a0bb54538874cacac332431591a62d403d8b935a3",
+    "metaSha": "01f4534f518cd07f88949d31e6f0075e8e39043e44b11d545c7e83bb5d153229",
+    "references": []
+  },
+  {
+    "from": "assets/textures/ui/volume.png",
+    "to": "assets/textures/ui/settings/volume.png",
+    "uuid": "c6581464-6fc1-4f94-a43b-46a737e32341",
+    "sha": "df8aeccd53df2933dc3a9373112660a14adb75d3c042d7bb5f3aebb9c8e40863",
+    "metaSha": "644093d191a187733b9da3f98144d684b5043372d85c713bc950b73f2e68bc7b",
+    "references": [
+      "assets/prefabs/popup/SettingsPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/volume_off.png",
+    "to": "assets/textures/ui/settings/volume_off.png",
+    "uuid": "e269ff18-1697-496b-a340-9392c645fc04",
+    "sha": "d5cfdca57257bcb9340f4765d0c5a50b6937d144a22a6e3f34e1ffebf05f7de6",
+    "metaSha": "aaa4b0c0941967b4218a039fbefa73260d9a7949ee1661240d5377c34a69f31d",
+    "references": [
+      "assets/prefabs/popup/SettingsPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/warning_text_box.png",
+    "to": "assets/textures/ui/gameplay/warning_text_box.png",
+    "uuid": "04284cc2-9271-4f9c-b7f8-4744344bbbe7",
+    "sha": "54fd0e31661c9254e3c27f93c859b3763b22e64a3bb619bc817b034a1bf01dfc",
+    "metaSha": "843e06e0b51eb2ad11e410bc7de01ef9be5da4f678690fe8ecac88d54dd9bce5",
+    "references": [
+      "assets/prefabs/screen/GameplayScreen.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/win_cat.png",
+    "to": "assets/textures/ui/result-rewards/win_cat.png",
+    "uuid": "3e31f1a6-8676-4195-b73b-cedf6f19dc63",
+    "sha": "3177781f3af7a80d5b53c79a592f8a6c3bc922936dbeeeb33c113a2edbca9b95",
+    "metaSha": "523faf94f1291c5121879f0c4ea373a3a71c2b3d067aafd79102f575f0bad272",
+    "references": [
+      "assets/prefabs/popup/ResultPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/win_title.png",
+    "to": "assets/textures/ui/result-rewards/win_title.png",
+    "uuid": "c3dbb293-567f-486d-9d79-8d8c21f95171",
+    "sha": "dd6b264b71d9c5d9da713729992c8accc72b8b2815247fe065eb427b39a76c00",
+    "metaSha": "4510ed325354078cd666713602f8a8aff980c3236959a8725ffafedeeeb7673b",
+    "references": [
+      "assets/prefabs/popup/DailyResultPopup.prefab",
+      "assets/prefabs/popup/ResultPopup.prefab"
+    ]
+  },
+  {
+    "from": "assets/textures/ui/x-mark2.png",
+    "to": "assets/textures/ui/gameplay/x-mark2.png",
+    "uuid": "add83169-2e22-48ac-bf5f-35e11757cdda",
+    "sha": "c13da1be662a5838e28c5d97babd167e1860e8052796d717bf421b77ee12e5c0",
+    "metaSha": "c02fcd19c8454b3e5300aef43a9eb1cc8c30e32da4ff738bcb6575c18ed3a70f",
+    "references": [
+      "assets/prefabs/popup/HowToPlayPopup.prefab"
+    ]
+  }
+]

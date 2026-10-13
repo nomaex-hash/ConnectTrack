@@ -1,0 +1,227 @@
+[
+  {
+    "playerId": "fake-player-0",
+    "name": "Milo",
+    "avatar": "",
+    "avatarId": "avatar_0",
+    "frameId": "frame_0",
+    "score": 1000,
+    "rank": 1
+  },
+  {
+    "playerId": "fake-player-1",
+    "name": "Luna",
+    "avatar": "",
+    "avatarId": "avatar_0",
+    "frameId": "frame_0",
+    "score": 988,
+    "rank": 2
+  },
+  {
+    "playerId": "mock-player",
+    "name": "Son",
+    "avatar": "",
+    "avatarId": "avatar_0",
+    "frameId": "frame_0",
+    "score": 976,
+    "rank": 3
+  },
+  {
+    "playerId": "fake-player-3",
+    "name": "Bella",
+    "avatar": "",
+    "avatarId": "avatar_0",
+    "frameId": "frame_0",
+    "score": 964,
+    "rank": 4
+  },
+  {
+    "playerId": "fake-player-4",
+    "name": "Oscar",
+    "avatar": "",
+    "avatarId": "avatar_0",
+    "frameId": "frame_0",
+    "score": 952,
+    "rank": 5
+  },
+  {
+    "playerId": "fake-player-5",
+    "name": "Nala",
+    "avatar": "",
+    "avatarId": "avatar_0",
+    "frameId": "frame_0",
+    "score": 940,
+    "rank": 6
+  },
+  {
+    "playerId": "fake-player-6",
+    "name": "Rocky",
+    "avatar": "",
+    "avatarId": "avatar_0",
+    "frameId": "frame_0",
+    "score": 928,
+    "rank": 7
+  },
+  {
+    "playerId": "fake-player-7",
+    "name": "Coco",
+    "avatar": "",
+    "avatarId": "avatar_0",
+    "frameId": "frame_0",
+    "score": 916,
+    "rank": 8
+  },
+  {
+    "playerId": "fake-player-8",
+    "name": "Max",
+    "avatar": "",
+    "avatarId": "avatar_0",
+    "frameId": "frame_0",
+    "score": 904,
+    "rank": 9
+  },
+  {
+    "playerId": "fake-player-9",
+    "name": "Ziggy",
+    "avatar": "",
+    "avatarId": "avatar_0",
+    "frameId": "frame_0",
+    "score": 892,
+    "rank": 10
+  },
+  {
+    "playerId": "fake-player-10",
+    "name": "Daisy",
+    "avatar": "",
+    "avatarId": "avatar_0",
+    "frameId": "frame_0",
+    "score": 880,
+    "rank": 11
+  },
+  {
+    "playerId": "fake-player-11",
+    "name": "Buddy",
+    "avatar": "",
+    "avatarId": "avatar_0",
+    "frameId": "frame_0",
+    "score": 868,
+    "rank": 12
+  },
+  {
+    "playerId": "fake-player-12",
+    "name": "Lola",
+    "avatar": "",
+    "avatarId": "avatar_0",
+    "frameId": "frame_0",
+    "score": 856,
+    "rank": 13
+  },
+  {
+    "playerId": "fake-player-13",
+    "name": "Simba",
+    "avatar": "",
+    "avatarId": "avatar_0",
+    "frameId": "frame_0",
+    "score": 844,
+    "rank": 14
+  },
+  {
+    "playerId": "fake-player-14",
+    "name": "Peanut",
+    "avatar": "",
+    "avatarId": "avatar_0",
+    "frameId": "frame_0",
+    "score": 832,
+    "rank": 15
+  },
+  {
+    "playerId": "fake-player-15",
+    "name": "Mocha",
+    "avatar": "",
+    "avatarId": "avatar_0",
+    "frameId": "frame_0",
+    "score": 820,
+    "rank": 16
+  },
+  {
+    "playerId": "fake-player-16",
+    "name": "Bruno",
+    "avatar": "",
+    "avatarId": "avatar_0",
+    "frameId": "frame_0",
+    "score": 808,
+    "rank": 17
+  },
+  {
+    "playerId": "fake-player-17",
+    "name": "Pepper",
+    "avatar": "",
+    "avatarId": "avatar_0",
+    "frameId": "frame_0",
+    "score": 796,
+    "rank": 18
+  },
+  {
+    "playerId": "fake-player-18",
+    "name": "Rex",
+    "avatar": "",
+    "avatarId": "avatar_0",
+    "frameId": "frame_0",
+    "score": 784,
+    "rank": 19
+  },
+  {
+    "playerId": "fake-player-19",
+    "name": "Willow",
+    "avatar": "",
+    "avatarId": "avatar_0",
+    "frameId": "frame_0",
+    "score": 772,
+    "rank": 20
+  },
+  {
+    "playerId": "fake-player-20",
+    "name": "Toby",
+    "avatar": "",
+    "avatarId": "avatar_0",
+    "frameId": "frame_0",
+    "score": 760,
+    "rank": 21
+  },
+  {
+    "playerId": "fake-player-21",
+    "name": "Sasha",
+    "avatar": "",
+    "avatarId": "avatar_0",
+    "frameId": "frame_0",
+    "score": 748,
+    "rank": 22
+  },
+  {
+    "playerId": "fake-player-22",
+    "name": "Duke",
+    "avatar": "",
+    "avatarId": "avatar_0",
+    "frameId": "frame_0",
+    "score": 736,
+    "rank": 23
+  },
+  {
+    "playerId": "fake-player-23",
+    "name": "Ruby",
+    "avatar": "",
+    "avatarId": "avatar_0",
+    "frameId": "frame_0",
+    "score": 724,
+    "rank": 24
+  },
+  {
+    "playerId": "fake-player-24",
+    "name": "Leo",
+    "avatar": "",
+    "avatarId": "avatar_0",
+    "frameId": "frame_0",
+    "score": 712,
+    "rank": 25
+  }
+]

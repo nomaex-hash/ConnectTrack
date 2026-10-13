@@ -1,0 +1,10 @@
+common_hand_tap.png
+size:592,448
+filter:Linear,Linear
+common_guide_wave
+bounds:459,317,130,130
+offsets:3,3,136,136
+tutorial_hand_2
+bounds:1,1,446,456
+offsets:47,46,534,540
+rotate:90

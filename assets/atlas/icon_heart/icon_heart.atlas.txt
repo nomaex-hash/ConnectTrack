@@ -1,0 +1,13 @@
+icon_heart.png
+size:760,292
+filter:Linear,Linear
+pma:true
+heart/1
+bounds:555,19,201,269
+offsets:1,1,203,271
+heart/2
+bounds:345,19,208,269
+offsets:1,1,210,271
+heart/heart
+bounds:2,2,341,286
+offsets:1,1,343,288
