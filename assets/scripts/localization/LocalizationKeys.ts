@@ -90,10 +90,27 @@ export const L10N = {
         tryNow: 'connectTracksTutorial.tryNow', // "đặt đường ray theo <color>gợi ý số</color> của mỗi <color>hàng và cột</color> thành 1 tuyến <color>liền mạch</color>"
         doubleTapHint: 'connectTracksTutorial.doubleTapHint', // "Ô <color>nối với đường ray</color> chắc chắn có đường ray. <color>Chạm hai lần</color> vào ô trống để đặt đường ray."
         excludeHint: 'connectTracksTutorial.excludeHint', // "Hàng này đã đủ đường ray, nên các ô còn lại <color>không thể là đường ray</color>. <color>Chạm</color> vào ô trống để loại trừ nó."
+        findRemainingHint: 'connectTracksTutorial.findRemainingHint', // "Tiếp tục và tìm tất cả <color>đường ray</color>! <color>Chạm hai lần</color> để đặt đường ray, <color>chạm</color> để loại trừ."
         sweepHint: 'connectTracksTutorial.sweepHint', // "<color>Quét</color> để nối tất cả đường ray!"
         nextButton: 'connectTracksTutorial.nextButton', // "Tiếp theo"
         tryNowButton: 'connectTracksTutorial.tryNowButton', // "Thử ngay"
         hintButton: 'connectTracksTutorial.hintButton', // nhãn nút gợi ý riêng của tutorial
+    },
+
+    connectTracksHint: {
+        // Text hiển thị khi mở gợi ý (ConnectTracksHintView) — trước đây hardcode thẳng tiếng Việt
+        // ngay trong domain/rules/trackHint.ts (TrackHint.text), không qua Localization nên luôn
+        // hiện tiếng Việt dù người chơi đang để tiếng Anh (bug đã sửa). Domain chỉ còn cung cấp
+        // `rule`, presentation tự map rule -> key ở đây (xem hintRuleText() trong connectTracksHintView.ts).
+        removeX: 'connectTracksHint.removeX', // rule A0 — "Ô này đã bị đánh dấu sai."
+        trackAtEdge: 'connectTracksHint.trackAtEdge', // rule A1 — "Đường ray phải nối vào đây, nên ô này là đường ray"
+        lineComplete: 'connectTracksHint.lineComplete', // rule A2 — "Hàng đã đạt con số, nên các ô còn lại không thể là đường ray."
+        onlyOpenDirection: 'connectTracksHint.onlyOpenDirection', // rule A3 — "Mọi hướng khác đều bị chặn, nên đường ray phải nối vào đây."
+        lineNeedsRest: 'connectTracksHint.lineNeedsRest', // rule A4 — "Để đạt con số của hàng, các ô còn lại phải là đường ray."
+        deadEnd: 'connectTracksHint.deadEnd', // rule A5 — "Ô này chỉ có một kết nối nên không thể là đường ray."
+        wouldExceed: 'connectTracksHint.wouldExceed', // rule A6 — "đường ray ở đây phải nối với 1 đường ray khác trong hàng/cột. Điều đó sẽ vượt quá con số nên không thể là đường ray"
+        shapeFromNeighbor: 'connectTracksHint.shapeFromNeighbor', // rule B1-preview — "Đường ray phải nối với các ô liền kề, nên hướng của nó đã rõ"
+        shapeWrong: 'connectTracksHint.shapeWrong', // rule B1-wrong — "Đường ray này đang hướng sai."
     },
 
     streak: {

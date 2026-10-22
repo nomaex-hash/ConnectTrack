@@ -48,6 +48,18 @@ export class CountDownTimeEvent extends Component {
         this.node.active = true;
     }
 
+    onEnable() {
+        // Cocos tự unschedule() mọi callback của Component khi node/component bị disable (xem
+        // onDisable() bên dưới) nhưng KHÔNG tự lên lịch lại khi enable trở lại — nếu node này nằm
+        // trong một cụm bị ẩn tạm thời (ví dụ hideUntilLoaded của LeaderboardTabGroupManager lúc
+        // đang tải dữ liệu) rồi hiện lại, đồng hồ sẽ đứng yên mãi mãi vì showTime() không bao giờ
+        // được gọi tiếp. Chỉ resume nếu đã initCountDownTime() ít nhất 1 lần (có cb) và chưa chạm 0.
+        if (this.cb && this.countTime > 0) {
+            this.unschedule(this.showTime);
+            this.schedule(this.showTime, 1);
+        }
+    }
+
     onDisable() {
         this.unschedule(this.showTime);
     }

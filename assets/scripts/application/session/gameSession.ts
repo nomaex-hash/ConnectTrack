@@ -95,7 +95,7 @@ export class GameSession {
             }
         }
         this.truth = createSolutionTruth(options.level);
-        this.requiredCells = Object.freeze([...options.requiredCells]);
+        this.requiredCells = Object.freeze(options.requiredCells.slice());
         this.tutorialMode = options.tutorialMode ?? false;
         this.board = Board.empty(options.level.size, this.truth.mainTrack);
         this.mistakes = MistakeCounter.initial();
@@ -176,7 +176,7 @@ export class GameSession {
             cellStates: Object.freeze(cellStates),
             cellLinks: Object.freeze(cellLinks),
             trackQuestions: Object.freeze(trackQuestions),
-            mainTrackCells: Object.freeze([...mainCells]),
+            mainTrackCells: Object.freeze(mainCells.slice()),
             mainTrackPorts: Object.freeze(mainTrackPorts),
             entranceCell,
             exitCell,
@@ -303,7 +303,7 @@ export class GameSession {
      * nothing changes. Whether the real game commits partial batches is UNKNOWN.
      */
     private handleMarkCellsAsX(cells: readonly number[]): CommandResult {
-        const unique = [...new Set(cells)];
+        const unique = Array.from(new Set(cells));
         if (unique.length === 0) {
             return this.rejected('emptyBatch');
         }
@@ -323,7 +323,7 @@ export class GameSession {
 
     /** X-removal drag: removes the listed X cells. Never applies Track, Track ? or RedX logic. */
     private handleRemoveXCells(cells: readonly number[]): CommandResult {
-        const unique = [...new Set(cells)];
+        const unique = Array.from(new Set(cells));
         if (unique.length === 0) {
             return this.rejected('emptyBatch');
         }

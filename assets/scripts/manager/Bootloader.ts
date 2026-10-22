@@ -1,4 +1,4 @@
-import { _decorator, Component, Director, Node, Prefab, ResolutionPolicy, director, view, resources, instantiate, isValid } from 'cc';
+import { _decorator, Component, Director, JsonAsset, Node, Prefab, ResolutionPolicy, director, view, resources, instantiate, isValid } from 'cc';
 import { BootLoadingView } from '../ui/widget/BootLoadingView';
 import { AppState } from '../core/AppState';
 import { EventManager } from '../core/EventManager';
@@ -21,6 +21,8 @@ import { FbPaymentService } from '../service/payment/FbPaymentService';
 import { PreloadedLevelData } from '../application/session/preloadedLevelData';
 import { CocosLevelDataAdapter } from '../infrastructure/content/cocosLevelDataAdapter';
 import { ProgressionSystem } from '../gameplay/progression/ProgressionSystem';
+import { setHardLevelIds } from '../config/LevelListConfig';
+import { LAZY_SCREENS } from '../ui/lazyPrefabRegistry';
 
 const { ccclass, property } = _decorator;
 
@@ -40,6 +42,13 @@ export class Bootloader extends Component {
     bootFadeSeconds = 0.4;
 
     private bootView: BootLoadingView | null = null;
+    private bootT0 = 0;
+    private lastProgress = 0;
+
+    /** Log mốc thời gian (ms) tính từ đầu runBootSequence — dùng để tìm bước boot chậm nhất. */
+    private mark(label: string): void {
+        console.log(`[Boot] +${Math.round(performance.now() - this.bootT0)}ms ${label}`);
+    }
 
     start(): void {
         this.applyFixedHeightResolution();
@@ -85,18 +94,8 @@ export class Bootloader extends Component {
 
         
         director.addPersistRootNode(this.appManagersNode);
+        this.bootT0 = performance.now();
         this.report(0.05, 'Chuẩn bị');
-
-        // Facebook Instant Games yêu cầu gọi startGameAsync() CÀNG SỚM CÀNG TỐT để ẩn loading
-        // screen của nền tảng. Không có FBInstant (Editor/preview) thì giữ nguyên Mock mặc định
-        // của 2 Holder — toàn bộ game vẫn chạy được, chỉ mất phần gọi backend/nền tảng thật.
-        if (typeof FBInstant !== 'undefined') {
-            FBInstantManagerHolder.set(new FBInstantManager());
-            PGSPlayInstantManagerHolder.set(new PGSPlayInstantManager());
-            PaymentServiceHolder.set(new FbPaymentService());
-        }
-        await FBInstantManagerHolder.current.init();
-        this.report(0.1, 'Kết nối nền tảng');
 
         const resourceManager = this.getManager(ResourceManager);
         const saveManager = this.getManager(SaveManager);
@@ -104,6 +103,12 @@ export class Bootloader extends Component {
         const gameManager = this.getManager(GameManager);
         const sceneManager = this.getManager(SceneManager);
         const uiManager = this.getManager(UIManager);
+
+        // CHẠY SONG SONG ngay từ đầu: tải màn chính (nặng nhất) và metadata level — không phụ thuộc
+        // FBInstant/save/ngôn ngữ nên không cần đợi các bước đó xong mới bắt đầu.
+        const scenePreload = sceneManager.preloadMainScene(progress => this.report(0.1 + progress * 0.6, 'Tải màn chính'));
+        scenePreload.then(() => this.mark('preload màn chính xong'), () => undefined); // tránh unhandled rejection; lỗi vẫn ném ở await bên dưới
+        const metadataReady = this.loadConnectTrackDifficultyMetadata().then(() => this.mark('metadata level xong'));
 
         const localizationManager =
             this.appManagersNode.getComponent(LocalizationManager) ??
@@ -115,15 +120,31 @@ export class Bootloader extends Component {
         // đã cache (nếu ngôn ngữ thật trùng fallback thì gần như không mất thêm thời gian).
         const localizationReady = localizationManager.init(FALLBACK_LANGUAGE);
 
+        // Facebook Instant Games yêu cầu gọi startGameAsync() CÀNG SỚM CÀNG TỐT để ẩn loading
+        // screen của nền tảng. Không có FBInstant (Editor/preview) thì giữ nguyên Mock mặc định
+        // của 2 Holder — toàn bộ game vẫn chạy được, chỉ mất phần gọi backend/nền tảng thật.
+        if (typeof FBInstant !== 'undefined') {
+            FBInstantManagerHolder.set(new FBInstantManager());
+            PGSPlayInstantManagerHolder.set(new PGSPlayInstantManager());
+            PaymentServiceHolder.set(new FbPaymentService());
+        }
+        await FBInstantManagerHolder.current.init();
+        this.mark('FBInstant.init xong');
+        this.report(0.1, 'Kết nối nền tảng');
+
         await Promise.all([resourceManager.init(), localizationReady]);
+        this.mark('tài nguyên + ngôn ngữ xong');
         this.report(0.2, 'Tài nguyên');
 
         await saveManager.load();
         saveManager.subscribeSaveTriggers();
+        this.mark('saveManager.load xong');
         this.report(0.4, 'Dữ liệu người chơi');
 
         await localizationManager.init(saveManager.playerData.settings.language);
         this.report(0.5, 'Ngôn ngữ');
+
+        await metadataReady;
 
         audioManager.applyVolume(saveManager.playerData.settings);
         audioManager.subscribeSettingsChanges();
@@ -131,6 +152,7 @@ export class Bootloader extends Component {
 
        
         gameManager.initSystems();
+        this.mark('initSystems xong');
         this.report(0.7, 'Hệ thống game');
 
         gameManager.changeState(AppState.Loading);
@@ -146,19 +168,41 @@ export class Bootloader extends Component {
             console.warn(`[Bootloader] Cannot preload ConnectTracks level ${firstLevel}; retry on entry.`, error);
         });
 
+        // GameplayScreen nằm trong bundle lazy (không còn bị kéo theo bởi Main.scene). Yêu cầu: màn ĐẦU TIÊN người
+        // chơi vào phải sẵn sàng TRƯỚC khi họ bấm Chơi — nên tải HẲN prefab (không chỉ download) cho MỌI người chơi,
+        // song song với preload màn chính và tải level. Lỗi (vd bundle chưa tạo) chỉ cảnh báo; khi đó vào màn chơi
+        // sẽ tải lúc cần.
+        const gameplayRef = LAZY_SCREENS[AppState.Gameplay];
+        const gameplayReady: Promise<void> = gameplayRef
+            ? resourceManager.loadPrefabFromBundle(gameplayRef.bundle, gameplayRef.path).then(
+                () => this.mark('prefab GameplayScreen đã nạp'),
+                error => { console.warn('[Bootloader] Không nạp trước được GameplayScreen; sẽ tải khi vào màn chơi.', error); },
+            )
+            : Promise.resolve();
+        // Puzzle của màn đầu (tutorial hoặc level hiện tại): đợi tải + parse + cache xong.
+        const puzzleReady = gameManager.warmFirstPuzzle().then(
+            () => this.mark('puzzle màn đầu đã cache'),
+            error => { console.warn('[Bootloader] Không tải trước được puzzle màn đầu; sẽ tải khi vào màn chơi.', error); },
+        );
+
         this.report(0.8, 'Vào màn chính');
-        await Promise.all([
-            sceneManager.preloadMainScene(progress => this.report(0.8 + progress * 0.15, 'Tải màn chính')),
-            levelReady,
-        ]);
+        await Promise.all([scenePreload, levelReady, gameplayReady, puzzleReady]);
+        this.mark('preload màn chính + level đầu sẵn sàng');
         if (!isValid(this, true)) return;
         if (this.bootView && !await this.bootView.complete()) return;
         await new Promise<void>(resolve => director.once(Director.EVENT_AFTER_DRAW, resolve));
         if (!isValid(this, true)) return;
         await sceneManager.loadMainScene();
+        this.mark('loadMainScene xong');
         this.report(0.95, 'Dựng giao diện');
 
         uiManager.attachToScene();
+        // Đưa prefab GameplayScreen (đã nằm trong cache asset của Cocos) vào UIRoot NGAY, trước khi hiện menu — để bấm
+        // Chơi đi đường đồng bộ, không còn bước nạp bundle/overlay loading nào.
+        await uiManager.prepareScreen(AppState.Gameplay).catch(error => {
+            console.warn('[Bootloader] prepareScreen(Gameplay) thất bại; sẽ tải khi vào màn chơi.', error);
+        });
+        this.mark('GameplayScreen sẵn sàng trong UIRoot');
 
         // Lần đầu mở app (chưa xem tutorial): vào THẲNG tutorial, không qua MainMenu —
         // tránh nhấp nháy màn hình Menu rồi mới chuyển sang Gameplay.
@@ -169,12 +213,37 @@ export class Bootloader extends Component {
         }
 
         this.report(1, 'Xong');
+        this.mark('HOÀN TẤT');
         console.log('[Bootloader] Boot sequence hoàn tất');
+    }
+
+    private async loadConnectTrackDifficultyMetadata(): Promise<void> {
+        await new Promise<void>((resolve) => {
+            resources.load('ConnectTrackData/tblevels_combined_0to200', JsonAsset, (error, asset) => {
+                if (error || !asset || !Array.isArray(asset.json)) {
+                    console.warn('[Bootloader] Không tải được metadata hard của ConnectTrack.');
+                    setHardLevelIds([]);
+                    resolve();
+                    return;
+                }
+                const hardIds: number[] = [];
+                for (const row of asset.json) {
+                    if (typeof row !== 'object' || row === null) continue;
+                    const record = row as Record<string, unknown>;
+                    if (record.is_hard_level === true && typeof record.id === 'number') hardIds.push(record.id);
+                }
+                setHardLevelIds(hardIds);
+                resolve();
+            });
+        });
     }
 
    
 
     private report(progress: number, step: string): void {
+        // Chỉ tiến, không lùi: vài bước nay chạy song song nên có thể báo không theo thứ tự.
+        progress = Math.max(progress, this.lastProgress);
+        this.lastProgress = progress;
         if (isValid(this.bootView, true)) this.bootView!.setProgress(progress);
         const payload: BootProgressEventPayload = { progress, step };
         EventManager.instance.emit(BOOT_PROGRESS_EVENT, payload);

@@ -272,7 +272,7 @@ export class GameResourceConfigManager extends Component {
         if (type == RESOURCE_TYPE.CURRENCY) {
             return `gameresouces/currency_${CURRENCY_TYPE[specificType].toString().toLowerCase()}`;
         } else if (type == RESOURCE_TYPE.BOOSTER) {
-            return `gameresouces/booster_${BOOSTER_TYPE[specificType].toString().toLowerCase()}`;
+            return `gameresouces/${this.getConnectTrackBoosterIconName(specificType, false)}`;
         } else if (type == RESOURCE_TYPE.SPECIAL) {
             return `gameresouces/special_${SPECIAL_RESOURCE_TYPE[specificType].toString().toLowerCase()}`;
         }
@@ -282,7 +282,7 @@ export class GameResourceConfigManager extends Component {
         if (type == RESOURCE_TYPE.CURRENCY) {
             return `gameresouces/currency_${CURRENCY_TYPE[specificType].toString().toLowerCase()}_2`;
         } else if (type == RESOURCE_TYPE.BOOSTER) {
-            return `gameresouces/booster_${BOOSTER_TYPE[specificType].toString().toLowerCase()}_2`;
+            return `gameresouces/${this.getConnectTrackBoosterIconName(specificType, true)}`;
         } else if (type == RESOURCE_TYPE.SPECIAL) {
             return `gameresouces/special_${SPECIAL_RESOURCE_TYPE[specificType].toString().toLowerCase()}_2`;
         }
@@ -292,10 +292,17 @@ export class GameResourceConfigManager extends Component {
         if (type == RESOURCE_TYPE.CURRENCY) {
             return `gameresouces/currency_${CURRENCY_TYPE[specificType].toString().toLowerCase()}_2`;
         } else if (type == RESOURCE_TYPE.BOOSTER) {
-            return `gameresouces/booster_${BOOSTER_TYPE[specificType].toString().toLowerCase()}_2`;
+            return `gameresouces/${this.getConnectTrackBoosterIconName(specificType, false)}`;
         } else if (type == RESOURCE_TYPE.SPECIAL) {
             return `gameresouces/special_${SPECIAL_RESOURCE_TYPE[specificType].toString().toLowerCase()}_2`;
         }
+    }
+
+    private getConnectTrackBoosterIconName(specificType: number, small: boolean): string {
+        const suffix = small ? '_2' : '';
+        if (specificType == BOOSTER_TYPE.HINT) return `game_prop_hint${suffix}`;
+        if (specificType == BOOSTER_TYPE.PLACE_DOG) return `item_hint_track${suffix}`;
+        return `booster_${BOOSTER_TYPE[specificType].toString().toLowerCase()}${suffix}`;
     }
 
 

@@ -410,7 +410,7 @@ export class ConnectTracksCellView extends Component {
      * not just one already fully gone) before touching it, same pattern as
      * ConnectTracksBoardView.clearClueLabels.
      */
-    setRailGlow(active: boolean, opacity = 131): void {
+    setRailGlow(active: boolean, opacity = 255): void {
         const visit = (node: Node): void => {
             if (!isValid(node, true)) {
                 return;
@@ -421,7 +421,7 @@ export class ConnectTracksCellView extends Component {
                 }
                 if (child.name.toLowerCase() === 'glowingsleeper') {
                     const fade = child.getComponent(UIOpacity) ?? child.addComponent(UIOpacity);
-                    fade.opacity = active ? Math.max(0, Math.min(131, opacity)) : 0;
+                    fade.opacity = active ? Math.max(0, Math.min(255, opacity)) : 0;
                     child.active = active;
                 }
                 else visit(child);

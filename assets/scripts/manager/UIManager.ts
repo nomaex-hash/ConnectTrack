@@ -20,13 +20,15 @@ import {
     NavigateRequestedEventPayload,
 } from '../event/AppEvents';
 import { UIRoot } from '../ui/UIRoot';
+import { ScreenPreparer } from '../ui/screenPreparer';
 import { UIScreen } from '../ui/UIScreen';
 import { UIPopup } from '../ui/UIPopup';
 import { PopupId } from '../ui/PopupId';
 import { PopupController } from '../ui/PopupController';
-import { ResultData } from '../ui/popup/ResultPopup';
-import { SettingsData } from '../ui/popup/SettingsPopup';
+import type { ResultData } from '../ui/popup/ResultPopup';
+import type { SettingsData } from '../ui/popup/SettingsPopup';
 import { SaveManager } from './SaveManager';
+import { GameManager } from './GameManager';
 import { AudioManager } from './AudioManager';
 import { PuzzleContext } from '../model/BoardSaveData';
 import { ProgressionHolder } from '../gameplay/progression/ProgressionHolder';
@@ -100,6 +102,11 @@ export class UIManager extends Component implements PopupController {
     /** Tàu ConnectTracks đang hoãn chạy, chờ quay lại Gameplay từ màn Streak — xem
      * notifyConnectTracksReadyForTrain()/onAppStateChanged(). */
     private pendingConnectTracksReady: (() => void) | null = null;
+    /** BUG đã sửa (báo lỗi của user: "sau streak thì lại bắt người chơi chơi lại màn [X] từ đầu")
+     * — màn GameplayScreen ĐANG CHỜ quay lại SAU KHI màn Streak ăn mừng đóng (ẩn — active=false —
+     * KHÔNG destroy()) — xem showScreenNow(). null nghĩa là không có gì đang treo, chuyển màn diễn
+     * ra bình thường (destroy + instantiate lại như mọi lần khác). */
+    private suspendedGameplayScreen: UIScreen | null = null;
 
     onLoad(): void {
         UIManager._instance = this;
@@ -112,6 +119,7 @@ export class UIManager extends Component implements PopupController {
         this.victoryInputBlocker?.destroy();
         EventManager.instance.targetOff(this);
         if (UIManager._instance === this) UIManager._instance = null;
+        ScreenPreparer.set(null);
     }
 
 
@@ -125,6 +133,7 @@ export class UIManager extends Component implements PopupController {
 
         this.root = root;
         this.setBlockInput(false);
+        ScreenPreparer.set((state) => this.prepareScreen(state));
 
         // Giống hệt cách HomeTabGroupManager.onLoad() đang làm cho Shop/Leaderboard (tính bằng
         // code 1 lần lúc khởi tạo, KHÔNG qua cc.Widget/ScreenFitNode) — screenLayer/popupLayer là
@@ -160,6 +169,7 @@ export class UIManager extends Component implements PopupController {
         // sẽ quay LẠI Gameplay (đúng session cũ, xem GameManager.onNavigate) — mở nốt popup
         // còn treo đó ĐÈ LÊN gameplay lúc này.
         if (payload.to === AppState.Gameplay) {
+            console.log('[DEBUG UIManager] onAppStateChanged to Gameplay, pendingConnectTracksReady=', !!this.pendingConnectTracksReady, 'from=', payload.from);
             this.openPendingResultIfAny();
             // ConnectTracks (xác nhận từ user: thêm lại luồng Streak, giữ đúng thứ tự) — tàu đang
             // hoãn chạy đợi quay lại từ màn Streak (xem notifyConnectTracksReadyForTrain()), đúng
@@ -170,6 +180,9 @@ export class UIManager extends Component implements PopupController {
                 this.runConnectTracksReadyChain(onReady);
             }
             return;
+        }
+        if (payload.from === AppState.DailyStreak) {
+            console.log('[DEBUG UIManager] onAppStateChanged FROM DailyStreak to', payload.to, '(NOT Gameplay — pendingConnectTracksReady sẽ bị xoá, xem block bên dưới)');
         }
 
         // "Mở app" — mốc đầu tiên (còn lại là sau khi thắng màn, xem openResultPopupForWin()) để
@@ -299,6 +312,13 @@ export class UIManager extends Component implements PopupController {
         if (!snapshot) return;
         if (this.currentScreenState !== AppState.Gameplay) return;
 
+        // "Luồng mở Leaderboard[Preview] đang thiếu luồng mở Profile để đặt tên" (xác nhận từ user,
+        // bám đúng luồng game gốc — cùng mục đích/cơ chế với maybeOpenTournamentActivation(), chỉ
+        // khác chỗ áp dụng: MỌI lần Leaderboard[Preview] sắp mở, không riêng lần kích hoạt giải đấu
+        // đầu tiên). Chưa đặt tên thì cắt hẳn chuỗi ở đây — KHÔNG mở LeaderboardPreview, KHÔNG mở
+        // Result tiếp theo nó (giống hệt cách maybeOpenTournamentActivation() cắt afterResultClosed()).
+        if (this.gateLeaderboardOnProfileName()) return;
+
         this.openPopup<LeaderboardPreviewSnapshot>(PopupId.LeaderboardPreview, snapshot, () => {
             // Đóng popup leo hạng xong: nếu KHÔNG phải lần đầu trong ngày thì mở Result luôn;
             // nếu là lần đầu trong ngày, cứ để pendingWinResultData nằm đó — sẽ được mở lại
@@ -308,6 +328,21 @@ export class UIManager extends Component implements PopupController {
             this.openResultPopupForWin();
         });
     };
+
+    /** "Bắt buộc có tên TRƯỚC khi Leaderboard mở ra thật sự" (xác nhận từ user — cùng mục đích đã
+     * nêu ở maybeOpenTournamentActivation(), áp dụng rộng ra cho MỌI lần Leaderboard[Preview] sắp
+     * mở chứ không riêng lần kích hoạt giải đấu đầu tiên). Chưa đặt tên: điều hướng về MainMenu +
+     * mở ProfileEditPopup (hệ clientEvent cũ, độc lập AppState), trả về true để caller CẮT HẲN
+     * chuỗi gọi tiếp theo (không mở Leaderboard[Preview] lần này) — giống hệt cách
+     * maybeOpenTournamentActivation() không gọi onDone() khi chưa có tên. Đã có tên: không làm gì,
+     * trả về false để caller tiếp tục bình thường. */
+    private gateLeaderboardOnProfileName(): boolean {
+        if (ProfileManager.instance?.getProfileChangeNameCompleted()) return false;
+        const payload: NavigateRequestedEventPayload = { to: AppState.MainMenu };
+        EventManager.instance.emit(NAVIGATE_REQUESTED_EVENT, payload);
+        clientEvent.dispatchEvent(Constants.SHOW_PROFILE_EDIT_POPUP);
+        return true;
+    }
 
     /**
      * "Luồng thắng ConnectTracks... tàu sẽ hoãn chạy cho đến khi luồng thắng của các popup khác
@@ -326,22 +361,53 @@ export class UIManager extends Component implements PopupController {
     notifyConnectTracksReadyForTrain(onReady: () => void): void {
         if (StreakPresentation.isPending()) {
             this.pendingConnectTracksReady = onReady;
+            // BUG đã sửa (báo lỗi của user — "màn Streak hiện đè lên lúc board còn đang di chuyển
+            // ra giữa"): GameManager trước đây TỰ hẹn giờ (gần như ngay lập tức) chuyển sang màn
+            // Streak ngay khi thắng, không hề biết animation ăn mừng của ConnectTracks (marks fade/
+            // sao bay/board di chuyển ra giữa + dừng 0.3s) đã xong hay chưa — giờ GameManager không
+            // tự hẹn giờ cho ConnectTracks nữa, CHỈ gọi ở ĐÚNG đây, nơi animation đã thật sự xong
+            // (GameplayScreen gọi notifyConnectTracksReadyForTrain từ completed() của
+            // ConnectTracksVictoryView, sau moveBoardToCenter() + dừng 0.3s — xem connectTracksVictoryView.ts).
+            GameManager.instance.enterStreakScreen();
             return;
         }
         this.runConnectTracksReadyChain(onReady);
     }
 
     private runConnectTracksReadyChain(onReady: () => void): void {
+        // BUG đã sửa ("vừa thắng xong giải đấu, popup chốt sổ hiện lên, sau đó LeaderboardPreview
+        // vẫn hiện điểm CŨ (chưa reset), vẫn đang Top 1 với điểm cũ") — nhớ lại NGAY TỪ ĐẦU hàm
+        // (trước khi maybeOpenTournamentResult() có thể chạy xong và reset currWeekScore) rằng
+        // giải đấu ĐANG chờ chốt sổ, để biết snapshot LeaderboardPreviewPresentation sắp consume()
+        // bên dưới có khả năng mang điểm CŨ (được request() lúc thắng, TRƯỚC khi giải đấu được
+        // chốt sổ/reset) hay không.
+        const tournamentWasPending = TournamentPresentation.isPending();
+
         const openPreviewThenReady = (): void => {
-            const snapshot = LeaderboardPreviewPresentation.consume();
+            let snapshot = LeaderboardPreviewPresentation.consume();
             if (!snapshot || this.currentScreenState !== AppState.Gameplay) {
                 onReady();
                 return;
             }
+            // Giải đấu VỪA được chốt sổ (điểm về 0, bot mới) qua maybeOpenTournamentResult() ở dưới
+            // — snapshot vừa consume() ở trên vẫn mang điểm của giải đấu CŨ (request() lúc thắng
+            // màn này, trước khi reset). Dựng lại theo điểm HIỆN TẠI (đã reset) để LeaderboardPreview
+            // hiện đúng bảng mới toanh — giống hệt cách maybeOpenTournamentResult() đã tự làm cho
+            // luồng Dogdoku cũ (xem openNewSessionThenDone() ở đó).
+            if (tournamentWasPending) {
+                const currentScore = LegacyLeaderboardManager.instance?.getLeaderboardCurrWeekScore() ?? 0;
+                snapshot = { oldScore: currentScore, newScore: currentScore };
+            }
+            // "Luồng mở Leaderboard[Preview] đang thiếu luồng mở Profile để đặt tên" (xác nhận từ
+            // user) — cùng gate đã áp cho luồng Dogdoku cũ (xem openLeaderboardPreviewForWin()).
+            // Chưa đặt tên: cắt hẳn chuỗi ở đây, KHÔNG mở LeaderboardPreview, KHÔNG gọi onReady()
+            // (tàu KHÔNG chạy lần này — giống hệt cách Tournament/Streak hoãn tàu đang chờ xử lý
+            // xong popup khác trước).
+            if (this.gateLeaderboardOnProfileName()) return;
             this.openPopup<LeaderboardPreviewSnapshot>(PopupId.LeaderboardPreview, snapshot, onReady);
         };
 
-        if (TournamentPresentation.isPending()) {
+        if (tournamentWasPending) {
             this.maybeOpenTournamentResult(openPreviewThenReady);
             return;
         }
@@ -510,23 +576,26 @@ export class UIManager extends Component implements PopupController {
             // Các lần TournamentResetPopup hiện lại SAU NÀY (chốt sổ tuần) đi qua nhánh
             // TournamentPresentation hoàn toàn khác, KHÔNG chạm code này.
             //
-            // Người chơi ĐÃ đặt tên từ TRƯỚC màn 10 (getProfileChangeNameCompleted() — cùng cờ
-            // ProfileEditPopup.commitName() đặt khi lưu tên khác mặc định) — không cần bắt đặt tên
-            // lại, cứ để luồng tiếp tục bình thường (sang màn 11) như mọi lần thắng khác.
-            if (ProfileManager.instance?.getProfileChangeNameCompleted()) {
-                onDone();
-                return;
-            }
+            // gateLeaderboardOnProfileName(): chưa đặt tên thì tự điều hướng về MainMenu + mở
+            // ProfileEditPopup rồi trả về true — cắt hẳn chuỗi afterResultClosed() ->
+            // maybeOpenTournamentResult() -> continueAfterResult() ở đây (KHÔNG gọi onDone()), đúng
+            // người chơi ở lại Main sau khi đóng popup đặt tên, không tiếp tục sang màn kế tiếp. Đã
+            // có tên (getProfileChangeNameCompleted() — cùng cờ ProfileEditPopup.commitName() đặt
+            // khi lưu tên khác mặc định): trả về false, luồng tiếp tục bình thường (sang màn 11).
+            if (this.gateLeaderboardOnProfileName()) return;
 
-            // Chưa từng đặt tên: bấm "Got it" phải về MAIN MENU TRƯỚC, rồi mới mở ProfileEditPopup
-            // (hệ clientEvent cũ, overlay độc lập AppState, sống ở Canvas gốc Main.scene) để đặt tên
-            // — người chơi ở lại Main sau khi đóng popup đặt tên, KHÔNG tiếp tục sang màn kế tiếp
-            // (KHÔNG gọi onDone() — cắt hẳn chuỗi afterResultClosed() -> maybeOpenTournamentResult()
-            // -> continueAfterResult() ở đây). Mục đích: bắt buộc có tên TRƯỚC khi Leaderboard mở ra
-            // thật sự (tránh người chơi lọt vào bảng xếp hạng mà chưa kịp đặt tên).
-            const payload: NavigateRequestedEventPayload = { to: AppState.MainMenu };
-            EventManager.instance.emit(NAVIGATE_REQUESTED_EVENT, payload);
-            clientEvent.dispatchEvent(Constants.SHOW_PROFILE_EDIT_POPUP);
+            // BUG đã sửa ("vừa kích hoạt giải đấu lần đầu, điểm KHÔNG reset, vẫn đang Top 1 với điểm
+            // cũ") — snapshot pendingLeaderboardPreview được chụp LÚC THẮNG màn này, TRƯỚC KHI
+            // activateTournament() (chạy trong TournamentResetPopup.onShow()) reset currWeekScore về
+            // 0 (vì addCurrWeekScore() cộng điểm VÔ ĐIỀU KIỆN kể cả màn trước khi giải đấu kích
+            // hoạt — xem LeaderboardManager.activateTournament()). Dựng lại theo điểm hiện tại (đã
+            // reset) để LeaderboardPreview hiện đúng bảng mới toanh, giống hệt cách
+            // maybeOpenTournamentResult() đã làm cho luồng chốt sổ tuần cũ.
+            if (this.pendingLeaderboardPreview) {
+                const currentScore = LegacyLeaderboardManager.instance?.getLeaderboardCurrWeekScore() ?? 0;
+                this.pendingLeaderboardPreview = { oldScore: currentScore, newScore: currentScore };
+            }
+            onDone();
         });
     }
 
@@ -581,7 +650,13 @@ export class UIManager extends Component implements PopupController {
     private resolveNextLevel(context: PuzzleContext, puzzleId: number): number | null {
         const progression = ProgressionHolder.current;
 
-        if (context === 'tutorial') {
+        // "Sau khi chơi daily, nút Menu phải hiện màn campaign hiện tại của người chơi" (xác nhận
+        // từ user) — daily không có "màn kế" thật (luôn puzzleId cố định/theo ngày, không có khái
+        // niệm +1), nên trước đây luôn trả về null ở đây → nút Continue của ResultPopup luôn hiện
+        // "Menu"/về MainMenu sau khi thắng daily. Giờ daily dùng CHUNG nhánh với tutorial — trả về
+        // ĐÚNG level campaign hiện tại của người chơi (progression.getCurrentLevel()), để nút hiện
+        // "Level N" và bấm vào là vào THẲNG màn campaign đó, giống hệt luồng tutorial đã có sẵn.
+        if (context === 'tutorial' || context === 'daily') {
             return progression?.getCurrentLevel() ?? 1;
         }
 
@@ -595,6 +670,13 @@ export class UIManager extends Component implements PopupController {
 
     private showScreenFor(state: AppState): void {
         this.screenLoadingTicket = null;
+        // Prefab màn này nằm trong bundle lazy và chưa nạp: hiện overlay loading, nạp xong mới dựng.
+        // Nếu đã nạp/prefetch xong (hoặc slot còn gán cứng) thì needsLazyScreen = false -> đi đường đồng bộ cũ.
+        const lazyRoot = this.root;
+        if (lazyRoot && state !== this.currentScreenState && lazyRoot.needsLazyScreen(state)) {
+            this.loadScreenThenShow(state, lazyRoot);
+            return;
+        }
         if (state === AppState.DailyStreak && this.currentScreenState !== state) {
             const ticket = {};
             this.screenLoadingTicket = ticket;
@@ -617,22 +699,137 @@ export class UIManager extends Component implements PopupController {
         this.showScreenNow(state);
     }
 
+    /**
+     * Đảm bảo prefab của màn `state` (nếu nằm trong bundle lazy) ĐÃ nạp xong, hiện overlay loading trong lúc chờ.
+     * GameManager gọi TRƯỚC khi đổi state để showScreenFor() đi đường đồng bộ (xem screenPreparer.ts).
+     */
+    async prepareScreen(state: AppState): Promise<void> {
+        const root = this.root;
+        if (!root || !root.needsLazyScreen(state)) return;
+        this.setPopupLoading(true);
+        try {
+            await root.ensureScreenPrefab(state);
+        } finally {
+            if (this.isValid) this.setPopupLoading(this.pendingPopupOpens.size > 0);
+        }
+    }
+
+    private loadScreenThenShow(state: AppState, root: UIRoot): void {
+        const ticket = {};
+        this.screenLoadingTicket = ticket;
+        this.setPopupLoading(true);
+        const startedAt = Date.now();
+        console.log(`[UIManager] Nạp màn lazy '${state}' từ bundle...`);
+        const finish = (): void => {
+            if (!this.isValid) return;
+            if (this.screenLoadingTicket === ticket) this.screenLoadingTicket = null;
+            this.setPopupLoading(this.pendingPopupOpens.size > 0);
+        };
+        root.ensureScreenPrefab(state).then(
+            () => {
+                console.log(`[UIManager] Màn lazy '${state}' đã nạp sau ${Date.now() - startedAt}ms.`);
+                // Đã có chuyển màn khác chen vào trong lúc đang tải -> bỏ lượt này.
+                if (!this.isValid || this.screenLoadingTicket !== ticket) {
+                    console.warn(`[UIManager] Bỏ qua dựng màn '${state}': đã có chuyển màn khác chen vào (currentScreenState=${this.currentScreenState}).`);
+                    return;
+                }
+                try {
+                    this.showScreenNow(state);
+                } catch (error) {
+                    console.error(`[UIManager] Không dựng được màn '${state}':`, error);
+                } finally {
+                    finish();
+                }
+            },
+            (error: unknown) => {
+                console.error(`[UIManager] Không tải được màn '${state}' từ bundle:`, error);
+                finish();
+            },
+        );
+    }
+
     private showScreenNow(state: AppState): void {
         if (this.currentScreenState === state) return;
         // Streak có thể xuất hiện trước popup kết quả: màn mới phải nhận được thao tác.
         this.setVictoryInputBlocked(false);
 
-        const root = this.requireRoot();
-        const prefab = root.getScreenPrefab(state);
+        console.log('[DEBUG UIManager] showScreenNow:', JSON.stringify({
+            targetState: state, currentScreenState: this.currentScreenState,
+            hasCurrentScreen: !!this.currentScreen, hasSuspendedGameplayScreen: !!this.suspendedGameplayScreen,
+            streakPending: StreakPresentation.isPending(),
+        }));
 
-        if (!prefab) {
+        // Quay LẠI Gameplay đúng lúc có 1 bản GameplayScreen đang treo (bị ẩn, không destroy —
+        // xem nhánh "tạm ẩn" bên dưới) — dựng lại NGUYÊN VẸN bản đó thay vì instantiate() bản mới
+        // tinh (sẽ mất sạch connectTracksSession/victory sequence đang tạm dừng chờ resume()).
+        if (state === AppState.Gameplay && this.suspendedGameplayScreen) {
+            console.log('[DEBUG UIManager] showScreenNow: RESUME branch taken');
+            this.closeAllPopups();
             this.closeCurrentScreen();
+            const screen = this.suspendedGameplayScreen;
+            this.suspendedGameplayScreen = null;
+            screen.node.active = true;
+            // Gỡ cờ "đang tạm ẩn" NGAY SAU KHI active=true — xem setSuspended() ở
+            // ConnectTracksVictoryView: từ giờ 1 lần onDisable() thật (đóng hẳn) phải cancel() lại
+            // như cũ.
+            (screen.node.getComponent('GameplayScreen') as GameplayScreen | null)
+                ?.connectTracksVictory?.setSuspended(false);
+            this.currentScreen = screen;
             this.currentScreenState = state;
             return;
         }
 
-        this.closeAllPopups();
-        this.closeCurrentScreen();
+        // BUG đã sửa (báo lỗi của user: "sau streak thì lại bắt người chơi chơi lại màn [X] từ
+        // đầu"): mọi lần chuyển màn BÌNH THƯỜNG destroy() hẳn node màn cũ rồi instantiate() lại 1
+        // bản HOÀN TOÀN MỚI khi quay lại (xem nhánh else bên dưới) — GameplayScreen không phải
+        // singleton sống xuyên suốt, nên MỌI field runtime (connectTracksSession, currentPuzzleId,
+        // victory sequence đang tạm dừng chờ resume...) biến mất sạch theo node cũ dù onClose() có
+        // cố "giữ lại" gì cũng vô nghĩa — instance đó bị destroy() ngay sau đó. Trường hợp DUY NHẤT
+        // cần giữ NGUYÊN VẸN y hệt lúc rời đi là "thắng lần đầu trong ngày" → tạm sang Streak ăn
+        // mừng → sắp quay LẠI ĐÚNG session đó (StreakPresentation.isPending() đúng lúc này — đặt cờ
+        // ở GameManager.onPuzzleSolved, TRƯỚC KHI DailyStreakScreen kịp tiêu thụ) — CHỈ ẩn node
+        // (active=false), KHÔNG close()/destroy() gì cả, để mọi state + coroutine JS đang chạy dở
+        // (Promise không phụ thuộc active của node) tự nhiên sống sót nguyên vẹn; nhánh resume ở
+        // trên sẽ hiện lại (active=true) đúng bản này khi quay về Gameplay.
+        if (state === AppState.DailyStreak && this.currentScreenState === AppState.Gameplay
+            && this.currentScreen && StreakPresentation.isPending()) {
+            console.log('[DEBUG UIManager] showScreenNow: SUSPEND branch taken');
+            this.closeAllPopups();
+            // PHẢI đặt cờ "đang tạm ẩn" TRƯỚC khi set active=false — Cocos gọi onDisable() của MỌI
+            // component active trong node đó NGAY TRONG CÙNG lệnh gán active=false (đồng bộ), không
+            // phải đợi tới frame sau. Đặt cờ sau active=false là quá trễ, onDisable() đã chạy xong.
+            (this.currentScreen.node.getComponent('GameplayScreen') as GameplayScreen | null)
+                ?.connectTracksVictory?.setSuspended(true);
+            this.suspendedGameplayScreen = this.currentScreen;
+            this.currentScreen.node.active = false;
+            this.currentScreen = null;
+        } else {
+            console.log('[DEBUG UIManager] showScreenNow: ELSE/fresh-instantiate branch taken', JSON.stringify({
+                reason: state !== AppState.DailyStreak ? 'state!=DailyStreak'
+                    : this.currentScreenState !== AppState.Gameplay ? 'currentScreenState!=Gameplay'
+                    : !this.currentScreen ? 'no currentScreen'
+                    : 'StreakPresentation.isPending()=false',
+            }));
+            this.closeAllPopups();
+            this.closeCurrentScreen();
+            // An toàn: nếu có 1 bản GameplayScreen đang treo (suspendedGameplayScreen) mà lần
+            // chuyển màn NÀY lại không phải "quay về Gameplay" (vd bấm back ở Streak về MainMenu
+            // thay vì "Tiếp tục") — dọn hẳn nó ở đây, tránh rò rỉ node mãi mãi không ai destroy().
+            if (this.suspendedGameplayScreen) {
+                console.log('[DEBUG UIManager] showScreenNow: leaking suspendedGameplayScreen cleaned up here');
+                this.suspendedGameplayScreen.close();
+                this.suspendedGameplayScreen.node.destroy();
+                this.suspendedGameplayScreen = null;
+            }
+        }
+
+        const root = this.requireRoot();
+        const prefab = root.getScreenPrefab(state);
+
+        if (!prefab) {
+            this.currentScreenState = state;
+            return;
+        }
 
         const node = instantiate(prefab);
         node.parent = root.screenLayer;
@@ -650,6 +847,16 @@ export class UIManager extends Component implements PopupController {
         }
         screen.attachPopups(this);
         screen.open();
+        this.scheduleLazyPrefetch();
+    }
+
+    private lazyPrefetchScheduled = false;
+
+    /** Sau khi màn ĐẦU TIÊN đã hiện: tải ngầm các prefab lazy (xem UIRoot.prefetchLazy). Chỉ 1 lần. */
+    private scheduleLazyPrefetch(): void {
+        if (this.lazyPrefetchScheduled || !this.root) return;
+        this.lazyPrefetchScheduled = true;
+        this.scheduleOnce(() => this.root?.prefetchLazy(), 1);
     }
 
     private closeCurrentScreen(): void {
@@ -668,29 +875,54 @@ export class UIManager extends Component implements PopupController {
             return;
         }
         const root = this.requireRoot();
-        if (!root.getPopupPrefab(id)) {
+        const lazy = !root.getPopupPrefab(id) && root.canLazyLoadPopup(id);
+        if (!lazy && !root.getPopupPrefab(id)) {
             console.warn(`[UIManager] Chưa gán prefab cho popup '${id}' trong UIRoot — bỏ qua.`);
             return;
         }
         const ticket = {};
         this.pendingPopupOpens.set(id, ticket);
         this.setPopupLoading(true);
-        // Vẽ loading trước. Không instantiate trong callback AFTER_DRAW vì browser
-        // vẫn cần trả quyền điều khiển để trình bày frame vừa vẽ.
-        director.once(Director.EVENT_AFTER_DRAW, () => {
-            if (!this.isValid || this.pendingPopupOpens.get(id) !== ticket) return;
-            this.scheduleOnce(() => {
-                if (this.pendingPopupOpens.get(id) !== ticket) return;
-                try {
-                    if (this.root === root && root.isValid) this.showPopupNow(id, data, onClosed);
-                } catch (error) {
-                    console.error(`[UIManager] Không mở được popup '${id}':`, error);
-                } finally {
-                    if (this.pendingPopupOpens.get(id) === ticket) this.pendingPopupOpens.delete(id);
-                    this.setPopupLoading(this.pendingPopupOpens.size > 0);
-                }
-            }, 0);
-        });
+        const lazyStartedAt = Date.now();
+        if (lazy) console.log(`[UIManager] Nạp popup lazy '${id}' từ bundle...`);
+        const present = (): void => {
+            // Vẽ loading trước. Không instantiate trong callback AFTER_DRAW vì browser
+            // vẫn cần trả quyền điều khiển để trình bày frame vừa vẽ.
+            director.once(Director.EVENT_AFTER_DRAW, () => {
+                if (!this.isValid || this.pendingPopupOpens.get(id) !== ticket) return;
+                this.scheduleOnce(() => {
+                    if (this.pendingPopupOpens.get(id) !== ticket) return;
+                    try {
+                        if (this.root === root && root.isValid) this.showPopupNow(id, data, onClosed);
+                    } catch (error) {
+                        console.error(`[UIManager] Không mở được popup '${id}':`, error);
+                    } finally {
+                        if (this.pendingPopupOpens.get(id) === ticket) this.pendingPopupOpens.delete(id);
+                        this.setPopupLoading(this.pendingPopupOpens.size > 0);
+                    }
+                }, 0);
+            });
+        };
+        if (!lazy) {
+            present();
+            return;
+        }
+        // Prefab nằm trong bundle lazy: tải xong mới dựng. Lỗi mạng -> dọn overlay và gọi onClosed để luồng
+        // gọi (vd sau popup kết quả) không bị kẹt chờ popup không bao giờ mở.
+        root.ensurePopupPrefab(id).then(
+            () => {
+                console.log(`[UIManager] Popup lazy '${id}' đã nạp sau ${Date.now() - lazyStartedAt}ms.`);
+                if (!this.isValid || this.pendingPopupOpens.get(id) !== ticket) return;
+                present();
+            },
+            (error: unknown) => {
+                console.error(`[UIManager] Không tải được popup '${id}' từ bundle:`, error);
+                if (!this.isValid || this.pendingPopupOpens.get(id) !== ticket) return;
+                this.pendingPopupOpens.delete(id);
+                this.setPopupLoading(this.pendingPopupOpens.size > 0);
+                onClosed?.();
+            },
+        );
     }
 
     private setPopupLoading(active: boolean): void {

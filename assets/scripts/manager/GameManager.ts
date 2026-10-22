@@ -82,6 +82,7 @@ import { IPuzzleProvider } from '../service/IPuzzleProvider';
 import { SaveManager } from './SaveManager';
 import { Localization } from '../localization/Localization';
 import { L10N } from '../localization/LocalizationKeys';
+import { ScreenPreparer } from '../ui/screenPreparer';
 
 const { ccclass } = _decorator;
 
@@ -192,6 +193,16 @@ export class GameManager extends Component {
 
         this.subscribe();
         this.checkPendingTournamentResult();
+        // BUG đã sửa (báo lỗi của user, kèm ảnh: "thắng level 10 rồi thoát game trước khi bấm popup
+        // kích hoạt — vào lại ở level 11 nhưng popup kích hoạt giải đấu không hiện ở Main"):
+        // checkTournamentActivation() trước đây CHỈ được gọi ở 2 nơi — (1) ngay sau khi thắng đúng
+        // level mở Leaderboard, (2) lúc quay lại Home qua onNavigate (NAVIGATE_REQUESTED_EVENT) —
+        // CẢ 2 đều KHÔNG chạy lúc mới mở app (Bootloader gọi thẳng changeState(MainMenu), không qua
+        // onNavigate/sự kiện gì cả) — TournamentActivationPresentation._pending chỉ sống trong bộ
+        // nhớ (không lưu save), nên nếu người chơi thoát app TRƯỚC KHI popup kịp hiện, nó mất sạch
+        // và không có gì gọi lại checkTournamentActivation() ở lần mở app kế tiếp. Gọi thêm Ở ĐÂY
+        // (boot), cùng chỗ với checkPendingTournamentResult() — che hết trường hợp còn thiếu.
+        this.checkTournamentActivation();
     }
 
     private subscribe(): void {
@@ -222,9 +233,60 @@ export class GameManager extends Component {
         return this.progression;
     }
 
+    /** DÙNG ĐỂ TEST — nhảy tới levelId (nút nhập level ở Settings, xem SettingsPopup.
+     * onJumpToLevelEditingEnded()) phải "giả lập" luôn là ĐÃ THẮNG hết các màn TRƯỚC levelId, không
+     * chỉ mở màn chơi đó lên — nếu không, mọi cờ mở khoá phụ thuộc progression.isCompleted() (streak
+     * ở GameConfig.streakUnlockLevel, Leaderboard ở GameConfig.leaderboardUnlockLevel, kích hoạt
+     * giải đấu...) vẫn đứng yên ở trạng thái CŨ, không khớp với level đang test (xác nhận từ user:
+     * "ở level nào thì cũng để test luôn luồng ở level đó"). Ghi THẲNG vào save
+     * (progression.highestLevel) thay vì gọi markCompleted() — hàm đó CHỈ cho đi TỚI, không lùi lại
+     * được (bảo vệ tiến trình chơi thật), nhưng đây là debug nên cần lùi được tự do để test lại cả
+     * những cờ mở khoá đã "qua" trước đó (ví dụ test lại level 1, dù trước đó đã test level 11). */
+    setTestHighestLevel(levelId: number): void {
+        if (!this.progression) return;
+        const highest = Math.max(0, Math.floor(levelId) - 1);
+        SaveManager.instance.playerData.progression.highestLevel = highest;
+        // Đồng bộ NGAY — cùng 2 dòng initSystems() đã làm lúc boot (Global tab đọc localConfig
+        // riêng, không tự theo progression).
+        localConfig.instance.currLevelUnlock = this.progression.completedCount;
+        configuration.instance.setData_LevelCurrentUnlock(this.progression.completedCount);
+
+        // BUG đã sửa (báo lỗi của user, kèm ảnh: "nhảy tới level 10 thắng thì hiện dữ liệu
+        // leaderboard CŨ chứ không phải luồng người chơi mới") — progression chỉ quyết định CỜ MỞ
+        // KHOÁ (isLeaderboardUnlocked()), KHÔNG hề đụng tới dữ liệu Weekly thật (tournamentStartMs/
+        // currWeekScore/bot...) — nếu save đã có sẵn từ lần test TRƯỚC (đã kích hoạt, bot đã leo
+        // hạng...), nhảy lùi progression không tự "xoá" phần đó, nên vẫn thấy leaderboard cũ dù vừa
+        // "mới mở khoá" theo progression. Nhảy tới level CÒN TRƯỚC/ĐÚNG mốc mở Leaderboard thì ép
+        // luôn Weekly về ĐÚNG trạng thái "chưa từng kích hoạt" — mới thật sự test được đúng luồng
+        // "người chơi mới" từ đầu.
+        if (highest < GameConfig.leaderboardUnlockLevel) {
+            LegacyLeaderboardManager.instance?.resetToNeverActivatedForTesting();
+        }
+
+        void SaveManager.instance.persist();
+    }
+
     getDailyService(): DailyPuzzleService {
         if (!this.dailyService) throw new Error('GameManager.initSystems() chưa chạy.');
         return this.dailyService;
+    }
+
+    /** DÙNG ĐỂ TEST — xem DailyPuzzleService.setTestStreakValue(). */
+    setTestStreakValue(value: number): void {
+        this.dailyService?.setTestStreakValue(value);
+        void SaveManager.instance.persist();
+    }
+
+    /** DÙNG ĐỂ TEST — xem DailyPuzzleService.setTestWeekToDaySix(). */
+    setTestWeekToDaySix(): void {
+        this.dailyService?.setTestWeekToDaySix();
+        void SaveManager.instance.persist();
+    }
+
+    /** DÙNG ĐỂ TEST — xem DailyPuzzleService.setTestNotPlayedToday(). */
+    setTestNotPlayedToday(): void {
+        this.dailyService?.setTestNotPlayedToday();
+        void SaveManager.instance.persist();
     }
 
 
@@ -255,6 +317,10 @@ export class GameManager extends Component {
         // thay vì tạo ván mới.
         const resumingSolvedSession =
             payload.to === AppState.Gameplay && this._state !== AppState.Gameplay && this.session !== null;
+        console.log('[DEBUG GameManager] onNavigate:', JSON.stringify({
+            to: payload.to, currentState: this._state, sessionAlive: this.session !== null,
+            resumingSolvedSession, shouldDisposeSession,
+        }));
 
         // PHẢI chạy TRƯỚC changeState() — changeState() bắn APP_STATE_CHANGED_EVENT ĐỒNG BỘ,
         // UIManager.onAppStateChanged (lắng nghe event đó) sẽ tiêu thụ TournamentActivationPresentation/
@@ -275,7 +341,10 @@ export class GameManager extends Component {
             this.disposeSession();
         }
 
-        if (resumingSolvedSession) this.session?.emitReadyAgain();
+        if (resumingSolvedSession) {
+            console.log('[DEBUG GameManager] calling session.emitReadyAgain()');
+            this.session?.emitReadyAgain();
+        }
     };
 
 
@@ -303,10 +372,24 @@ export class GameManager extends Component {
      * onNavigate's resumingSolvedSession). Session sẽ bị huỷ SAU, khi người chơi thật sự
      * rời Gameplay (qua popup Result/DailyResult).
      */
-    private enterStreakScreen(): void {
+    enterStreakScreen(): void {
         this.changeState(AppState.DailyStreak);
     }
 
+
+    /**
+     * Đợi puzzle của màn ĐẦU TIÊN người chơi sắp vào tải + parse + cache xong: tutorial nếu chưa xem, ngược lại
+     * level campaign hiện tại. Bootloader gọi lúc boot để bấm Chơi/vào tutorial KHÔNG còn phải đợi tải màn.
+     * (initSystems() đã preload nhưng không ai đợi nó xong; load() ở đây nhận lại đúng promise đó rồi cache.)
+     */
+    async warmFirstPuzzle(): Promise<void> {
+        const seenTutorial = SaveManager.instance.playerData.hasSeenTutorial;
+        if (seenTutorial) {
+            await this.puzzleProvider.load('campaign', resolveCampaignPuzzleDataId(this.getProgression().getCurrentLevel()));
+        } else {
+            await this.puzzleProvider.load('tutorial', 0);
+        }
+    }
 
     startTutorial(): void {
         void this.startPuzzle('tutorial', 0).catch((error: unknown) => {
@@ -335,7 +418,12 @@ export class GameManager extends Component {
         // đúng lúc load xong nên bị giật vài khung hình lúc bấm sang màn tiếp theo.
         this.disposeSession();
 
-        const puzzle = await this.puzzleProvider.load(context, dataId);
+        // Song song với tải puzzle: đảm bảo prefab GameplayScreen (bundle lazy) ĐÃ nạp xong TRƯỚC khi đổi state,
+        // để màn được dựng đồng bộ ở changeState() và kịp nhận sự kiện bắt đầu màn (xem screenPreparer.ts).
+        const [puzzle] = await Promise.all([
+            this.puzzleProvider.load(context, dataId),
+            ScreenPreparer.prepare(AppState.Gameplay),
+        ]);
 
         const playerData = SaveManager.instance.playerData;
         const puzzleDate = context === 'daily' ? today() : null;
@@ -413,7 +501,24 @@ export class GameManager extends Component {
         // hay không, tránh phải đoán qua đua timer với STREAK_REDIRECT_DELAY bên dưới.
         // "Thêm lại luồng kích hoạt giải đấu và chuỗi vào ConnectTracks, giữ đúng thứ tự" (xác nhận
         // từ user) — bỏ loại trừ connectTracksInline, Streak áp dụng chung cho mọi context.
-        if (firstToday) StreakPresentation.requestCelebrate();
+        // "Streak mở ở level 5, thắng xong level 5 thì các hoạt động liên quan Streak mới kích
+        // hoạt" (xác nhận từ user) — isStreakUnlocked() đọc progression TRƯỚC KHI handleCampaignSolved()
+        // (bên dưới) chạy, nên CHÍNH lần thắng level 5 này phải tự tính thêm (payload.puzzleId ===
+        // streakUnlockLevel), không chỉ dựa vào progression đã lưu từ TRƯỚC đó.
+        const wasStreakUnlocked = this.isStreakUnlocked();
+        const justUnlockedStreak = !wasStreakUnlocked
+            && payload.context === 'campaign' && payload.puzzleId === GameConfig.streakUnlockLevel;
+        const streakUnlocked = wasStreakUnlocked || justUnlockedStreak;
+        // BUG đã sửa (báo lỗi của user: "sau khi thắng màn 5 thắp chuỗi không hiện"): recordActivity()
+        // ở trên luôn chạy NGAY TỪ ĐẦU, kể cả trước khi mở khoá Streak — nếu người chơi đã thắng màn
+        // 1-4 CÙNG ngày với lúc thắng màn 5 (ca rất thường gặp khi test liền 1 mạch), firstToday đã
+        // bị "dùng hết" ở màn 1 (lúc Streak CHƯA mở), nên tới màn 5 firstToday luôn = false, NẾU chỉ
+        // dựa vào `firstToday && streakUnlocked` thì sẽ KHÔNG BAO GIỜ kích hoạt được, phải đợi sang
+        // NGÀY HÔM SAU mới có firstToday mới — sai với ý "thắng xong màn 5 thì kích hoạt". Lần MỞ
+        // KHOÁ ĐẦU TIÊN (justUnlockedStreak) phải tự kích hoạt NGAY, bất kể firstToday hôm đó đã
+        // dùng hay chưa — dữ liệu chuỗi (data.streak) vẫn đã được recordActivity() tính đúng từ đầu
+        // dù UI chưa từng hiện, nên hiện celebrate ở đây vẫn hiện ĐÚNG số ngày đã tích luỹ.
+        if (streakUnlocked && (firstToday || justUnlockedStreak)) StreakPresentation.requestCelebrate();
 
         if (payload.context === 'campaign') {
             // ConnectTracks cung cấp leaderboardScore RIÊNG (số ô đường ray của màn, xem
@@ -437,14 +542,18 @@ export class GameManager extends Component {
         // mới chuyển màn, tránh chuyển màn NGAY lúc tim còn đang bay dở trên Gameplay. CHƯA mở
         // Leaderboard (group tim không chạy, không có gì để đợi): giữ nguyên mốc cũ — đợi hoạt
         // ảnh đặt chó cuối cùng chạy xong (STREAK_REDIRECT_DELAY).
-        if (firstToday) {
+        if (streakUnlocked && (firstToday || justUnlockedStreak)) {
             this.unschedule(this.enterStreakScreenDeferred);
             if (payload.presentation === 'connectTracksInline') {
-                // ConnectTracks đã tự chạy xong TOÀN BỘ hoạt ảnh thắng riêng (marks fade/sao bay
-                // vào rail/đưa bàn vào giữa) TRƯỚC KHI notifyConnectTracksWon() được gọi — không
-                // còn gì phải đợi thêm nữa, nên KHÔNG dùng timer heart-fly/đặt chó của Dogdoku (vốn
-                // vô nghĩa ở đây, ConnectTracks không bắn HEART_FLY_FINISHED_EVENT bao giờ).
-                this.scheduleOnce(this.enterStreakScreenDeferred, 0);
+                // BUG đã sửa (báo lỗi của user — "lỗi màn streak ở level 1 chưa khắc phục, phải đợi
+                // board di chuyển ra giữa + dừng 0.3s rồi mới hiện streak"): notifyConnectTracksWon()
+                // giờ bắn PUZZLE_SOLVED_EVENT NGAY lúc thắng (TRƯỚC khi ConnectTracksVictoryView
+                // chạy animation ăn mừng), không phải SAU khi animation xong như comment cũ ở đây
+                // từng mô tả — hẹn giờ 0 ở đây làm màn Streak hiện ĐÈ LÊN animation (board/sao/0.3s)
+                // còn đang chạy dở. KHÔNG tự hẹn giờ chuyển màn ở đây nữa — chỉ đặt cờ
+                // StreakPresentation (đã làm ở trên); UIManager.notifyConnectTracksReadyForTrain()
+                // (gọi bởi GameplayScreen ĐÚNG lúc animation ăn mừng thật sự xong) sẽ tự gọi
+                // enterStreakScreen() vào đúng lúc.
             } else if (this.isLeaderboardUnlocked()) {
                 this.awaitingHeartFlyForStreak = true;
                 this.scheduleOnce(this.enterStreakScreenDeferred, STREAK_HEART_FLY_FALLBACK_SECONDS);
@@ -477,6 +586,10 @@ export class GameManager extends Component {
         // không liên quan gì tới bot ở đó. Người chơi thật KHÔNG mất/thêm điểm khi thua, nhưng
         // bot vẫn có % tăng điểm riêng theo đúng cột "user lose" trong bảng thiết kế (trước đây
         // bot đứng yên hoàn toàn khi người chơi thua).
+        // BUG đã sửa (cùng loại với phần Weekly của addCurrWeekScore() — "bảng Weekly phải đứng
+        // yên hoàn toàn trước khi kích hoạt giải đấu"): phần Weekly bên trong addLoseAttempt() giờ
+        // tự kiểm tra hasTournamentActivated() (xem đó) — vẫn gọi VÔ ĐIỀU KIỆN ở đây vì hàm đó CÒN
+        // cập nhật bot Global (không có khái niệm kích hoạt), vẫn phải chạy dù Weekly chưa kích hoạt.
         if (payload.context === 'campaign') {
             LegacyLeaderboardManager.instance?.addLoseAttempt();
         }
@@ -512,6 +625,12 @@ export class GameManager extends Component {
         // thống hoàn toàn khác với LeaderboardManager (assets/scripts/gameplay/leaderboard/) ở
         // dưới đây. Không có cầu nối này thì thắng bao nhiêu màn cũng KHÔNG cập nhật màn hình
         // Leaderboard người chơi thực sự nhìn thấy (điểm/hạng đứng yên mãi).
+        // BUG đã sửa (báo lỗi của user, kèm ảnh: "vừa mở Leaderboard ra đã lên Top 1 dù chưa bấm
+        // kích hoạt giải đấu" — game gốc CHỈ tính điểm Weekly kể từ lúc bấm kích hoạt, không tính
+        // các màn chơi TRƯỚC đó): phần Weekly (currWeekScore + bot Weekly) bên trong
+        // addCurrWeekScore() giờ tự kiểm tra hasTournamentActivated() (xem đó) — KHÔNG gate cả hàm
+        // ở đây nữa, vì addCurrWeekScore() CÒN cập nhật Global (không có khái niệm kích hoạt) + gửi
+        // điểm lên PGS, vẫn phải chạy BÌNH THƯỜNG dù giải đấu Weekly chưa kích hoạt.
         // Chụp điểm TRƯỚC/SAU để LeaderboardPreviewPopup (popup leo hạng hiện sau khi thắng màn)
         // biết hạng cũ/mới mà animate — phải chụp Ở ĐÂY vì đây là nơi DUY NHẤT gọi addCurrWeekScore().
         // Điểm tuần = số TIM CÒN LẠI lúc thắng (Dogdoku, 0..GameConfig.maxMistakes) HOẶC số ô đường
@@ -522,11 +641,9 @@ export class GameManager extends Component {
         const newWeekScore = LegacyLeaderboardManager.instance?.getLeaderboardCurrWeekScore() ?? oldWeekScore;
         // CHỈ hiện popup leo hạng cho người chơi ĐÃ MỞ ĐƯỢC Leaderboard (isLeaderboardUnlocked() —
         // thắng xong level GameConfig.leaderboardUnlockLevel, cùng điều kiện nút Leaderboard hiện
-        // ở Main Menu) VÀ đã KÍCH HOẠT giải đấu (hasTournamentActivated() — true ngay từ đầu với
-        // người chơi cũ đã có sẵn tournamentStartMs, chỉ false với người chơi hoàn toàn mới CHƯA
-        // từng bấm "Got it"/"Claim" hay popup TournamentActivationPopup lần nào). Người chơi chưa
-        // mở Leaderboard thấy popup leo hạng/kích hoạt sẽ rất khó hiểu (chưa biết Leaderboard là
-        // gì, bảng Weekly cũng đang "đứng yên hoàn toàn" — xem checkWeekRollover()).
+        // ở Main Menu) VÀ đã KÍCH HOẠT giải đấu (hasTournamentActivated()) — chưa kích hoạt thì
+        // oldWeekScore===newWeekScore (addCurrWeekScore() tự không cộng gì cho Weekly), leo hạng
+        // không có ý nghĩa gì để hiện popup.
         if (this.isLeaderboardUnlocked() && LegacyLeaderboardManager.instance?.hasTournamentActivated()) {
             LeaderboardPreviewPresentation.request(oldWeekScore, newWeekScore);
         }
@@ -669,7 +786,7 @@ export class GameManager extends Component {
             score: localScoreFallback,
             rank: result.entries.length + 1,
         };
-        return { entries: [...result.entries, myEntry], total: result.total };
+        return { entries: result.entries.concat([myEntry]), total: result.total };
     }
 
     /** Gửi 1 analytics event tuỳ ý lên backend — không tự gọi ở đâu, các nơi cần tự gọi khi có event thật. */
@@ -811,6 +928,13 @@ export class GameManager extends Component {
      * này để chặn tập trung 1 chỗ, tránh phải nhớ thêm điều kiện riêng ở từng nơi. */
     private isLeaderboardUnlocked(): boolean {
         return this.progression?.isCompleted(GameConfig.leaderboardUnlockLevel) ?? false;
+    }
+
+    /** true khi người chơi đã THẮNG XONG level GameConfig.streakUnlockLevel — cùng điều kiện nút
+     * Streak hiện ra ở Main Menu (xem MainMenuScreen.refresh()). Chặn tập trung ở đây để mọi nơi
+     * kích hoạt luồng Streak (StreakPresentation.requestCelebrate()) đều đồng nhất 1 điều kiện. */
+    private isStreakUnlocked(): boolean {
+        return this.progression?.isCompleted(GameConfig.streakUnlockLevel) ?? false;
     }
 
     /**

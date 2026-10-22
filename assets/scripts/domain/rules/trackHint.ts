@@ -37,8 +37,8 @@ export function findTrackHint(board: Board, truth: SolutionTruth, phaseB: boolea
         return expected !== null && actual.length === 2 && expected.every(d => actual.includes(d));
     };
     const hint = (rule: TrackHint['rule'], action: TrackHint['action'], targets: number[], lifted: number[], text: string, directions: readonly Direction[] = []): TrackHint => Object.freeze({
-        rule, action, targets: Object.freeze([...targets]), lifted: Object.freeze([...new Set(lifted)]),
-        directions: Object.freeze([...directions]), text, error: rule === 'A0' || rule === 'B1-wrong',
+        rule, action, targets: Object.freeze(targets.slice()), lifted: Object.freeze(Array.from(new Set(lifted))),
+        directions: Object.freeze(directions.slice()), text, error: rule === 'A0' || rule === 'B1-wrong',
     });
     if (phaseB) {
         const previews = cells.filter(c => !given(c) && board.stateAt(c) === S.TrackPreview);
@@ -50,7 +50,7 @@ export function findTrackHint(board: Board, truth: SolutionTruth, phaseB: boolea
                     && (given(n) ? board.mainTrack.portsAt(n) : board.linksAt(n)).includes(oppositeOf(d));
             })) continue;
             const dirs = truth.correctDirectionsAt(c);
-            if (dirs) return hint('B1-preview', 'shape', [c], [c, ...marks(c)],
+            if (dirs) return hint('B1-preview', 'shape', [c], [c].concat(marks(c)),
                 'Đường ray phải nối với các ô liền kề, nên hướng của nó đã rõ', dirs);
         }
         // No invented fallback that changes a shaped track while previews still remain.
@@ -67,10 +67,8 @@ export function findTrackHint(board: Board, truth: SolutionTruth, phaseB: boolea
         const n = near(c, d);
         if (n !== null && empty(n)) return hint('A1', 'preview', [n], [c, n], 'Đường ray phải nối vào đây, nên ô này là đường ray');
     }
-    const lines = [
-        ...Array.from({ length: height }, (_, row) => cells.filter(c => Math.floor(c / width) === row)),
-        ...Array.from({ length: width }, (_, col) => cells.filter(c => c % width === col)),
-    ];
+    const lines = Array.from({ length: height }, (_, row) => cells.filter(c => Math.floor(c / width) === row))
+        .concat(Array.from({ length: width }, (_, col) => cells.filter(c => c % width === col)));
     const clue = (line: number[]) => line.filter(c => truth.isSolutionCell(c)).length;
     for (const line of lines) {
         const targets = line.filter(empty);
@@ -84,7 +82,7 @@ export function findTrackHint(board: Board, truth: SolutionTruth, phaseB: boolea
         const ns = dirs.map(d => near(c, d)!);
         if (!ns.some(track)) continue;
         const target = ns.find(empty);
-        if (target !== undefined) return hint('A3', 'preview', [target], [c, ...marks(c), target], 'Mọi hướng khác đều bị chặn, nên đường ray phải nối vào đây.');
+        if (target !== undefined) return hint('A3', 'preview', [target], [c].concat(marks(c), [target]), 'Mọi hướng khác đều bị chặn, nên đường ray phải nối vào đây.');
     }
     for (const line of lines) {
         const targets = line.filter(empty);
@@ -93,7 +91,7 @@ export function findTrackHint(board: Board, truth: SolutionTruth, phaseB: boolea
             return hint('A4', 'preview', targets, line, 'Để đạt con số của hàng, các ô còn lại phải là đường ray.');
     }
     for (const c of cells.filter(empty)) if (open(c).length === 1)
-        return hint('A5', 'markX', [c], [c, ...marks(c)], 'Ô này chỉ có một kết nối nên không thể là đường ray.');
+        return hint('A5', 'markX', [c], [c].concat(marks(c)), 'Ô này chỉ có một kết nối nên không thể là đường ray.');
     for (const line of lines) {
         if (clue(line) - line.filter(track).length !== 1) continue;
         for (const c of line.filter(empty)) {

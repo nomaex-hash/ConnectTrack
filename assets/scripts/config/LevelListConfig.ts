@@ -86,6 +86,13 @@ export function resolveCampaignPuzzleDataId(displayLevel: number): number {
  * cứ mỗi 10 level là 1 level khó (30, 40, 50, ...), lặp lại vô hạn kể cả sau khi displayLevel
  * vượt quá campaignLevelCount (vòng lặp endless vẫn tính trên displayLevel).
  */
+let hardLevelIds: ReadonlySet<number> = new Set<number>();
+
+/** Gán metadata hard đọc từ ConnectTrackData. Không còn suy ra theo chu kỳ số level. */
+export function setHardLevelIds(levelIds: readonly number[]): void {
+    hardLevelIds = new Set<number>(levelIds);
+}
+
 export function isHardLevel(displayLevel: number): boolean {
-    return displayLevel >= 30 && (displayLevel - 30) % 10 === 0;
+    return hardLevelIds.has(displayLevel);
 }

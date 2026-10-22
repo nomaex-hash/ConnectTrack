@@ -38,11 +38,16 @@ vi.mock('cc', () => {
     }
     class UITransform { contentSize = { width: 720, height: 1280 }; anchorPoint = { x: .5, y: .5 }; setContentSize() {} setAnchorPoint() {} }
     class Button { static EventType = { CLICK: 'click' }; node = new Node('next'); interactable = true; isValid = true; }
+    class ChainableTween {
+        to() { return this; } delay() { return this; } call(fn?: () => void) { fn?.(); return this; } start() { return this; }
+    }
     return {
         _decorator: { ccclass: () => (target: unknown) => target, property: () => () => {} },
         Node, Vec3, UITransform, Button, Component: class { node = new Node('sequence'); },
-        UIOpacity: class { opacity = 255; }, Widget: class {}, Label: class {}, Prefab: class {},
+        UIOpacity: class { opacity = 255; }, Widget: class {}, Label: class {}, Prefab: class {}, Font: class {},
+        Color: class { constructor(public r = 0, public g = 0, public b = 0, public a = 255) {} },
         BlockInputEvents: class {}, MotionStreak: class {}, ParticleSystem: class {}, sp: { Skeleton: class {} },
+        tween: vi.fn(() => new ChainableTween()), Tween: class { static stopAllByTarget() {} },
         instantiate: vi.fn(() => new Node('star')), isValid: (item: any) => !!item && item.isValid !== false, warn: vi.fn(),
     };
 });
@@ -120,18 +125,36 @@ describe('victory sequence with mocked Cocos', () => {
         expect(conversion).toHaveBeenCalledTimes(1);
         expect(worldWrites).not.toHaveBeenCalled();
     });
-    it('fades each sleeper from 0 to 131 and back to 0 before hiding', async () => {
+    it('runs 1 continuous wave spanning multiple cells at once, then clears all glow', async () => {
         const { view, board } = setup();
         (view as any).board = board;
-        view.glowPulseSeconds = .2;
-        const pulse = (view as any).pulseRail(0, 0);
-        expect(board.setRailGlow).toHaveBeenLastCalledWith(0, true, 0);
-        view.update(.1);
-        expect(board.setRailGlow).toHaveBeenLastCalledWith(0, true, 131);
-        view.update(.1);
-        expect(board.setRailGlow).toHaveBeenLastCalledWith(0, true, 0);
-        await pulse;
-        expect(board.setRailGlow).toHaveBeenLastCalledWith(0, false);
+        // Mỗi ô tự chạy 1 chu kỳ fade-out ĐỘC LẬP dài railGlowSeconds, trễ theo thứ tự trong path
+        // (i * waveCellSeconds) — railGlowSeconds > waveCellSeconds (0.3 > 0.1) khiến các ô liền kề
+        // chồng lấp thời gian chạy, TỰ KHẮC tạo ra >1 ô sáng cùng lúc, không cần "cửa sổ" cố định.
+        view.railGlowSeconds = .3;
+        const path = [0, 1, 2, 3, 4, 5];
+        const wave = (view as any).playRailWave(path, 0, .1);
+
+        // Giữa sóng, MỘT khung hình phải thắp sáng NHIỀU ô cùng lúc (khác hẳn kiểu pulse cũ, mỗi ô
+        // tự chạy độc lập) — kiểm tra ít nhất 1 frame có >1 ô active=true cùng lúc.
+        let sawMultiCellFrame = false;
+        for (let i = 0; i < 90; i++) {
+            const before = board.setRailGlow.mock.calls.length;
+            view.update(.01);
+            const litCells = new Set(
+                board.setRailGlow.mock.calls.slice(before)
+                    .filter((call: unknown[]) => call[1] === true)
+                    .map((call: unknown[]) => call[0]),
+            );
+            if (litCells.size > 1) sawMultiCellFrame = true;
+            await Promise.resolve(); await Promise.resolve();
+        }
+        expect(sawMultiCellFrame).toBe(true);
+
+        await wave;
+        for (const cell of path) {
+            expect(board.setRailGlow).toHaveBeenCalledWith(cell, false);
+        }
     });
 
     it('flies to the count Label world position rather than the RailGroup origin', async () => {
@@ -159,9 +182,11 @@ describe('victory sequence with mocked Cocos', () => {
         expect(board.setRailGlow).not.toHaveBeenCalled();
         await advance(view, 25);
         expect(board.setVictoryMarksFade).toHaveBeenLastCalledWith(1);
-        expect(board.setRailGlow).toHaveBeenCalledWith(0, true, 0);
+        // Sóng glow liên tục (playRailWave) đã bắt đầu chạy — chi tiết hình dạng sóng (nhiều ô
+        // sáng cùng lúc, độ sáng theo khoảng cách) được test riêng ở "runs 1 continuous wave...".
+        expect(board.setRailGlow).toHaveBeenCalled();
         expect(completed).not.toHaveBeenCalled();
-        await advance(view, 240);
+        await advance(view, 360);
         expect(view.railLabel!.string).toBe('7');
         expect(view.railGroup!.active).toBe(false);
         expect(hud.active).toBe(false);
@@ -216,7 +241,7 @@ describe('victory sequence with mocked Cocos', () => {
         const { view, board, completed, next, begin } = setup();
         view.starPrefab = null;
         expect(begin()).toBe(true);
-        await advance(view, 260);
+        await advance(view, 400);
         expect(view.railLabel!.string).toBe('7');
         expect((view as any).flights.size).toBe(0);
         expect(board.playVictoryTrain).toHaveBeenCalledTimes(1);

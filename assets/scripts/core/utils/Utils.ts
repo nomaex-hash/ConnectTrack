@@ -27,7 +27,7 @@ export default class Utils {
     };
 
     public static shuffleNumbers(numbers: number[]): number[] {
-        const result = [...numbers];
+        const result = numbers.slice();
         for (let i = result.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [result[i], result[j]] = [result[j], result[i]];
@@ -518,11 +518,10 @@ export default class Utils {
     //     }
     // }
 
-    static formatString(s: string, ...arg: string[]) {
-
-        for (var i = 0; i < arg.length; i++) {
-            var reg = new RegExp("\\{" + i + "\\}", "gm");
-            s = s.replace(reg, arg[i]);
+    static formatString(s: string) {
+        for (var i = 1; i < arguments.length; i++) {
+            var reg = new RegExp("\\{" + (i - 1) + "\\}", "gm");
+            s = s.replace(reg, arguments[i]);
         }
         return s;
     }

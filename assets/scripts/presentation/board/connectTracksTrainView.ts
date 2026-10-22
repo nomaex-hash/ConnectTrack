@@ -23,26 +23,40 @@ export class ConnectTracksTrainView extends Component {
     private cars: Node[] = [];
 
     @property({
+        min: 0.01,
         tooltip:
-            'Tốc độ THẤP NHẤT (px/giây) — áp dụng khi đường ray NGẮN (ít ô). Tốc độ tàu không cố ' +
-            'định: tỉ lệ theo số ô đường ray, đường dài hơn referenceTrackCellsForMaxSpeed thì chạy ' +
-            'đúng bằng maxSpeedPxPerSecond, ngắn hơn thì giảm dần về mức này.',
+            'Tốc độ THẤP NHẤT, tính theo SỐ Ô/giây (KHÔNG còn px/giây — xác nhận từ user: cố định ' +
+            'px/giây khiến board nhiều ô/board ít ô (cellSize khác nhau) chạy nhìn nhanh/chậm khác ' +
+            'nhau) — áp dụng khi đường ray NGẮN (ít ô). Tốc độ tàu không cố định: tỉ lệ theo số ô ' +
+            'đường ray, đường dài hơn referenceTrackCellsForMaxSpeed thì chạy đúng bằng ' +
+            'maxSpeedCellsPerSecond, ngắn hơn thì giảm dần về mức này. Nhân với cellSize THẬT của ' +
+            'CHÍNH màn đang chơi (tham số cellSize của play()) ra px/giây thật sự dùng để di chuyển — ' +
+            'cùng 1 số ô/giây luôn mất CÙNG 1 khoảng thời gian đi hết 1 ô bất kể board to hay nhỏ.',
     })
-    private minSpeedPxPerSecond = 150;
+    private minSpeedCellsPerSecond = 2;
 
-    @property({ tooltip: 'Tốc độ CAO NHẤT (px/giây) — áp dụng khi đường ray đủ DÀI (xem referenceTrackCellsForMaxSpeed).' })
-    private maxSpeedPxPerSecond = 320;
+    @property({ min: 0.01, tooltip: 'Tốc độ CAO NHẤT, tính theo SỐ Ô/giây — áp dụng khi đường ray đủ DÀI (xem referenceTrackCellsForMaxSpeed). Cùng cách quy đổi ra px/giây như minSpeedCellsPerSecond.' })
+    private maxSpeedCellsPerSecond = 4.5;
 
     @property({
         tooltip:
             'Số ô đường ray (từ cổng vào tới lối ra) ứng với tốc độ CAO NHẤT. Đường ray có ít ô hơn ' +
-            'mức này thì tốc độ giảm dần tuyến tính về minSpeedPxPerSecond; nhiều ô hơn vẫn giữ nguyên ' +
-            'maxSpeedPxPerSecond (không tăng thêm nữa).',
+            'mức này thì tốc độ giảm dần tuyến tính về minSpeedCellsPerSecond; nhiều ô hơn vẫn giữ ' +
+            'nguyên maxSpeedCellsPerSecond (không tăng thêm nữa).',
     })
     private referenceTrackCellsForMaxSpeed = 20;
 
-    @property({ tooltip: 'Khoảng cách tâm đầu tàu tới toa đầu (đơn vị Board). Các toa sau tự điều chỉnh theo chiều dài đã scale để giữ cùng khoảng hở.' })
+    @property({ tooltip: 'Khoảng cách GIỮA 2 TOA liên tiếp (đơn vị Board, từ toa thứ 2 trở đi) — KHÔNG áp dụng cho khoảng từ đầu tàu tới toa đầu, xem engineCarSpacing. Tự điều chỉnh theo chiều dài đã scale để giữ cùng khoảng hở.' })
     private carSpacing = 70;
+
+    @property({
+        tooltip:
+            'Khoảng cách RIÊNG từ đầu tàu tới toa đầu tiên (đơn vị Board) — tách khỏi carSpacing ' +
+            'để chỉnh được độc lập (xác nhận từ user: toa mới thêm không bám sát đầu tàu như các ' +
+            'toa còn lại, do kích thước toa đó khác các toa kia làm khoảng hở tính lệch). Mặc định ' +
+            'bằng carSpacing.',
+    })
+    private engineCarSpacing = 70;
 
     @property({ min: 1, tooltip: 'Kích thước cell tham chiếu (đơn vị Board) khi thiết kế tàu. Cell thực tế bằng giá trị này thì giữ scale đã chỉnh trong Editor; cell nhỏ/lớn hơn thì toàn bộ tàu co/phóng theo tỷ lệ. Mặc định 100.' })
     private referenceCellSize = 100;
@@ -84,6 +98,21 @@ export class ConnectTracksTrainView extends Component {
             'cùng áp dụng cho cả đầu tàu lẫn toa vì chúng dùng chung 1 bộ art xoay theo hướng đi.',
     })
     private angleOffset = 0;
+
+    @property({
+        min: 0,
+        tooltip:
+            'Tốc độ quay TỐI ĐA của đầu tàu/toa (độ/giây) khi hướng đi đổi đột ngột (vào khúc cua) — ' +
+            '0 = TẮT làm mượt, xoay "cứng" khớp ngay hướng đường ray như cũ (không có độ trễ). Số ' +
+            'càng NHỎ thì xoay càng chậm/mượt (tàu "rẽ" từ từ thay vì xoay góc tức thì). KHÔNG áp ' +
+            'dụng cho khói (smoke luôn bám chính xác hướng đường ray để offset không bị lệch).',
+    })
+    private maxTurnDegreesPerSecond = 0;
+
+    /** Góc hiện tại (độ) của TỪNG node đang được làm mượt — chỉ dùng khi maxTurnDegreesPerSecond > 0.
+     * Reset mỗi lần play() (qua updatePoses(null) lúc đó) để không mang góc cũ từ lần chạy TRƯỚC
+     * sang, tránh tàu "xoay ngược" từ hướng của lần thắng trước về hướng ban đầu của lần này. */
+    private currentAngleByNode = new Map<Node, number>();
 
     @property({
         type: ParticleSystem,
@@ -131,6 +160,13 @@ export class ConnectTracksTrainView extends Component {
      * `onFinished`: gọi ĐÚNG 1 LẦN khi toa cuối cùng đã đi hết polyline (tàu biến mất hẳn) — dùng
      * để mở ResultPopup CHỈ SAU KHI tàu chạy xong (xác nhận từ user: đây là điều kiện thắng DUY
      * NHẤT mà người chơi thấy, không phải lúc GameSession chuyển Won).
+     *
+     * `cellSize`: kích thước 1 ô (đơn vị LOCAL của board) CỦA CHÍNH màn đang chơi — BUG đã sửa
+     * (báo lỗi của user: "board nhiều ô tàu chạy rất nhanh, board ít ô tàu đi chậm"): tốc độ KHÔNG
+     * còn tính bằng px/giây cố định nữa (dễ lệch vì cellSize/scale khác nhau tuỳ board) mà tính
+     * bằng SỐ Ô/giây (minSpeedCellsPerSecond/maxSpeedCellsPerSecond) rồi NHÂN với cellSize của
+     * CHÍNH màn này ra px/giây local thật sự dùng để di chuyển — cùng 1 số ô/giây luôn mất CÙNG 1
+     * khoảng thời gian đi hết 1 ô bất kể board to hay nhỏ, không cần biết/bù scale hiển thị nữa.
      */
     play(polyline: readonly Point[], trackCellCount: number, onFinished?: () => void, pathSpace?: Node, cellSize = this.referenceCellSize): void {
         this.pathSpace = pathSpace ?? this.node;
@@ -154,9 +190,21 @@ export class ConnectTracksTrainView extends Component {
         const ratio = this.referenceTrackCellsForMaxSpeed > 0
             ? Math.min(1, Math.max(0, trackCellCount / this.referenceTrackCellsForMaxSpeed))
             : 1;
-        this.currentSpeedPxPerSecond =
-            (this.minSpeedPxPerSecond + (this.maxSpeedPxPerSecond - this.minSpeedPxPerSecond) * ratio)
+        const speedCellsPerSecond =
+            (this.minSpeedCellsPerSecond + (this.maxSpeedCellsPerSecond - this.minSpeedCellsPerSecond) * ratio)
             * this.speedMultiplierOverride;
+        const effectiveCellSize = Number.isFinite(cellSize) && cellSize > 0 ? cellSize : this.referenceCellSize;
+        this.currentSpeedPxPerSecond = speedCellsPerSecond * effectiveCellSize;
+
+        // LOG TẠM ĐỂ DEBUG (theo yêu cầu user — xem tốc độ tàu tuỳ theo từng màn) — xoá sau khi xác
+        // nhận speedCellsPerSecond (số ô/giây) giống nhau giữa các màn mà vẫn nhìn tốc độ hợp lý,
+        // dù currentSpeedPxPerSecond (local px/giây thật sự dùng để di chuyển) khác nhau tuỳ cellSize.
+        console.log('[DEBUG ConnectTracksTrainView] play():', JSON.stringify({
+            trackCellCount, cellSize: effectiveCellSize, speedCellsPerSecond,
+            currentSpeedPxPerSecond: this.currentSpeedPxPerSecond,
+            totalDistanceLocal: this.totalDistance,
+            estimatedRunSeconds: this.currentSpeedPxPerSecond > 0 ? this.totalDistance / this.currentSpeedPxPerSecond : null,
+        }));
 
         // stop() rồi play() lại (không chỉ play()) — an toàn khi play() được gọi lại (Restart rồi
         // thắng lần nữa) trong lúc khói cũ vẫn còn đang phát dở, giống pattern ConnectTracksVictoryView.
@@ -186,7 +234,7 @@ export class ConnectTracksTrainView extends Component {
             return;
         }
         this.traveled += this.currentSpeedPxPerSecond * dt;
-        this.updatePoses();
+        this.updatePoses(dt);
         if (this.traveled > this.totalDistance) {
             this.running = false;
             this.node.active = false;
@@ -197,10 +245,14 @@ export class ConnectTracksTrainView extends Component {
         }
     }
 
-    private updatePoses(): void {
-        this.applyPose(this.engine, this.traveled);
+    /** `dt`: null khi gọi NGAY lúc play() bắt đầu (đặt pose khởi tạo, xoay "cứng" tức thì, KHÔNG
+     * làm mượt — đồng thời seed lại currentAngleByNode đúng góc ban đầu, xoá sạch góc cũ từ lần
+     * chạy TRƯỚC); số giây trôi qua khi gọi từ update() mỗi khung hình (có làm mượt nếu
+     * maxTurnDegreesPerSecond > 0). */
+    private updatePoses(dt: number | null = null): void {
+        this.applyPose(this.engine, this.traveled, dt);
         this.cars.forEach((car, index) => {
-            this.applyPose(car, this.traveled - this.carOffsets[index]);
+            this.applyPose(car, this.traveled - this.carOffsets[index], dt);
         });
         this.applySmokePose();
     }
@@ -237,7 +289,7 @@ export class ConnectTracksTrainView extends Component {
     }
 
     private buildCarOffsets(): number[] {
-        const lengths = [this.engine, ...this.cars].map((node) => {
+        const lengths = [this.engine].concat(this.cars).map((node) => {
             const ui = node?.getComponent(UITransform);
             if (!node || !ui || !this.pathSpace) return 0;
             const angle = this.angleOffset * Math.PI / 180;
@@ -247,10 +299,17 @@ export class ConnectTracksTrainView extends Component {
                 + Math.abs(Math.sin(angle)) * ui.height * Math.abs(scale.y);
             return length / Math.max(1e-6, Math.abs(boardScale.x));
         });
-        const spacing = Math.max(0, this.carSpacing) * this.cellScaleFactor;
-        const gap = spacing - ((lengths[0] ?? 0) + (lengths[1] ?? 0)) / 2;
         let offset = 0;
         return this.cars.map((_, index) => {
+            // BUG đã sửa (báo lỗi của user: "toa mới thêm không chạy theo đầu tàu như các toa còn
+            // lại") — trước đây `gap` chỉ tính 1 LẦN từ cặp (đầu tàu, toa đầu) rồi DÙNG CHUNG cho
+            // mọi cặp toa khác, nên toa nào có kích thước khác 2 toa đầu tiên sẽ bị lệch khoảng hở
+            // thực tế. Giờ tính `gap` RIÊNG cho TỪNG cặp — cặp (đầu tàu, toa đầu) dùng
+            // engineCarSpacing (property riêng, xác nhận từ user), các cặp (toa, toa) sau dùng
+            // carSpacing như cũ.
+            const spacingSetting = index === 0 ? this.engineCarSpacing : this.carSpacing;
+            const spacing = Math.max(0, spacingSetting) * this.cellScaleFactor;
+            const gap = spacing - ((lengths[index] ?? 0) + (lengths[index + 1] ?? 0)) / 2;
             // Missing visual dimensions fall back to the authored centre spacing.
             const separation = lengths[index] > 0 && lengths[index + 1] > 0
                 ? Math.max(0, (lengths[index] + lengths[index + 1]) / 2 + gap)
@@ -260,7 +319,7 @@ export class ConnectTracksTrainView extends Component {
         });
     }
 
-    private applyPose(node: Node | null, distance: number): void {
+    private applyPose(node: Node | null, distance: number, dt: number | null): void {
         if (!node || !this.polyline) {
             return;
         }
@@ -270,10 +329,14 @@ export class ConnectTracksTrainView extends Component {
             return;
         }
         node.active = true;
-        this.applyTransform(node, pose.point, pose.angleDeg);
+        this.applyTransform(node, pose.point, pose.angleDeg, dt);
     }
 
-    private applyTransform(node: Node, point: Point, angleDeg: number): void {
+    /** `dt`: null = xoay "cứng" tức thì theo `angleDeg` (dùng cho smoke — luôn bám CHÍNH XÁC hướng
+     * đường ray, xem applySmokePose() — và cho pose khởi tạo lúc play() vừa bắt đầu). Số giây = làm
+     * mượt góc quay của chính `node`, giới hạn tối đa maxTurnDegreesPerSecond độ/giây, đi theo
+     * chiều NGẮN HƠN (xem shortestAngleDelta) — maxTurnDegreesPerSecond <= 0 vẫn xoay cứng như cũ. */
+    private applyTransform(node: Node, point: Point, angleDeg: number, dt: number | null = null): void {
         const source = this.pathSpace;
         if (!source || !node.parent) return;
         const radians = angleDeg * Math.PI / 180;
@@ -285,6 +348,29 @@ export class ConnectTracksTrainView extends Component {
         node.setPosition(localPosition);
         // pose.angleDeg (atan2) và node.angle của Cocos CÙNG quy ước: dương = ngược kim đồng hồ,
         // 0° = hướng +X (phải) — cộng thẳng angleOffset, không cần đổi dấu.
-        node.angle = Math.atan2(localAhead.y - localPosition.y, localAhead.x - localPosition.x) * 180 / Math.PI + this.angleOffset;
+        const targetAngle = Math.atan2(localAhead.y - localPosition.y, localAhead.x - localPosition.x) * 180 / Math.PI + this.angleOffset;
+        node.angle = this.smoothedAngle(node, targetAngle, dt);
+    }
+
+    private smoothedAngle(node: Node, targetAngle: number, dt: number | null): number {
+        if (dt === null || this.maxTurnDegreesPerSecond <= 0) {
+            this.currentAngleByNode.set(node, targetAngle);
+            return targetAngle;
+        }
+        const current = this.currentAngleByNode.get(node) ?? targetAngle;
+        const maxDelta = this.maxTurnDegreesPerSecond * dt;
+        const delta = ConnectTracksTrainView.shortestAngleDelta(current, targetAngle);
+        const next = current + Math.max(-maxDelta, Math.min(maxDelta, delta));
+        this.currentAngleByNode.set(node, next);
+        return next;
+    }
+
+    /** Hiệu số góc NGẮN HƠN từ `from` tới `to`, luôn trong khoảng (-180, 180] — tránh tàu xoay
+     * "vòng xa" (vd 179° -> -179° lẽ ra chỉ cần xoay 2°, không phải gần 360°). */
+    private static shortestAngleDelta(from: number, to: number): number {
+        let delta = (to - from) % 360;
+        if (delta > 180) delta -= 360;
+        if (delta < -180) delta += 360;
+        return delta;
     }
 }

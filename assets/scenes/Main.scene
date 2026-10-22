@@ -608,60 +608,27 @@
       "__expectedType__": "cc.Prefab"
     },
     "levelSelectScreen": null,
-    "gameplayScreen": {
-      "__uuid__": "5560034e-0acb-449d-8813-a60e2163acb0",
-      "__expectedType__": "cc.Prefab"
-    },
-    "dailyStreakScreen": {
-      "__uuid__": "a410f01c-291a-41b4-b363-4fa92f628bb3",
-      "__expectedType__": "cc.Prefab"
-    },
+    "gameplayScreen": null,
+    "dailyStreakScreen": null,
     "pausePopup": null,
-    "resultPopup": {
-      "__uuid__": "8ecc5404-e05c-48b2-bf4a-bc75fc080d4d",
-      "__expectedType__": "cc.Prefab"
-    },
-    "dailyResultPopup": {
-      "__uuid__": "b895aac4-cf3a-493f-ac5a-2294c306ca71",
-      "__expectedType__": "cc.Prefab"
-    },
+    "resultPopup": null,
+    "dailyResultPopup": null,
     "settingsPopup": {
       "__uuid__": "986aadce-2dd3-41f2-b62a-af6260ab9e2b",
       "__expectedType__": "cc.Prefab"
     },
-    "howToPlayPopup": {
-      "__uuid__": "3198916a-d1f2-4415-a334-4639ba29bf1b",
-      "__expectedType__": "cc.Prefab"
-    },
+    "howToPlayPopup": null,
     "rewardPopup": {
       "__uuid__": "31d9d0c2-a5a5-4a3a-8dd5-d3f8374a8b6c",
       "__expectedType__": "cc.Prefab"
     },
     "starterPackPopup": null,
-    "leaderboardPreviewPopup": {
-      "__uuid__": "8901d0fb-fcca-4d18-88b2-f19c04aa534d",
-      "__expectedType__": "cc.Prefab"
-    },
-    "tournamentResultPopup": {
-      "__uuid__": "fadd3373-fa24-4ddc-a2ae-7ecb56ae1631",
-      "__expectedType__": "cc.Prefab"
-    },
-    "tournamentResetPopup": {
-      "__uuid__": "1e62ef41-631c-4afe-bad1-c235424e9f7e",
-      "__expectedType__": "cc.Prefab"
-    },
-    "tournamentActivationPopup": {
-      "__uuid__": "1e62ef41-631c-4afe-bad1-c235424e9f7e",
-      "__expectedType__": "cc.Prefab"
-    },
-    "leaderboardPopup": {
-      "__uuid__": "59bcf00a-942e-4616-8e37-2e62aa5a9f3c",
-      "__expectedType__": "cc.Prefab"
-    },
-    "connectTracksLosePopup": {
-      "__uuid__": "8ecc5404-e05c-48b2-bf4a-bc75fc080d4d",
-      "__expectedType__": "cc.Prefab"
-    },
+    "leaderboardPreviewPopup": null,
+    "tournamentResultPopup": null,
+    "tournamentResetPopup": null,
+    "tournamentActivationPopup": null,
+    "leaderboardPopup": null,
+    "connectTracksLosePopup": null,
     "_id": "0dOhYKOOxGRIoniy6xs4ld"
   },
   {

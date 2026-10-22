@@ -166,7 +166,7 @@
     "_preview": true,
     "_fadeTime": 0.2,
     "_minSeg": 1,
-    "_stroke": 60,
+    "_stroke": 30,
     "_texture": {
       "__uuid__": "14d86008-50dc-4d7f-a9c3-df56c60f182a@6c48a",
       "__expectedType__": "cc.Texture2D"
@@ -364,6 +364,7 @@
       "__id__": 0
     },
     "fileId": "c46/YsCPVOJYA4mWEpNYRx",
-    "instance": null
+    "instance": null,
+    "targetOverrides": null
   }
 ]

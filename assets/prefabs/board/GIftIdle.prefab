@@ -510,15 +510,9 @@
     },
     "playOnLoad": false,
     "_clips": [
-      {
-        "__uuid__": "8209d30d-8e5e-4530-9729-6750eaa121b2",
-        "__expectedType__": "cc.AnimationClip"
-      }
+      null
     ],
-    "_defaultClip": {
-      "__uuid__": "8209d30d-8e5e-4530-9729-6750eaa121b2",
-      "__expectedType__": "cc.AnimationClip"
-    },
+    "_defaultClip": null,
     "_id": ""
   },
   {

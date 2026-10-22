@@ -1358,7 +1358,7 @@ export class BoardView extends Component implements DogSpineProvider {
                     cellIndex,
                     boardSize: this.boardSize,
                     frameIntervalsMs: frames,
-                    worstIntervalMs: Math.max(...frames),
+                    worstIntervalMs: Math.max.apply(Math, frames),
                     totalMs: Math.round(now - started),
                 });
             }
@@ -1786,7 +1786,7 @@ export class BoardView extends Component implements DogSpineProvider {
     private getLineWaveSteps(axis: 'row' | 'col', index: number, triggerRow: number, triggerCol: number): number[][] {
         const triggerCell = triggerRow * this.boardSize + triggerCol;
         const rest = this.lineWaveOrder(axis, index, triggerRow, triggerCol).filter((cell) => cell !== triggerCell);
-        return [[triggerCell], ...rest.map((cell) => [cell])];
+        return [[triggerCell]].concat(rest.map((cell) => [cell]));
     }
 
     /** Thứ tự các ô hàng/cột cho hiệu ứng sóng — bắt đầu từ ô GẦN sprite Clear nhất (CÙNG cạnh
@@ -1932,7 +1932,7 @@ export class BoardView extends Component implements DogSpineProvider {
     /** Danh sách bước sóng cho vùng/màu (bước 0 là CHÍNH ô trigger — "tâm sóng"). Tách riêng khỏi
      * spawnRegionClearEffect() cùng lý do getLineWaveSteps(). */
     private getRegionWaveSteps(cell: number, region: number): number[][] {
-        return [[cell], ...this.regionWaveGroups(region, cell)];
+        return [[cell]].concat(this.regionWaveGroups(region, cell));
     }
 
     /** Gộp 2 danh sách bước sóng (hàng/cột + vùng/màu, mỗi cái đã có ô trigger ở bước 0) thành

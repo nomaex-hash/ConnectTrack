@@ -317,10 +317,55 @@ export class LeaderboardPreviewManager extends Component {
      * lúc climb đang chạy (applySlotDataInstant) — đó không phải "lần đầu mở". */
     private pendingAvatarLoads: Promise<void>[] = [];
 
-    /** LeaderboardPreviewPopup.onShow() đợi Promise này rồi mới hideLoading() — xem play(). */
+    /** Callback ĐỒNG BỘ, gọi NGAY TRONG CÙNG lệnh .then() của Promise.all(pendingAvatarLoads) — tham
+     * khảo ĐÚNG pattern readyCallbacks/onReady() của LeaderboardGroupWeek/LeaderboardTabGroupManager
+     * (xác nhận từ user: "loading ở leaderboardPreview hãy tham khảo cách load của leaderboard") —
+     * KHÔNG để LeaderboardPreviewPopup tự thêm 1 lớp `.then()` RIÊNG của chính nó bọc ra ngoài nữa
+     * (đúng BUG đã sửa ở LeaderboardPopup trước đây: mỗi lớp `.then()` lồng thêm là +1 microtask trễ
+     * so với lúc dữ liệu thật sự sẵn sàng — "icon loading vẫn xoay nhưng nội dung đã hiện" chính là
+     * hệ quả của độ trễ dồn lại đó). Reset mỗi lần play() chạy lại, CÙNG lúc với pendingAvatarLoads. */
+    private avatarReadyCallbacks: (() => void)[] = [];
+
+    /** @deprecated BUG đã sửa (xác nhận từ user — lặp lại đúng bug "icon loading tắt trễ/sai nhịp"
+     * đã gặp và sửa ở LeaderboardTabGroupManager.whenLeaderboardReady()): dùng onAvatarsReady()
+     * (callback đồng bộ) thay vào đó — Promise trả về đây LUÔN trễ thêm 1 microtask so với lúc
+     * avatarReadyCallbacks thật sự chạy, vì mọi `.then()` của CHÍNH caller lại cộng thêm 1 microtask
+     * nữa. Giữ lại chỉ để không phá vỡ chỗ nào lỡ còn gọi trực tiếp. */
     whenAvatarsReady(): Promise<void> {
-        return Promise.all(this.pendingAvatarLoads).then(() => {});
+        return new Promise(resolve => this.onAvatarsReady(resolve));
     }
+
+    /** Đăng ký callback ĐỒNG BỘ, chạy CÙNG lệnh với lúc toàn bộ pendingAvatarLoads của lần play()
+     * GẦN NHẤT đã tải xong hết — xem avatarReadyCallbacks. Gọi NGAY nếu không còn gì đang tải (vd
+     * play() vừa return sớm do thiếu node bắt buộc). */
+    onAvatarsReady(callback: () => void): void {
+        if (this.pendingAvatarLoads.length === 0) {
+            callback();
+            return;
+        }
+        this.avatarReadyCallbacks.push(callback);
+    }
+
+    /** Gọi ĐÚNG 1 LẦN khi Promise.all(pendingAvatarLoads) của lần play() hiện tại resolve — xem
+     * play(). Tự bỏ qua nếu 1 lần play() MỚI đã chạy đè lên (so sánh snapshot mảng) trước khi lần
+     * CŨ kịp tải xong, tránh gọi callback của phiên đã lỗi thời. */
+    private resolveAvatarsReady(snapshot: Promise<void>[]): void {
+        if (this.pendingAvatarLoads !== snapshot) return;
+        const callbacks = this.avatarReadyCallbacks;
+        this.avatarReadyCallbacks = [];
+        for (const callback of callbacks) callback();
+    }
+
+    @property({
+        type: [Node],
+        tooltip:
+            'CÁC NODE PHẢI ẨN HẲN (active=false) cho tới khi avatar/frame đã tải xong và ổn định — ' +
+            'y hệt hideUntilLoaded của LeaderboardTabGroupManager (xác nhận từ user: "ở leaderboard ' +
+            'có 1 property là hide until loaded, thêm 1 cái giống hệt cho leaderboardPreview"). Tự ' +
+            'ẩn NGAY lúc play() bắt đầu, tự hiện lại NGAY lúc onAvatarsReady() báo đã tải xong hết ' +
+            '(callback ĐỒNG BỘ, không qua Promise — cùng lý do với onAvatarsReady()).',
+    })
+    hideUntilLoaded: Node[] = [];
 
     private rows: Map<number, RankRow> = new Map();
     private pool: Node[] = [];
@@ -583,7 +628,12 @@ export class LeaderboardPreviewManager extends Component {
      */
     play(oldScore: number, newScore: number, onDone: () => void): void {
         this.pendingAvatarLoads = [];
+        this.avatarReadyCallbacks = [];
+        for (const node of this.hideUntilLoaded) if (node) node.active = false;
         if (!this.scrollView || !this.contentGroup || !this.itemPrefab || !LegacyLeaderboardManager.instance) {
+            // Không có gì để tải cả — hiện lại NGAY, không có gì sẽ gọi onAvatarsReady() để tự hiện
+            // lại nữa (pendingAvatarLoads mãi mãi rỗng, nhưng không ai đăng ký callback ở nhánh này).
+            for (const node of this.hideUntilLoaded) if (node) node.active = true;
             onDone();
             return;
         }
@@ -641,6 +691,17 @@ export class LeaderboardPreviewManager extends Component {
         this.climbing = true;
         this.buildAnimationWindow(oldRank, newRank, startsInTopSlots);
 
+        // pendingAvatarLoads đã dựng XONG HẲN (đồng bộ, buildTopSlots + buildAnimationWindow ở trên
+        // đều push THẲNG trong cùng lệnh gọi play() này, không qua await/scheduleOnce nào) — snapshot
+        // NGAY tại đây rồi gắn .then() DUY NHẤT gọi thẳng resolveAvatarsReady(), không còn lớp
+        // .then() nào khác lồng thêm ở nơi khác (xem onAvatarsReady()/avatarReadyCallbacks).
+        const avatarLoadsSnapshot = this.pendingAvatarLoads;
+        Promise.all(avatarLoadsSnapshot).then(() => this.resolveAvatarsReady(avatarLoadsSnapshot));
+        this.onAvatarsReady(() => {
+            if (!this.isValid) return;
+            for (const node of this.hideUntilLoaded) if (node) node.active = true;
+        });
+
         // Dòng "tôi" trong ScrollView (KHÔNG áp dụng khi startsInTopSlots — xem ghi chú ở trên)
         // ban đầu hiện số tim CŨ và THỨ HẠNG CŨ (oldRank) — trước đây dòng vừa dựng lên đã hiện sẵn
         // newRank dù còn đứng ở vị trí cũ (info gán cho hàng vốn đã là dữ liệu hạng mới). Số tim
@@ -668,7 +729,17 @@ export class LeaderboardPreviewManager extends Component {
             }
         };
 
-        this.scheduleOnce(() => {
+        // "Node track bay vào ô điểm chỉ được kích hoạt khi các node ở hideUntilLoaded hiện lên"
+        // (xác nhận từ user) — trước đây CHỈ đợi initialHoldSeconds (hẹn giờ cố định), độc lập hoàn
+        // toàn với việc avatar/frame đã tải xong hay chưa. Nếu tải chậm hơn initialHoldSeconds, icon
+        // ray sẽ bắt đầu bay NGAY TRONG LÚC nội dung vẫn còn ẩn (hideUntilLoaded chưa active=true) —
+        // trông như bay vào khoảng trống/đè lên nội dung chưa kịp hiện. Giờ đợi CẢ 2 điều kiện: hết
+        // initialHoldSeconds VÀ onAvatarsReady() đã báo xong — cái nào xong SAU mới là mốc bắt đầu
+        // thật sự.
+        let holdElapsed = false;
+        let avatarsReady = false;
+        const tryStartHeartGainPhase = (): void => {
+            if (!holdElapsed || !avatarsReady || !this.isValid) return;
             this.runHeartGainPhase(scoreTargetNode, setScore, oldScore, newScore, () => {
                 if (climbedRanks <= 0) {
                     this.finishClimb(onDone);
@@ -683,7 +754,9 @@ export class LeaderboardPreviewManager extends Component {
                 if (playerRow) this.startMoveParticle(playerRow);
                 this.runLiftPhase(oldRank, newRank, climbedRanks, enteringTop3, onDone);
             });
-        }, this.initialHoldSeconds);
+        };
+        this.scheduleOnce(() => { holdElapsed = true; tryStartHeartGainPhase(); }, this.initialHoldSeconds);
+        this.onAvatarsReady(() => { avatarsReady = true; tryStartHeartGainPhase(); });
     }
 
     /** Bục TOP3 tĩnh: hiện TRẠNG THÁI CŨ (trước lần thắng này) lúc vừa mở popup NẾU `showOld=true`

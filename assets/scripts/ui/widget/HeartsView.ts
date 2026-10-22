@@ -43,6 +43,20 @@ export class HeartsView extends Component {
     heartAnimSizeOffset: Vec2 = new Vec2(0, 0);
 
     private readonly overlays: (Node | null)[] = [];
+    /** true từ sau LẦN set() ĐẦU TIÊN — trước đó không có khái niệm "vừa chuyển trạng thái" nào cả,
+     * chỉ đồng bộ tĩnh theo remaining/max hiện tại (xem nhánh !heartStateInitialized bên dưới). */
+    private heartStateInitialized = false;
+    /** BUG đã sửa (báo lỗi của user: "đặt sai, anim tim vỡ đang chạy mà thao tác tiếp thì anim lặp
+     * lại liên tục từ đầu"): trước đây wasFull đọc TRỰC TIẾP overlay.active — nhưng overlay.active
+     * vẫn = true SUỐT lúc clip vỡ đang chạy (chỉ về false ở callback FINISHED của playBreak()), nên
+     * MỌI lần set() gọi lại trong lúc đó (vd do refreshConnectTracksBoard() chạy lại vì bất kỳ thao
+     * tác nào khác của người chơi, không chỉ riêng mistake mới) đều hiểu lầm "tim NÀY lại vừa vỡ
+     * lần nữa", gọi playBreak() đè lên animation đang chạy dở, restart từ đầu — lặp vô hạn tới khi
+     * người chơi ngừng thao tác đủ lâu cho animation chạy hết 1 lần trọn vẹn không bị interrupt.
+     * Theo dõi RIÊNG bằng Set này (chỉ đổi ở ĐÚNG lúc phát hiện chuyển full->mất hoặc mất->full),
+     * độc lập với overlay.active — set() gọi lại khi KHÔNG có gì đổi (index vẫn đang breaking dở)
+     * giờ không chạm gì tới overlay/animation đang chạy nữa. */
+    private readonly lostIndices = new Set<number>();
 
     /** remaining/max: index < remaining = "còn mạng" (overlay ACTIVE, hiện tim đầy); index >= remaining
      * = "đã mất" (overlay tắt, lộ tim rỗng). Tim nào vừa chuyển từ còn→mất (so với lần set() trước)
@@ -54,11 +68,22 @@ export class HeartsView extends Component {
             if (!slot) continue;
             slot.active = i < max;
             if (i >= max) continue;
-            const wasFull = this.overlays[i]?.active ?? false;
             const nowFull = i < remaining;
+
+            if (!this.heartStateInitialized) {
+                // Lần đầu tiên: chỉ đồng bộ tĩnh, không có "chuyển trạng thái" nào để chạy hoạt ảnh.
+                if (nowFull) this.lostIndices.delete(i); else this.lostIndices.add(i);
+                const overlay = this.ensureOverlay(i);
+                if (overlay) overlay.active = nowFull;
+                continue;
+            }
+
+            const wasFull = !this.lostIndices.has(i);
             if (wasFull && !nowFull) {
+                this.lostIndices.add(i);
                 this.playBreak(i); // Overlay tự tắt SAU KHI chạy xong clip vỡ (xem playBreak).
             } else if (!wasFull && nowFull) {
+                this.lostIndices.delete(i);
                 // BUG đã sửa (báo lỗi của user — "bấm chơi lại, tim vẫn chưa được reset"): tim HỒI
                 // PHỤC sau khi đã từng vỡ (restart/revive) — overlay cũ còn ĐỨNG ở frame CUỐI clip
                 // vỡ (Animation.stop() không tự đưa playhead về đầu), chỉ bật lại active=true là
@@ -66,11 +91,11 @@ export class HeartsView extends Component {
                 // (pristine, y hệt lúc ensureOverlay() tạo lần đầu, chưa từng play()) để chắc chắn
                 // về đúng hình "đầy" tĩnh.
                 this.recreateOverlay(i);
-            } else {
-                const overlay = this.ensureOverlay(i);
-                if (overlay) overlay.active = nowFull;
             }
+            // else: không đổi gì so với lần set() trước (kể cả đang breaking dở) — KHÔNG đụng tới
+            // overlay/animation, để animation đang chạy (nếu có) tự chạy tiếp đến hết.
         }
+        this.heartStateInitialized = true;
     }
 
     /** Tạo (lười, 1 lần) bản overlay cho ô `index`, làm con của ĐÚNG ô tim rỗng đó, vị trí (0,0) —
@@ -165,6 +190,10 @@ export class HeartsView extends Component {
             if (!overlay || !overlay.isValid || !overlay.active) continue;
             const position = overlay.getWorldPosition();
             overlay.active = false;
+            // Đồng bộ lostIndices (xem set()) — nếu không, lần set() kế tiếp (level mới, remaining
+            // đầy trở lại) sẽ thấy wasFull/nowFull đều "true" (không phát hiện ra thay đổi) và bỏ
+            // qua, khiến tim vừa "bay đi" này không được recreateOverlay() dựng lại tim đầy.
+            this.lostIndices.add(i);
             return position;
         }
         return null;

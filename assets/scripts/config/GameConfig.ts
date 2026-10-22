@@ -16,9 +16,21 @@ export const GameConfig = {
      * phải isUnlocked — level vừa "mở ra để chơi" thì CHƯA đủ, phải THẮNG xong mới hiện nút). */
     leaderboardUnlockLevel: 10,
 
+    /** Mọi hoạt động liên quan Streak (nút Streak ở Main Menu, màn ăn mừng chuỗi sau khi thắng lần
+     * đầu trong ngày) chỉ kích hoạt SAU KHI thắng xong đúng level này — cùng kiểu isCompleted như
+     * leaderboardUnlockLevel, không phải isUnlocked (xác nhận từ user). */
+    streakUnlockLevel: 5,
+
 
     scoreStreakBaseTier: 450,
     scoreStreakTierStep: 130,
+
+    /** "Đặt đúng đến track thứ 10 thì hiện mức đầu [của praise combo], cứ cách 3 track đúng lại
+     * hiện mức tiếp theo" (xác nhận từ user) — streak (connectTracksScoreStreak) >= praiseStreakStart
+     * VÀ (streak - praiseStreakStart) chia hết cho praiseStreakStep mới kích hoạt
+     * ConnectTracksBoardView.spawnPraiseEffect(), xem GameplayScreen.spawnScorePopupsForTrackChanges(). */
+    praiseStreakStart: 10,
+    praiseStreakStep: 3,
 
   
     scoreSpeedBonusMax: 100,

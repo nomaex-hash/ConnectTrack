@@ -98,6 +98,22 @@ export class ItemLeaderboardBase extends Component {
             pathFrame = ProfileManager.instance.getPathFrame_byID(parseInt(strFrame));
         }
 
+        // BUG đã sửa ("mỗi lần mở lại Leaderboard[Preview] lại phải load, dù ảnh đã cache") — trước
+        // đây LUÔN xoá sprite về null rồi đi qua cả vòng callback/Promise dù ảnh đã nằm sẵn trong
+        // cache (MConfigResourceUtils.mapLoadedAvatars/mapLoadedFrames), gây chớp tắt + icon loading
+        // xoay không cần thiết mỗi lần mở lại. Giờ kiểm tra cache TRƯỚC (đồng bộ, không tải gì) —
+        // nếu CẢ avatar LẪN frame đã có sẵn, gán thẳng luôn, KHÔNG xoá sprite tạm thời, trả về
+        // Promise ĐÃ RESOLVE sẵn (không qua vòng callback/Promise nào nữa). Chỉ rơi xuống luồng tải
+        // bất đồng bộ cũ (có xoá sprite tạm, có thể thấy icon loading) khi THỰC SỰ còn thiếu ảnh nào
+        // đó trong cache.
+        const cachedAvatar = MConfigResourceUtils.peekCachedProfileSpriteFrame(PROFILE_TAB_TYPE.AVATAR, pathAvatar);
+        const cachedFrame = MConfigResourceUtils.peekCachedProfileSpriteFrame(PROFILE_TAB_TYPE.FRAME, pathFrame);
+        if (cachedAvatar && cachedFrame) {
+            if (this.iconAvatar) this.iconAvatar.spriteFrame = cachedAvatar;
+            if (this.iconFrame) this.iconFrame.spriteFrame = cachedFrame;
+            return Promise.resolve();
+        }
+
         if (this.iconAvatar) this.iconAvatar.spriteFrame = null;
         if (this.iconFrame) this.iconFrame.spriteFrame = null;
 

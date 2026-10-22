@@ -1,6 +1,10 @@
 import { _decorator, Component, Node, Prefab } from 'cc';
 import { AppState } from '../core/AppState';
 import { PopupId } from './PopupId';
+import { ResourceManager } from '../manager/ResourceManager';
+import {
+    LAZY_POPUPS, LAZY_PREFETCH_ENABLED, LAZY_PREFETCH_GAP_SECONDS, LAZY_SCREENS, LazyAssetCache, LazyPrefabRef, PREFETCH_ORDER,
+} from './lazyPrefabRegistry';
 
 const { ccclass, property } = _decorator;
 
@@ -67,7 +71,85 @@ export class UIRoot extends Component {
     @property({ type: Prefab, tooltip: 'ConnectTracksLosePopup.prefab — popup thua RIÊNG của ConnectTracks (thay thế ResultPopup cũ cho ConnectTracks), có cụm 3 tim vỡ + nút xem QC hồi sinh + nút chơi lại.' })
     connectTracksLosePopup: Prefab = null!;
 
+    /** Prefab nạp lazy từ bundle (chỉ dùng khi slot tương ứng bên trên BỎ TRỐNG) — xem lazyPrefabRegistry. */
+    private readonly lazyPrefabs = new LazyAssetCache<Prefab>(
+        (ref) => ResourceManager.instance.loadPrefabFromBundle(ref.bundle, ref.path),
+    );
+    private prefetchStarted = false;
+
+    /** Prefab dùng được NGAY (đồng bộ): slot gán trong scene, hoặc bản lazy đã nạp xong. */
     getScreenPrefab(state: AppState): Prefab | null {
+        const slot = this.getScreenSlot(state);
+        if (slot) return slot;
+        const ref = LAZY_SCREENS[state];
+        return ref ? this.lazyPrefabs.get(ref) : null;
+    }
+
+    getPopupPrefab(id: PopupId): Prefab | null {
+        const slot = this.getPopupSlot(id);
+        if (slot) return slot;
+        const ref = LAZY_POPUPS[id];
+        return ref ? this.lazyPrefabs.get(ref) : null;
+    }
+
+    /** Slot trống + có cấu hình lazy + CHƯA nạp: UIManager phải đợi ensureScreenPrefab() trước khi dựng. */
+    needsLazyScreen(state: AppState): boolean {
+        return !this.getScreenPrefab(state) && !!LAZY_SCREENS[state];
+    }
+
+    canLazyLoadPopup(id: PopupId): boolean {
+        return !this.getPopupSlot(id) && !!LAZY_POPUPS[id];
+    }
+
+    async ensureScreenPrefab(state: AppState): Promise<Prefab | null> {
+        const existing = this.getScreenPrefab(state);
+        if (existing) return existing;
+        const ref = LAZY_SCREENS[state];
+        return ref ? this.lazyPrefabs.ensure(ref) : null;
+    }
+
+    async ensurePopupPrefab(id: PopupId): Promise<Prefab | null> {
+        const existing = this.getPopupPrefab(id);
+        if (existing) return existing;
+        const ref = LAZY_POPUPS[id];
+        return ref ? this.lazyPrefabs.ensure(ref) : null;
+    }
+
+    /**
+     * Tải NGẦM (chỉ download, không dựng node) các prefab lazy theo PREFETCH_ORDER, TUẦN TỰ từng cái để
+     * không tranh băng thông với màn đang hiển thị. Gọi 1 lần sau khi màn đầu tiên đã hiện. Mọi lỗi chỉ
+     * cảnh báo — lúc người chơi thật sự mở màn/popup đó, ensure*() sẽ tự tải lại.
+     */
+    prefetchLazy(): void {
+        if (this.prefetchStarted || !LAZY_PREFETCH_ENABLED) return;
+        this.prefetchStarted = true;
+        void (async () => {
+            for (const ref of PREFETCH_ORDER) {
+                if (!this.isValid) return;
+                if (this.lazyPrefabs.get(ref) || this.slotAssignedFor(ref)) continue;
+                try {
+                    await ResourceManager.instance.preloadPrefabFromBundle(ref.bundle, ref.path);
+                } catch (error) {
+                    console.warn(`[UIRoot] Prefetch ${ref.bundle}/${ref.path} thất bại (sẽ tải lại khi cần).`, error);
+                }
+                // Nhường khung hình: không dồn các prefab nặng liên tiếp lên main thread.
+                await new Promise<void>((resolve) => this.scheduleOnce(() => resolve(), LAZY_PREFETCH_GAP_SECONDS));
+            }
+        })();
+    }
+
+    /** true nếu prefab của ref này đang được gán cứng trong 1 slot (không cần tải ngầm). */
+    private slotAssignedFor(ref: LazyPrefabRef): boolean {
+        for (const state of Object.keys(LAZY_SCREENS) as AppState[]) {
+            if (LAZY_SCREENS[state] === ref) return !!this.getScreenSlot(state);
+        }
+        for (const id of Object.keys(LAZY_POPUPS) as PopupId[]) {
+            if (LAZY_POPUPS[id] === ref) return !!this.getPopupSlot(id);
+        }
+        return false;
+    }
+
+    private getScreenSlot(state: AppState): Prefab | null {
         switch (state) {
             case AppState.MainMenu:
                 return this.mainMenuScreen;
@@ -83,7 +165,7 @@ export class UIRoot extends Component {
         }
     }
 
-    getPopupPrefab(id: PopupId): Prefab | null {
+    private getPopupSlot(id: PopupId): Prefab | null {
         switch (id) {
             case PopupId.Pause:
                 return this.pausePopup;

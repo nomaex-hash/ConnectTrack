@@ -4,16 +4,18 @@ const { ccclass, property } = _decorator;
 
 const ICON_SIZE = 56;
 const POP_IN_SECONDS = 0.2;
+const SCATTER_SECONDS = 0.25;
 const FADE_IN_SECONDS = 0.2;
 const PLUS_LABEL_LIFETIME_SECONDS = 1.2;
 
 /**
  * Hiệu ứng icon bay trong LeaderboardPreview — mỗi icon hiện ra TẠI ĐÚNG điểm xuất phát (scale
- * 0→iconScale, opacity 0→255, không còn lệch ngẫu nhiên/bung ra quanh điểm xuất phát như trước —
- * xác nhận từ user: bỏ hẳn pha "bung ra", chỉ còn hiện ra rồi bay thẳng vào đích), chờ 1 nhịp
- * (holdSeconds) rồi bay THẲNG vào đích, kèm nhãn "+N" tại điểm xuất phát. Tách riêng khỏi
- * CoinPoolManager vì component đó gắn chặt với ví vàng (COIN_UPDATE cộng vàng thật khi coin tới
- * đích) — ở đây chỉ báo qua callback để UI tự tăng số điểm hiển thị, KHÔNG đụng dữ liệu gì.
+ * 0→iconScale, opacity 0→255) rồi "bung ra" (bay lệch tới 1 điểm NGẪU NHIÊN trong bán kính
+ * scatterRadius quanh điểm xuất phát, CÙNG LÚC với lúc phóng to — xác nhận từ user: thêm lại hiệu
+ * ứng bung ra đã bỏ trước đó), chờ 1 nhịp (holdSeconds) rồi bay THẲNG vào đích, kèm nhãn "+N" tại
+ * điểm xuất phát GỐC (không bung). Tách riêng khỏi CoinPoolManager vì component đó gắn chặt với ví
+ * vàng (COIN_UPDATE cộng vàng thật khi coin tới đích) — ở đây chỉ báo qua callback để UI tự tăng số
+ * điểm hiển thị, KHÔNG đụng dữ liệu gì.
  */
 @ccclass('LeaderboardHeartFlyEffect')
 export class LeaderboardHeartFlyEffect extends Component {
@@ -46,6 +48,9 @@ export class LeaderboardHeartFlyEffect extends Component {
             'phải scale tĩnh lúc tạo node. 1 = giữ nguyên kích thước gốc ICON_SIZE (56px).',
     })
     iconScale = 1;
+
+    @property({ tooltip: 'Bán kính (world units) icon "bung ra" ngẫu nhiên quanh điểm xuất phát, ngay khi vừa hiện ra, trước khi bay vào đích. 0 = tắt hẳn hiệu ứng bung ra.' })
+    scatterRadius = 40;
 
     @property({ tooltip: 'Khoảng cách thời gian giữa 2 icon liên tiếp (giây).' })
     staggerSeconds = 0.12;
@@ -95,11 +100,21 @@ export class LeaderboardHeartFlyEffect extends Component {
             opacity.opacity = 0;
 
             const appearDelay = i * this.staggerSeconds;
+            const scatterAngle = Math.random() * Math.PI * 2;
+            const scatterDist = Math.random() * this.scatterRadius;
+            const scatterPos = new Vec3(
+                fromWorldPos.x + Math.cos(scatterAngle) * scatterDist,
+                fromWorldPos.y + Math.sin(scatterAngle) * scatterDist,
+                fromWorldPos.z,
+            );
 
             tween(opacity).delay(appearDelay).to(FADE_IN_SECONDS, { opacity: 255 }).start();
             tween(node)
                 .delay(appearDelay)
-                .to(POP_IN_SECONDS, { scale: new Vec3(this.iconScale, this.iconScale, 1) }, { easing: 'backOut' })
+                .parallel(
+                    tween<Node>().to(POP_IN_SECONDS, { scale: new Vec3(this.iconScale, this.iconScale, 1) }, { easing: 'backOut' }),
+                    tween<Node>().to(SCATTER_SECONDS, { worldPosition: scatterPos }, { easing: 'quadOut' }),
+                )
                 .delay(this.holdSeconds)
                 .to(this.flySeconds, { worldPosition: toWorldPos }, { easing: 'quadIn' })
                 .call(() => {

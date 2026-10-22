@@ -53,7 +53,7 @@ export class oneToMultiListener {
         }
     };
 
-    public static dispatchEvent (eventName: string, ...args: any) {
+    public static dispatchEvent (eventName: string, arg1?: any, arg2?: any, arg3?: any, arg4?: any) {
         // if (this.supportEvent !== null && !this.supportEvent.hasOwnProperty(eventName)) {
         //     cc.error("please add the event into clientEvent.js");
         //     return;
@@ -74,7 +74,7 @@ export class oneToMultiListener {
         for (i = 0; i < handlerList.length; i++) {
             const objHandler = handlerList[i];
             if (objHandler.handler) {
-                objHandler.handler.apply(objHandler.target, args);
+                objHandler.handler.apply(objHandler.target, params);
             }
         }
     };

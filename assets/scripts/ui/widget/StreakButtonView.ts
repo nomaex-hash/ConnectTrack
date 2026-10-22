@@ -2,6 +2,8 @@ import { _decorator, Component, Label, Node, Sprite, SpriteFrame, Tween, tween }
 import { DailyServiceHolder } from '../../service/DailyServiceHolder';
 import { Localization } from '../../localization/Localization';
 import { L10N } from '../../localization/LocalizationKeys';
+import { EventManager } from '../../core/EventManager';
+import { LANGUAGE_CHANGED_EVENT } from '../../localization/LocalizationEvents';
 
 const { ccclass, property } = _decorator;
 
@@ -35,14 +37,16 @@ export class StreakButtonView extends Component {
     checkNode: Node | null = null;
 
     onEnable(): void {
+        EventManager.instance.on(LANGUAGE_CHANGED_EVENT, this.refresh, this);
         this.refresh();
     }
 
     onDisable(): void {
+        EventManager.instance.off(LANGUAGE_CHANGED_EVENT, this.refresh, this);
         if (this.glowNode) Tween.stopAllByTarget(this.glowNode);
     }
 
-    refresh(): void {
+    refresh = (): void => {
         const service = DailyServiceHolder.current;
         const streak = service?.streak ?? 0;
 

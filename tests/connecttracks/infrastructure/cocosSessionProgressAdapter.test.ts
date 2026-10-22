@@ -12,10 +12,9 @@ import { TEST_LEVEL } from '../domain/fixtures';
 
 beforeEach(() => { storage.records.clear(); vi.clearAllMocks(); });
 describe('local board saves', () => {
-    it('persists between adapter instances, isolates context/level, and leaves legacy saves alone', () => {
+    it('persists between adapter instances and isolates context/level', () => {
         const adapter = new CocosSessionProgressAdapter();
         const data = new GameSession({ level: TEST_LEVEL, requiredCells: [1, 2, 5] }).exportProgress()!;
-        storage.records.set('dogdoku_save_data', 'legacy');
         adapter.write('campaign:18:', data);
         const reopened = new CocosSessionProgressAdapter();
         expect(reopened.read('campaign:18:')).toEqual(data);
@@ -23,7 +22,7 @@ describe('local board saves', () => {
         expect(reopened.read('campaign:19:')).toBeNull();
         reopened.remove('campaign:18:');
         expect(reopened.read('campaign:18:')).toBeNull();
-        expect(storage.records.get('dogdoku_save_data')).toBe('legacy');
+        expect([...storage.records.keys()]).toEqual(['connecttracks:save:v1']);
     });
     it('handles corrupt JSON and unavailable storage without crashing gameplay', () => {
         const adapter = new CocosSessionProgressAdapter();

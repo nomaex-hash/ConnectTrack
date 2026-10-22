@@ -1,7 +1,9 @@
-import { _decorator, AudioClip, AudioSource, Component, Node } from 'cc';
+import { _decorator, AudioClip, AudioSource, Component, Input, Node, input } from 'cc';
 import { CellState } from '../core/CellState';
 import { GameSnapshot, GamePhase } from '../application/contracts/gameSnapshot';
 import { EventManager } from '../core/EventManager';
+import { AppState } from '../core/AppState';
+import { APP_STATE_CHANGED_EVENT, AppStateChangedEventPayload } from '../event/AppStateChangedEvent';
 import { SETTINGS_CHANGED_EVENT, SettingsChangedEventPayload } from '../event/AppEvents';
 import {
     CELL_CHANGED_EVENT,
@@ -140,6 +142,10 @@ export class AudioManager extends Component {
     private bgmVolume = 1;
     private sfxVolume = 1;
     private isTutorial = false;
+    /** "Nhạc nền vẫn chạy ở tut và boot, khi nào vào main mới mở" (xác nhận từ user) — nhạc nền
+     * KHÔNG được phát trong lúc Boot/tutorial, CHỈ bắt đầu từ lần đầu tiên AppState chuyển sang
+     * MainMenu trở đi (xem onAppStateChanged()/applyBgmState()). */
+    private hasReachedMainMenu = false;
 
     private readonly lastPlayedAt = new Map<AudioClip, number>();
 
@@ -163,12 +169,36 @@ export class AudioManager extends Component {
         bus.on(PUZZLE_FAILED_EVENT, this.onFailed, this);
         bus.on<HintShownEventPayload>(HINT_SHOWN_EVENT, this.onHintShown, this);
         bus.on<ScoreChangedEventPayload>(SCORE_CHANGED_EVENT, this.onScoreChanged, this);
+        bus.on<AppStateChangedEventPayload>(APP_STATE_CHANGED_EVENT, this.onAppStateChanged, this);
+
+        // Trình duyệt web CHẶN audio tự phát khi chưa có "user gesture" (autoplay policy) — gọi
+        // play() mà không hề có thao tác chạm/click nào trước đó coi như bị nuốt mất, không hề phát
+        // ra tiếng, và KHÔNG có gì tự thử lại. Lắng nghe thao tác chạm/click ĐẦU TIÊN trong toàn bộ
+        // app để tự gọi lại applyBgmState() — "mở khoá" audio context ngay khi trình duyệt cho phép.
+        // applyBgmState() tự KHÔNG phát gì nếu hasReachedMainMenu vẫn false (xem field đó), nên
+        // nghe sự kiện này suốt từ Boot không làm nhạc phát sớm hơn lúc vào Main.
+        input.on(Input.EventType.TOUCH_START, this.onFirstGestureUnlockBgm, this);
+        input.on(Input.EventType.MOUSE_DOWN, this.onFirstGestureUnlockBgm, this);
     }
 
     onDestroy(): void {
         EventManager.instance.targetOff(this);
+        input.off(Input.EventType.TOUCH_START, this.onFirstGestureUnlockBgm, this);
+        input.off(Input.EventType.MOUSE_DOWN, this.onFirstGestureUnlockBgm, this);
         if (AudioManager._instance === this) AudioManager._instance = null;
     }
+
+    private onFirstGestureUnlockBgm = (): void => {
+        input.off(Input.EventType.TOUCH_START, this.onFirstGestureUnlockBgm, this);
+        input.off(Input.EventType.MOUSE_DOWN, this.onFirstGestureUnlockBgm, this);
+        this.applyBgmState();
+    };
+
+    private onAppStateChanged = (payload: AppStateChangedEventPayload): void => {
+        if (payload.to !== AppState.MainMenu || this.hasReachedMainMenu) return;
+        this.hasReachedMainMenu = true;
+        this.applyBgmState();
+    };
 
 
     applyVolume(settings: { bgmVolume: number; sfxVolume: number }): void {
@@ -180,7 +210,9 @@ export class AudioManager extends Component {
 
     /**
      * Đồng bộ nhạc nền với âm lượng hiện tại: >0 thì phát (lặp), =0 thì DỪNG hẳn
-     * (đỡ tốn pin thay vì phát câm). Không có clip thì bỏ qua.
+     * (đỡ tốn pin thay vì phát câm). Không có clip thì bỏ qua. "Nhạc nền vẫn chạy ở tut và boot,
+     * khi nào vào main mới mở" (xác nhận từ user) — CHƯA từng vào MainMenu (hasReachedMainMenu
+     * false, xem onAppStateChanged()) thì KHÔNG phát, bất kể bgmVolume > 0 hay đã có gesture chưa.
      */
     private applyBgmState(): void {
         const source = this.bgmSource;
@@ -188,7 +220,7 @@ export class AudioManager extends Component {
 
         source.volume = this.bgmVolume;
 
-        if (this.bgmVolume > 0) {
+        if (this.hasReachedMainMenu && this.bgmVolume > 0) {
             if (!source.playing) source.play();
         } else if (source.playing) {
             source.stop();
@@ -219,6 +251,13 @@ export class AudioManager extends Component {
         // Tắt âm thanh "vào bàn/spawn" riêng cho MỌI tutorial (xác nhận từ user) — các âm thanh
         // khác (track, hint, thắng...) không đổi, vẫn phát bình thường trong tutorial.
         if (this.isTutorial) return;
+        // BUG đã sửa (báo lỗi của user: "từ màn thắp chuỗi về campaign nghe thấy âm thanh spawn
+        // cell dù board không hề được tạo lại") — payload.instant=true nghĩa là board hiện lại
+        // ĐÚNG trạng thái cũ (vd quay lại Gameplay từ Streak), KHÔNG hề chạy lại hiệu ứng
+        // scale/stagger "spawn" từng ô (xem comment payload.instant ở PuzzleEvents.ts và guard
+        // tương tự ở GameplayScreen.onPuzzleReady) — âm thanh "vào bàn" phải bỏ qua trong trường
+        // hợp này, không có gì để báo hiệu cả.
+        if (payload.instant) return;
         this.play(this.boardEnterClip);
     };
 

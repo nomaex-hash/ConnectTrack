@@ -1,7 +1,7 @@
 import { expect, it, vi } from 'vitest';
 vi.mock('cc', () => ({
     _decorator: { ccclass: () => (t: unknown) => t, property: () => () => {} },
-    Component: class {}, NodePool: class {}, Color: class {}, Graphics: class {}, Label: class {},
+    Component: class {}, NodePool: class {}, Color: class {}, Graphics: class {}, Label: class {}, Font: class {},
     Node: class {}, Prefab: class {}, UIOpacity: class {}, UITransform: class {}, Tween: class {},
     Vec3: class {
         x = 0; y = 0; z = 0;
@@ -11,6 +11,7 @@ vi.mock('cc', () => ({
 }));
 vi.mock('../../../assets/scripts/presentation/board/connectTracksCellView', () => ({ APPEAR_DURATION: .2, ConnectTracksCellView: class {} }));
 vi.mock('../../../assets/scripts/presentation/board/connectTracksTrainView', () => ({ ConnectTracksTrainView: class {} }));
+vi.mock('../../../assets/scripts/presentation/board/connectTracksPraiseEffect', () => ({ ConnectTracksPraiseEffect: class {} }));
 import { ConnectTracksBoardView } from '../../../assets/scripts/presentation/board/connectTracksBoardView';
 
 function setup() {

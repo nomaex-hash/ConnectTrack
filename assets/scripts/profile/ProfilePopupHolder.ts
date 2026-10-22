@@ -98,10 +98,8 @@ export class ProfilePopupHolder extends Component {
         try {
             const manager = ProfileManager.instance;
             if (!manager || !this.profileEditPopupPrefab) throw new Error('Profile chưa sẵn sàng.');
-            const assets = [
-                ...manager.avatarDataDetails.map(entry => ({ type: PROFILE_TAB_TYPE.AVATAR, path: manager.getPathAvatar_byID(entry.Id), cache: MConfigResourceUtils.mapLoadedAvatars })),
-                ...manager.frameDataDetails.map(entry => ({ type: PROFILE_TAB_TYPE.FRAME, path: manager.getPathFrame_byID(entry.Id), cache: MConfigResourceUtils.mapLoadedFrames })),
-            ];
+            const assets = manager.avatarDataDetails.map(entry => ({ type: PROFILE_TAB_TYPE.AVATAR, path: manager.getPathAvatar_byID(entry.Id), cache: MConfigResourceUtils.mapLoadedAvatars }))
+                .concat(manager.frameDataDetails.map(entry => ({ type: PROFILE_TAB_TYPE.FRAME, path: manager.getPathFrame_byID(entry.Id), cache: MConfigResourceUtils.mapLoadedFrames })));
             const missing = assets.filter(asset => !isValid(asset.cache.get(asset.path), true));
             if (missing.length) {
                 this.showLoading();

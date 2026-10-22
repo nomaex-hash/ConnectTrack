@@ -2,7 +2,43 @@ import { _decorator, BlockInputEvents, Color, Component, Graphics, Node, RichTex
 import { TrackHint } from '../../domain/rules/trackHint';
 import { trackOrientationOf } from './trackOrientation';
 import { ConnectTracksBoardView } from './connectTracksBoardView';
+import { Localization } from '../../localization/Localization';
+import { L10N } from '../../localization/LocalizationKeys';
 const { ccclass, property } = _decorator;
+
+/** BUG đã sửa (báo lỗi của user: "bấm hint ở tut thì text hướng dẫn lại là tiếng việt" dù máy đang
+ * để tiếng Anh) — TrackHint.text (domain/rules/trackHint.ts) hardcode thẳng tiếng Việt, không qua
+ * Localization. Domain chỉ còn dùng để GIẢI THÍCH LOGIC qua `rule`; text hiển thị thật PHẢI map
+ * qua đây, không được đọc thẳng hint.text nữa. Rule A8 không có text hiển thị (áp dụng thẳng, xem
+ * ConnectTracksTutorialController) nên không cần key. */
+function hintRuleText(rule: TrackHint['rule']): string {
+    switch (rule) {
+        case 'A0': return Localization.get(L10N.connectTracksHint.removeX);
+        case 'A1': return Localization.get(L10N.connectTracksHint.trackAtEdge);
+        case 'A2': return Localization.get(L10N.connectTracksHint.lineComplete);
+        case 'A3': return Localization.get(L10N.connectTracksHint.onlyOpenDirection);
+        case 'A4': return Localization.get(L10N.connectTracksHint.lineNeedsRest);
+        case 'A5': return Localization.get(L10N.connectTracksHint.deadEnd);
+        case 'A6': return Localization.get(L10N.connectTracksHint.wouldExceed);
+        case 'B1-preview': return Localization.get(L10N.connectTracksHint.shapeFromNeighbor);
+        case 'B1-wrong': return Localization.get(L10N.connectTracksHint.shapeWrong);
+        case 'A8': return '';
+    }
+}
+
+/** `cells` tạo thành ĐÚNG 1 hàng hoặc 1 cột trọn vẹn (không thiếu/thừa ô nào) — dùng để biết khi
+ * nào cần hiện lineClueHighlightLabel của board (Hint A2/A4/A5 có thể nhấc nguyên 1 hàng/cột). */
+function detectFullLine(cells: readonly number[], width: number, height: number): { axis: 'row' | 'column'; line: number } | null {
+    if (cells.length === width) {
+        const row = Math.floor(cells[0]! / width);
+        if (cells.every((c) => Math.floor(c / width) === row)) return { axis: 'row', line: row };
+    }
+    if (cells.length === height) {
+        const col = cells[0]! % width;
+        if (cells.every((c) => c % width === col)) return { axis: 'column', line: col };
+    }
+    return null;
+}
 
 /** Screen overlay only; decisions and mutations are supplied by GameSession. */
 @ccclass('ConnectTracksHintView')
@@ -45,6 +81,8 @@ export class ConnectTracksHintView extends Component {
     private layer: Node | null = null;
     private hiddenTracks: { board: ConnectTracksBoardView; cells: readonly number[] } | null = null;
     private lifted: { node: Node; parent: Node; index: number; position: Vec3; scale: Vec3 }[] = [];
+    /** Board đang hiện Hint này — chỉ để gọi hideLineClueHighlight() đúng board lúc close(). */
+    private liftedBoard: ConnectTracksBoardView | null = null;
     private apply: (() => void) | null = null;
     private dismiss: (() => void) | null = null;
     get showing(): boolean { return this.layer !== null; }
@@ -101,6 +139,10 @@ export class ConnectTracksHintView extends Component {
             board.setHintTracksHidden(hint.targets, true);
         }
         this.apply = apply; this.dismiss = dismiss;
+        this.liftedBoard = board;
+        const fullLine = detectFullLine(hint.lifted, width, height);
+        if (fullLine) board.showLineClueHighlight(fullLine.axis, fullLine.line, layer);
+        else board.hideLineClueHighlight();
         // Capture every index before reparenting any cell.
         this.lifted = nodes.map(n => ({ node: n!, parent: n!.parent!, index: n!.getSiblingIndex(),
             position: n!.position.clone(), scale: n!.scale.clone() }));
@@ -181,7 +223,12 @@ export class ConnectTracksHintView extends Component {
             }
             targetGraphics.stroke();
         }
-        this.textLabel.string = hint.text;
+        // BUG đã sửa (báo lỗi của user, kèm ảnh chụp): viền xanh (targetBorderNode) phải nổi TRÊN
+        // line xám ngăn cách ô (cellSeparatorWidth) — trước đây ép borders.setSiblingIndex(-1) đẩy
+        // line xám lên TRÊN CÙNG, cắt ngang/đè lên viền xanh ở đúng cạnh chung giữa 2 ô target. Thứ
+        // tự tạo node TỰ NHIÊN đã đúng rồi (borders tạo TRƯỚC viền xanh ở trên) — không cần (và
+        // không được) ép lại sibling index nữa.
+        this.textLabel.string = hintRuleText(hint.rule);
         this.content.active = true; this.content.setSiblingIndex(-1);
         this.setApplyVisible(true);
         return true;
@@ -197,6 +244,8 @@ export class ConnectTracksHintView extends Component {
     onTapCancel(): void { this.close(); }
     close(notify = true): void {
         const dismiss = this.dismiss; this.apply = null; this.dismiss = null;
+        if (this.liftedBoard && isValid(this.liftedBoard, true)) this.liftedBoard.hideLineClueHighlight();
+        this.liftedBoard = null;
         if (this.hiddenTracks && isValid(this.hiddenTracks.board, true))
             this.hiddenTracks.board.setHintTracksHidden(this.hiddenTracks.cells, false);
         this.hiddenTracks = null;

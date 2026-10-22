@@ -8,7 +8,7 @@
     "__uuid__": "d1346436-ac96-4271-b863-1f4fdead95b0",
     "__expectedType__": "cc.EffectAsset"
   },
-  "_techIdx": 0,
+  "_techIdx": 1,
   "_defines": [
     {},
     {}
@@ -36,7 +36,7 @@
   "_props": [
     {
       "mainTexture": {
-        "__uuid__": "b5348bca-3468-4118-b6d2-40075f54f1ad@6c48a",
+        "__uuid__": "4423145a-ce0d-49b5-b761-a00d241b574e@6c48a",
         "__expectedType__": "cc.Texture2D"
       }
     },

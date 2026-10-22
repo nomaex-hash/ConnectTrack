@@ -3,12 +3,13 @@ vi.mock('cc', () => ({
     _decorator: { ccclass: () => (t: unknown) => t, property: () => () => {} },
     Component: class {}, NodePool: class {},
     Color: class { constructor(public r = 0, public g = 0, public b = 0, public a = 255) {} },
-    Graphics: class {}, Label: class {}, Node: class {}, Prefab: class {},
+    Graphics: class {}, Label: class {}, Node: class {}, Prefab: class {}, Font: class {},
     UIOpacity: class {}, UITransform: class {}, Vec3: class {}, Tween: class {},
     isValid: (value: any, strict: boolean) => !!value && value.isValid !== false && !(strict && value.destroying),
 }));
 vi.mock('../../../assets/scripts/presentation/board/connectTracksCellView', () => ({ APPEAR_DURATION: .2, ConnectTracksCellView: class {} }));
 vi.mock('../../../assets/scripts/presentation/board/connectTracksTrainView', () => ({ ConnectTracksTrainView: class {} }));
+vi.mock('../../../assets/scripts/presentation/board/connectTracksPraiseEffect', () => ({ ConnectTracksPraiseEffect: class {} }));
 import { Color } from 'cc';
 import { ConnectTracksBoardView } from '../../../assets/scripts/presentation/board/connectTracksBoardView';
 import { GamePhase } from '../../../assets/scripts/application/contracts/gameSnapshot';

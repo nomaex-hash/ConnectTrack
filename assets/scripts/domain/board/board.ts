@@ -91,7 +91,7 @@ export class Board {
             throw new RangeError('Track degree cannot exceed 2.');
         }
         const nextLinks = new Map(this.links);
-        const next = Object.freeze([...current, direction]);
+        const next = Object.freeze(current.concat([direction]));
         nextLinks.set(index, next);
         const nextStates = this.states.slice();
         if (next.length === 2) {

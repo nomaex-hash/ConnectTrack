@@ -323,10 +323,7 @@ export class TutorialController extends Component {
 
     private enterMarkRowCol1Step(): void {
         this.step = Step.MarkRowCol1;
-        this.markTargets = [
-            ...this.rowCells(this.dogCell1, this.size),
-            ...this.colCells(this.dogCell1, this.size),
-        ];
+        this.markTargets = this.rowCells(this.dogCell1, this.size).concat(this.colCells(this.dogCell1, this.size));
 
         this.setTopText(Localization.get(L10N.tutorial.markRowCol1));
         this.showBottomText(Localization.get(L10N.tutorial.markRowCol1Hint));
@@ -340,7 +337,7 @@ export class TutorialController extends Component {
 
     private revealMarkRowCol1Targets = (): void => {
         // Bước này KHÔNG dùng tay — chỉ viền vàng nhấp nháy trên các ô cùng hàng/cột.
-        this.applyVisible([this.dogCell1, ...this.markTargets], this.markTargets);
+        this.applyVisible([this.dogCell1].concat(this.markTargets), this.markTargets);
     };
 
     private onMarkRowCol1Done(): void {
@@ -418,7 +415,7 @@ export class TutorialController extends Component {
     }
 
     private revealMarkAround2Targets = (): void => {
-        this.applyVisible([this.dogCell2, ...this.markTargets], this.markTargets);
+        this.applyVisible([this.dogCell2].concat(this.markTargets), this.markTargets);
         this.spotlightMarkTargets();
     };
 
@@ -615,7 +612,7 @@ export class TutorialController extends Component {
      * không còn là WrongMark nữa).
      */
     private forceClearPendingWrongPlacements(): void {
-        for (const cell of [...this.wrongCells]) {
+        for (const cell of this.wrongCells.slice()) {
             this.clearWrongPlacement(cell);
         }
     }
@@ -729,7 +726,7 @@ export class TutorialController extends Component {
     }
 
     private setBorders(cells: readonly number[]): void {
-        this.borderedCells = [...cells];
+        this.borderedCells = cells.slice();
         for (const cell of cells) this.board?.getCellView(cell)?.setGoldBorder(true);
     }
 

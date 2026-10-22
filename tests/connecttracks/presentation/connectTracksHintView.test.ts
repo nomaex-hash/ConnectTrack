@@ -51,7 +51,8 @@ function setup() {
     view.previewNode.addComponent(UITransform);
     const parent = new Node(), cell = new Node(); cell.parent = parent;
     cell.setPosition(new Vec3(32, 64)); cell.setScale(new Vec3(.7, .7, 1)); cell.setSiblingIndex(5);
-    const board = { node: parent, getHintCellNode: () => cell, getCellSize: () => 64, setHintTracksHidden: vi.fn() } as any;
+    const board = { node: parent, getHintCellNode: () => cell, getCellSize: () => 64, setHintTracksHidden: vi.fn(),
+        showLineClueHighlight: vi.fn(), hideLineClueHighlight: vi.fn() } as any;
     const hint = { rule: 'A1', action: 'preview', targets: [0], lifted: [0], directions: [], text: 'hint', error: false } as any;
     return { view, cell, parent, board, hint };
 }
@@ -60,7 +61,9 @@ it('shows without Apply and restores cell parent/order/transform before applying
     const apply = vi.fn(() => expect(cell.parent).toBe(parent));
     expect(view.show(hint, board, 3, 3, apply, dismiss)).toBe(true);
     expect(cell.parent).not.toBe(parent); expect(apply).not.toHaveBeenCalled();
-    expect(view.textLabel!.string).toBe('hint');
+    // hint.text không còn được đọc trực tiếp nữa (bug đã sửa: text domain hardcode tiếng Việt,
+    // bỏ qua ngôn ngữ đang chọn) — giờ map qua rule 'A1' -> key localization tương ứng.
+    expect(view.textLabel!.string).toBe('connectTracksHint.trackAtEdge');
     view.onTapApply(); view.onTapApply();
     expect(apply).toHaveBeenCalledTimes(1); expect(dismiss).not.toHaveBeenCalled();
     expect(cell.getSiblingIndex()).toBe(5); expect(cell.position).toEqual(new Vec3(32, 64));

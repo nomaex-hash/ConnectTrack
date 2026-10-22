@@ -88,8 +88,8 @@ export function createLevelData(input: LevelDataInput): LevelData {
 
     return Object.freeze({
         size: Object.freeze(size),
-        solutionPath: Object.freeze([...path]),
-        given: Object.freeze([...input.given]),
+        solutionPath: Object.freeze(path.slice()),
+        given: Object.freeze(input.given.slice()),
         outwardStart,
         outwardEnd,
     });

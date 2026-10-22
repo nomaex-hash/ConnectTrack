@@ -40,7 +40,7 @@ export class LeaderboardPreviewPopup extends UIPopup<LeaderboardPreviewSnapshot>
         // "Đợi load xong mới cho mở, không thì vẫn dùng icon loading" (xác nhận từ user) — dữ liệu
         // bảng xếp hạng (bot/rank/top3) dựng ĐỒNG BỘ, nhưng avatar/frame của từng người tải BẤT
         // ĐỒNG BỘ riêng (lần đầu có thể chậm, chưa có cache) — loadingIcon (đã tự hiện sẵn từ
-        // show()) giữ nguyên cho tới khi manager báo đã tải xong HẾT (whenAvatarsReady()), không
+        // show()) giữ nguyên cho tới khi manager báo đã tải xong HẾT (onAvatarsReady()), không
         // tắt ngay ở đây nữa.
         this.continueEnabled = false;
         if (this.btnContinue) {
@@ -73,7 +73,12 @@ export class LeaderboardPreviewPopup extends UIPopup<LeaderboardPreviewSnapshot>
         // hideLoading() cũ nhưng QUÊN thêm lại chỗ gọi mới — loadingIcon không bao giờ được tắt nữa.
         // Tắt NGAY khi manager báo avatar/frame đã tải xong hết (độc lập với animation leo hạng ở
         // trên, KHÔNG đợi animation xong mới tắt).
-        void this.manager.whenAvatarsReady().then(() => this.hideLoading());
+        // BUG đã sửa (xác nhận từ user — "loading ở leaderboardPreview hãy tham khảo cách load của
+        // leaderboard", lặp lại đúng bug "icon loading vẫn xoay nhưng nội dung đã hiện" đã gặp và
+        // sửa ở LeaderboardPopup): .then() ở ĐÂY cộng thêm 1 microtask NỮA so với lúc manager thật
+        // sự sẵn sàng — đổi sang onAvatarsReady() (callback đồng bộ, chạy CÙNG lệnh với manager),
+        // đúng pattern onLeaderboardReady() của LeaderboardTabGroupManager.
+        this.manager.onAvatarsReady(() => this.hideLoading());
     }
 
     /** Nút Continue ẨN (opacity 0) suốt lúc hiệu ứng leo hạng (manager.play) đang chạy — chỉ hiện

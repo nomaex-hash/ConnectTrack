@@ -185,10 +185,7 @@
     "_fillRange": 0,
     "_isTrimmedMode": true,
     "_useGrayscale": false,
-    "_atlas": {
-      "__uuid__": "722505c4-fb0a-4b61-b5e4-2df4e43102d8",
-      "__expectedType__": "cc.SpriteAtlas"
-    },
+    "_atlas": null,
     "_id": ""
   },
   {
@@ -273,7 +270,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 62,
-      "height": 54
+      "height": 62
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -684,7 +681,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 80,
-      "height": 70
+      "height": 80
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",

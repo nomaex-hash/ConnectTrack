@@ -1,15 +1,17 @@
-import { sys } from 'cc';
 import { ISaveService } from './ISaveService';
+import { connectTracksLocalStore } from '../infrastructure/persistence/connectTracksLocalStore';
 
-const STORAGE_KEY = 'dogdoku_save_data';
-
-
+/**
+ * Save người chơi — nay nằm trong document duy nhất `connecttracks:save:v1` (field `player`) cùng với
+ * mọi dữ liệu local khác của ConnectTracks, thay vì key riêng `dogdoku_save_data`. Key cũ được
+ * connectTracksLocalStore tự migrate (an toàn, không ghi đè, chỉ xoá sau khi kiểm tra) ở lần đọc đầu.
+ */
 export class LocalSaveService implements ISaveService {
     async read(): Promise<string | null> {
-        return sys.localStorage.getItem(STORAGE_KEY);
+        return connectTracksLocalStore.readPlayerSave();
     }
 
     async write(json: string): Promise<void> {
-        sys.localStorage.setItem(STORAGE_KEY, json);
+        connectTracksLocalStore.writePlayerSave(json);
     }
 }

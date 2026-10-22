@@ -116,12 +116,12 @@ export function buildTrainPolyline(
     const exitUnit = DIRECTION_UNIT[exitOutward];
     const before: Point = { x: first.x + entranceUnit.x * cellSize, y: first.y + entranceUnit.y * cellSize };
     const after: Point = { x: last.x + exitUnit.x * cellSize, y: last.y + exitUnit.y * cellSize };
-    return roundTrainCorners([before, ...points, after], cornerRadius);
+    return roundTrainCorners([before].concat(points, [after]), cornerRadius);
 }
 
 /** Quarter-circle bends join cell-edge midpoints, keeping the train inside curved rail cells. */
 export function roundTrainCorners(points: readonly Point[], radius: number): Point[] {
-    if (points.length < 3 || radius <= 0) return [...points];
+    if (points.length < 3 || radius <= 0) return points.slice();
     const result: Point[] = [points[0]];
     for (let i = 1; i < points.length - 1; i++) {
         const a = points[i - 1], b = points[i], c = points[i + 1];

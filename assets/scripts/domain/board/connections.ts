@@ -6,8 +6,8 @@ import { Board } from './board';
  * Directions a cell offers: its player links plus its fixed Main Track ports.
  */
 export function offeredDirections(board: Board, index: number): readonly Direction[] {
-    const offered = new Set<Direction>([...board.linksAt(index), ...board.mainTrack.portsAt(index)]);
-    return [...offered];
+    const offered = new Set<Direction>(board.linksAt(index).concat(board.mainTrack.portsAt(index)));
+    return Array.from(offered);
 }
 
 /**

@@ -99,7 +99,7 @@ export class LeaderboardInfoPopup extends BasePopup {
     }
 
     private allAnimatableNodes(): Node[] {
-        return [this.title, this.cluster1, ...this.allNodes()];
+        return [this.title, this.cluster1].concat(this.allNodes());
     }
 
     private targetScaleFor(node: Node): Vec3 {

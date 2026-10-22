@@ -6,8 +6,12 @@ import { EventManager } from '../../core/EventManager';
 import { GameConfig } from '../../config/GameConfig';
 import { ProgressionHolder } from '../../gameplay/progression/ProgressionHolder';
 import { LeaderboardPreviewPresentation } from '../../gameplay/leaderboardpreview/LeaderboardPreviewPresentation';
+import { StreakPresentation } from '../../gameplay/streak/StreakPresentation';
+import { SaveManager } from '../../manager/SaveManager';
 import { PuzzleContext } from '../../model/BoardSaveData';
 import { BoardView } from '../board/BoardView';
+import { isHardLevel } from '../../config/LevelListConfig';
+import { RuleFrameIntro } from '../widget/RuleFrameIntro';
 import {
     CONNECT_TRACKS_PLACE_TRACK_GRANT_REQUESTED_EVENT,
     CONNECT_TRACKS_RESTART_REQUESTED_EVENT,
@@ -52,7 +56,7 @@ import { HeartsView } from '../widget/HeartsView';
 import { Localization } from '../../localization/Localization';
 import { L10N } from '../../localization/LocalizationKeys';
 import { GameSession } from '../../application/session/gameSession';
-import { GamePhase } from '../../application/contracts/gameSnapshot';
+import { GamePhase, GameSnapshot } from '../../application/contracts/gameSnapshot';
 import { requiredCellsFor } from '../../application/session/requiredCells';
 import { PreloadedLevelData } from '../../application/session/preloadedLevelData';
 import { CocosLevelDataAdapter } from '../../infrastructure/content/cocosLevelDataAdapter';
@@ -137,6 +141,18 @@ export class GameplayScreen extends UIScreen {
     connectTracksHintLabel: Node | null = null;
 
     @property({
+        type: RuleFrameIntro,
+        tooltip:
+            '"Nối lại node encourage đầu game" (xác nhận từ user — port từ luồng Dogdoku cũ) — bong ' +
+            'bóng chữ khích lệ hiện lên SAU KHI board ConnectTracks hiện xong, bỏ qua tutorial. CHỈ ' +
+            'cần gán encourageNodeNormal/encourageLabelNormal (+ encourageNodeHard/' +
+            'encourageLabelHard nếu muốn phân biệt level khó) trên component này — KHÔNG cần gán ' +
+            'ruleFrameNode/goldBorderNode (ConnectTracks không có RuleFrame, phần đó tự bỏ qua). Để ' +
+            'trống thì bỏ qua hẳn tính năng này.',
+    })
+    connectTracksEncourage: RuleFrameIntro | null = null;
+
+    @property({
         type: ConnectTracksOptionMenuView,
         tooltip:
             'Track option menu (xác nhận từ user) — component riêng (ConnectTracksOptionMenuView), ' +
@@ -163,6 +179,16 @@ export class GameplayScreen extends UIScreen {
 
     @property({ type: Sprite, tooltip: 'Thanh tiến trình (Sprite type = FILLED). Có thể trống.' })
     dogsFill: Sprite | null = null;
+
+    @property({
+        type: RichText,
+        tooltip:
+            'ConnectTracks (song song với dogsLabel, KHÔNG dùng chung): số ô đường ray đã TÌM ĐÚNG / ' +
+            'tổng số ô cần tìm trên bàn, ví dụ "1/4" — tăng dần CÙNG lúc với score (TrackPreview/' +
+            'Track lần đầu, không tính các ô given/mainTrackCells). Dùng chung màu foundDogsColor ' +
+            'cho phần số đã tìm.',
+    })
+    connectTracksTrackCountLabel: RichText | null = null;
 
     @property({ type: Label, tooltip: 'Số lượt Place Dog còn lại' })
     placeDogLabel: Label | null = null;
@@ -203,7 +229,7 @@ export class GameplayScreen extends UIScreen {
             'Số lượt Place Track khởi tạo lần ĐẦU TIÊN chơi ConnectTracks (chưa từng lưu gì) — các ' +
             'lần mở màn sau đọc đúng số đã lưu, không reset lại số này nữa.',
     })
-    connectTracksPlaceTrackInitialCharges = 3;
+    connectTracksPlaceTrackInitialCharges = 5;
 
     @property({
         type: Node,
@@ -334,6 +360,10 @@ export class GameplayScreen extends UIScreen {
     private heartFlyBusy = false;
 
     private totalDogs = 0;
+    /** Tổng số ô đường ray cần tìm của level ConnectTracks hiện tại — giống requiredCellsFor(level)
+     * dùng để tạo connectTracksSession, chụp lại 1 lần lúc tải level để refreshConnectTracksBoard()
+     * khỏi phải gọi lại requiredCellsFor() mỗi frame. */
+    private connectTracksRequiredCellsTotal = 0;
     private maxMistakes = 0;
     private placeDogCharges = 0;
     private hintCharges = 0;
@@ -345,6 +375,17 @@ export class GameplayScreen extends UIScreen {
     private currentPuzzleId = 0;
     private displayedScore = 0;
     private readonly scoreCounter = { value: 0 };
+    /** Cách tính điểm Y HỆT Meowdoku's ScoreSystem.addForDog (xác nhận từ user: "cách tính điểm như
+     * Meowdoku") — tier tăng dần theo combo streak (scoreStreakBaseTier + (streak-1) *
+     * scoreStreakTierStep) CỘNG speed bonus (đặt càng nhanh liên tiếp càng thưởng thêm, xem
+     * speedBonusFor) — streak reset về 0 mỗi khi có mistake mới (RedX), elapsed-seconds tự đếm
+     * riêng cho ConnectTracks (GameSession không có timer, không mượn của PuzzleSession được) vì
+     * phiên ConnectTracks sống độc lập hoàn toàn với PuzzleSession cũ. KHÔNG phân biệt đặt tay hay
+     * Place Track hỗ trợ (đơn giản hoá — Meowdoku gốc có addForAssistedDog riêng cho hỗ trợ, nhưng
+     * việc đó cần biết lệnh nào vừa dispatch, ngoài phạm vi chỉ diff snapshot hiện tại). */
+    private connectTracksScoreStreak = 0;
+    private connectTracksLastGainSeconds: number | null = null;
+    private connectTracksElapsedStartMs = 0;
 
 
     private foundColorHex = '4cd137';
@@ -367,6 +408,11 @@ export class GameplayScreen extends UIScreen {
     /** Chặn gọi lặp lại nếu tàu chạy xong (setWonHandler) được gọi hơn 1 lần — xem notifyConnectTracksWon. */
     private connectTracksWonNotified = false;
     private connectTracksVictoryStarted = false;
+    /** true trong lúc đang chờ connectTracksEncourage.playWinPraise() chạy xong — chặn
+     * refreshConnectTracksBoard() gọi lại lần nữa (vào cùng nhánh Won) trong lúc hiệu ứng "khen
+     * thắng" còn đang hiện, tránh chạy playWinPraise() chồng nhiều lần trước khi
+     * connectTracksVictory.begin() kịp bắt đầu (lúc đó connectTracksVictoryStarted mới được set). */
+    private connectTracksWinPraisePending = false;
     /** Tránh phát lại tween hiện/ẩn connectTracksHintLabel mỗi lần refresh nếu trạng thái không đổi. */
     private connectTracksHintVisible = false;
     private connectTracksHintEligible = false;
@@ -397,6 +443,7 @@ export class GameplayScreen extends UIScreen {
         this.warnIfMissing(this.connectTracksHintLabel, 'connectTracksHintLabel');
         this.warnIfMissing(this.connectTracksOptionMenu, 'connectTracksOptionMenu');
         this.warnIfMissing(this.connectTracksPlaceTrackLabel, 'connectTracksPlaceTrackLabel');
+        this.warnIfMissing(this.connectTracksTrackCountLabel, 'connectTracksTrackCountLabel');
 
         // Place Track là 1 ví (inventory) RIÊNG của người chơi, tồn tại XUYÊN SUỐT mọi level
         // ConnectTracks (không reset mỗi lần vào màn/level mới, khác board progress theo từng
@@ -437,17 +484,8 @@ export class GameplayScreen extends UIScreen {
     protected onClose(): void {
         this.saveConnectTracksProgress();
         this.connectTracksProgressKey = null;
-        this.connectTracksVictory?.cancel();
-        this.connectTracksVictoryStarted = false;
         this.connectTracksTutorial?.cancel();
         EventManager.instance.targetOff(this);
-
-        // animateScoreTo() tween trên object thường (scoreCounter), KHÔNG phải Node — Cocos
-        // không tự huỷ tween này khi node bị destroy như với Node/Component thật. Trước đây
-        // không sao vì màn Gameplay luôn sống đủ lâu (đợi Result popup); giờ có luồng thắng
-        // lần đầu trong ngày nhảy thẳng sang Streak NGAY, dễ đóng màn khi tween còn đang
-        // chạy dở, để sót thì "value" bị đọc trên state đã chết → crash "reading 'value'".
-        Tween.stopAllByTarget(this.scoreCounter);
 
         // Chuỗi hiệu ứng tự đánh dấu ô (onAutoMarkApplied/playAutoMarkCelebration/flyAutoMarkSparks)
         // dùng nhiều scheduleOnce() nối tiếp — huỷ hết nếu màn đóng giữa chừng (ví dụ nhảy sang
@@ -457,28 +495,75 @@ export class GameplayScreen extends UIScreen {
         // Huỷ mọi loadConnectTracksLevel() đang await: nếu nó resolve sau khi màn đã đóng (và có
         // thể đã mở lại với 1 level khác), token không khớp nữa nên bị bỏ qua.
         this.connectTracksLoadToken++;
-        this.connectTracksBoosterHint?.close(false);
-        this.connectTracksSession?.cancelHint();
-        this.connectTracksSession = null;
-        this.soundSnapshot = null;
-        this.connectTracksLostNotified = false;
-        this.connectTracksWonNotified = false;
-        this.connectTracksInput?.unbind();
-        this.connectTracksBoard?.setWonHandler(null);
-        this.connectTracksBoard?.setSelectedCellChangedHandler(null);
-        this.connectTracksOptionMenu?.setOptionSelectedHandler(null);
-        this.connectTracksOptionsSelectedCell = null;
-        this.hideConnectTracksHintInstant();
-        this.connectTracksOptionMenu?.hideInstant();
+
+        // BUG đã sửa (báo lỗi của user: "sau streak thì lại bắt người chơi chơi lại màn [vừa
+        // thắng]"): màn Gameplay bị ĐÓNG (onClose, qua UIManager.showScreenFor) mỗi khi chuyển
+        // sang màn Streak ăn mừng — dù GameManager cố tình GIỮ SỐNG session của NÓ (xem
+        // enterStreakScreen/resumingSolvedSession), connectTracksSession là field RIÊNG của CHÍNH
+        // component này, không liên quan gì — vẫn bị dọn sạch ở dưới như mọi lần đóng màn bình
+        // thường khác (connectTracksVictory?.cancel() HUỶ LUÔN chuỗi ăn mừng đang tạm dừng chờ
+        // resume(), connectTracksSession=null xoá sạch ván vừa thắng, connectTracksInput?.unbind()
+        // làm board hết phản hồi). Lúc quay lại (onOpen), không có gì tạo lại —
+        // onPuzzleReady() cố tình return sớm cho trường hợp "instant" resume (xem ghi chú ở đó),
+        // nên coi như "trắng tay", buộc tải lại từ đầu ở nơi khác.
+        //
+        // StreakPresentation.isPending() đúng là `true` NGAY TẠI THỜI ĐIỂM NÀY (cờ đặt ở
+        // GameManager.onPuzzleSolved, TRƯỚC KHI DailyStreakScreen.onOpen() kịp consume nó vài dòng
+        // sau) — dùng làm tín hiệu đáng tin cậy "chỉ đang tạm NHƯỜNG màn hình cho Streak, sắp quay
+        // lại NGAY đúng session này", bỏ qua toàn bộ phần dọn dẹp ConnectTracks bên dưới trong
+        // trường hợp đó. Nếu người chơi sau đó bấm back ở Streak (bỏ dở, về MainMenu) thay vì
+        // "Tiếp tục", session bị bỏ quên ở đây vẫn được dọn sạch BÌNH THƯỜNG sau đó — lần
+        // loadConnectTracksLevel() kế tiếp (level thật sự mới) tự gán lại connectTracksSession=null
+        // đầu tiên trước khi tạo session mới, không rò rỉ gì cả.
+        if (!StreakPresentation.isPending()) {
+            this.connectTracksVictory?.cancel();
+            this.connectTracksVictoryStarted = false;
+            this.connectTracksWinPraisePending = false;
+            this.connectTracksEncourage?.cancelWinPraise();
+            // animateScoreTo() tween trên object thường (scoreCounter), KHÔNG phải Node — Cocos
+            // không tự huỷ tween này khi node bị destroy như với Node/Component thật. Trước đây
+            // không sao vì màn Gameplay luôn sống đủ lâu (đợi Result popup); giờ có luồng thắng
+            // lần đầu trong ngày nhảy thẳng sang Streak NGAY, dễ đóng màn khi tween còn đang
+            // chạy dở, để sót thì "value" bị đọc trên state đã chết → crash "reading 'value'".
+            Tween.stopAllByTarget(this.scoreCounter);
+            this.connectTracksBoosterHint?.close(false);
+            this.connectTracksSession?.cancelHint();
+            this.connectTracksSession = null;
+            this.soundSnapshot = null;
+            this.connectTracksLostNotified = false;
+            this.connectTracksWonNotified = false;
+            this.connectTracksInput?.unbind();
+            this.connectTracksBoard?.setWonHandler(null);
+            this.connectTracksBoard?.setSelectedCellChangedHandler(null);
+            this.connectTracksOptionMenu?.setOptionSelectedHandler(null);
+            this.connectTracksOptionsSelectedCell = null;
+            this.hideConnectTracksHintInstant();
+            this.connectTracksOptionMenu?.hideInstant();
+        }
     }
 
 
     private onPuzzleReady = (payload: PuzzleReadyEventPayload): void => {
-        // BUG đã sửa (báo lỗi của user): sau khi bấm "sang màn tiếp theo" ở cuối tutorial, màn thật
-        // mở ra nhưng khung text/chấm tròn CỦA TUTORIAL vẫn còn hiện đè lên — vì connectTracksTutorial
-        // chưa bao giờ bị cancel() khi onPuzzleReady chạy lại cho level THẬT (isTutorial=false).
-        // Luôn dọn sạch nó ở đây, bất kể payload mới là tutorial hay level thật.
-        this.connectTracksTutorial?.cancel();
+        // BUG đã sửa (báo lỗi của user — "chơi xong màn 1, qua Streak xong lại phải chơi lại màn
+        // 1"): GameManager.onNavigate gọi session.emitReadyAgain() (PUZZLE_READY_EVENT với
+        // instant=true) khi bấm "Tiếp tục" ở màn Streak quay LẠI đúng session vừa thắng (session
+        // không hề bị huỷ — xem enterStreakScreen/resumingSolvedSession). Lúc đó level NÀY đã thắng
+        // xong và ConnectTracksVictoryView đang TẠM DỪNG đúng ngay chỗ này chờ popup Tournament/
+        // Streak/LeaderboardPreview chạy xong để resume() (xem UIManager.runConnectTracksReadyChain)
+        // — nếu xử lý y hệt 1 level MỚI (cancel() + loadConnectTracksLevel() load lại từ đầu bên
+        // dưới) sẽ HUỶ MẤT ván vừa thắng, buộc người chơi chơi lại từ đầu. Cùng context+puzzleId,
+        // instant=true, không phải tutorial => chỉ là "thông báo lại", không làm gì cả, để luồng ăn
+        // mừng đang tạm dừng tự tiếp tục.
+        console.log('[DEBUG GameplayScreen] onPuzzleReady:', JSON.stringify({
+            instant: payload.instant, payloadContext: payload.context, payloadPuzzleId: payload.puzzleId,
+            currentContext: this.currentContext, currentPuzzleId: this.currentPuzzleId,
+        }));
+        if (payload.instant && payload.context !== 'tutorial'
+            && payload.context === this.currentContext && payload.puzzleId === this.currentPuzzleId) {
+            console.log('[DEBUG GameplayScreen] onPuzzleReady: GUARD HIT -> return early (no reload)');
+            return;
+        }
+        console.log('[DEBUG GameplayScreen] onPuzzleReady: guard MISSED -> will proceed to cancel()/loadConnectTracksLevel()');
         // BUG đã sửa (báo lỗi của user — "booster/back/settings bị ẩn sau khi sang level thật từ
         // tut"): ConnectTracksVictoryView.collectHud() quét MỌI node con không được bảo vệ của
         // gameplayRoot (gồm TopBar/BtnBack/BottomToolbar — nơi chứa nút back/settings/2 booster) rồi
@@ -492,6 +577,23 @@ export class GameplayScreen extends UIScreen {
         // nữa vẫn an toàn — savedHud đã rỗng, chỉ là no-op).
         this.connectTracksVictory?.cancel();
         this.connectTracksVictoryStarted = false;
+        this.connectTracksWinPraisePending = false;
+        this.connectTracksEncourage?.cancelWinPraise();
+        // BUG đã sửa (báo lỗi của user): sau khi bấm "sang màn tiếp theo" ở cuối tutorial, màn thật
+        // mở ra nhưng khung text/chấm tròn CỦA TUTORIAL vẫn còn hiện đè lên — vì connectTracksTutorial
+        // chưa bao giờ bị cancel() khi onPuzzleReady chạy lại cho level THẬT (isTutorial=false).
+        // Luôn dọn sạch nó ở đây, bất kể payload mới là tutorial hay level thật.
+        //
+        // BUG đã sửa (báo lỗi của user — "offset board của tut vẫn đang ảnh hưởng đến màn
+        // campaign"): connectTracksTutorial?.cancel() PHẢI chạy SAU connectTracksVictory?.cancel()
+        // (trước đây ngược lại) — ConnectTracksVictoryView.cancel() tự trả board.node về
+        // this.boardPosition, giá trị nó TỰ CHỤP lúc victory.begin() (đúng lúc tutorial vừa thắng,
+        // tutorial.enterWonStep() gọi) — một snapshot ĐỘC LẬP, có thể lệch (log thực tế đo được:
+        // Y=-50 thay vì đúng vị trí gốc của board). Nếu tutorial.cancel() (trả board về ĐÚNG vị trí
+        // gốc gameplay thật, chụp từ trước khi tutorial từng đụng vào) chạy TRƯỚC, victory.cancel()
+        // chạy SAU sẽ ĐÈ LẠI bằng snapshot sai đó — board kẹt lệch dù tutorial.cancel() đã làm đúng.
+        // Đảo thứ tự: để tutorial.cancel() là lệnh CUỐI CÙNG quyết định vị trí board.
+        this.connectTracksTutorial?.cancel();
         this.totalDogs = payload.totalDogs;
         this.maxMistakes = payload.maxMistakes;
 
@@ -536,9 +638,27 @@ export class GameplayScreen extends UIScreen {
             // nút hiện số level đó, giống label nút Play ở main menu.
             this.connectTracksTutorial?.begin(
                 () => {
+                    // BUG đã sửa (báo lỗi của user: "lần nào vào game cũng phải chơi qua tut, tut
+                    // chỉ được phép hiện 1 lần trong lần đầu tiên") — tutorial ConnectTracks (khác
+                    // tutorial Dogdoku cũ) không bắn PUZZLE_SOLVED_EVENT nên KHÔNG BAO GIỜ chạy qua
+                    // GameManager.handleTutorialSolved() (nơi DUY NHẤT đặt hasSeenTutorial=true) —
+                    // Bootloader luôn đọc cờ này để quyết định vào thẳng tutorial hay MainMenu lúc
+                    // mở app, nên cờ mãi mãi ở false khiến tutorial hiện lại MỌI LẦN mở app. Đặt
+                    // thẳng ở đây — NGAY lúc tutorial thật sự xong (trước cả khi người chơi bấm
+                    // "Tiếp theo") — và persist() ngay, không đợi tới lần save định kỳ kế tiếp lỡ
+                    // người chơi thoát app sớm.
+                    SaveManager.instance.playerData.hasSeenTutorial = true;
+                    void SaveManager.instance.persist();
                     const currentLevel = ProgressionHolder.current?.getCurrentLevel() ?? 1;
                     const label = this.connectTracksVictory?.nextLabel;
                     if (label) label.string = `${Localization.get(L10N.menu.levelPrefix)}${currentLevel}`;
+                    // "Load màn 1 luôn trong lúc popup thắng tut còn hiện, để sang màn 1 không bị
+                    // nháy" (xác nhận từ user) — tải trước NGAY LÚC NÀY (sớm nhất có thể, trước khi
+                    // người chơi kịp bấm "Tiếp theo"), cùng kiểu non-blocking preload đã dùng ở luồng
+                    // thắng thật (xem notifyConnectTracksWon's completed callback bên dưới).
+                    void this.connectTracksLevels.preload(String(currentLevel)).catch(error => {
+                        console.warn(`[GameplayScreen] Could not preload ConnectTracks level ${currentLevel}; retry on entry.`, error);
+                    });
                 },
                 () => {
                     const currentLevel = ProgressionHolder.current?.getCurrentLevel() ?? 1;
@@ -558,12 +678,18 @@ export class GameplayScreen extends UIScreen {
      * token chặn kết quả trễ của 1 lần load CŨ (màn đã đóng hoặc đã mở level khác) ghi đè session.
      */
     private async loadConnectTracksLevel(levelId: string): Promise<void> {
+        console.log('[DEBUG GameplayScreen] loadConnectTracksLevel() start, levelId=', levelId,
+            'connectTracksBoard.node.position=', this.connectTracksBoard
+                ? `${this.connectTracksBoard.node.position.x},${this.connectTracksBoard.node.position.y},${this.connectTracksBoard.node.position.z}`
+                : 'no board');
         this.saveConnectTracksProgress();
         this.connectTracksProgressKey = null;
         this.connectTracksInput?.unbind();
         const progressKey = `${this.currentContext}:${levelId}:${this.isDailyContext ? this.formatToday() : ''}`;
         this.connectTracksVictory?.cancel();
         this.connectTracksVictoryStarted = false;
+        this.connectTracksWinPraisePending = false;
+        this.connectTracksEncourage?.cancelWinPraise();
         this.setLabel(this.boardSizeLabel, '');
         const token = ++this.connectTracksLoadToken;
         this.connectTracksBoosterHint?.close(false);
@@ -571,10 +697,15 @@ export class GameplayScreen extends UIScreen {
         this.connectTracksInput?.unbind();
         this.connectTracksSession = null;
         this.soundSnapshot = null;
+        this.connectTracksScoreStreak = 0;
+        this.connectTracksLastGainSeconds = null;
+        this.connectTracksElapsedStartMs = performance.now();
         try {
             const level = await this.connectTracksLevels.loadLevel(levelId);
             if (!this.isValid || token !== this.connectTracksLoadToken) return;
-            this.connectTracksSession = new GameSession({ level, requiredCells: requiredCellsFor(level) });
+            const requiredCells = requiredCellsFor(level);
+            this.connectTracksRequiredCellsTotal = requiredCells.length;
+            this.connectTracksSession = new GameSession({ level, requiredCells });
             this.connectTracksProgressKey = progressKey;
             const progress = this.connectTracksProgress.read(progressKey);
             if (progress !== null && !this.connectTracksSession.restoreProgress(progress)) {
@@ -597,6 +728,18 @@ export class GameplayScreen extends UIScreen {
             this.hideConnectTracksHintInstant();
             this.connectTracksOptionMenu?.hideInstant();
             this.refreshConnectTracksBoard();
+            // "Nối lại node encourage đầu game" (xác nhận từ user — port từ luồng Dogdoku cũ,
+            // RuleFrameIntro.ts) — gọi TRỰC TIẾP qua playEncourageOnly(), KHÔNG bắn
+            // PUZZLE_READY_EVENT (event đó chỉ dành cho Dogdoku, nhiều listener khác sẽ phản ứng
+            // nhầm). Bỏ qua tutorial (đúng behavior gốc của RuleFrameIntro). Đọc
+            // lastSpawnDurationSeconds NGAY SAU refreshConnectTracksBoard() (đã rebuild() xong,
+            // giá trị luôn mới nhất) để encourage chờ ĐÚNG lúc board hiện xong mới bật lên.
+            if (this.currentContext !== 'tutorial') {
+                this.connectTracksEncourage?.playEncourageOnly(
+                    isHardLevel(this.currentPuzzleId),
+                    this.connectTracksBoard?.lastSpawnDurationSeconds ?? 0,
+                );
+            }
         } catch (failure) {
             if (this.isValid && token === this.connectTracksLoadToken) {
                 console.warn(`[GameplayScreen] ConnectTracks: không tải được level '${levelId}'.`, failure);
@@ -607,14 +750,89 @@ export class GameplayScreen extends UIScreen {
     /** Vẽ lại bàn ConnectTracks và cập nhật heartsView từ snapshot của session hiện tại. */
     private soundSnapshot: ReturnType<GameSession['snapshot']> | null = null;
 
+    /** "Nối lại score trong gameplay" (xác nhận từ user) — điểm hiện khi người chơi TÌM ĐƯỢC 1 ô
+     * đáp án đúng LẦN ĐẦU (chuyển sang TrackPreview/Track), KHÔNG phải lúc đường ray đó hoàn chỉnh
+     * đủ 2 đầu nối (xác nhận từ user: "điểm hiện khi đặt rail hoặc tìm được track đúng chứ không
+     * phải khi đặt track hoàn chỉnh"). Cộng dồn vào nhãn score trên top bằng ĐÚNG hiệu ứng đếm số
+     * sẵn có (animateScoreTo — giữ hiệu ứng tăng số như cũ). Nhiều ô tìm được CÙNG LÚC (vd Place
+     * Track) chỉ gọi animateScoreTo() 1 LẦN với tổng điểm, tránh tween đè lẫn nhau nếu gọi riêng
+     * từng ô — nhưng streak/speed bonus vẫn tính TUẦN TỰ từng ô (xem gainForConnectTracksCell). */
+    private spawnScorePopupsForTrackChanges(before: GameSnapshot, after: GameSnapshot): void {
+        const board = this.connectTracksBoard;
+        if (after.mistakes > before.mistakes) this.connectTracksScoreStreak = 0;
+        let gained = 0;
+        after.cellStates.forEach((state, i) => {
+            if (after.mainTrackCells.includes(i)) return;
+            if (state !== 'Track' && state !== 'TrackPreview') return;
+            const previous = before.cellStates[i];
+            if (previous === 'Track' || previous === 'TrackPreview') return;
+            const amount = this.gainForConnectTracksCell();
+            gained += amount;
+            if (board?.isValid) {
+                board.spawnScorePopup(i, amount);
+                // "Đặt đúng đến track thứ 10 thì hiện mức đầu [praise combo], cứ cách 3 track đúng
+                // lại hiện mức tiếp theo" (xác nhận từ user, thay cho luật cũ "từ track thứ 2 liên
+                // tiếp") — streak đã được gainForConnectTracksCell() tăng ĐÚNG cho ô này ngay phía
+                // trên. Hiện CAO HƠN viền board, KHÔNG neo theo ô i (xác nhận từ user, không đổi).
+                const streakFromStart = this.connectTracksScoreStreak - GameConfig.praiseStreakStart;
+                if (streakFromStart >= 0 && streakFromStart % GameConfig.praiseStreakStep === 0) {
+                    board.spawnPraiseEffect(streakFromStart / GameConfig.praiseStreakStep + 1);
+                }
+            }
+        });
+        if (gained > 0) this.animateScoreTo(this.displayedScore + gained);
+    }
+
+    /** Y HỆT Meowdoku's ScoreSystem.addForDog: tier tăng dần theo combo streak + speed bonus (đặt
+     * càng nhanh liên tiếp càng thưởng thêm). Đơn giản hoá: không phân biệt đặt tay hay Place Track
+     * hỗ trợ (xem ghi chú ở spawnScorePopupsForTrackChanges). */
+    private gainForConnectTracksCell(): number {
+        const elapsed = (performance.now() - this.connectTracksElapsedStartMs) / 1000;
+        const secondsSinceLast = this.connectTracksLastGainSeconds === null
+            ? Infinity : elapsed - this.connectTracksLastGainSeconds;
+        this.connectTracksLastGainSeconds = elapsed;
+        this.connectTracksScoreStreak += 1;
+        const tier = GameConfig.scoreStreakBaseTier
+            + (this.connectTracksScoreStreak - 1) * GameConfig.scoreStreakTierStep;
+        return tier + this.connectTracksSpeedBonusFor(secondsSinceLast);
+    }
+
+    private connectTracksSpeedBonusFor(secondsSinceLast: number): number {
+        if (!Number.isFinite(secondsSinceLast)) return 0;
+        const instant = GameConfig.scoreSpeedBonusInstantSeconds;
+        if (secondsSinceLast <= instant) return GameConfig.scoreSpeedBonusMax;
+        const decayed = GameConfig.scoreSpeedBonusMax
+            - (secondsSinceLast - instant) * GameConfig.scoreSpeedBonusDecayPerSecond;
+        return Math.max(0, Math.round(decayed));
+    }
+
+    /** "Label phải hiện số track còn lại trong bàn" (xác nhận từ user) — ĐÃ TÌM ĐÚNG / TỔNG cần
+     * tìm, tăng dần (giống dogsLabel, xác nhận từ user), CÙNG tiêu chí đếm với
+     * spawnScorePopupsForTrackChanges() ở trên (TrackPreview/Track, không tính mainTrackCells —
+     * các ô given đã hoàn thành sẵn từ đầu level). */
+    private refreshConnectTracksTrackCountLabel(snapshot: GameSnapshot): void {
+        if (!this.connectTracksTrackCountLabel) return;
+        let found = 0;
+        snapshot.cellStates.forEach((state, i) => {
+            if (snapshot.mainTrackCells.includes(i)) return;
+            if (state === 'Track' || state === 'TrackPreview') found++;
+        });
+        this.connectTracksTrackCountLabel.string =
+            `<color=#${this.foundColorHex}>${found}</color>/${this.connectTracksRequiredCellsTotal}`;
+    }
+
     private refreshConnectTracksBoard(): void {
         const session = this.connectTracksSession;
         if (!session) return;
         const snapshot = session.snapshot();
-        if (this.soundSnapshot) AudioManager.maybeInstance?.playTrackChanges(this.soundSnapshot, snapshot);
+        if (this.soundSnapshot) {
+            AudioManager.maybeInstance?.playTrackChanges(this.soundSnapshot, snapshot);
+            this.spawnScorePopupsForTrackChanges(this.soundSnapshot, snapshot);
+        }
         this.soundSnapshot = snapshot;
         this.saveConnectTracksProgress();
         this.setLabel(this.boardSizeLabel, `${snapshot.width} x ${snapshot.height}`);
+        this.refreshConnectTracksTrackCountLabel(snapshot);
         if (this.connectTracksBoard?.isValid) {
             this.connectTracksBoard.render(snapshot);
         }
@@ -635,7 +853,8 @@ export class GameplayScreen extends UIScreen {
         // vẫn bắn lại được PUZZLE_SOLVED_EVENT bình thường.
         if (snapshot.phase !== GamePhase.Won) {
             this.connectTracksWonNotified = false;
-        } else if (!this.connectTracksVictoryStarted && this.connectTracksBoard && this.connectTracksVictory) {
+        } else if (!this.connectTracksVictoryStarted && !this.connectTracksWinPraisePending
+            && this.connectTracksBoard && this.connectTracksVictory) {
             // "Hiệu ứng sao bay chỉ kích hoạt khi leaderboard preview sẽ mở, phải đi cặp với nhau"
             // (xác nhận từ user) — gọi notifyConnectTracksWon() NGAY TẠI ĐÂY, TRƯỚC KHI victory
             // sequence bắt đầu chạy (trước đây gọi muộn hơn, trong completed() — SAU KHI tàu/sao đã
@@ -647,32 +866,51 @@ export class GameplayScreen extends UIScreen {
             this.notifyConnectTracksWon();
             const starsEnabled = (this.currentContext !== 'campaign' || this.currentPuzzleId > 10)
                 && LeaderboardPreviewPresentation.isPending();
-            const started = this.connectTracksVictory.begin(this.connectTracksBoard, snapshot, this.node,
-                (resume) => {
-                    const label = this.connectTracksVictory?.nextLabel;
-                    const next = UIManager.instance.getConnectTracksNextLevel(this.currentContext, this.currentPuzzleId);
-                    if (next !== null) {
-                        // Non-blocking: warm the exact next level while the victory train runs.
-                        void this.connectTracksLevels.preload(String(next)).catch(error => {
-                            console.warn(`[GameplayScreen] Could not preload ConnectTracks level ${next}; retry on entry.`, error);
-                        });
-                    }
-                    if (label) label.string = next === null ? Localization.get(L10N.common.backToMenu)
-                        : `${Localization.get(L10N.menu.levelPrefix)}${next}`;
-                    // "Tàu hoãn chạy cho đến khi luồng thắng của các popup khác chạy xong" (xác nhận
-                    // từ user, đúng thứ tự ưu tiên ResultPopup thật của Meowdoku — Tournament rồi
-                    // LeaderboardPreview) — notifyConnectTracksWon() đã gọi Ở TRÊN (trước cả victory
-                    // sequence), GameManager đã xử lý xong tiến trình/điểm/cờ Tournament-pending từ
-                    // lâu, resume (= cho tàu chạy) chỉ khi chuỗi đó thật sự xong.
-                    UIManager.instance.notifyConnectTracksReadyForTrain(resume);
-                },
-                // "Thêm lại luồng kích hoạt giải đấu vào ConnectTracks, giữ đúng thứ tự" (xác nhận
-                // từ user) — đúng vị trí "sau khi Result đóng" của luồng thật (afterResultClosed() →
-                // maybeOpenTournamentActivation()), áp ngay trước khi thực sự chuyển màn kế tiếp.
-                () => UIManager.instance.continueConnectTracksWinAfterActivationCheck(this.currentContext, this.currentPuzzleId),
-                starsEnabled);
-            this.connectTracksVictoryStarted = started;
-            if (started) this.connectTracksInput?.unbind();
+            this.connectTracksWinPraisePending = true;
+            const beginVictorySequence = (): void => {
+                this.connectTracksWinPraisePending = false;
+                // Board/victory có thể đã bị huỷ/thay thế (Restart, đóng màn...) trong lúc hiệu ứng
+                // khen còn đang hiện — không còn gì để bắt đầu nữa thì bỏ qua, các nơi reset cờ này
+                // (xem cancelWinPraise()) đã tự dọn connectTracksWinPraisePending rồi.
+                if (!this.connectTracksBoard?.isValid || !this.connectTracksVictory) return;
+                const started = this.connectTracksVictory.begin(this.connectTracksBoard, snapshot, this.node,
+                    (resume) => {
+                        const label = this.connectTracksVictory?.nextLabel;
+                        const next = UIManager.instance.getConnectTracksNextLevel(this.currentContext, this.currentPuzzleId);
+                        if (next !== null) {
+                            // Non-blocking: warm the exact next level while the victory train runs.
+                            void this.connectTracksLevels.preload(String(next)).catch(error => {
+                                console.warn(`[GameplayScreen] Could not preload ConnectTracks level ${next}; retry on entry.`, error);
+                            });
+                        }
+                        if (label) label.string = next === null ? Localization.get(L10N.common.backToMenu)
+                            : `${Localization.get(L10N.menu.levelPrefix)}${next}`;
+                        // "Tàu hoãn chạy cho đến khi luồng thắng của các popup khác chạy xong" (xác
+                        // nhận từ user, đúng thứ tự ưu tiên ResultPopup thật của Meowdoku — Tournament
+                        // rồi LeaderboardPreview) — notifyConnectTracksWon() đã gọi Ở TRÊN (trước cả
+                        // victory sequence), GameManager đã xử lý xong tiến trình/điểm/cờ
+                        // Tournament-pending từ lâu, resume (= cho tàu chạy) chỉ khi chuỗi đó thật sự
+                        // xong.
+                        UIManager.instance.notifyConnectTracksReadyForTrain(resume);
+                    },
+                    // "Thêm lại luồng kích hoạt giải đấu vào ConnectTracks, giữ đúng thứ tự" (xác
+                    // nhận từ user) — đúng vị trí "sau khi Result đóng" của luồng thật
+                    // (afterResultClosed() → maybeOpenTournamentActivation()), áp ngay trước khi thực
+                    // sự chuyển màn kế tiếp.
+                    () => UIManager.instance.continueConnectTracksWinAfterActivationCheck(this.currentContext, this.currentPuzzleId),
+                    starsEnabled);
+                this.connectTracksVictoryStarted = started;
+                if (started) this.connectTracksInput?.unbind();
+            };
+            // "Chèn thêm 1 hiệu ứng [khen thắng] ở thời điểm này, các luồng còn lại chạy SAU nó"
+            // (xác nhận từ user) — connectTracksVictory.begin() (board di chuyển vào giữa, tàu chạy,
+            // các popup...) chỉ bắt đầu SAU KHI hiệu ứng khen đã biến mất hẳn. Không có
+            // connectTracksEncourage (chưa gán trong Editor) thì chạy ngay, không chặn gì cả.
+            if (this.connectTracksEncourage) {
+                this.connectTracksEncourage.playWinPraise(beginVictorySequence);
+            } else {
+                beginVictorySequence();
+            }
         }
     }
 
@@ -1441,11 +1679,22 @@ export class GameplayScreen extends UIScreen {
         this.connectTracksSession?.cancelHint();
         this.connectTracksVictory?.cancel();
         this.connectTracksVictoryStarted = false;
+        this.connectTracksWinPraisePending = false;
+        this.connectTracksEncourage?.cancelWinPraise();
         this.connectTracksBoard?.closeOptionsMenu();
         this.sendIntent(IntentType.Restart);
 
         if (this.connectTracksSession) {
             this.soundSnapshot = null;
+            // Chơi lại từ đầu thì score trên top cũng về 0 — không animate đếm xuống, snap thẳng
+            // (giống hearts/mistakes cũng reset cứng khi restart, không có hiệu ứng gì).
+            Tween.stopAllByTarget(this.scoreCounter);
+            this.displayedScore = 0;
+            this.scoreCounter.value = 0;
+            this.setLabel(this.scoreLabel, '0');
+            this.connectTracksScoreStreak = 0;
+            this.connectTracksLastGainSeconds = null;
+            this.connectTracksElapsedStartMs = performance.now();
             this.connectTracksSession.dispatch({ type: 'restart' });
             if (this.connectTracksBoard) this.connectTracksInput?.bind(this.connectTracksSession,
                 () => this.refreshConnectTracksBoard(), this.connectTracksBoard);

@@ -64,6 +64,8 @@ export abstract class UIPopup<TData = void> extends Component {
      * node đó tự lo xoay qua onEnable()/schedule() (xem iconLoading.ts), KHÔNG cần tween thủ công
      * ở đây. Tự gọi ngay lúc show(); subclass gọi lại TAY nếu cần hiện lại loading giữa chừng. */
     protected showLoading(): void {
+        // LOG TẠM ĐỂ DEBUG — xoá sau khi xác định được nguyên nhân thật.
+        console.log('[DEBUG UIPopup]', this.constructor.name, 'showLoading() lúc', performance.now().toFixed(0), 'loadingIcon=', !!this.loadingIcon);
         if (this.loadingIcon) this.loadingIcon.active = true;
     }
 
@@ -71,6 +73,8 @@ export abstract class UIPopup<TData = void> extends Component {
      * xoay. Subclass gọi khi dữ liệu/animation đã sẵn sàng để hiện popup bình thường. An toàn gọi
      * nhiều lần / gọi khi chưa từng showLoading(). */
     protected hideLoading(): void {
+        // LOG TẠM ĐỂ DEBUG — xoá sau khi xác định được nguyên nhân thật.
+        console.log('[DEBUG UIPopup]', this.constructor.name, 'hideLoading() lúc', performance.now().toFixed(0), new Error().stack);
         if (this.loadingIcon) this.loadingIcon.active = false;
     }
 

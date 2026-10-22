@@ -51,7 +51,18 @@ export class MConfigResourceUtils {
     static mapLoadedAvatars: Map<string, SpriteFrame> = new Map<string, SpriteFrame>();
     static mapLoadedFrames: Map<string, SpriteFrame> = new Map<string, SpriteFrame>();
 
-    public static getProfileSpriteFrame(profileTabType:PROFILE_TAB_TYPE,path: string, cb: LoadCompleteCallback<SpriteFrame>) { 
+    /** Đọc THẲNG cache (mapLoadedAvatars/mapLoadedFrames), KHÔNG tải gì cả — cho nơi gọi biết TRƯỚC
+     * (đồng bộ, không cần callback/Promise) ảnh này có sẵn hay chưa, để tự quyết định có cần hiện
+     * loadingIcon/xoá sprite tạm thời hay không (xem ItemLeaderboardBase.loadAvatar()). Trả về
+     * SpriteFrame nếu có trong cache, null nếu chưa. */
+    public static peekCachedProfileSpriteFrame(profileTabType: PROFILE_TAB_TYPE, path: string): SpriteFrame | null {
+        const map = profileTabType == PROFILE_TAB_TYPE.AVATAR
+            ? MConfigResourceUtils.mapLoadedAvatars
+            : MConfigResourceUtils.mapLoadedFrames;
+        return map.get(path) ?? null;
+    }
+
+    public static getProfileSpriteFrame(profileTabType:PROFILE_TAB_TYPE,path: string, cb: LoadCompleteCallback<SpriteFrame>) {
         if(profileTabType == PROFILE_TAB_TYPE.AVATAR){
             if(MConfigResourceUtils.mapLoadedAvatars.has(path))
             {

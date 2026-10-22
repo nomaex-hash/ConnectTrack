@@ -86,6 +86,52 @@ export class DailyPuzzleService {
     }
 
 
+    /** DÙNG ĐỂ TEST — ghi thẳng SỐ chuỗi (data.streak), KHÔNG đụng gì tới dayRow (checkedDates/
+     * anchor) — xác nhận từ user: "thêm 1 edit box khi nhập vào thì hiện số chuỗi đúng như thế
+     * (không liên quan đến dayrow)". streakLastDate luôn đặt về `now` để số vừa nhập không bị
+     * isStreakExpired() ghi đè về 0 ngay khi hiện lại màn Streak. */
+    setTestStreakValue(value: number, now: string = today()): void {
+        const streak = Math.max(0, Math.floor(value));
+        this.data.streak = streak;
+        if (streak > this.data.bestStreak) this.data.bestStreak = streak;
+        this.data.streakLastDate = now;
+    }
+
+    /** DÙNG ĐỂ TEST — ép dayRow tuần hiện tại thành ĐÃ ĐIỂM DANH ĐÚNG 6/7 ngày (ngày quà — ô cuối —
+     * CÒN TRỐNG), để chơi xong 1 màn NGAY HÔM NAY là đủ điều kiện thắp chuỗi ngày 7/nhận quà — xác
+     * nhận từ user: "1 nút khi bấm vào thì chuỗi trong tuần nhảy đến 6 ngày và chơi 1 màn nữa là
+     * thắp được chuỗi ngày thứ 7... chỉ liên quan đến dayrow, không liên quan đến số chuỗi". KHÔNG
+     * đụng gì tới streak/bestStreak. streakLastDate đặt về HÔM QUA (không phải hôm nay) để lần chơi
+     * tiếp theo (hôm nay) tính đúng gap=1 ở advanceStreak(), số chuỗi tiếp tục tự nhiên thay vì bị
+     * coi là đứt quãng rồi reset về 1. */
+    setTestWeekToDaySix(now: string = today()): void {
+        const anchor = addDays(now, -(StreakConfig.windowDays - 1));
+        this.data.streakAnchorDate = anchor;
+        this.data.checkedDates = [];
+        for (let i = 0; i < StreakConfig.windowDays - 1; i++) {
+            this.data.checkedDates.push(addDays(anchor, i));
+        }
+        this.data.rewardClaimedForAnchor = false;
+        this.data.streakLastDate = addDays(now, -1);
+    }
+
+    /** DÙNG ĐỂ TEST — bỏ dấu "đã chơi hôm nay" khỏi checkedDates, KHÔNG đụng gì tới streak/
+     * bestStreak/anchor — xác nhận từ user: "giữ nguyên số streak, chỉ đánh dấu chưa chơi hôm nay"
+     * (khác hẳn resetStreak() — đưa streak về 0 hoàn toàn). Render lại màn Streak sau lệnh này sẽ
+     * rơi vào enterLockedMode() (board.streak>0 && !playedToday — "chơi để giữ chuỗi"), test lại
+     * được luồng thắp chuỗi (tap sun) nhiều lần mà KHÔNG mất số đã tích luỹ.
+     *
+     * streakLastDate PHẢI lùi về HÔM QUA (không giữ nguyên hôm nay) — nếu không, recordActivity()
+     * ở lần "chơi lại" kế tiếp sẽ thấy streakLastDate===now ngay dòng đầu tiên và return sớm
+     * (firstToday:false, coi như "đã ghi nhận hôm nay rồi"), streak KHÔNG cộng thêm dù checkedDates
+     * đã bị gỡ dấu — lùi về hôm qua để advanceStreak() tính đúng gap=1 (cộng dồn tiếp, KHÔNG đứt
+     * quãng), y hệt kỹ thuật đã dùng ở setTestWeekToDaySix(). */
+    setTestNotPlayedToday(now: string = today()): void {
+        const index = this.data.checkedDates.indexOf(now);
+        if (index >= 0) this.data.checkedDates.splice(index, 1);
+        if (this.data.streakLastDate === now) this.data.streakLastDate = addDays(now, -1);
+    }
+
     resetStreak(): void {
         this.data.streak = 0;
         this.data.bestStreak = 0;

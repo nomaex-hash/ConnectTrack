@@ -381,6 +381,31 @@ export class LeaderboardManager extends Component {
     this.checkWeekRollover();
   }
 
+  /** DÙNG ĐỂ TEST — đưa Weekly về ĐÚNG trạng thái "chưa từng kích hoạt giải đấu" (người chơi hoàn
+   * toàn mới), KHÁC resetWeeklyForTesting() (giả lập tuần VỪA HẾT GIỜ — vẫn ĐANG kích hoạt).
+   * tournamentStartMs=0 (checkWeekRollover() tự đứng yên hoàn toàn, không tính hết hạn — xem đó),
+   * currWeekScore/bot Weekly/thành tích đều về 0 — y hệt save mới cài app. Gọi từ GameManager.
+   * setTestHighestLevel() khi nhảy test tới level <= GameConfig.leaderboardUnlockLevel (xác nhận
+   * từ user: "nhảy tới level 10 thắng vẫn phải thấy đúng luồng người chơi mới, không phải dữ liệu
+   * leaderboard cũ còn sót lại từ lần test trước"). */
+  resetToNeverActivatedForTesting(): void {
+    if (!this.leaderboardDataSave) return;
+    this.leaderboardDataSave.tournamentStartMs = 0;
+    this.leaderboardDataSave.currWeekScore = 0;
+    this.leaderboardDataSave.pendingResultRank = 0;
+    this.leaderboardDataSave.lastOfflineCheckMs = 0;
+    this.leaderboardDataSave.timesTop1 = 0;
+    this.leaderboardDataSave.timesTop2 = 0;
+    this.leaderboardDataSave.timesTop3 = 0;
+    this.leaderboardDataSave.claimedReward = 0;
+    this.leaderboardDataSave.countWeek = 0;
+    this.leaderboardDataSave.lastWeekCheckReward = 0;
+    this.fakeBotScores = null;
+    this.fakeBotWeeklyIdentities = null;
+    this.fakeBotWeek = -1;
+    this.setSaveLeaderboardData();
+  }
+
   /** Cache điểm 50 bot giả trong tuần — LƯU FILE (xem leaderboardDataSave.fakeBotScores/
    * setSaveLeaderboardData), không còn mất khi tắt app. Bot chỉ "chơi thêm" MỖI KHI người chơi
    * thật thắng 1 màn (xem addCurrWeekScore) — đồng bộ tốc độ leo hạng của bot theo đúng nhịp chơi
@@ -535,10 +560,13 @@ export class LeaderboardManager extends Component {
    * thang điểm MỚI này (xem WeeklyLeagueConfig.ts). */
   addCurrWeekScore(weeklyScore: number){
     this.checkWeekRollover();
-    // Nếu đang có pendingResultRank (tuần cũ đã hết giờ, đang chờ popup Claim/Continue xử lý) —
-    // KHÔNG cộng thêm điểm/bot Weekly nữa (giải đấu tuần đó coi như đã kết thúc, chưa có giải đấu
-    // mới để cộng vào) — Global vẫn cộng bình thường (không có khái niệm "kết thúc" theo tuần).
-    if (this.leaderboardDataSave.pendingResultRank === 0) {
+    // BUG đã sửa (báo lỗi của user: "vừa mở Leaderboard ra đã lên Top 1 dù chưa bấm kích hoạt giải
+    // đấu" — game gốc CHỈ tính điểm Weekly kể từ lúc bấm kích hoạt, không tính các màn chơi TRƯỚC
+    // đó): thêm điều kiện hasTournamentActivated() — trước đây CHỈ gate theo pendingResultRank,
+    // nên currWeekScore/bot Weekly vẫn âm thầm cộng dồn cho người chơi MỚI (tournamentStartMs==0)
+    // ngay từ màn 1, trong khi đúng ra bảng Weekly phải "đứng yên hoàn toàn" tới lúc kích hoạt. Chỉ
+    // gate phần WEEKLY này — Global (dưới đây) không có khái niệm kích hoạt, vẫn cộng bình thường.
+    if (this.leaderboardDataSave.pendingResultRank === 0 && this.hasTournamentActivated()) {
       this.leaderboardDataSave.currWeekScore += Math.max(0, weeklyScore);
       this.rollWeeklyOnlineGrowth(this.getFakeBotWeeklyScores(), 'win', this.leaderboardDataSave.currWeekScore);
     }
@@ -565,7 +593,9 @@ export class LeaderboardManager extends Component {
    * win khi user lose" trong bảng thiết kế — trước đây bot ĐỨNG YÊN hoàn toàn khi người chơi thua. */
   addLoseAttempt(): void {
     this.checkWeekRollover();
-    if (this.leaderboardDataSave.pendingResultRank === 0) {
+    // BUG đã sửa (cùng loại với addCurrWeekScore()) — thêm hasTournamentActivated(), bảng Weekly
+    // phải đứng yên hoàn toàn (kể cả bot lúc thua) tới lúc kích hoạt giải đấu.
+    if (this.leaderboardDataSave.pendingResultRank === 0 && this.hasTournamentActivated()) {
       this.rollWeeklyOnlineGrowth(this.getFakeBotWeeklyScores(), 'lose', this.leaderboardDataSave.currWeekScore);
     }
     this.rollGlobalOnlineGrowth(this.getFakeBotGlobalScores(), 'lose', localConfig.instance.currLevelUnlock);

@@ -170,7 +170,7 @@ export class HintController extends Component {
             hint.action === HintAction.MarkCells
                 ? liftFullHighlight
                     ? liftableHighlightCells
-                    : [...markPreviewCells, ...dogCells, ...contradictionExtraCells]
+                    : markPreviewCells.concat(dogCells, contradictionExtraCells)
                 : hint.targetCells;
         this.board?.liftCellsTo(this.resolveSpotlightLayer(), spotlightCells);
 

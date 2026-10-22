@@ -47,7 +47,7 @@ export class HintSystem {
                 kind: HintKind.SingleCandidate,
                 action: HintAction.MarkCells,
                 targetCells,
-                highlightCells: [dog, ...zone],
+                highlightCells: [dog].concat(zone),
                 regionIds: [board.regionOf(dog)],
             };
         }
@@ -151,7 +151,7 @@ export class HintSystem {
                 kind: HintKind.FullLineColor,
                 action: HintAction.MarkCells,
                 targetCells,
-                highlightCells: [...cellsInLine, ...targetCells],
+                highlightCells: cellsInLine.concat(targetCells),
                 regionIds: [region],
                 lines: [{ axis, index: line }],
             };
@@ -187,7 +187,7 @@ export class HintSystem {
             kind: HintKind.Contradiction,
             action: HintAction.MarkCells,
             targetCells: culprits,
-            highlightCells: [...culprits, ...victimCandidates],
+            highlightCells: culprits.concat(victimCandidates),
             // Ô ứng viên CÒN LẠI của màu nạn nhân — chỉ minh hoạ, không nằm trong targetCells (xem
             // core/Hint.ts để biết HintController render khác nhau tuỳ culprits.length).
             eliminatedCandidateCells: victimCandidates,
@@ -322,7 +322,9 @@ function* combinations<T>(items: readonly T[], k: number): Generator<T[]> {
     }
     for (let i = 0; i <= items.length - k; i++) {
         for (const rest of combinations(items.slice(i + 1), k - 1)) {
-            yield [items[i]!, ...rest];
+            const combo: T[] = [items[i]!];
+            for (const r of rest) combo.push(r);
+            yield combo;
         }
     }
 }

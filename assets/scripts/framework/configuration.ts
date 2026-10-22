@@ -9,13 +9,14 @@ import { InfoDay } from "../calendar/InfoDay";
 import { ConstantKeySaves } from "../constantKeySaves";
 import { FBInstantManager } from "../common/FBInstantManager";
 import { GameResource } from "../datainfo/GameResource";
+import { connectTracksLocalStore } from "../infrastructure/persistence/connectTracksLocalStore";
 // import { EventScoreDataInfo } from "../tournament/EventScoreDataInfo";
 const { ccclass } = _decorator;
 
 declare const jsb: any;
 export type ValueObj = { [name: string]: string };
 
-export type Constructor<T = unknown> = new (...args: any[]) => T;
+export type Constructor<T = unknown> = new () => T;
 export type AssetType<T = Asset> = Constructor<T>;
 export type LoadCompleteCallback<T> = (error: Error | null, asset: T) => void;
 
@@ -53,7 +54,8 @@ export class configuration {
 
                 content = valueObject[this.KEY_CONFIG];
             } else {
-                content = sys.localStorage.getItem(this.KEY_CONFIG);
+                // Đã gộp vào document duy nhất `connecttracks:save:v1` (key "MagicSort" cũ được tự migrate).
+                content = connectTracksLocalStore.readLegacyConfig();
             }
             // console.log("configurationconfigurationconfiguration");
             // console.log(content);
@@ -146,8 +148,11 @@ export class configuration {
             configuration.instance.markSave = false;
 
             if (!sys.isNative) {
-                const ls = sys.localStorage;
-                ls.setItem(configuration.instance.KEY_CONFIG, zipStr);
+                try {
+                    connectTracksLocalStore.writeLegacyConfig(zipStr);
+                } catch (error) {
+                    console.warn('[configuration] Không ghi được config xuống localStorage.', error);
+                }
                 return;
             }
 

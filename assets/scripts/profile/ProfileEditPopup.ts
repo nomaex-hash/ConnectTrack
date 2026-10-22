@@ -22,14 +22,18 @@ const { ccclass, property } = _decorator;
 const FRAME_COUNT_BEFORE_LEADERBOARD_UNLOCK = 4;
 
 /**
- * Avatar/Frame: lưu ngay trong setUpdateSelectedItem() khi bấm 1 ô (Frame khoá theo level thì
- * ItemProfileDetail tự chặn tap, không dispatch PROFILE_POPUP_SELECT_ITEM lên tới đây) — nút Save
- * KHÔNG liên quan tới 2 mục này.
+ * Avatar/Frame: chọn ô (setUpdateSelectedItem, qua PROFILE_POPUP_SELECT_ITEM) CHỈ preview cục bộ
+ * (currAvatarSelectedID/currFrameSelectedID + showInfo() đổi icon xem trước) — KHÔNG gọi
+ * ProfileManager.setAvatar/setFrame ngay. Chỉ thật sự lưu khi bấm Save (onTapSave). Đóng popup mà
+ * CHƯA bấm Save (hidePopup, kể cả qua nút Close) sẽ tự revert về savedAvatarSelectedID/
+ * savedFrameSelectedID — mốc giá trị đã lưu gần nhất, chụp lại mỗi lần mở popup (showProfilePopup)
+ * và mỗi lần Save thành công.
  *
  * Tên: có 2 đường lưu dùng CHUNG commitName() — (1) EditBox tự kết thúc chỉnh sửa (chạm ra
  * ngoài / bấm Done trên bàn phím), xem onNameEditingEnded(), KHÔNG đóng popup; (2) bấm nút Save
- * (onTapSave, node "btnSave" có sẵn trong prefab nhưng trước đây bị ẩn/không wire), commitName()
- * xong mới đóng popup — tên rỗng thì báo lỗi, GIỮ popup mở, không đóng.
+ * (onTapSave, node "btnSave" có sẵn trong prefab nhưng trước đây bị ẩn/không wire) — lưu CẢ tên
+ * LẪN avatar/frame đang preview rồi đóng popup; tên rỗng thì commitName() báo lỗi, GIỮ popup mở,
+ * không lưu avatar/frame, không đóng.
  *
  * Hiệu ứng hiện/ẩn: KHÔNG dùng tween scale/opacity có sẵn của BasePopup nữa (isTweenPopup=false),
  * chuyển hẳn sang PopupAnimation (component gắn trực tiếp trên node popup này) để đồng bộ với
@@ -63,6 +67,10 @@ export class ProfileEditPopup extends BasePopup {
 
     currAvatarSelectedID:number = 0;
     currFrameSelectedID:number = 0;
+
+    private savedAvatarSelectedID = 0;
+    private savedFrameSelectedID = 0;
+    private saveCompleted = false;
 
     defaultName:string = '';
 
@@ -146,6 +154,9 @@ export class ProfileEditPopup extends BasePopup {
         if (this.nodeNotifyValidName) this.nodeNotifyValidName.active = false;
         if (this.bgNameErrorSprite) this.bgNameErrorSprite.active = false;
         this.defaultName = ProfileManager.instance.getName();
+        this.savedAvatarSelectedID = ProfileManager.instance.getAvatarSelectedID();
+        this.savedFrameSelectedID = ProfileManager.instance.getFrameSelectedID();
+        this.saveCompleted = false;
         this.contentGroup.destroyAllChildren();
         this.arrItemProfiles = [];
         super.showPopup(_cbWhenClose);
@@ -191,19 +202,16 @@ export class ProfileEditPopup extends BasePopup {
             for(let i = 0; i < this.arrItemProfiles.length; i++) {
                 this.arrItemProfiles[i].setUpdateSelectedItem(selectedID);
             }
-            ProfileManager.instance.setAvatar(selectedID);
         }
         else if(this.currTab == PROFILE_TAB_TYPE.FRAME) {
             this.currFrameSelectedID = selectedID;
             for(let i = 0; i < this.arrItemProfiles.length; i++) {
                 this.arrItemProfiles[i].setUpdateSelectedItem(selectedID);
             }
-            ProfileManager.instance.setFrame(selectedID);
         }
 
         this.showInfo();
-        clientEvent.dispatchEvent(Constants.PROFILE_UPDATE);
-        PGSPlayInstantManager.instance?.UpdatePlayerInfo(ProfileManager.instance.getName(), ProfileManager.instance.getAvatarURL());
+        // Chỉ preview trong popup; không phát sự kiện/save dữ liệu thật cho tới khi bấm Save.
     }
 
     onTouchEditName(){
@@ -215,14 +223,19 @@ export class ProfileEditPopup extends BasePopup {
     /** Lưu tên khi người chơi chạm ra ngoài EditBox / bấm Done trên bàn phím — KHÔNG đóng popup
      * (khác onTapSave). Tên rỗng thì KHÔNG lưu, giữ nguyên tên cũ và báo lỗi. */
     onNameEditingEnded(): void {
-        this.commitName();
+        this.validatePendingName();
     }
 
-    /** Bấm nút Save (btnSave): lưu tên đang nhập RỒI đóng popup — tên rỗng thì commitName() báo
-     * lỗi và trả về false, GIỮ popup mở để người chơi sửa lại, không đóng. Avatar/Frame không cần
-     * xử lý gì thêm ở đây vì đã tự lưu ngay lúc bấm chọn (setUpdateSelectedItem). */
+    /** Bấm nút Save (btnSave): lưu tên đang nhập + avatar/frame đang preview RỒI đóng popup — tên
+     * rỗng thì commitName() báo lỗi và trả về false, GIỮ popup mở để người chơi sửa lại, KHÔNG lưu
+     * avatar/frame, không đóng. */
     onTapSave(): void {
         if (!this.commitName()) return;
+        ProfileManager.instance?.setAvatar(this.currAvatarSelectedID);
+        ProfileManager.instance?.setFrame(this.currFrameSelectedID);
+        this.savedAvatarSelectedID = this.currAvatarSelectedID;
+        this.savedFrameSelectedID = this.currFrameSelectedID;
+        this.saveCompleted = true;
         this.hidePopup();
     }
 
@@ -232,7 +245,8 @@ export class ProfileEditPopup extends BasePopup {
         if (!this.editName || !ProfileManager.instance) return false;
         const name = this.editName.string.trim();
         if (!name) {
-            this.editName.string = this.defaultName;
+            // Giữ ô nhập rỗng để người chơi sửa trực tiếp. Tên đã lưu chỉ được
+            // khôi phục khi thật sự đóng popup mà không Save.
             if (this.bgNameErrorSprite) this.bgNameErrorSprite.active = true;
             if (this.nodeNotifyValidName) this.nodeNotifyValidName.active = true;
             clientEvent.dispatchEvent(Constants.SHOW_NOTIFICATION, "Please update your name to continue!");
@@ -250,6 +264,13 @@ export class ProfileEditPopup extends BasePopup {
         clientEvent.dispatchEvent(Constants.PROFILE_UPDATE);
         PGSPlayInstantManager.instance?.UpdatePlayerInfo(ProfileManager.instance.getName(), ProfileManager.instance.getAvatarURL());
         return true;
+    }
+
+    private validatePendingName(): boolean {
+        const valid = !!this.editName?.string.trim();
+        if (this.bgNameErrorSprite) this.bgNameErrorSprite.active = !valid;
+        if (this.nodeNotifyValidName) this.nodeNotifyValidName.active = !valid;
+        return valid;
     }
 
     showInfo(){
@@ -358,6 +379,14 @@ export class ProfileEditPopup extends BasePopup {
      * PopupAnimation chạy xong hiệu ứng biến mất rồi mới thực sự đóng popup (nút Close cũng đi
      * qua đường này vì BasePopup.touchClose() gọi thẳng this.hidePopup()). */
     hidePopup(): void {
+        if (!this.saveCompleted && ProfileManager.instance) {
+            ProfileManager.instance.setAvatar(this.savedAvatarSelectedID);
+            ProfileManager.instance.setFrame(this.savedFrameSelectedID);
+            this.currAvatarSelectedID = this.savedAvatarSelectedID;
+            this.currFrameSelectedID = this.savedFrameSelectedID;
+            if (this.editName) this.editName.string = this.defaultName;
+        }
+        this.saveCompleted = false;
         const anim = this.resolveAnimation();
         if (!anim) {
             super.hidePopup();

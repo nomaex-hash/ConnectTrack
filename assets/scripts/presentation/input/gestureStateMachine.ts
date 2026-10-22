@@ -220,7 +220,7 @@ export class GestureStateMachine {
         if (steps.length === 0) {
             return;
         }
-        const visited = [...this.state.visited];
+        const visited = this.state.visited.slice();
         for (const cell of steps) {
             if (!visited.includes(cell)) {
                 visited.push(cell);

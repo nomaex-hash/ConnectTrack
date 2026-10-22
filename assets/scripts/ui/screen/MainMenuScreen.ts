@@ -336,6 +336,12 @@ export class MainMenuScreen extends UIScreen {
             this.leaderboardButtonNode.active = progression.isCompleted(GameConfig.leaderboardUnlockLevel);
         }
 
+        // "Streak mở ở level 5, thắng xong level 5 thì các hoạt động liên quan Streak mới kích
+        // hoạt" (xác nhận từ user) — cùng kiểu isCompleted như leaderboardButtonNode ở trên.
+        if (this.streakButtonNode) {
+            this.streakButtonNode.active = progression.isCompleted(GameConfig.streakUnlockLevel);
+        }
+
         this.refreshStarterPackButton();
     };
 

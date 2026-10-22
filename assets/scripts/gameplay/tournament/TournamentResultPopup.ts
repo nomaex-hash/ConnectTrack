@@ -123,8 +123,12 @@ export class TournamentResultPopup extends UIPopup<TournamentResultSnapshot> {
     }
 
     protected onShow(data: TournamentResultSnapshot): void {
-        // Không có bước tải nào — tắt loading NGAY (UIPopup.showLoading() tự bật lúc show()).
-        this.hideLoading();
+        // BUG đã sửa ("mở lên bị trống và lag" — avatar/frame hạng 1-3 tải BẤT ĐỒNG BỘ qua
+        // MConfigResourceUtils.getProfileSpriteFrame() ở refreshTopAvatars()/loadAvatarInto(), vẫn
+        // đang trống (null) lúc hideLoading() cũ gọi NGAY ở đây — hideLoading() giờ dời xuống cuối,
+        // CHỈ gọi sau khi refreshTopAvatars() báo cả 3 slot (avatar+frame) đã tải xong, cùng chính
+        // sách "chỉ tắt icon loading khi mọi node trong prefab đã ổn định" đã áp cho LeaderboardPopup/
+        // LeaderboardPreviewPopup (xác nhận từ user).
         const timesAchieved = LegacyLeaderboardManager.instance?.getTimesAchievedRank(data.rank) ?? 0;
         const unitText = Localization.get(timesAchieved === 1 ? L10N.tournament.unitOne : L10N.tournament.unitMany);
         const countText = timesAchieved < 10 ? `0${timesAchieved}` : `${timesAchieved}`;
@@ -149,7 +153,7 @@ export class TournamentResultPopup extends UIPopup<TournamentResultSnapshot> {
         if (this.titleShadowLabel) this.titleShadowLabel.string = plainTitle;
 
         this.highlightMedal(data.rank);
-        this.refreshTopAvatars();
+        void this.refreshTopAvatars().then(() => this.hideLoading());
         this.updateBoxForRank(data.rank);
     }
 
@@ -168,9 +172,9 @@ export class TournamentResultPopup extends UIPopup<TournamentResultSnapshot> {
      * phải top3 của giải đấu MỚI (chưa kích hoạt lúc popup này đang hiện). Ghép người chơi + bot
      * theo điểm rồi lấy 3 người cao nhất — tự nhiên khớp đúng elemtn đã quyết định pendingResultRank.
      */
-    private refreshTopAvatars(): void {
+    private refreshTopAvatars(): Promise<void> {
         const legacy = LegacyLeaderboardManager.instance;
-        if (!legacy) return;
+        if (!legacy) return Promise.resolve();
 
         const botScores = legacy.getFakeBotWeeklyScores();
         const botIdentities = legacy.getFakeBotWeeklyIdentities();
@@ -188,18 +192,23 @@ export class TournamentResultPopup extends UIPopup<TournamentResultSnapshot> {
             { avatar: this.avatarRank3, frame: this.frameRank3 },
         ];
 
+        const loads: Promise<void>[] = [];
         for (let i = 0; i < slots.length; i++) {
             const entry = entries[i];
             if (!entry) continue;
-            this.loadAvatarInto(slots[i].avatar, slots[i].frame, entry.isMyRank, entry.avatarURL);
+            loads.push(this.loadAvatarInto(slots[i].avatar, slots[i].frame, entry.isMyRank, entry.avatarURL));
         }
+        return Promise.all(loads).then(() => {});
     }
 
     /** Nạp avatar + khung — Y HỆT logic ItemLeaderboardBase.loadAvatar() (đọc chung 1 nguồn dữ
      * liệu ProfileManager/MConfigResourceUtils để đảm bảo avatar hiện ở đây khớp avatar thật hiện
      * ở Leaderboard), chỉ khác là nhận thẳng avatarURL/isMyRank thay vì phải có component
      * ItemRankInfo đầy đủ. */
-    private loadAvatarInto(avatarSprite: Sprite | null, frameSprite: Sprite | null, isMyRank: boolean, avatarURL: string): void {
+    /** Trả về Promise CHỈ xong khi cả avatar LẪN frame đã tải xong (thành công hay lỗi đều
+     * resolve() — không treo mãi nếu 1 ảnh lỗi) — cho refreshTopAvatars() gom lại, tắt loadingIcon
+     * đúng lúc mọi avatar/frame đã ổn định (xác nhận từ user). */
+    private loadAvatarInto(avatarSprite: Sprite | null, frameSprite: Sprite | null, isMyRank: boolean, avatarURL: string): Promise<void> {
         let pathAvatar = '';
         let pathFrame = '';
         if (isMyRank) {
@@ -218,18 +227,23 @@ export class TournamentResultPopup extends UIPopup<TournamentResultSnapshot> {
         if (avatarSprite) avatarSprite.spriteFrame = null;
         if (frameSprite) frameSprite.spriteFrame = null;
 
-        MConfigResourceUtils.getProfileSpriteFrame(PROFILE_TAB_TYPE.AVATAR, pathAvatar, (err: unknown, spriteFrame) => {
-            if (err) { console.log(err); return; }
-            // Guard .node — popup có thể đã đóng/huỷ TRƯỚC KHI callback load ảnh bất đồng bộ này
-            // chạy tới (giống hệt lý do ItemLeaderboardBase.loadAvatar() guard tương tự).
-            if (!avatarSprite || !avatarSprite.node) return;
-            avatarSprite.spriteFrame = spriteFrame;
+        const avatarLoaded = new Promise<void>(resolve => {
+            MConfigResourceUtils.getProfileSpriteFrame(PROFILE_TAB_TYPE.AVATAR, pathAvatar, (err: unknown, spriteFrame) => {
+                if (err) { console.log(err); resolve(); return; }
+                // Guard .node — popup có thể đã đóng/huỷ TRƯỚC KHI callback load ảnh bất đồng bộ này
+                // chạy tới (giống hệt lý do ItemLeaderboardBase.loadAvatar() guard tương tự).
+                if (avatarSprite && avatarSprite.node) avatarSprite.spriteFrame = spriteFrame;
+                resolve();
+            });
         });
-        MConfigResourceUtils.getProfileSpriteFrame(PROFILE_TAB_TYPE.FRAME, pathFrame, (err: unknown, spriteFrame) => {
-            if (err) { console.log(err); return; }
-            if (!frameSprite || !frameSprite.node) return;
-            frameSprite.spriteFrame = spriteFrame;
+        const frameLoaded = new Promise<void>(resolve => {
+            MConfigResourceUtils.getProfileSpriteFrame(PROFILE_TAB_TYPE.FRAME, pathFrame, (err: unknown, spriteFrame) => {
+                if (err) { console.log(err); resolve(); return; }
+                if (frameSprite && frameSprite.node) frameSprite.spriteFrame = spriteFrame;
+                resolve();
+            });
         });
+        return Promise.all([avatarLoaded, frameLoaded]).then(() => {});
     }
 
     /** Hiện 3 huy chương kiểu POP-IN — Y HỆT hiệu ứng dòng Top 3 thật ở Leaderboard

@@ -35,6 +35,21 @@ export class CurvedLabel extends Component {
     anglePerChar = 8;
 
     @property({
+        min: 0,
+        tooltip: 'Khoảng cách thêm giữa hai ký tự theo pixel. Để 0 để chữ giữ khoảng cách tự nhiên của Label.',
+    })
+    characterGapPx = 0;
+
+    @property({ min: 0, tooltip: 'Khoảng cách cố định giữa mép hai ký tự. 0 dùng khoảng cách tự nhiên theo bề rộng glyph.' })
+    fixedCharacterSpacingPx = 0;
+
+    @property({ tooltip: 'Dùng cùng một bước ngang cho mọi ký tự, tránh glyph rộng/hẹp bị chồng sau khi xoay.' })
+    uniformCharacterAdvance = true;
+
+    @property({ min: 0, tooltip: 'Hệ số tăng độ nghiêng theo đường cong. 1 là tự nhiên, 2 là nghiêng rõ hơn.' })
+    rotationStrength = 2;
+
+    @property({
         tooltip:
             'Chỉnh tay tâm cong lệch trái/phải (px) — dương dịch tâm sang PHẢI (chữ cong ' +
             'nhiều hơn bên trái), âm dịch sang TRÁI. Dùng khi thấy lệch nhẹ do bo/viền chữ ' +
@@ -65,7 +80,9 @@ export class CurvedLabel extends Component {
         const chars = Array.from(text);
         const sign = this.curveUp ? 1 : -1;
         // Trị tuyệt đối để tránh chuỗi bị lật ngược nếu Inspector lỡ để giá trị âm.
-        const gapPx = (Math.abs(this.anglePerChar) * Math.PI * this.radius) / 180;
+        // Không dùng bán kính để kéo giãn ký tự. Radius chỉ quyết định độ cong;
+        // khoảng cách giữa chữ được giữ cố định như một Label thông thường.
+        const gapPx = Math.max(0, this.characterGapPx);
 
         // Tạo node + set string cho từng ký tự trước, NHƯNG chưa định vị/hiện ngay — đo bề
         // rộng thật (UITransform.width) đôi khi chưa ổn định với 1-2 ký tự cuối nếu đọc NGAY
@@ -83,6 +100,7 @@ export class CurvedLabel extends Component {
             const ch = chars[i]!;
             label.string = ch === ' ' ? ' ' : ch;
             label.updateRenderData(true);
+            this.expandVerticalBounds(node, label);
 
             const opacity = node.getComponent(UIOpacity) ?? node.addComponent(UIOpacity);
             opacity.opacity = 0;
@@ -108,8 +126,19 @@ export class CurvedLabel extends Component {
         // khoảng cách thực tế giữa các ký tự đều nhau, không phụ thuộc bề rộng ký tự.
         const centersArc: number[] = [];
         let arc = 0;
+        let widest = 0;
+        for (const width of widths) {
+            if (width > widest) widest = width;
+        }
+        const uniformAdvance = widest +
+            (this.fixedCharacterSpacingPx > 0 ? this.fixedCharacterSpacingPx : this.pendingGapPx);
         for (let i = 0; i < nodes.length; i++) {
-            if (i > 0) arc += widths[i - 1]! / 2 + widths[i]! / 2 + this.pendingGapPx;
+            if (i > 0) {
+                arc += this.uniformCharacterAdvance
+                    ? uniformAdvance
+                    : widths[i - 1]! / 2 + widths[i]! / 2 +
+                      (this.fixedCharacterSpacingPx > 0 ? this.fixedCharacterSpacingPx : this.pendingGapPx);
+            }
             centersArc.push(arc);
         }
         // Căn giữa theo MÉP TRÁI của ký tự đầu và MÉP PHẢI của ký tự cuối (không phải theo
@@ -132,7 +161,7 @@ export class CurvedLabel extends Component {
             const x = this.radius * Math.sin(angleRad);
             const y = sign * this.radius * (Math.cos(angleRad) - 1);
             node.setPosition(x, y, 0);
-            node.angle = -sign * angleDeg;
+            node.angle = -sign * angleDeg * this.rotationStrength;
 
             const opacity = node.getComponent(UIOpacity);
             if (opacity) opacity.opacity = 255;
@@ -145,5 +174,11 @@ export class CurvedLabel extends Component {
         }
         this.charNodes.length = 0;
         this.pendingNodes = [];
+    }
+
+    private expandVerticalBounds(node: Node, label: Label): void {
+        const transform = node.getComponent(UITransform);
+        if (!transform) return;
+        transform.setContentSize(transform.width, Math.max(transform.height, label.fontSize * 1.65));
     }
 }

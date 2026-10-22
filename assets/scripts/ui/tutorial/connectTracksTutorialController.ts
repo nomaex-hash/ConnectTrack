@@ -79,6 +79,14 @@ export class ConnectTracksTutorialController extends Component {
     @property({ type: ConnectTracksVictoryView, tooltip: 'CÙNG instance ConnectTracksVictoryView mà GameplayScreen dùng — tái dùng NGUYÊN luồng thắng thật ở bước cuối.' })
     private victory: ConnectTracksVictoryView | null = null;
 
+    /** Scale GỐC của board.node TRƯỚC khi tutorial nhân thêm boardScaleOverride — chụp lại trong
+     * begin() để cancel() trả lại đúng, tránh rò rỉ sang level thật tiếp theo. */
+    private boardOriginalScale: Vec3 | null = null;
+
+    /** Vị trí GỐC của board.node TRƯỚC khi tutorial cộng thêm boardOffsetOverride — chụp lại trong
+     * begin() để cancel() trả lại đúng, tránh rò rỉ sang level thật tiếp theo. */
+    private boardOriginalPosition: Vec3 | null = null;
+
     @property({ type: ConnectTracksTrainView, tooltip: 'CÙNG instance ConnectTracksTrainView (tàu thắng thật) mà board dùng — tutorial tự chỉnh scale/tốc độ RIÊNG cho board 4x4 nhỏ qua 2 property bên dưới, rồi trả lại mặc định khi xong.' })
     private trainView: ConnectTracksTrainView | null = null;
 
@@ -88,17 +96,46 @@ export class ConnectTracksTutorialController extends Component {
     @property({ min: 0.01, tooltip: 'Hệ số nhân THÊM vào tốc độ tàu đã tính (min/maxSpeedPxPerSecond) — RIÊNG cho màn tutorial. 1 = giữ nguyên như gameplay thật.' })
     private trainSpeedOverride = 1;
 
+    @property({ min: 0.01, tooltip: 'Hệ số nhân THÊM vào scale hiện tại của board (board.node) — RIÊNG cho màn tutorial, trả lại scale cũ khi thoát tutorial. 1 = giữ nguyên như gameplay thật.' })
+    private boardScaleOverride = 1;
+
+    @property({
+        type: Vec3,
+        tooltip:
+            'Lệch vị trí (x/y, đơn vị local của board.node.parent) CỘNG THÊM vào vị trí hiện tại ' +
+            'của board — RIÊNG cho màn tutorial, trả lại đúng vị trí cũ khi thoát tutorial. (0,0) = ' +
+            'giữ nguyên như gameplay thật.',
+    })
+    private boardOffsetOverride: Vec3 = new Vec3(0, 0, 0);
+
     @property({ type: RichText, tooltip: 'RichText khung hướng dẫn — dùng RichText (không phải Label) vì text có chèn BBCode <color=#..> để tô đúng từ khoá.' })
     private textLabel: RichText | null = null;
 
-    @property({ type: Node, tooltip: 'Node khung hướng dẫn (cha của textLabel) — nhấp nháy opacity 1 nhịp khi người chơi chạm ra ngoài khu vực được phép.' })
+    @property({ type: Node, tooltip: 'Node khung hướng dẫn (cha của textLabel).' })
     private textPanel: Node | null = null;
 
-    @property({ type: Button, tooltip: 'Nút "Tiếp theo"/"Thử ngay" — ẩn hẳn từ bước double-tap đầu tiên trở đi (xác nhận từ user).' })
+    @property({
+        type: Node,
+        tooltip:
+            'Node THỰC SỰ được scale khi người chơi chạm ra ngoài khu vực được phép (phóng to rồi ' +
+            'hơi lún xuống rồi về scale gốc 1 nhịp). Để TRỐNG thì dùng luôn textPanel ở trên. Nếu nút ' +
+            '"Tiếp theo" đang là CON của textPanel, PHẢI gán 1 node con KHÁC của textPanel vào đây ' +
+            '(gồm nền + chữ, KHÔNG bao gồm nút) — nếu không, scale của textPanel sẽ kéo theo scale ' +
+            'của nút (xác nhận từ user: nút không được bị nhấp nháy theo).',
+    })
+    private textPanelBlinkTarget: Node | null = null;
+
+    @property({ type: Button, tooltip: 'Nút "Tiếp theo"/"Thử ngay" — ẩn hẳn từ bước double-tap đầu tiên trở đi (xác nhận từ user). Tự nhấp nháy scale liên tục (2 property bên dưới) suốt lúc đang hiện.' })
     private nextButton: Button | null = null;
 
     @property({ type: Label, tooltip: 'Label TRÊN nút ở trên — đổi chữ "Tiếp theo" -> "Thử ngay" ở bước hiện preview lời giải.' })
     private nextButtonLabel: Label | null = null;
+
+    @property({ min: 0.01, tooltip: 'Thời gian (giây) MỖI CHIỀU của 1 nhịp nhấp nháy scale nút Tiếp theo/Thử ngay (to lên rồi về lại = 2 lần giá trị này).' })
+    private nextButtonBlinkSpeed = 0.5;
+
+    @property({ min: 1, tooltip: 'Scale TO NHẤT của nút lúc nhấp nháy (1 = không đổi gì).' })
+    private nextButtonBlinkScale = 1.08;
 
     @property({
         min: 0,
@@ -188,6 +225,7 @@ export class ConnectTracksTutorialController extends Component {
 
     @property({ type: Color, tooltip: 'Màu viền xám quanh vùng ô được nhấc — mặc định giống màu viền của Hint.' })
     private liftBorderColor: Color = new Color(124, 126, 150, 255);
+
 
     @property({
         min: 0,
@@ -299,7 +337,12 @@ export class ConnectTracksTutorialController extends Component {
         // THỰC SỰ là con của this.node — nếu textPanel/nextButton được author ở MỘT nhánh khác của
         // scene (chỉ tham chiếu qua @property, không phải con thật), set active trên this.node
         // không hề lan tới chúng. Tắt THẲNG từng node, không phụ thuộc cấu trúc cha-con thế nào.
-        if (this.textPanel && isValid(this.textPanel, true)) this.textPanel.active = false;
+        if (this.textPanel && isValid(this.textPanel, true)) {
+            Tween.stopAllByTarget(this.textPanel);
+            this.textPanel.setScale(1, 1, 1);
+            this.textPanel.active = false;
+        }
+        this.stopButtonBlink();
         if (this.nextButton && isValid(this.nextButton.node, true)) this.nextButton.node.active = false;
         if (this.tutorialHintCluster && isValid(this.tutorialHintCluster, true)) this.tutorialHintCluster.active = false;
         if (this.tutorialHintPrompt && isValid(this.tutorialHintPrompt, true)) this.tutorialHintPrompt.active = false;
@@ -329,6 +372,21 @@ export class ConnectTracksTutorialController extends Component {
         // Trả lại mặc định (1 = không đổi gì) — cùng instance train với gameplay thật.
         this.trainView?.setScaleMultiplierOverride(1);
         this.trainView?.setSpeedMultiplierOverride(1);
+        // Trả lại scale GỐC của board — cùng instance board với gameplay thật, không được rò rỉ
+        // boardScaleOverride sang level thật tiếp theo.
+        if (this.board && isValid(this.board.node, true) && this.boardOriginalScale) {
+            this.board.node.setScale(this.boardOriginalScale);
+        }
+        this.boardOriginalScale = null;
+        // Trả lại vị trí GỐC của board — cùng lý do với scale ở trên, không được rò rỉ
+        // boardOffsetOverride sang level thật tiếp theo.
+        if (this.board && isValid(this.board.node, true) && this.boardOriginalPosition) {
+            this.board.node.setPosition(this.boardOriginalPosition);
+        }
+        console.log('[DEBUG ConnectTracksTutorialController] cancel(): restored boardOriginalPosition=',
+            this.boardOriginalPosition ? `${this.boardOriginalPosition.x},${this.boardOriginalPosition.y},${this.boardOriginalPosition.z}` : 'null (nothing to restore)',
+            'board.node.position AFTER restore=', this.board && isValid(this.board.node, true) ? `${this.board.node.position.x},${this.board.node.position.y},${this.board.node.position.z}` : 'no board/invalid');
+        this.boardOriginalPosition = null;
         if (isValid(this.node)) this.node.active = false;
     }
 
@@ -358,6 +416,25 @@ export class ConnectTracksTutorialController extends Component {
         // rò rỉ sang level thật tiếp theo.
         this.trainView?.setScaleMultiplierOverride(this.trainScaleOverride);
         this.trainView?.setSpeedMultiplierOverride(this.trainSpeedOverride);
+        // Scale RIÊNG cho board của tutorial (xác nhận từ user) — chụp lại scale gốc 1 lần rồi nhân
+        // thêm boardScaleOverride, cùng kiểu "hệ số nhân thêm" như trainScaleOverride ở trên.
+        if (this.board && !this.boardOriginalScale) this.boardOriginalScale = this.board.node.scale.clone();
+        if (this.board && this.boardOriginalScale) {
+            const s = this.boardOriginalScale;
+            this.board.node.setScale(s.x * this.boardScaleOverride, s.y * this.boardScaleOverride, s.z);
+        }
+        // Lệch vị trí RIÊNG cho board của tutorial (xác nhận từ user) — chụp lại vị trí gốc 1 lần
+        // rồi cộng thêm boardOffsetOverride, cùng kiểu "chụp gốc rồi áp override" như scale ở trên.
+        if (this.board && !this.boardOriginalPosition) this.boardOriginalPosition = this.board.node.position.clone();
+        if (this.board && this.boardOriginalPosition) {
+            const p = this.boardOriginalPosition;
+            const o = this.boardOffsetOverride;
+            this.board.node.setPosition(p.x + o.x, p.y + o.y, p.z + o.z);
+        }
+        console.log('[DEBUG ConnectTracksTutorialController] begin(): boardOriginalPosition=',
+            this.boardOriginalPosition ? `${this.boardOriginalPosition.x},${this.boardOriginalPosition.y},${this.boardOriginalPosition.z}` : 'null',
+            'offsetOverride=', `${this.boardOffsetOverride.x},${this.boardOffsetOverride.y},${this.boardOffsetOverride.z}`,
+            'board.node.position AFTER apply=', this.board ? `${this.board.node.position.x},${this.board.node.position.y},${this.board.node.position.z}` : 'no board');
         this.session = new GameSession({
             level: CONNECT_TRACKS_TUTORIAL_LEVEL,
             requiredCells: CONNECT_TRACKS_TUTORIAL_REQUIRED_CELLS,
@@ -445,11 +522,27 @@ export class ConnectTracksTutorialController extends Component {
 
     // ---- Gesture gating -----------------------------------------------------------------------
 
+    /** 1 lần kéo LIÊN TỤC bắn RIÊNG 1 'trackDragBegin' + NHIỀU 'trackBoundaryStep' (1 cái/ô đi
+     * qua) — nếu không chặn, mỗi ô ngoài vùng cho phép trong CÙNG 1 lần kéo sẽ tự kích nhấp nháy
+     * lần lượt, trông như "kéo qua ô nào cũng nháy" (báo lỗi của user). Giới hạn CHỈ 1 lần nhấp
+     * nháy cho CẢ lần kéo, reset đúng lúc 'trackDragBegin' (bắt đầu lần kéo MỚI). Tap/double tap/
+     * batch (emptyDragBatch/xDragBatch) đã là 1 cử chỉ trọn vẹn — không cần giới hạn gì thêm. */
+    private dragBlinkedOnce = false;
+
     private readonly canDispatch = (gesture: PlayerGesture): boolean => {
+        if (gesture.kind === 'trackDragBegin') this.dragBlinkedOnce = false;
+        const isDragStep = gesture.kind === 'trackDragBegin' || gesture.kind === 'trackBoundaryStep';
         if (this.allowedCells) {
             for (const cell of cellsOfGesture(gesture)) {
                 if (!this.allowedCells.has(cell)) {
-                    this.blinkTextPanel();
+                    if (isDragStep) {
+                        if (!this.dragBlinkedOnce) {
+                            this.dragBlinkedOnce = true;
+                            this.blinkTextPanel();
+                        }
+                    } else {
+                        this.blinkTextPanel();
+                    }
                     return false;
                 }
             }
@@ -541,6 +634,7 @@ export class ConnectTracksTutorialController extends Component {
         // nhấc kèm; KHÔNG ép thêm ô exit (15, không thuộc hàng 0) vào (xác nhận từ user: chỉ nhấc
         // khi thực sự cần dùng, không phải "luôn luôn" nhấc entrance/exit).
         this.setLiftedCells([0, 1, 2, 3]);
+        if (this.board && this.liftLayer) this.board.showLineClueHighlight('row', 0, this.liftLayer);
         this.setText(L10N.connectTracksTutorial.rowClue);
         this.setButton(L10N.connectTracksTutorial.nextButton, () => this.enterLiftColumnStep());
     }
@@ -551,9 +645,11 @@ export class ConnectTracksTutorialController extends Component {
         this.setDim(true);
         // Cột 1 — không có ô entrance/exit nào thuộc cột này, nên không nhấc thêm gì khác.
         this.setLiftedCells([1, 5, 9, 13]);
+        if (this.board && this.liftLayer) this.board.showLineClueHighlight('column', 1, this.liftLayer);
         this.setText(L10N.connectTracksTutorial.colClue);
         this.setButton(L10N.connectTracksTutorial.nextButton, () => this.enterShowSolutionPreviewStep());
     }
+
 
     /** Bật/tắt nền đen LUÔN fade bằng opacity, không bật/tắt cứng (xác nhận từ user). */
     private setDim(active: boolean): void {
@@ -610,7 +706,7 @@ export class ConnectTracksTutorialController extends Component {
             board.getTutorialCellOverlay(snapshot.entranceCell, 'TutorialEntranceArrow'),
             board.getTutorialCellOverlay(snapshot.exitCell, 'TutorialExitArrow'),
         ].filter((n): n is Node => !!n && isValid(n, true) && !!n.parent);
-        const nodes = [...cellNodes, ...arrowNodes];
+        const nodes = cellNodes.concat(arrowNodes);
         this.lifted = nodes.map((n) => ({
             node: n, parent: n.parent!, index: n.getSiblingIndex(),
             position: n.position.clone(), scale: n.scale.clone(),
@@ -673,8 +769,9 @@ export class ConnectTracksTutorialController extends Component {
     }
 
     private clearLift(): void {
+        if (this.board && isValid(this.board.node, true)) this.board.hideLineClueHighlight();
         if (this.liftBorderGraphics && isValid(this.liftBorderGraphics, true)) this.liftBorderGraphics.clear();
-        for (const item of [...this.lifted].sort((a, b) => a.index - b.index)) {
+        for (const item of this.lifted.slice().sort((a, b) => a.index - b.index)) {
             if (!isValid(item.node, true) || !isValid(item.parent, true)) continue;
             item.node.setParent(item.parent);
             item.node.setPosition(item.position);
@@ -711,7 +808,7 @@ export class ConnectTracksTutorialController extends Component {
             }
             this.renderAndSyncSound(session.snapshot(), true); // Demo xem trước lời giải — im lặng.
         }
-        this.dimmedCells = [...CONNECT_TRACKS_TUTORIAL_REQUIRED_CELLS];
+        this.dimmedCells = CONNECT_TRACKS_TUTORIAL_REQUIRED_CELLS.slice();
         for (const cell of this.dimmedCells) {
             const node = this.board?.getHintCellNode(cell);
             if (!node) continue;
@@ -817,6 +914,11 @@ export class ConnectTracksTutorialController extends Component {
         this.allowedCells = null; // Full board from here on (confirmed by the user).
         this.hideHighlight();
         this.hideHand();
+        // BUG đã sửa (báo lỗi của user, kèm ảnh: text vẫn hiện excludeHint của bước 8-9 trước đó) —
+        // bước này trước giờ KHÔNG hề gọi setText(), nên chữ bị đứng yên lại nội dung cũ. Đổi sang
+        // nội dung MỚI (xác nhận từ user) giải thích cả 2 thao tác board cho phép từ bước này trở
+        // đi (chạm 2 lần đặt đường ray, chạm 1 lần loại trừ).
+        this.setText(L10N.connectTracksTutorial.findRemainingHint);
         if (this.tutorialHintCluster) this.tutorialHintCluster.active = true;
         // Label phụ hiện ĐỒNG THỜI với cụm gợi ý (xác nhận từ user).
         if (this.tutorialHintPrompt) this.tutorialHintPrompt.active = true;
@@ -937,6 +1039,7 @@ export class ConnectTracksTutorialController extends Component {
         const button = this.nextButton;
         if (!button) return;
         if (!labelKey || !onTap) {
+            this.stopButtonBlink();
             button.node.active = false;
             return;
         }
@@ -945,6 +1048,31 @@ export class ConnectTracksTutorialController extends Component {
         button.node.off(Node.EventType.TOUCH_END, this.handleNextTap, this);
         this.pendingNext = onTap;
         button.node.on(Node.EventType.TOUCH_END, this.handleNextTap, this);
+        this.startButtonBlink();
+    }
+
+    /** Nhấp nháy scale LIÊN TỤC (không phải 1 nhịp) suốt lúc nút Tiếp theo/Thử ngay đang hiện (xác
+     * nhận từ user) — tốc độ/độ to chỉnh qua nextButtonBlinkSpeed/nextButtonBlinkScale. */
+    private startButtonBlink(): void {
+        const node = this.nextButton?.node;
+        if (!node) return;
+        Tween.stopAllByTarget(node);
+        node.setScale(1, 1, 1);
+        const s = this.nextButtonBlinkScale;
+        tween(node)
+            .repeatForever(
+                tween<Node>()
+                    .to(this.nextButtonBlinkSpeed, { scale: new Vec3(s, s, 1) }, { easing: 'sineInOut' })
+                    .to(this.nextButtonBlinkSpeed, { scale: new Vec3(1, 1, 1) }, { easing: 'sineInOut' }),
+            )
+            .start();
+    }
+
+    private stopButtonBlink(): void {
+        const node = this.nextButton?.node;
+        if (!node || !isValid(node, true)) return;
+        Tween.stopAllByTarget(node);
+        node.setScale(1, 1, 1);
     }
 
     private pendingNext: (() => void) | null = null;
@@ -954,16 +1082,21 @@ export class ConnectTracksTutorialController extends Component {
         next?.();
     };
 
-    /** Phản hồi khi chạm ra ngoài vùng được chỉ định: phóng to 1 nhịp bằng SCALE, không phải opacity
-     * (xác nhận từ user — áp dụng từ giai đoạn 2 trở đi, nơi feedback này thực sự có thể kích hoạt). */
+    /** Phản hồi khi chạm ra ngoài vùng được chỉ định: phóng to, hơi LÚN XUỐNG (nhỏ hơn scale gốc 1
+     * nhịp), rồi mới về đúng scale gốc (xác nhận từ user — áp dụng từ giai đoạn 2 trở đi, nơi
+     * feedback này thực sự có thể kích hoạt). Scale `textPanelBlinkTarget` nếu có gán, KHÔNG scale
+     * thẳng `textPanel` — nếu nút "Tiếp theo" là con của textPanel mà lại scale chính textPanel,
+     * scale của nút sẽ bị kéo theo (xác nhận từ user: nút không được nhấp nháy theo). Xem tooltip
+     * của textPanelBlinkTarget để biết cách gán cho đúng. */
     private readonly blinkTextPanel = (): void => {
-        const node = this.textPanel;
+        const node = this.textPanelBlinkTarget ?? this.textPanel;
         if (!node) return;
         Tween.stopAllByTarget(node);
         node.setScale(1, 1, 1);
         tween(node)
             .to(0.08, { scale: new Vec3(1.08, 1.08, 1) }, { easing: 'quadOut' })
-            .to(0.1, { scale: new Vec3(1, 1, 1) }, { easing: 'quadIn' })
+            .to(0.08, { scale: new Vec3(0.96, 0.96, 1) }, { easing: 'quadInOut' })
+            .to(0.1, { scale: new Vec3(1, 1, 1) }, { easing: 'quadOut' })
             .start();
     };
 

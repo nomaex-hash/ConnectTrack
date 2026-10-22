@@ -14,8 +14,8 @@ export interface SessionProgress {
 
 export function levelSignature(truth: SolutionTruth, required: readonly number[]): string {
     const l = truth.level;
-    return JSON.stringify([l.size.width, l.size.height, l.solutionPath, [...l.given].sort((a,b) => a-b),
-        l.outwardStart, l.outwardEnd, [...required].sort((a,b) => a-b)]);
+    return JSON.stringify([l.size.width, l.size.height, l.solutionPath, l.given.slice().sort((a,b) => a-b),
+        l.outwardStart, l.outwardEnd, required.slice().sort((a,b) => a-b)]);
 }
 
 /** Validate into a new immutable board before replacing any live session state. */

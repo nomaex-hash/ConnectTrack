@@ -1,4 +1,4 @@
-import { _decorator, Node, sys } from 'cc';
+import { _decorator, EditBox, Node, sys } from 'cc';
 import { UIPopup } from '../UIPopup';
 import { EventManager } from '../../core/EventManager';
 import { AppState } from '../../core/AppState';
@@ -6,6 +6,8 @@ import {
     CONNECT_TRACKS_RESTART_REQUESTED_EVENT,
     HINT_GRANT_REQUESTED_EVENT,
     HintGrantRequestedEventPayload,
+    LEVEL_SELECTED_EVENT,
+    LevelSelectedEventPayload,
     NAVIGATE_REQUESTED_EVENT,
     NavigateRequestedEventPayload,
     SETTINGS_CHANGE_REQUESTED_EVENT,
@@ -92,6 +94,17 @@ export class SettingsPopup extends UIPopup<SettingsData> {
     })
     feedbackUrl = '';
 
+    @property({
+        type: EditBox,
+        tooltip:
+            'DÙNG ĐỂ TEST — nhập số level campaign rồi bấm xong/chạm ra ngoài (EDITING_DID_ENDED) ' +
+            'là nhảy THẲNG vào đúng level đó (giống trước đây phải tự sửa level ở key save), KHÔNG ' +
+            'qua kiểm tra đã mở khoá hay chưa — campaign không giới hạn levelId (xem GameManager.' +
+            'startPuzzle()). Đặt Input Mode = Number trong Editor để chỉ gõ được số. Để trống thì bỏ ' +
+            'qua hẳn tính năng này. Chỉ nên bật ở build debug.',
+    })
+    jumpToLevelInput: EditBox | null = null;
+
     private bgmOn = true;
     private sfxOn = true;
     private vibrationEnabled = true;
@@ -113,11 +126,35 @@ export class SettingsPopup extends UIPopup<SettingsData> {
 
     protected onEnable(): void {
         EventManager.instance.on(LANGUAGE_CHANGED_EVENT, this.refresh, this);
+        this.jumpToLevelInput?.node.on(EditBox.EventType.EDITING_DID_ENDED, this.onJumpToLevelEditingEnded, this);
     }
 
     protected onDisable(): void {
         EventManager.instance.off(LANGUAGE_CHANGED_EVENT, this.refresh, this);
+        this.jumpToLevelInput?.node.off(EditBox.EventType.EDITING_DID_ENDED, this.onJumpToLevelEditingEnded, this);
     }
+
+    /** DÙNG ĐỂ TEST — nhập xong số level (EditBox kết thúc chỉnh sửa) là nhảy thẳng vào level đó,
+     * y hệt cách trước đây phải tự sửa level ở key save. Số không hợp lệ (rỗng/không phải số
+     * nguyên dương) thì bỏ qua, không làm gì cả.
+     *
+     * "Ở level nào thì cũng để test luôn luồng ở level đó (vd level 1 không có streak/leaderboard,
+     * level 5 mới mở streak, sau level 10 mới có leaderboard...)" (xác nhận từ user) —
+     * setTestHighestLevel() (gọi TRƯỚC khi bắn LEVEL_SELECTED_EVENT) ghi thẳng progression như đã
+     * thắng hết các màn TRƯỚC levelId, để mọi cờ mở khoá phụ thuộc progression (streak, leaderboard,
+     * kích hoạt giải đấu...) tự khớp đúng với level đang nhảy tới — không chỉ mở màn chơi lên mà bỏ
+     * qua các cờ đó. */
+    private onJumpToLevelEditingEnded = (): void => {
+        const raw = this.jumpToLevelInput?.string ?? '';
+        const levelId = parseInt(raw, 10);
+        if (!Number.isInteger(levelId) || levelId <= 0) return;
+
+        GameManager.instance?.setTestHighestLevel(levelId);
+        const payload: LevelSelectedEventPayload = { context: 'campaign', levelId };
+        EventManager.instance.emit(LEVEL_SELECTED_EVENT, payload);
+        console.log(`[SettingsPopup] Nhảy thẳng vào level ${levelId} (test) — progression đã ép như đã thắng hết màn 1..${levelId - 1}.`);
+        this.requestClose();
+    };
 
 
     onToggleMusic(): void {
@@ -198,7 +235,7 @@ export class SettingsPopup extends UIPopup<SettingsData> {
         if (!legacy) return;
 
         const botScores = legacy.getFakeBotWeeklyScores();
-        const topBotScore = botScores.length > 0 ? Math.max(...botScores) : 0;
+        const topBotScore = botScores.length > 0 ? Math.max.apply(Math, botScores) : 0;
         legacy.setLeaderboardCurrWeekScore(topBotScore + 1);
         legacy.resetWeeklyForTesting();
 

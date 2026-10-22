@@ -2,6 +2,14 @@
 
 Ngày: 2026-10-09. Căn cứ: user yêu cầu về Main rồi vào lại để tiếp tục bàn cũ.
 
+
+> **Cập nhật 2026-10-22 (user yêu cầu gộp về 1 key):** toàn bộ dữ liệu local nay nằm trong ĐÚNG 1 key
+> `connecttracks:save:v1` (`connectTracksLocalStore`): `sessions` (bàn đang chơi), `placeTrackCharges`,
+> `player` (trước là `dogdoku_save_data`) và `legacyConfig` (trước là key `MagicSort` của
+> `framework/configuration`). Hai key cũ được migrate 1 lần khi load: không ghi đè dữ liệu mới, chỉ xoá
+> key cũ sau khi ghi và đọc lại kiểm tra khớp; thất bại thì giữ key cũ. Các dòng bên dưới nói về
+> `dogdoku_save_data`/keyspace riêng là lịch sử trước thay đổi này.
+
 - Application sở hữu `SessionProgressPort` và định dạng `SessionProgress` v1.
 - `GameSession` xuất bản sao bất biến, kiểm tra bản lưu trước khi thay trạng thái.
 - Infrastructure dùng `sys.localStorage`, giống backend lưu local hiện có nhưng dùng keyspace
