@@ -62,11 +62,11 @@ export class AudioManager extends Component {
         const clips = new Set<AudioClip | null>();
         if (after.mistakes > before.mistakes) clips.add(this.wrongClip);
         after.cellStates.forEach((state, i) => {
-            if (after.mainTrackCells.includes(i)) return;
+            if (after.mainTrackCells.indexOf(i) !== -1) return;
             const previous = before.cellStates[i];
             const links = after.cellLinks[i];
             const oldLinks = before.cellLinks[i];
-            const changedLinks = links.length !== oldLinks.length || links.some(d => !oldLinks.includes(d));
+            const changedLinks = links.length !== oldLinks.length || links.some(d => oldLinks.indexOf(d) === -1);
             if (state === previous && !changedLinks) return;
             if (state === 'X') clips.add(this.markClip);
             else if (state === 'Empty' && (previous === 'X' || previous === 'RedX')) clips.add(this.unmarkClip);

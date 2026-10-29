@@ -119,12 +119,10 @@ export class ItemLeaderboardBase extends Component {
 
         // LOG TẠM ĐỂ DEBUG — xoá sau khi tìm ra nguyên nhân avatar/frame không hiện cho 1 số bot
         // (tên vẫn hiện đúng, chỉ riêng ảnh không tải được — nghi ngờ avatarURL/pathAvatar/pathFrame sai).
-        console.log('[ItemLeaderboardBase.loadAvatar] userName=', this.itemRankInfo.userName, 'isMyRank=', this.itemRankInfo.isMyRank, 'avatarURL=', this.itemRankInfo.avatarURL, 'pathAvatar=', pathAvatar, 'pathFrame=', pathFrame);
 
         const avatarLoaded = new Promise<void>((resolve) => {
             MConfigResourceUtils.getProfileSpriteFrame(PROFILE_TAB_TYPE.AVATAR, pathAvatar, (err, spriteFrame) => {
                 if (err) {
-                    console.log('[ItemLeaderboardBase.loadAvatar] LỖI tải AVATAR userName=', this.itemRankInfo.userName, 'pathAvatar=', pathAvatar, 'err=', err);
                 } else {
                     // Guard .node (KHÔNG dùng .isValid — .isValid chỉ false SAU KHI destroy xử lý
                     // xong cuối frame; item có thể vừa bị destroy/recycle CÙNG FRAME (đổi tab,
@@ -140,7 +138,6 @@ export class ItemLeaderboardBase extends Component {
         const frameLoaded = new Promise<void>((resolve) => {
             MConfigResourceUtils.getProfileSpriteFrame(PROFILE_TAB_TYPE.FRAME, pathFrame, (err, spriteFrame) => {
                 if (err) {
-                    console.log('[ItemLeaderboardBase.loadAvatar] LỖI tải FRAME userName=', this.itemRankInfo.userName, 'pathFrame=', pathFrame, 'err=', err);
                 } else {
                     if (this.iconFrame && this.iconFrame.node) this.iconFrame.spriteFrame = spriteFrame;
                 }

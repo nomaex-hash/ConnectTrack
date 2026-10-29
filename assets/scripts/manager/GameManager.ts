@@ -317,10 +317,6 @@ export class GameManager extends Component {
         // thay vì tạo ván mới.
         const resumingSolvedSession =
             payload.to === AppState.Gameplay && this._state !== AppState.Gameplay && this.session !== null;
-        console.log('[DEBUG GameManager] onNavigate:', JSON.stringify({
-            to: payload.to, currentState: this._state, sessionAlive: this.session !== null,
-            resumingSolvedSession, shouldDisposeSession,
-        }));
 
         // PHẢI chạy TRƯỚC changeState() — changeState() bắn APP_STATE_CHANGED_EVENT ĐỒNG BỘ,
         // UIManager.onAppStateChanged (lắng nghe event đó) sẽ tiêu thụ TournamentActivationPresentation/
@@ -342,7 +338,6 @@ export class GameManager extends Component {
         }
 
         if (resumingSolvedSession) {
-            console.log('[DEBUG GameManager] calling session.emitReadyAgain()');
             this.session?.emitReadyAgain();
         }
     };

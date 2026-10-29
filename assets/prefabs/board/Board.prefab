@@ -1346,9 +1346,9 @@
       "__uuid__": "6e4b2116-519a-457f-bc4c-a3e790a99585",
       "__expectedType__": "cc.Prefab"
     },
-    "clueOffset": 50,
+    "clueOffset": 40,
     "clueLabelNativeCellSize": 130,
-    "clueScaleMin": 0.7,
+    "clueScaleMin": 0.8,
     "clueColor": {
       "__type__": "cc.Color",
       "r": 67,
@@ -1363,6 +1363,8 @@
       "b": 83,
       "a": 255
     },
+    "clueSatisfiedPulseScale": 1.35,
+    "clueSatisfiedPulseSeconds": 0.28,
     "lineClueHighlightLabel": {
       "__id__": 57
     },

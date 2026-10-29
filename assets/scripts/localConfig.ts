@@ -38,7 +38,8 @@ export class localConfig {
 	isLevelEditor: boolean = false;
 	//#region FBInstant
 	playerID: string;
-	envType: ENV_TYPE = ENV_TYPE.TEST_AD;
+	// Có global FBInstant (SDK do index.ejs nạp) -> chạy chế độ Facebook; Editor/preview không có -> TEST_AD.
+	envType: ENV_TYPE = typeof FBInstant !== 'undefined' ? ENV_TYPE.FB : ENV_TYPE.TEST_AD;
 	FAN_enable: boolean = true;
 	isMobile: boolean = true;
 	isRemoveRiseUpToTest: boolean = false;
@@ -50,7 +51,6 @@ export class localConfig {
 	updatePlayerData_Finished() {
 
 		localConfig.instance.currLevelUnlock = configuration.instance.getData_LevelCurrentUnlock();
-		console.log("currLevelUnlock", localConfig.instance.currLevelUnlock);
 		if (this.envType == ENV_TYPE.TEST_AD) {
 			localConfig.instance.currLevelUnlock = 71; //test
 		}
@@ -206,7 +206,6 @@ export class localConfig {
 		this.tab_Selected_Size.x =(maxWidthTab / countScale) * this.TAB_SELECTED_SCALE;
 		this.tab_Unselected_Size.x =(maxWidthTab / countScale) * this.TAB_UNSELECTED_SCALE;
 
-		console.log("initTabConfig",this.tab_Selected_Size.x,this.tab_Unselected_Size.x);
 	}
 
 	getTabPosition(indexTab: number, indexTabSelected: number) {

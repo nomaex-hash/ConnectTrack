@@ -13,10 +13,17 @@ export class MockAdService implements IAdService {
         return true;
     }
 
+    /** Mock không có quảng cáo xen kẽ — luôn bỏ qua để không chặn luồng test. */
+    isInterstitialReady(): boolean {
+        return false;
+    }
+
+    async showInterstitial(): Promise<boolean> {
+        return false;
+    }
+
     async showRewarded(): Promise<RewardedAdResult> {
-        console.log('[MockAd] Giả lập đang xem quảng cáo...');
         await new Promise((resolve) => setTimeout(resolve, MOCK_WATCH_SECONDS * 1000));
-        console.log('[MockAd] Xem xong, nhận thưởng.');
         return { rewarded: true };
     }
 }

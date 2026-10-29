@@ -10,7 +10,7 @@ vi.mock('cc', () => ({
         set(x: number, y: number, z: number) { this.x = x; this.y = y; this.z = z; return this; }
         clone() { return new (this.constructor as any)(this.x, this.y, this.z); }
     },
-    screen: { windowSize: { width: 360, height: 1280 } }, warn: vi.fn(),
+    screen: { windowSize: { width: 360, height: 1280 }, devicePixelRatio: 1 }, warn: vi.fn(),
 }));
 import { Canvas, UITransform, Vec3, screen, warn } from 'cc';
 import { ResponsiveUI } from '../../../assets/scripts/presentation/ui/responsiveUI';
@@ -40,7 +40,64 @@ function setup(attached = true) {
 beforeEach(() => {
     screen.windowSize.width = 360;
     screen.windowSize.height = 1280;
+    (screen as any).devicePixelRatio = 1;
     vi.clearAllMocks();
+});
+
+function narrowSetup(horizontal: number, vertical: number) {
+    const ctx = setup();
+    ctx.rect.width = 100;
+    ctx.rect.height = 100;
+    ctx.component.horizontal = horizontal;
+    ctx.component.vertical = vertical;
+    ctx.component.shrinkOnNarrowScreen = true;
+    ctx.component.narrowScreenWidth = 500;
+    return ctx;
+}
+
+it('shrinkOnNarrowScreen scales an edge-anchored node by the squared width ratio below the threshold', () => {
+    const { component, node } = narrowSetup(1, 2);
+    screen.windowSize.width = 500;
+    component.lateUpdate();
+    expect(node.scale.x).toBe(1);
+    screen.windowSize.width = 250;
+    component.lateUpdate();
+    expect(node.scale.x).toBe(.25);
+    expect(node.scale.y).toBe(.25);
+});
+
+it('minNarrowScale stops the narrow-screen shrink at the configured floor', () => {
+    const { component, node } = narrowSetup(1, 2);
+    component.minNarrowScale = .6;
+    screen.windowSize.width = 450;
+    component.lateUpdate();
+    expect(node.scale.x).toBeCloseTo(.81);
+    screen.windowSize.width = 250;
+    component.lateUpdate();
+    expect(node.scale.x).toBe(.6);
+});
+
+it('shrinkOnNarrowScreen compares against CSS pixels (windowSize / devicePixelRatio)', () => {
+    const { component, node } = narrowSetup(1, 2);
+    (screen as any).devicePixelRatio = 2;
+    screen.windowSize.width = 1000;
+    component.lateUpdate();
+    expect(node.scale.x).toBe(1);
+    screen.windowSize.width = 500;
+    component.lateUpdate();
+    expect(node.scale.x).toBe(.25);
+});
+
+it('shrinkOnNarrowScreen ignores nodes centered on both axes and is off by default', () => {
+    const centered = narrowSetup(2, 2);
+    screen.windowSize.width = 250;
+    centered.component.lateUpdate();
+    expect(centered.node.scale.x).toBe(1);
+
+    const off = narrowSetup(1, 2);
+    off.component.shrinkOnNarrowScreen = false;
+    off.component.lateUpdate();
+    expect(off.node.scale.x).toBe(1);
 });
 
 it('self Target Area falls back to viewport and warns once, without progressive shrinking', () => {

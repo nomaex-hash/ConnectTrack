@@ -121,7 +121,6 @@ export class FBInstantManager extends Component {
 
 
         let entryPointData = FBInstant.getEntryPointData();
-        console.log(entryPointData);
         if(entryPointData != null){
             try {
                 let entryPointDataPayLoad = JSON.parse(entryPointData);
@@ -165,7 +164,6 @@ export class FBInstantManager extends Component {
                 if(entryPointData.withfriendData.length > 0){
                     try {
                         localConfig.instance.currWithFriendDataInfo = JSON.parse(entryPointData.withfriendData);
-                        console.log(localConfig.instance.currWithFriendDataInfo);
                         // if (!localConfig.instance.currWithFriendDataInfo.levelIndex) {
                         //     localConfig.instance.currWithFriendDataInfo.levelIndex = lodash.random(10,20);
                         // }
@@ -314,7 +312,6 @@ export class FBInstantManager extends Component {
         else if(localConfig.instance.envType == ENV_TYPE.TEST_AD){
             if (this.isShowInterstitialAd){
                 if(self.fb_InterstitialAd_CallBack){
-                    console.log("Show_InterstitialAdAsync TEST AD");
                     self.fb_InterstitialAd_CallBack(null, Constants.FB_INTERSTITIAL_CALLBACK_SUCCESS);
                     clientEvent.dispatchEvent(Constants.HIDE_LOADING_AD_POPUP);
                     self.SetNextTime_ShowInterstitialAd();
@@ -383,6 +380,15 @@ export class FBInstantManager extends Component {
         }
     }
 
+
+    /** Có thể hiện interstitial ngay không (đã init, hết thời gian chờ giữa 2 lần, chưa gỡ quảng cáo, đã nạp xong).
+     *  Port từ MahjongZen (bản ConnectTracks không có ngưỡng level nên bỏ điều kiện đó). */
+    check_InterstitialAdAsync_Available(){
+        if (!this.isInitializeAsync) return false;
+        if (!this.isShowInterstitialAd) return false;
+        if (localConfig.instance.isRemoveAd) return false;
+        return !!(this.preloadedInterstitial && this.isFinishedLoad_InterstitialAd);
+    }
 
     timeWait_InterstitialAd_Callback(){
         // this.fb_InterstitialAd_CallBack(new Error("load FAIL"), Constants.FB_INTERSTITIAL_CALLBACK_FAIL);
@@ -739,7 +745,6 @@ export class FBInstantManager extends Component {
                 }, 0.2);
                 this.SetNextTime_ReloadBanner();
             }else{
-                console.log("NOT RELOAD!");
             }       
         }
     }
@@ -793,7 +798,8 @@ export class FBInstantManager extends Component {
 
 
     setStartGame(){
-        GoogleAnalyticsService.Instance.setInitGoogleAnalytics();
+        // Scene chưa có node GGAS (GoogleAnalyticsService) thì bỏ qua thay vì ném lỗi trước startGameAsync().
+        GoogleAnalyticsService.Instance?.setInitGoogleAnalytics();
         let self = this;
         ////console.log("setStartGame");
         ////console.log(this.isInitializeAsync);
@@ -847,7 +853,6 @@ export class FBInstantManager extends Component {
                 localConfig.instance.tourID_session = tournament.getID();
 
                 let tournamentPayLoad = tournament.getPayload();
-                console.log(tournamentPayLoad);
                 if(tournamentPayLoad && tournamentPayLoad.length > 0){
                     let payloadData = JSON.parse(tournament.getPayload());
                 }
@@ -943,7 +948,7 @@ export class FBInstantManager extends Component {
                 action: 'LEADERBOARD',
                 name: 'score.' + FBInstant.context.getID()
               })
-                .then(() => console.log('Update Posted'))
+                .then(() => undefined)
                 .catch(error => console.error(error));
         }
     }
@@ -1043,10 +1048,8 @@ export class FBInstantManager extends Component {
                 };
 
                 FBInstant.tournament.shareAsync(shareTournamentPayload).then(()=>{
-                    console.log("PostScoreShareTournament Success!!!!");
                     cb!(null,Constants.FB_CALLBACK_SUCCESS);
                 }).catch((err) => {
-                    console.log(err);
                     cb!(err,Constants.FB_CALLBACK_FAIL);
                 });
             }
@@ -1062,10 +1065,8 @@ export class FBInstantManager extends Component {
             };
 
             FBInstant.tournament.shareAsync(shareTournamentPayload).then(()=>{
-                console.log("PostScoreShareTournament Success!!!!");
                 cb!(null,Constants.FB_CALLBACK_SUCCESS);
             }).catch((err) => {
-                console.log(err);
                 cb!(err,Constants.FB_CALLBACK_FAIL);
             });
         }else{
@@ -1238,7 +1239,6 @@ export class FBInstantManager extends Component {
                     cb(null,Constants.FB_CALLBACK_SUCCESS);
                 })
                 .catch((e) =>{
-                    console.log("updateContext FAIL",e);
                     cb(new Error("Error!"),Constants.FB_CALLBACK_FAIL);
                 });
             }else{
@@ -1491,7 +1491,6 @@ export class FBInstantManager extends Component {
     GetASID(){
         FBInstant.player.getASIDAsync().then(
             _asid => {
-                console.log(_asid);
                 let data = {
                     a2u: {
                         id: this.getID(),
@@ -1500,7 +1499,6 @@ export class FBInstantManager extends Component {
                         page_key: "18",
                     },
                 };
-                console.log(data);
                 this.asID = _asid;
                 PGSPlayInstantManager.instance.CancelA2U();
             }
@@ -1560,7 +1558,6 @@ export class FBInstantManager extends Component {
     getIAP_AllPack(){
         FBInstantManager.instance.arrCatalogInfos = [];
         FBInstant.payments.getCatalogAsync().then((products: FBInstant.Product[]) => {
-            console.log(products);
             for(let i=0; i< products.length;i++){
                 let productID:string = products[i].productID;
                 let price: string = products[i].price;

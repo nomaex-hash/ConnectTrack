@@ -59,6 +59,20 @@ export class GameSession {
 
     cancelHint(): void { this.pendingHint = null; }
 
+    /** "Sau khi tìm hết track preview, nếu 5s không thao tác thì hiện đường nối (dash + 2 chấm xanh
+     * entrance/exit) giống hệt Tutorial step 10b, hiện LIÊN TỤC cho tới khi người chơi nối xong hẳn
+     * rồi tắt ngay" (xác nhận từ user) — ordered solution path cells, CHỈ trả về khi cùng điều kiện
+     * needsConnectionHintNow() (đã identified hết, CHƯA nối xong/thắng) — BUG đã sửa ("hiệu ứng tự
+     * hiện lại lúc tàu đang chạy"): trước đây chỉ check allRequiredCellsIdentified() một mình, vẫn
+     * true cả SAU KHI đã thắng (mọi cell lúc đó đã là Track thật), nên null SAI thời điểm — null
+     * trước khi identified hết VÀ null khi đã nối xong/thắng, để không lộ Solution Truth sớm lẫn
+     * không tự bật lại sau khi xong. Dùng cho dash trail trong GameplayScreen (xem
+     * connectTracksIdleConnectHint.ts) — KHÔNG dùng traceTrainPath() (đòi hỏi mỗi ô đã có ĐỦ 2 kết
+     * nối thật, tức Track, chưa tồn tại ở giai đoạn này — các ô vẫn chỉ là TrackPreview). */
+    solutionPathForIdleHint(): readonly number[] | null {
+        return this.needsConnectionHintNow() ? this.truth.level.solutionPath : null;
+    }
+
     applyHint(hint: TrackHint): CommandResult {
         const pending = this.pendingHint;
         this.pendingHint = null;
@@ -158,13 +172,7 @@ export class GameSession {
         // ever be Empty, X, TrackPreview or Track (double-tap only ever turns a SOLUTION cell RedX,
         // and every required cell is a solution cell by definition), so this check alone also covers
         // Track ? (which is PlayerCellState.TrackPreview with one link, per Board's own invariant).
-        const allRequiredIdentified = this.requiredCells.every((cell) => {
-            const state = this.board.stateAt(cell);
-            return state === PlayerCellState.TrackPreview || state === PlayerCellState.Track;
-        });
-        const needsConnectionHint =
-            this.phase === GamePhase.Active && allRequiredIdentified
-            && !(isWon(this.board, this.requiredCells) && hasCompleteRailPath(this.board, this.truth));
+        const needsConnectionHint = this.needsConnectionHintNow();
         return Object.freeze({
             rowClues: Object.freeze(Array.from({ length: height }, (_, row) =>
                 clueSatisfaction(this.board, cellsInRow(this.board, row), this.truth))),
@@ -247,6 +255,9 @@ export class GameSession {
             // Track ? tap behaviour is UNKNOWN.
             return this.rejected('notAllowedOnState');
         }
+        if (this.allRequiredCellsIdentified()) {
+            return this.rejected('markingLocked');
+        }
         const next = state === PlayerCellState.Empty ? PlayerCellState.X : PlayerCellState.Empty;
         this.board = this.board.withState(cell, next);
         return this.accepted(true);
@@ -282,6 +293,13 @@ export class GameSession {
             return this.accepted(false);
         }
         if (!this.truth.isSolutionCell(cell)) {
+            // Confirmed by the user: once every required cell has already been identified, a wrong
+            // double-tap (attempting to place on a non-solution cell) is blocked the exact same way
+            // as handleTap/handleMarkCellsAsX/handleRemoveXCells — it must NOT still "place" RedX or
+            // record a mistake just because it went through double-tap instead of a single tap.
+            if (this.allRequiredCellsIdentified()) {
+                return this.rejected('markingLocked');
+            }
             // Same consequence as a wrong Track drag target (confirmed by the user): counts as one
             // of the 3 mistakes, and can end the game exactly like a wrong drag crossing does —
             // EXCEPT in tutorialMode, where the mistake is never recorded (still shown as RedX).
@@ -307,6 +325,9 @@ export class GameSession {
         if (unique.length === 0) {
             return this.rejected('emptyBatch');
         }
+        if (this.allRequiredCellsIdentified()) {
+            return this.rejected('markingLocked');
+        }
         for (const cell of unique) {
             if (this.checkTargetCell(cell) !== null) {
                 return this.rejected('batchContainsIneligibleCell');
@@ -326,6 +347,9 @@ export class GameSession {
         const unique = Array.from(new Set(cells));
         if (unique.length === 0) {
             return this.rejected('emptyBatch');
+        }
+        if (this.allRequiredCellsIdentified()) {
+            return this.rejected('markingLocked');
         }
         for (const cell of unique) {
             if (!isIndexInBounds(this.truth.level.size, cell) || this.board.stateAt(cell) !== PlayerCellState.X) {
@@ -390,6 +414,14 @@ export class GameSession {
                 // NOTHING AT ALL — no RedX, no mistake, and (already true either way) the pivot is
                 // left unchanged so the drag is never interrupted.
                 if (this.tutorialMode) {
+                    return this.accepted(false);
+                }
+                // Confirmed by the user: once every required cell has already been identified (the
+                // connecting phase), dragging across a non-solution cell must NOT place a mark (X)
+                // or wrongmark (RedX) either — same treatment as handleTap/handleDoubleTap's wrong-
+                // cell branch/handleMarkCellsAsX/handleRemoveXCells, just reached through a drag
+                // crossing instead. The drag is never interrupted (pivot stays put either way).
+                if (this.allRequiredCellsIdentified()) {
                     return this.accepted(false);
                 }
                 this.board = result.board;
@@ -529,6 +561,28 @@ export class GameSession {
     private isCellIdentified(cell: number): boolean {
         const state = this.board.stateAt(cell);
         return state === PlayerCellState.TrackPreview || state === PlayerCellState.Track;
+    }
+
+    /** Confirmed by the user: once every required cell has been identified as track (TrackPreview,
+     * Track ?, or a completed Track — i.e. not left Empty/X), the player can only connect track from
+     * here — see 'markingLocked' in handleTap/handleMarkCellsAsX/handleRemoveXCells. Shared with the
+     * needsConnectionHint computation in snapshot(). */
+    private allRequiredCellsIdentified(): boolean {
+        return this.requiredCells.every((cell) => {
+            const state = this.board.stateAt(cell);
+            return state === PlayerCellState.TrackPreview || state === PlayerCellState.Track;
+        });
+    }
+
+    /** "Cần nối" (needsConnectionHint trong snapshot(), và idle dash-trail — xem
+     * solutionPathForIdleHint()) đúng khi: đang Active, mọi required cell đã identified, VÀ CHƯA
+     * thực sự nối xong hoàn chỉnh (isWon + hasCompleteRailPath) — thiếu vế sau là đúng nguyên nhân
+     * bug "hiệu ứng dash tự hiện lại lúc tàu đang chạy" (xác nhận từ user): allRequiredCellsIdentified()
+     * một mình vẫn true ngay cả SAU KHI đã thắng (mọi cell lúc đó đã là Track thật), nên phải loại
+     * trừ rõ ràng pha Won/đã nối xong ở đây, KHÔNG chỉ dựa vào allRequiredCellsIdentified(). */
+    private needsConnectionHintNow(): boolean {
+        return this.phase === GamePhase.Active && this.allRequiredCellsIdentified()
+            && !(isWon(this.board, this.requiredCells) && hasCompleteRailPath(this.board, this.truth));
     }
 
     private checkTargetCell(cell: number): RejectionReason | null {

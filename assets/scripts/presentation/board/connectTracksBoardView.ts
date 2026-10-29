@@ -346,6 +346,21 @@ export class ConnectTracksBoardView extends Component {
         return this.cellSize;
     }
 
+    /** Vị trí Y (world space) của VIỀN TRÊN của board NGAY LÚC GỌI (phụ thuộc cả vị trí/scale hiện
+     * tại của board.node, nên gọi ĐÚNG LÚC — ví dụ trước lúc board di chuyển vào giữa màn hình thì
+     * ra vị trí trong lúc chơi, gọi SAU khi di chuyển thì ra vị trí đã căn giữa). Dùng để các overlay
+     * BÊN NGOÀI board (rail group, thông báo "cần nối", text thắng...) tự định vị CAO HƠN viền board
+     * đúng N px, không lệ thuộc 1 vị trí Editor cố định (sai lệch khi board đổi kích thước theo từng
+     * level — xem rebuild()). */
+    getTopEdgeWorldY(): number {
+        const gridHeight = this.height * this.cellSize;
+        const uiTransform = this.getComponent(UITransform);
+        if (!uiTransform) return this.node.worldPosition.y;
+        const worldTop = new Vec3();
+        uiTransform.convertToWorldSpaceAR(new Vec3(0, gridHeight / 2, 0), worldTop);
+        return worldTop.y;
+    }
+
     /** Draws the given snapshot. Call again after every command that changes the board. */
     prepareLevelSpawn(): void {
         this.stopVictory();
@@ -819,9 +834,6 @@ export class ConnectTracksBoardView extends Component {
         // LOG TẠM ĐỂ DEBUG (theo yêu cầu user — xem tốc độ tàu tuỳ theo từng màn) — xoá cùng lúc với
         // log tương ứng ở ConnectTracksTrainView.play(). Ghép cùng gridWidth/gridHeight để thấy rõ
         // board "nhiều ô" (grid lớn) so với "ít ô" (grid nhỏ) đang có cellSize khác nhau thế nào.
-        console.log('[DEBUG ConnectTracksBoardView] playTrain():', JSON.stringify({
-            gridWidth: snapshot.width, gridHeight: snapshot.height, cellSize: this.cellSize,
-        }));
 
         train.play(polyline, path.length, () => finished?.(), this.node, this.cellSize);
     }

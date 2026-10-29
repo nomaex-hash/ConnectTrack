@@ -16,6 +16,9 @@ export interface FBInstantPlayer {
     getName(): string | null;
     getPhoto(): string | null;
     getSignedPlayerInfoAsync(requirePayload?: string): Promise<FBInstantSignedPlayerInfo>;
+    getDataAsync(keys: readonly string[]): Promise<Record<string, unknown>>;
+    setDataAsync(data: Record<string, unknown>): Promise<void>;
+    flushDataAsync(): Promise<void>;
 }
 
 export interface FBInstantContext {
@@ -58,6 +61,7 @@ export interface FBInstantSDK {
     readonly context: FBInstantContext;
     readonly payments: FBInstantPayments;
     updateAsync(payload: FBInstantUpdatePayload): Promise<void>;
+    onPause(callback: () => void): void;
 }
 
 declare global {

@@ -225,6 +225,8 @@
     "tournament.unitMany": "times",
 
     "result.win": "WELL DONE !",
+    "result.restart": "Restart",
+    "result.ad":"RESURRECT",
     "result.lose": "TRY AGAIN !",
     "result.winTexts": [
         "GOOD!",
@@ -375,7 +377,7 @@
     "profile.Save": "Save",
 
     "tournament.newSession": "New Session",
-    "tournament.description": "Play to collect ❤️ and climb\nthe ranks in each event. Aim\nfor a higher rank!",
+    "tournament.description": "Play to collect tracks and climb\nthe ranks in each event. Aim\nfor a higher rank!",
     "tournament.claim": "Got it!",
 
     "weekday.sun": "Sun",
@@ -405,5 +407,12 @@
     "howToPlay.page1": "You can only\n have 1 pet per color",
     "howToPlay.page2": "Pets cannot touch,\n even at the corners",
     "howToPlay.page3": "A Pet cannot share a row or column \nwith another pet",
-    "howToPlay.page4": "Don't guess — use logic\n to rule out invalid cells"
+    "howToPlay.page4": "Don't guess — use logic\n to rule out invalid cells",
+
+    "howToPlay.gameRulesHeader": "Game Rules",
+    "howToPlay.rule1": "Find all tracks on the board and connect them all.",
+    "howToPlay.rule2": "Numbers show how many tracks belong in each row and column.",
+    "howToPlay.controlsHeader": "Controls",
+    "howToPlay.control1": "Double tap a cell to mark it as a track.",
+    "howToPlay.control2": "Tap or swipe across empty cells to mark them with Xs; repeat to remove marks."
 }

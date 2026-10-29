@@ -141,7 +141,12 @@ export class TournamentResultPopup extends UIPopup<TournamentResultSnapshot> {
 
         // CHỈ số lần (countText) tô xanh ở chữ CHÍNH — "time(s)" đứng sau giữ NGUYÊN màu gốc,
         // không nằm trong tag <color>. Label bóng đổ là Label thường, không đọc tag <color> nên
-        // dùng plainTitle (chữ thô, không tag).
+        // dùng plainTitle (chữ thô, không tag) — xác nhận từ user: shadow dùng CHUNG 1 template với
+        // chữ chính (resultTitle), không tách key riêng nữa. Viền chữ (outline) của titleRichText
+        // KHÔNG còn chèn qua tag <outline> trong string nữa (xác nhận từ user) — chỉ còn
+        // titleShadowLabel tự lo outline qua field native _enableOutline/_outlineColor/_outlineWidth
+        // sẵn có trong RewardTop3.prefab, titleRichText chỉ khác titleShadowLabel đúng 1 điểm duy
+        // nhất: tag <color> tô số lần đạt hạng.
         if (this.titleRichText) {
             this.titleRichText.string = template
                 .replace('{rank}', rankText)
@@ -229,7 +234,7 @@ export class TournamentResultPopup extends UIPopup<TournamentResultSnapshot> {
 
         const avatarLoaded = new Promise<void>(resolve => {
             MConfigResourceUtils.getProfileSpriteFrame(PROFILE_TAB_TYPE.AVATAR, pathAvatar, (err: unknown, spriteFrame) => {
-                if (err) { console.log(err); resolve(); return; }
+                if (err) {  resolve(); return; }
                 // Guard .node — popup có thể đã đóng/huỷ TRƯỚC KHI callback load ảnh bất đồng bộ này
                 // chạy tới (giống hệt lý do ItemLeaderboardBase.loadAvatar() guard tương tự).
                 if (avatarSprite && avatarSprite.node) avatarSprite.spriteFrame = spriteFrame;
@@ -238,7 +243,7 @@ export class TournamentResultPopup extends UIPopup<TournamentResultSnapshot> {
         });
         const frameLoaded = new Promise<void>(resolve => {
             MConfigResourceUtils.getProfileSpriteFrame(PROFILE_TAB_TYPE.FRAME, pathFrame, (err: unknown, spriteFrame) => {
-                if (err) { console.log(err); resolve(); return; }
+                if (err) {  resolve(); return; }
                 if (frameSprite && frameSprite.node) frameSprite.spriteFrame = spriteFrame;
                 resolve();
             });

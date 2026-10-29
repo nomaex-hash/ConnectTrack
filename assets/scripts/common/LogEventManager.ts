@@ -314,7 +314,6 @@ export class LogEventManager extends Component {
     public static logEventParameters(eventName: string, parameters?: any) {
         // console.error("LOG EVENT",eventName,parameters);
         if (localConfig.instance.envType == ENV_TYPE.TEST_AD) { 
-            console.log("LOG EVENT", eventName, parameters);
             return; 
         }
         
@@ -339,7 +338,6 @@ export class LogEventManager extends Component {
     
     public logUserProperty(property_name: string, property_value: any) {
         if (localConfig.instance.envType == ENV_TYPE.TEST_AD) { 
-            console.log("LOG EVENT", property_name, property_value);
             return;
         }
         let parameters = { [property_name]: property_value };

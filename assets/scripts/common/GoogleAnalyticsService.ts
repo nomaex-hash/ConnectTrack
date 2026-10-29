@@ -76,14 +76,13 @@ export class GoogleAnalyticsService extends Component {
     }
 
     private async initPlayinstantTracker(){
-        if(localConfig.instance.envType == ENV_TYPE.FB){
+        if(localConfig.instance.envType == ENV_TYPE.FB && typeof playinstantTracker !== 'undefined'){
             playinstantTracker.init({
                 gameId: GoogleAnalyticsService.PGS_GAME_ID,
                 measurementId: GoogleAnalyticsService.GA_MEASUREMENT_ID,
                 userId: FBInstant.player.getID(),
                 getSignature: async function () {
                     const signedInfo = await FBInstant.player.getSignedPlayerInfoAsync();
-                    console.log(signedInfo.getSignature());
                     return signedInfo.getSignature();
                 },
                 debug: false,
@@ -105,7 +104,7 @@ export class GoogleAnalyticsService extends Component {
             gtag("set", "user_properties", user_properties);
         }
 
-        if(localConfig.instance.envType == ENV_TYPE.FB){
+        if(localConfig.instance.envType == ENV_TYPE.FB && typeof playinstantTracker !== 'undefined'){
             playinstantTracker.setUserProperties(mapToObject(this.mapUserProperties));
         }
     }
@@ -329,7 +328,7 @@ export class GoogleAnalyticsService extends Component {
         // params.ga_session_number = this.gaSessionNumber;
         // PGSPlayInstantManager.instance.TrackEvent(this.clientId, eventName,params, userProperties);
 
-        if(localConfig.instance.envType == ENV_TYPE.FB){
+        if(localConfig.instance.envType == ENV_TYPE.FB && typeof playinstantTracker !== 'undefined'){
             playinstantTracker.track(eventName, params);
         }
     }

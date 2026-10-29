@@ -30,18 +30,14 @@ export class MockFBInstantManager implements IFBInstantManager {
     }
 
     async chooseContext(): Promise<void> {
-        console.log('[MockPlatform] chooseContext');
     }
 
     async createContext(playerId: string): Promise<void> {
-        console.log('[MockPlatform] createContext', playerId);
     }
 
     async switchContext(contextId: string): Promise<void> {
-        console.log('[MockPlatform] switchContext', contextId);
     }
 
     async updateContext(payload: ContextUpdatePayload): Promise<void> {
-        console.log('[MockPlatform] updateContext', payload);
     }
 }

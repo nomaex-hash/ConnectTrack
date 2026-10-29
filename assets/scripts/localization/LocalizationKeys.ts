@@ -229,5 +229,14 @@ export const L10N = {
         page2: 'howToPlay.page2',
         page3: 'howToPlay.page3',
         page4: 'howToPlay.page4',
+        // Nội dung "How to play" MỚI cho ConnectTracks (khớp đúng chữ trong ảnh thiết kế người
+        // dùng gửi) — 4 key page1-4/title ở trên là nội dung Meowdoku cũ (mèo/màu), không còn khớp
+        // với ConnectTracks, giữ nguyên không xoá vì chưa chắc còn chỗ nào tham chiếu tới.
+        gameRulesHeader: 'howToPlay.gameRulesHeader',
+        rule1: 'howToPlay.rule1',
+        rule2: 'howToPlay.rule2',
+        controlsHeader: 'howToPlay.controlsHeader',
+        control1: 'howToPlay.control1',
+        control2: 'howToPlay.control2',
     },
 } as const;

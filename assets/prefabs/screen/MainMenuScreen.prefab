@@ -1443,6 +1443,9 @@
     "marginRight": 50,
     "marginTop": 200,
     "marginBottom": 0,
+    "shrinkOnNarrowScreen": true,
+    "narrowScreenWidth": 470,
+    "minNarrowScale": 0.8,
     "_id": ""
   },
   {
@@ -1586,6 +1589,9 @@
     "marginRight": 0,
     "marginTop": 50,
     "marginBottom": 0,
+    "shrinkOnNarrowScreen": true,
+    "narrowScreenWidth": 470,
+    "minNarrowScale": 0.8,
     "_id": ""
   },
   {
@@ -3137,6 +3143,9 @@
     "marginRight": 0,
     "marginTop": 200,
     "marginBottom": 0,
+    "shrinkOnNarrowScreen": true,
+    "narrowScreenWidth": 470,
+    "minNarrowScale": 0.8,
     "_id": ""
   },
   {
@@ -3399,6 +3408,9 @@
     "marginRight": 50,
     "marginTop": 70,
     "marginBottom": 0,
+    "shrinkOnNarrowScreen": false,
+    "narrowScreenWidth": 500,
+    "minNarrowScale": 0,
     "_id": ""
   },
   {
@@ -10335,6 +10347,9 @@
     "marginRight": 0,
     "marginTop": 0,
     "marginBottom": 0,
+    "shrinkOnNarrowScreen": false,
+    "narrowScreenWidth": 500,
+    "minNarrowScale": 0,
     "_id": ""
   },
   {

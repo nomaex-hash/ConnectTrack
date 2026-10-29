@@ -338,7 +338,6 @@ export class ItemLeaderboard extends Component {
         const avatarLoaded = new Promise<void>((resolve) => {
             MConfigResourceUtils.getProfileSpriteFrame(PROFILE_TAB_TYPE.AVATAR,pathAvatar, (err, spriteFrame) =>{
                 if(err){
-                    console.log(err);
                 }else{
                     // Guard .node (KHÔNG dùng .isValid — xem giải thích chi tiết ở
                     // ItemLeaderboardBase.loadAvatar(), cùng 1 lỗi race condition) — item có thể đã bị
@@ -352,7 +351,6 @@ export class ItemLeaderboard extends Component {
         const frameLoaded = new Promise<void>((resolve) => {
             MConfigResourceUtils.getProfileSpriteFrame(PROFILE_TAB_TYPE.FRAME,pathFrame, (err, spriteFrame) =>{
                 if(err){
-                    console.log(err);
                 }else{
                     if(this.iconFrame && this.iconFrame.node) this.iconFrame.spriteFrame = spriteFrame;
                 }

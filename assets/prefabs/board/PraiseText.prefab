@@ -22509,7 +22509,8 @@
         "__expectedType__": "cc.SpriteFrame"
       }
     ],
-    "digitSpacing": 4,
+    "digitSpacing": -10,
+    "digitEdgePadding": 0,
     "fitSize": {
       "__type__": "cc.Size",
       "width": 150,
@@ -22754,7 +22755,8 @@
         "__expectedType__": "cc.SpriteFrame"
       }
     ],
-    "digitSpacing": 4,
+    "digitSpacing": -10,
+    "digitEdgePadding": 0,
     "fitSize": {
       "__type__": "cc.Size",
       "width": 150,
@@ -22927,7 +22929,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
+      "width": 10,
       "height": 100
     },
     "_anchorPoint": {

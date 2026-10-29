@@ -1,4 +1,4 @@
-import { _decorator, BlockInputEvents, Button, Component, Label, MotionStreak, Node, ParticleSystem, Prefab, UITransform, UIOpacity, Vec3, Widget, instantiate, isValid, sp, warn } from 'cc';
+import { _decorator, BlockInputEvents, Button, Component, Label, MotionStreak, Node, ParticleSystem, Prefab, Tween, UITransform, UIOpacity, Vec3, Widget, instantiate, isValid, sp, tween, warn } from 'cc';
 import { GameSnapshot } from '../../application/contracts/gameSnapshot';
 import { ConnectTracksBoardView } from './connectTracksBoardView';
 import { traceTrainPath } from './trainPath';
@@ -27,6 +27,14 @@ export class ConnectTracksVictoryView extends Component {
     background: Node | null = null;
     @property({ type: Node, tooltip: 'Cụm Rail gồm bg, icon, Label. Cùng cấp với Board; không đặt trong Board.' })
     railGroup: Node | null = null;
+    @property({
+        tooltip:
+            'railGroup tự định vị CAO HƠN viền trên của board đúng N px (world) ngay lúc bật hiện —' +
+            ' KHÔNG còn dùng vị trí Y cố định gán sẵn trong Editor nữa (sai lệch khi board đổi kích ' +
+            'thước theo từng level, xem ConnectTracksBoardView.getTopEdgeWorldY()). CHỈ đổi Y, giữ ' +
+            'nguyên X đã canh trong Editor.',
+    })
+    railGroupHeightAboveBoard = 40;
     @property(Label)
     railLabel: Label | null = null;
     @property({ type: Prefab, tooltip: 'Prefab ngôi sao có MotionStreak. Vị trí bay lấy từ ô tới Rail Group.' })
@@ -39,6 +47,16 @@ export class ConnectTracksVictoryView extends Component {
     nextButton: Button | null = null;
     @property(Label)
     nextLabel: Label | null = null;
+    @property({
+        min: 0.01,
+        tooltip:
+            'Giống hệt hiệu ứng nút "Tiếp theo" ở Tutorial (xác nhận từ user) — thời gian (giây) ' +
+            'MỖI CHIỀU của 1 nhịp nhấp nháy scale nút qua màn tiếp theo (to lên rồi về lại = 2 lần ' +
+            'giá trị này), chạy LIÊN TỤC suốt lúc nút đang hiện (từ lúc fade-in xong cho tới lúc bấm).',
+    })
+    nextButtonBlinkSpeed = 0.5;
+    @property({ min: 1, tooltip: 'Scale TO NHẤT của nút qua màn tiếp theo lúc nhấp nháy (1 = không đổi gì) — cùng ý nghĩa với Tutorial.' })
+    nextButtonBlinkScale = 1.08;
     @property({
         min: 0.01,
         tooltip:
@@ -114,6 +132,13 @@ export class ConnectTracksVictoryView extends Component {
             'tiếp.',
     })
     winEffectText: WinTextArc | null = null;
+    @property({
+        tooltip:
+            'winEffectText tự định vị CAO HƠN viền trên của board (SAU KHI đã di chuyển vào giữa ' +
+            'màn hình) đúng N px (world) ngay lúc playWinEffect() chạy — KHÔNG còn dùng vị trí Y cố ' +
+            'định gán sẵn trong Editor nữa. CHỈ đổi Y, giữ nguyên X đã canh trong Editor.',
+    })
+    winTextHeightAboveBoard = 60;
 
     @property({
         type: ParticleSystem,
@@ -229,6 +254,7 @@ export class ConnectTracksVictoryView extends Component {
         if (!await this.animate(this.marksFadeSeconds, t => this.board!.setVictoryMarksFade(t))
             || token !== this.generation) return;
         this.railGroup!.active = this.starsEnabled;
+        if (this.starsEnabled) this.positionAboveBoard(this.railGroup!, this.railGroupHeightAboveBoard);
         const reveal = this.starsEnabled ? this.showRail(true) : Promise.resolve(true);
         const arrivals: Promise<boolean>[] = [];
         const waveCellSeconds = this.effectiveWaveCellSeconds(path.length);
@@ -285,6 +311,31 @@ export class ConnectTracksVictoryView extends Component {
         if (this.blocker && isValid(this.blocker, true)) this.blocker.destroy();
         this.blocker = null;
         this.ready = true;
+        this.startNextButtonBlink();
+    }
+
+    /** Nhấp nháy scale LIÊN TỤC trên nút qua màn tiếp theo, y hệt hiệu ứng nút "Tiếp theo" ở
+     * Tutorial (xác nhận từ user) — xem ConnectTracksTutorialController.startButtonBlink(). */
+    private startNextButtonBlink(): void {
+        const node = this.nextButton?.node;
+        if (!node) return;
+        Tween.stopAllByTarget(node);
+        node.setScale(new Vec3(1, 1, 1));
+        const s = this.nextButtonBlinkScale;
+        tween(node)
+            .repeatForever(
+                tween<Node>()
+                    .to(this.nextButtonBlinkSpeed, { scale: new Vec3(s, s, 1) }, { easing: 'sineInOut' })
+                    .to(this.nextButtonBlinkSpeed, { scale: new Vec3(1, 1, 1) }, { easing: 'sineInOut' }),
+            )
+            .start();
+    }
+
+    private stopNextButtonBlink(): void {
+        const node = this.nextButton?.node;
+        if (!node || !isValid(node, true)) return;
+        Tween.stopAllByTarget(node);
+        node.setScale(new Vec3(1, 1, 1));
     }
 
     private moveBoardToCenter(): Promise<boolean> {
@@ -453,6 +504,21 @@ export class ConnectTracksVictoryView extends Component {
         return node.getComponent(UIOpacity) ?? node.addComponent(UIOpacity);
     }
 
+    /** Định vị `node` CAO HƠN viền trên của board (ĐÚNG LÚC gọi — xem
+     * ConnectTracksBoardView.getTopEdgeWorldY()) đúng `heightAbove` px (world), CHỈ đổi Y — giữ
+     * nguyên X/Z hiện tại của node (đã canh ngang sẵn trong Editor). Không làm gì nếu thiếu board
+     * hoặc node không có node cha (không có không gian local nào để quy đổi về). */
+    private positionAboveBoard(node: Node, heightAbove: number): void {
+        if (!this.board || !node.parent) return;
+        const parentUI = node.parent.getComponent(UITransform);
+        if (!parentUI) return;
+        const targetWorldY = this.board.getTopEdgeWorldY() + heightAbove;
+        const worldPoint = node.worldPosition.clone();
+        worldPoint.y = targetWorldY;
+        const localPoint = parentUI.convertToNodeSpaceAR(worldPoint);
+        node.setPosition(node.position.x, localPoint.y, node.position.z);
+    }
+
     private installBlocker(root: Node): void {
         const node = new Node('VictoryInputBlocker');
         node.layer = root.layer;
@@ -488,6 +554,7 @@ export class ConnectTracksVictoryView extends Component {
         if (!this.ready) return;
         this.ready = false;
         if (this.nextButton) this.nextButton.interactable = false;
+        this.stopNextButtonBlink();
         this.nextAction?.();
     };
 
@@ -495,6 +562,7 @@ export class ConnectTracksVictoryView extends Component {
      * vào giữa màn hình. */
     private playWinEffect(): void {
         if (this.winEffectText) {
+            this.positionAboveBoard(this.winEffectText.node, this.winTextHeightAboveBoard);
             this.winEffectText.node.active = true;
             void this.winEffectText.play(Localization.getRandom(L10N.result.winTexts));
         }
@@ -555,6 +623,7 @@ export class ConnectTracksVictoryView extends Component {
             this.nextButton.node.off(Button.EventType.CLICK, this.onNext, this);
             this.nextButton.node.active = false;
         }
+        this.stopNextButtonBlink();
         this.board = null;
         this.boardPosition = null;
         this.boardScale = null;

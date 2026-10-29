@@ -223,6 +223,8 @@
     "gameplay.text": "Hãy nối các đường ray để hoàn thành",
 
     "result.win": "TUYỆT VỜI !",
+    "result.restart": "Chơi Lại",
+    "result.ad": "Hồi Sinh",
     "result.lose": "Hết mạng !",
     "result.winTexts": [
         "TỐT!",
@@ -369,7 +371,7 @@
     "profile.Save": "Lưu",
 
     "tournament.newSession": "Phiên mới",
-    "tournament.description": "Chơi để thu thập ❤️ và leo hạng\ntrong mỗi giải đấu. Cố gắng đạt\nthứ hạng cao hơn!",
+    "tournament.description": "Chơi để thu thập đường ray và leo hạng trong mỗi giải đấu. Cố gắng đạt thứ hạng cao hơn!",
     "tournament.claim": "Đã hiểu",
 
     "weekday.sun": "CN",
@@ -403,5 +405,12 @@
     "howToPlay.page1": "Bạn chỉ có thể có\n 1 mèo cho mỗi màu",
     "howToPlay.page2": "Mèo không thể\n chạm nhau, ngay cả ở các góc",
     "howToPlay.page3": "Mèo không thể ở cùng hàng\n hoặc cột với một mèo khác",
-    "howToPlay.page4": "Không đoán mò — hãy dùng logic\n để loại bỏ các ô không hợp lệ"
+    "howToPlay.page4": "Không đoán mò — hãy dùng logic\n để loại bỏ các ô không hợp lệ",
+
+    "howToPlay.gameRulesHeader": "Luật chơi",
+    "howToPlay.rule1": "Tìm tất cả đường ray trên bàn chơi và nối chúng lại với nhau.",
+    "howToPlay.rule2": "Các số cho biết có bao nhiêu đường ray thuộc mỗi hàng và cột.",
+    "howToPlay.controlsHeader": "Cách chơi",
+    "howToPlay.control1": "Chạm đúp vào 1 ô để đánh dấu đó là đường ray.",
+    "howToPlay.control2": "Chạm hoặc vuốt qua các ô trống để đánh dấu X; lặp lại để bỏ dấu."
 }

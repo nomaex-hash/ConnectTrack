@@ -7,10 +7,8 @@ export class MockSocialService implements ISocialService {
     }
 
     async share(content: ShareContent): Promise<void> {
-        console.log('[MockSocial] share', content);
     }
 
     async challengeFriend(content: ShareContent): Promise<void> {
-        console.log('[MockSocial] challengeFriend', content);
     }
 }

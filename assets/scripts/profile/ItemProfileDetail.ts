@@ -68,7 +68,6 @@ export class ItemProfileDetail extends Component {
             let pathAvatar:string = ProfileManager.instance.getPathAvatar_byID(this.profileDataDetail.Id);
             MConfigResourceUtils.getProfileSpriteFrame(PROFILE_TAB_TYPE.AVATAR,pathAvatar, (err, spriteFrame) =>{
                 if(err){
-                    console.log(err);
                 }else{
                     if(this.avatarIcon == null) return;
                     this.avatarIcon.sizeMode = Sprite.SizeMode.CUSTOM;
@@ -79,7 +78,6 @@ export class ItemProfileDetail extends Component {
             let pathFrame:string = ProfileManager.instance.getPathFrame_byID(this.profileDataDetail.Id);
             MConfigResourceUtils.getProfileSpriteFrame(PROFILE_TAB_TYPE.FRAME,pathFrame, (err, spriteFrame) =>{
                 if(err){
-                    console.log(err);
                 }else{
                     if(this.frameIcon == null) return;
                     this.frameIcon.sizeMode = Sprite.SizeMode.CUSTOM;

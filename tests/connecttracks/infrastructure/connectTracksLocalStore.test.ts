@@ -116,3 +116,63 @@ describe('connectTracksLocalStore — gộp về 1 key', () => {
         expect(store.readPlayerSave()).toBe('OLD');
     });
 });
+
+describe('connectTracksLocalStore — hỗ trợ đồng bộ cloud', () => {
+    // Các test phía trên đổi setItem thành bản lỗi/hỏng và không khôi phục — dựng lại bản bình thường.
+    beforeEach(() => {
+        storage.setItem.mockImplementation((key: string, value: string) => { storage.records.set(key, value); });
+    });
+
+    it('mỗi lần ghi đóng dấu savedAt và báo cho listener', async () => {
+        const store = await freshStore();
+        const listener = vi.fn();
+        const off = store.onPersisted(listener);
+        expect(store.getSavedAt()).toBe(0);
+        store.writePlaceTrackCharges(1);
+        expect(store.getSavedAt()).toBeGreaterThan(0);
+        expect(storedDoc().savedAt).toBe(store.getSavedAt());
+        expect(listener).toHaveBeenCalledTimes(1);
+        off();
+        store.writePlaceTrackCharges(2);
+        expect(listener).toHaveBeenCalledTimes(1);
+    });
+
+    it('importSnapshot thay cả document, giữ savedAt của snapshot, KHÔNG báo listener; từ chối snapshot hỏng', async () => {
+        const store = await freshStore();
+        store.writePlaceTrackCharges(1);
+        const listener = vi.fn();
+        store.onPersisted(listener);
+        const snapshot = JSON.stringify({ version: 1, savedAt: 42, placeTrackCharges: 9, sessions: { 'campaign:3:': { c: 3 } } });
+        expect(store.importSnapshot(snapshot)).toBe(true);
+        expect(store.getSavedAt()).toBe(42);
+        expect(store.readPlaceTrackCharges()).toBe(9);
+        expect(store.readSession('campaign:3:')).toEqual({ c: 3 });
+        expect(storedDoc().savedAt).toBe(42);
+        expect(listener).not.toHaveBeenCalled();
+
+        for (const bad of ['not json', '[]', '{"version":2,"sessions":{}}', '{"version":1}']) {
+            expect(store.importSnapshot(bad)).toBe(false);
+        }
+        expect(store.readPlaceTrackCharges()).toBe(9);
+    });
+});
+
+describe('connectTracksLocalStore — snapshot cloud không chứa legacyConfig', () => {
+    beforeEach(() => {
+        storage.setItem.mockImplementation((key: string, value: string) => { storage.records.set(key, value); });
+    });
+
+    it('exportSnapshot bỏ legacyConfig (tránh lồng configuration vào chính nó); importSnapshot giữ legacyConfig local', async () => {
+        const store = await freshStore();
+        store.writeLegacyConfig('{"iap":1}');
+        store.writePlaceTrackCharges(4);
+        const exported = JSON.parse(store.exportSnapshot());
+        expect(exported.legacyConfig).toBeUndefined();
+        expect(exported.placeTrackCharges).toBe(4);
+
+        expect(store.importSnapshot(JSON.stringify({ version: 1, savedAt: 99, sessions: {}, placeTrackCharges: 8 }))).toBe(true);
+        expect(store.readLegacyConfig()).toBe('{"iap":1}');
+        expect(store.readPlaceTrackCharges()).toBe(8);
+        expect(storedDoc().legacyConfig).toBe('{"iap":1}');
+    });
+});

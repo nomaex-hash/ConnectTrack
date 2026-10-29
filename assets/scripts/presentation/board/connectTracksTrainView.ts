@@ -199,12 +199,6 @@ export class ConnectTracksTrainView extends Component {
         // LOG TẠM ĐỂ DEBUG (theo yêu cầu user — xem tốc độ tàu tuỳ theo từng màn) — xoá sau khi xác
         // nhận speedCellsPerSecond (số ô/giây) giống nhau giữa các màn mà vẫn nhìn tốc độ hợp lý,
         // dù currentSpeedPxPerSecond (local px/giây thật sự dùng để di chuyển) khác nhau tuỳ cellSize.
-        console.log('[DEBUG ConnectTracksTrainView] play():', JSON.stringify({
-            trackCellCount, cellSize: effectiveCellSize, speedCellsPerSecond,
-            currentSpeedPxPerSecond: this.currentSpeedPxPerSecond,
-            totalDistanceLocal: this.totalDistance,
-            estimatedRunSeconds: this.currentSpeedPxPerSecond > 0 ? this.totalDistance / this.currentSpeedPxPerSecond : null,
-        }));
 
         // stop() rồi play() lại (không chỉ play()) — an toàn khi play() được gọi lại (Restart rồi
         // thắng lần nữa) trong lúc khói cũ vẫn còn đang phát dở, giống pattern ConnectTracksVictoryView.

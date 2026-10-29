@@ -248,9 +248,6 @@ export class LeaderboardManager extends Component {
     const beforeRemainingSec = this.leaderboardDataSave.tournamentStartMs
       ? Math.max(0, Math.floor((this.leaderboardDataSave.tournamentStartMs + TOURNAMENT_DURATION_MS - now) / 1000))
       : null;
-    console.log('[LeaderboardManager.fastForwardOfflineGrowthForTesting] TRƯỚC', {
-      hours, tournamentStartMs: this.leaderboardDataSave.tournamentStartMs, beforeRemainingSec,
-    });
 
     if (this.leaderboardDataSave.tournamentStartMs) {
       this.leaderboardDataSave.tournamentStartMs -= hoursMs;
@@ -259,9 +256,6 @@ export class LeaderboardManager extends Component {
     const afterRemainingSec = this.leaderboardDataSave.tournamentStartMs
       ? Math.max(0, Math.floor((this.leaderboardDataSave.tournamentStartMs + TOURNAMENT_DURATION_MS - Date.now()) / 1000))
       : null;
-    console.log('[LeaderboardManager.fastForwardOfflineGrowthForTesting] SAU', {
-      tournamentStartMs: this.leaderboardDataSave.tournamentStartMs, afterRemainingSec,
-    });
 
     // checkOfflineGrowth() tự lưu (setSaveLeaderboardData()) ở cuối — hours>0 luôn đảm bảo
     // elapsedMs vượt ngưỡng OFFLINE_TICK_MINUTES_NORMAL nên không rơi vào nhánh early-return nào,
@@ -269,10 +263,6 @@ export class LeaderboardManager extends Component {
     // Test đủ số chu kỳ trong khoảng tua, kể cả khi người chơi đã dưới hạng sàn.
     this.checkOfflineGrowth(true);
 
-    console.log('[LeaderboardManager.fastForwardOfflineGrowthForTesting] SAU checkOfflineGrowth', {
-      tournamentStartMs: this.leaderboardDataSave.tournamentStartMs,
-      getTimeToNextWeekNgay: this.getTimeToNextWeek(),
-    });
   }
 
   /** Điểm KHỞI ĐIỂM mỗi bot khi giải đấu Weekly RESET (mùa mới) — random ĐỘC LẬP từng bot, chia 3

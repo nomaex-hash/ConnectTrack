@@ -36,8 +36,12 @@ describe('ConnectTracks hint transaction', () => {
     });
     it('B1 completes previews in correct directions and eventually wins', () => {
         const s = session();
-        for (const cell of [1, 2, 5]) s.dispatch({ type: 'doubleTapCell', cell });
+        // Mark the wrong cell X BEFORE identifying every required cell — once all required cells
+        // are identified (TrackPreview), marking/unmarking X on a non-solution cell is rejected
+        // ('markingLocked', confirmed by the user). Order between unrelated cells doesn't affect
+        // the resulting board state, so this still sets up the same scenario for B1 to clean up.
         s.dispatch({ type: 'tapCell', cell: 4 });
+        for (const cell of [1, 2, 5]) s.dispatch({ type: 'doubleTapCell', cell });
         const first = s.requestHint()!;
         expect(first.rule).toBe('B1-preview');
         expect(first.targets).toEqual([1]); expect(first.lifted).toEqual([1, 4]);

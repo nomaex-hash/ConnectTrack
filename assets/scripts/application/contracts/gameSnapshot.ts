@@ -81,7 +81,13 @@ export type RejectionReason =
      * is nothing left to auto-place. */
     | 'nothingToPlace'
     /** Revive (confirmed by the user): only meaningful when phase is Lost — rejected otherwise. */
-    | 'notLost';
+    | 'notLost'
+    /** Mark/unmark X (confirmed by the user): once every required cell has already been identified
+     * (TrackPreview, Track ?, or a completed Track — see needsConnectionHint/allRequiredIdentified),
+     * the player can only connect track from here — tapCell's Empty<->X toggle and the
+     * markCellsAsX/removeXCells swipe-batch commands are all rejected on non-solution cells.
+     * Dragging to connect track (beginTrackDrag/trackBoundaryCrossed/applyTrackShape) is unaffected. */
+    | 'markingLocked';
 
 export type CommandResult =
     | { readonly accepted: true; readonly changed: boolean; readonly snapshot: GameSnapshot }

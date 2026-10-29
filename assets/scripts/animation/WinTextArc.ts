@@ -30,6 +30,16 @@ export class WinTextArc extends Component {
     @property({ tooltip: 'Khoảng cách thêm giữa các ký tự (px)' }) spacing = 0;
     @property({ tooltip: 'Bán kính cung. Nhỏ = cong nhiều. 0 = chữ thẳng' }) arcRadius = 1100;
 
+    @property({
+        min: 0,
+        tooltip:
+            'Độ rộng TỐI ĐA (px, local — cùng đơn vị với kích thước thiết kế của Canvas) mà cả dòng ' +
+            'chữ được phép chiếm. Chữ càng dài (nhiều ký tự) càng dễ tràn ra ngoài màn hình — nếu độ ' +
+            'rộng thật sự đo được (sau khi xếp hết ký tự lên cung) VƯỢT QUÁ giá trị này, CẢ node tự ' +
+            'co lại (scale đều, không méo) cho vừa đúng khít. 0 = tắt, không tự co giãn gì cả.',
+    })
+    maxWidth = 650;
+
     @property({ tooltip: 'Lệch THÊM của bóng theo X (px), cộng vào độ lệch sẵn có giữa node shadow và text trong Editor' }) shadowOffsetX = 0;
     @property({ tooltip: 'Lệch THÊM của bóng theo Y (px), cộng vào độ lệch sẵn có giữa node shadow và text trong Editor' }) shadowOffsetY = 0;
 
@@ -39,7 +49,20 @@ export class WinTextArc extends Component {
     fixShadowSquash = true;
 
     @property({ tooltip: 'Thời gian giữa 2 ký tự liên tiếp (giây)' }) charInterval = 0.04;
-    @property({ tooltip: 'Thời gian bật của 1 ký tự (giây)' }) popDuration = 0.22;
+    @property({ tooltip: 'Thời gian bật của 1 ký tự (giây) — chặng phóng lên charOvershootScale.' }) popDuration = 0.22;
+    @property({ min: 0.01, tooltip: 'Scale CUỐI CÙNG mà mỗi ký tự dừng lại (1 = đúng cỡ chữ của Label mẫu, 1.5 = to gấp rưỡi).' })
+    charScale = 1;
+    @property({
+        min: 0.01,
+        tooltip:
+            'Scale CAO NHẤT mỗi ký tự phóng TỚI trước khi thu nhỏ về lại charScale — tách riêng khỏi ' +
+            'charScale để chỉnh được mức "vượt quá" (overshoot) độc lập, không phụ thuộc overshoot ' +
+            'ngầm của easing backOut nữa. Phải >= charScale để còn thấy hiệu ứng phóng to rồi thu lại; ' +
+            'bằng charScale thì tắt hẳn chặng thu nhỏ (phóng thẳng tới charScale, không overshoot).',
+    })
+    charOvershootScale = 1.2;
+    @property({ min: 0.01, tooltip: 'Thời gian (giây) thu nhỏ từ charOvershootScale về lại charScale — chặng 2, chạy ngay sau popDuration.' })
+    charSettleDuration = 0.12;
 
     private _chars: Node[] = [];
 
@@ -107,9 +130,13 @@ export class WinTextArc extends Component {
         const total = widths.reduce((a, b) => a + b, 0);
         let cursor = -total / 2;
         const R = this.arcRadius;
+        let minEdge = Infinity;
+        let maxEdge = -Infinity;
         glyphs.forEach((_, i) => {
             const x = cursor + widths[i] / 2;
             cursor += widths[i];
+            minEdge = Math.min(minEdge, x - widths[i] / 2);
+            maxEdge = Math.max(maxEdge, x + widths[i] / 2);
             [shadowWrappers[i], textWrappers[i]].forEach((node) => {
                 if (!node) return;
                 if (R > 0) {
@@ -122,6 +149,16 @@ export class WinTextArc extends Component {
             });
         });
 
+        // "Chữ dài quá bị tràn ra ngoài màn hình, muốn tự co scale theo kích thước màn hình" (xác
+        // nhận từ user) — độ rộng CHIỀU NGANG thật sự đo được (minEdge..maxEdge, tính trên trục x
+        // CHƯA cong — xấp xỉ đủ tốt cho mục đích clamp, cong hẹp lại một chút so với con số thẳng
+        // nên không bao giờ co NHẦM ÍT hơn mức cần). Co đều cả node (scale X=Y) nếu vượt maxWidth,
+        // KHÔNG méo hình — chỉ co nhỏ lại, KHÔNG phóng to thêm nếu chữ ngắn hơn maxWidth.
+        const measuredWidth = glyphs.length > 0 ? maxEdge - minEdge : 0;
+        const fitScale = this.maxWidth > 0 && measuredWidth > this.maxWidth
+            ? this.maxWidth / measuredWidth : 1;
+        this.node.setScale(fitScale, fitScale, 1);
+
         // 3. Bật từng ký tự (bóng và chữ cùng nhịp).
         return new Promise<void>((resolve) => {
             glyphs.forEach((ch, i) => {
@@ -129,17 +166,20 @@ export class WinTextArc extends Component {
                 [shadowWrappers[i], textWrappers[i]].forEach((node) => {
                     if (!node) return;
                     const op = node.getComponent(UIOpacity)!;
-                    tween(node)
-                        .delay(i * this.charInterval)
-                        .to(this.popDuration, { scale: new Vec3(1, 1, 1) }, { easing: 'backOut' })
-                        .start();
+                    const overshoot = tween(node).delay(i * this.charInterval)
+                        .to(this.popDuration, { scale: new Vec3(this.charOvershootScale, this.charOvershootScale, 1) }, { easing: 'backOut' });
+                    if (this.charOvershootScale !== this.charScale) {
+                        overshoot.to(this.charSettleDuration, { scale: new Vec3(this.charScale, this.charScale, 1) }, { easing: 'quadOut' });
+                    }
+                    overshoot.start();
                     tween(op)
                         .delay(i * this.charInterval)
                         .to(this.popDuration * 0.4, { opacity: 255 })
                         .start();
                 });
             });
-            const dur = Math.max(glyphs.length - 1, 0) * this.charInterval + this.popDuration;
+            const settleDuration = this.charOvershootScale !== this.charScale ? this.charSettleDuration : 0;
+            const dur = Math.max(glyphs.length - 1, 0) * this.charInterval + this.popDuration + settleDuration;
             this.scheduleOnce(() => { this._pending = null; resolve(); }, dur);
             // Nếu bị play/hide/clear đè giữa chừng, vẫn resolve để không treo await.
             this._pending = resolve;

@@ -26,6 +26,7 @@ import { clientEvent } from '../../framework/clientEvent';
 import { ProfileManager } from '../../profile/ProfileManager';
 import { LeaderboardManager as LegacyLeaderboardManager } from '../../leaderboard/LeaderboardManager';
 import { LeaderboardHeartFlyEffect } from './LeaderboardHeartFlyEffect';
+import { climbSegmentDuration, climbSegmentEasing, climbTimeForDistance } from './climbMotion';
 const { ccclass, property } = _decorator;
 
 const MAX_FLY_HEARTS = 10;
@@ -93,6 +94,17 @@ export class LeaderboardPreviewManager extends Component {
 
     @property({ tooltip: 'Tốc độ bay (px/giây) TỐI ĐA — không bao giờ vượt quá, dù leo bao nhiêu hạng.' })
     climbSpeedMax = 900;
+
+    @property({
+        min: 0,
+        tooltip:
+            'Thời gian TĂNG TỐC (giây): vận tốc tăng ĐỀU từ 0 lên tốc độ bay (đã tính theo số hạng, xem ' +
+            'climbSpeedMin/climbSpeedMax) rồi giữ nguyên — tránh bị "giật" vì bật tốc độ ngay lúc bắt đầu leo. ' +
+            'Tính từ lúc BẮT ĐẦU bay, dùng chung cho cả pha cuộn lẫn pha hàng "tôi" tự bay (không tăng tốc lại ' +
+            'từ 0 ở pha sau). Càng lớn càng mượt nhưng tổng thời gian leo cũng dài thêm ~ nửa giá trị này. ' +
+            '0 = bật tốc độ ngay như cũ.',
+    })
+    climbAccelSeconds = 0.5;
 
     @property({ tooltip: 'Thời gian các hàng bị vượt tách ra (dịch xuống 1 ô) — hàng "tôi" dừng chờ đúng khoảng này trước khi đập xuống (giây).' })
     separateSeconds = 0.25;
@@ -383,6 +395,8 @@ export class LeaderboardPreviewManager extends Component {
 
 
     private pinnedPlayerNode: Node | null = null;
+    /** Đối tượng trung gian cho tween cuộn của pha ScrollView (value 0..1 = tiến độ quãng đường đã cuộn). */
+    private climbScrollProxy: { value: number } | null = null;
     private pinnedAnchorSlotConstant = 0;
 
     /** Cha + sibling index GỐC của scrollRowMoveParticle trước khi tạm làm con hàng "tôi" — khôi
@@ -556,6 +570,10 @@ export class LeaderboardPreviewManager extends Component {
     }
 
     protected onDisable(): void {
+        if (this.climbScrollProxy) {
+            Tween.stopAllByTarget(this.climbScrollProxy);
+            this.climbScrollProxy = null;
+        }
         this.scrollView?.node.off(ScrollView.EventType.SCROLLING, this.onScrolling, this);
         clientEvent.off(Constants.LEADERBOARD_SHOW_DETAIL_REWARD, this.showDetailRewardGroup, this);
     }
@@ -928,7 +946,7 @@ export class LeaderboardPreviewManager extends Component {
         const lastTickRank = enteringTop3 ? this.rankOffset + 1 : newRank;
         for (let i = 1; i <= k; i++) {
             const rank = oldRank - i;
-            const delay = this.liftDuration + (i * this.rowHeight) / speed;
+            const delay = this.liftDuration + climbTimeForDistance(i * this.rowHeight, speed, this.climbAccelSeconds);
             // Bot mà "tôi" vừa vượt qua ở tick này ĐANG đứng ở hạng CŨ `rank` (trước khi có lần
             // thắng này) — hạng CUỐI CÙNG của nó (sau khi nhường 1 ô cho "tôi") là rank+1, xem
             // spawnRow()/buildAnimationWindow() (startRank=finalRank-1).
@@ -976,26 +994,43 @@ export class LeaderboardPreviewManager extends Component {
         const targetOffsetY = this.computeScrollTargetY(scrollTargetRank);
         const scrollDistance = Math.abs(targetOffsetY - startOffsetY);
 
-        const proceed = (): void => {
-            if (enteringTop3) this.runFlyPastViewport(playerRow, newRank, speed, onDone);
-            else this.runFlyToOvershoot(playerRow, newRank, speed, onDone);
+        // traveledDistance: quãng đã đi tính từ lúc bắt đầu leo — pha tự bay tiếp nối đúng điểm này trên CÙNG
+        // đường cong tăng tốc (climbMotion) nên vận tốc liên tục, không tăng tốc lại từ 0.
+        const proceed = (traveledDistance: number): void => {
+            if (enteringTop3) this.runFlyPastViewport(playerRow, newRank, speed, onDone, traveledDistance);
+            else this.runFlyToOvershoot(playerRow, newRank, speed, onDone, traveledDistance);
         };
 
         if (scrollDistance < 0.5) {
-            proceed();
+            proceed(0);
             return;
         }
 
-        const scrollDuration = scrollDistance / speed;
+        const scrollDuration = climbSegmentDuration(0, scrollDistance, speed, this.climbAccelSeconds);
         this.pinnedPlayerNode = playerRow.node;
         this.pinnedAnchorSlotConstant = this.anchorSlotConstant();
-        // attenuated=false: cuộn đều tốc độ, KHÔNG giảm tốc dần về cuối.
-        this.scrollView.scrollToOffset(new Vec3(0, targetOffsetY, 0), scrollDuration, false);
 
-        this.scheduleOnce(() => {
-            this.pinnedPlayerNode = null;
-            proceed();
-        }, scrollDuration);
+        // Tự lái ScrollView mỗi frame (tween + easing "tăng tốc đều rồi chạy đều") thay cho
+        // scrollToOffset(thời gian, attenuated=false) — API đó chỉ có chạy đều hoặc giảm tốc, không có gia tốc.
+        // scrollToOffset(..., 0) là cuộn tức thì; gọi onScrolling() tay để hàng "tôi" ghim đúng vị trí neo.
+        const applyOffset = (fraction: number): void => {
+            this.scrollView?.scrollToOffset(new Vec3(0, startOffsetY + (targetOffsetY - startOffsetY) * fraction, 0), 0);
+            this.onScrolling();
+        };
+        const progress = { value: 0 };
+        this.climbScrollProxy = progress;
+        tween(progress)
+            .to(scrollDuration, { value: 1 }, {
+                easing: climbSegmentEasing(0, scrollDistance, speed, this.climbAccelSeconds),
+                onUpdate: () => applyOffset(progress.value),
+            })
+            .call(() => {
+                applyOffset(1);
+                this.climbScrollProxy = null;
+                this.pinnedPlayerNode = null;
+                proceed(scrollDistance);
+            })
+            .start();
     }
 
     /** Sau khi ScrollView đã cuộn hết mức (hoặc không cần cuộn) — hàng "tôi" bay THẲNG tới đúng vị
@@ -1003,7 +1038,7 @@ export class LeaderboardPreviewManager extends Component {
      * vượt" thêm nửa hạng phía trên rồi mới đập xuống như trước — tới đúng vị trí thì dừng thêm
      * separateSeconds (đợi các bot bị vượt ổn định — xem revealOvertakenBotAt) rồi chạy thẳng hiệu
      * ứng "đập xuống" (playThud, giờ chỉ còn thuần scale, không di chuyển gì thêm). */
-    private runFlyToOvershoot(playerRow: RankRow, newRank: number, speed: number, onDone: () => void): void {
+    private runFlyToOvershoot(playerRow: RankRow, newRank: number, speed: number, onDone: () => void, traveledDistance = 0): void {
         const finalY = this.yForRank(newRank);
         const remaining = Math.abs(finalY - playerRow.node.position.y);
 
@@ -1019,8 +1054,13 @@ export class LeaderboardPreviewManager extends Component {
             return;
         }
 
+        const endDistance = traveledDistance + remaining;
         tween(playerRow.node)
-            .to(remaining / speed, { position: new Vec3(0, finalY, 0) }, { easing: 'linear' })
+            .to(
+                climbSegmentDuration(traveledDistance, endDistance, speed, this.climbAccelSeconds),
+                { position: new Vec3(0, finalY, 0) },
+                { easing: climbSegmentEasing(traveledDistance, endDistance, speed, this.climbAccelSeconds) },
+            )
             .call(arrive)
             .start();
     }
@@ -1029,7 +1069,7 @@ export class LeaderboardPreviewManager extends Component {
      * tục bay CÙNG tốc độ `speed` cho tới khi ra khỏi hẳn mép TRÊN khung nhìn (Mask tự che khuất
      * dần) + thêm flyPastViewportExtraRows hàng cho chắc, rồi biến mất (gỡ khỏi ScrollView) — sau
      * đó mới "đáp" xuống bục TOP3 tĩnh tương ứng (runTopSlotEntrance()). */
-    private runFlyPastViewport(playerRow: RankRow, newRank: number, speed: number, onDone: () => void): void {
+    private runFlyPastViewport(playerRow: RankRow, newRank: number, speed: number, onDone: () => void, traveledDistance = 0): void {
         // Số hàng phía TRÊN vị trí neo (anchorRowsAboveTarget) mới là khoảng cách thật cần bay
         // thêm để ra khỏi mép TRÊN khung nhìn — KHÔNG còn là visibleRows đầy đủ như hồi neo đáy
         // (playerAnchorRatio=1); neo giữa (0.5, mặc định mới) thì chỉ còn NỬA khung nhìn phía trên.
@@ -1052,8 +1092,13 @@ export class LeaderboardPreviewManager extends Component {
             vanish();
             return;
         }
+        const endDistance = traveledDistance + remaining;
         tween(playerRow.node)
-            .to(remaining / speed, { position: new Vec3(0, exitY, 0) }, { easing: 'linear' })
+            .to(
+                climbSegmentDuration(traveledDistance, endDistance, speed, this.climbAccelSeconds),
+                { position: new Vec3(0, exitY, 0) },
+                { easing: climbSegmentEasing(traveledDistance, endDistance, speed, this.climbAccelSeconds) },
+            )
             .call(vanish)
             .start();
     }
@@ -1159,11 +1204,6 @@ export class LeaderboardPreviewManager extends Component {
             }
             if (elapsed >= this.topSlotAvatarLoadTimeoutSeconds) {
                 // LOG TẠM ĐỂ DEBUG — xoá sau khi tìm ra nguyên nhân avatar/frame không hiện cho 1 số bot.
-                console.log(
-                    '[LeaderboardPreviewManager.waitForAvatarFrameLoaded] TIMEOUT userName=', info.userName,
-                    'avatarURL=', info.avatarURL, 'retried=', retried,
-                    'avatarSpriteFrame=', slot.iconAvatar?.spriteFrame, 'frameSpriteFrame=', slot.iconFrame?.spriteFrame,
-                );
                 if (!retried) {
                     this.applySlotDataInstant(slot, info);
                     this.waitForAvatarFrameLoaded(slot, info, onReady, true);
@@ -1632,7 +1672,6 @@ export class LeaderboardPreviewManager extends Component {
         info.avatarURL = identity?.avatarURL ?? ProfileManager.instance?.getRandomAvatarURL() ?? '';
 
         // LOG TẠM ĐỂ DEBUG — xoá sau khi tìm ra nguyên nhân avatar/frame không hiện cho 1 số bot.
-        console.log('[LeaderboardPreviewManager.buildBotInfo] userName=', info.userName, 'avatarURL=', info.avatarURL, 'identity=', identity);
 
         return info;
     }

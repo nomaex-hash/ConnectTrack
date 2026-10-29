@@ -58,7 +58,7 @@ function distance(a: Point, b: Point): number {
 export function classifyDragOrigin(snapshot: GameSnapshot, cell: number): DragKind | null {
     const state = snapshot.cellStates[cell];
     const isTrackQuestion = snapshot.trackQuestions.some((question) => question.cell === cell);
-    const isGivenCell = snapshot.mainTrackCells.includes(cell);
+    const isGivenCell = snapshot.mainTrackCells.indexOf(cell) !== -1;
     if (isGivenCell || isTrackQuestion || state === PlayerCellState.TrackPreview || state === PlayerCellState.Track) {
         return 'track';
     }

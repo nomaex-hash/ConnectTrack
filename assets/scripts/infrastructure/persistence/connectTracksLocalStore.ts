@@ -16,6 +16,8 @@ type MergedField = 'player' | 'legacyConfig';
 
 interface ConnectTracksSaveDocument {
     version: 1;
+    /** Mốc (ms epoch) của lần ghi gần nhất — dùng để so bản local với bản trên cloud (Facebook). */
+    savedAt?: number;
     placeTrackCharges?: number;
     sessions: Record<string, unknown>;
     /** Chuỗi JSON NGUYÊN VĂN của save người chơi (do SaveDataSerializer tạo) — lưu dạng chuỗi để không
@@ -43,6 +45,7 @@ function emptyDoc(): ConnectTracksSaveDocument {
  */
 export class ConnectTracksLocalStore {
     private doc: ConnectTracksSaveDocument | null = null;
+    private readonly persistListeners: Array<() => void> = [];
 
     private load(): ConnectTracksSaveDocument {
         if (this.doc) return this.doc;
@@ -64,12 +67,76 @@ export class ConnectTracksLocalStore {
     private persist(): boolean {
         if (!this.doc) return false;
         try {
+            this.doc.savedAt = Date.now();
             sys.localStorage.setItem(KEY, JSON.stringify(this.doc));
+            this.notifyPersisted();
             return true;
         } catch (error) {
             warn('[ConnectTracks] Cannot save local data.', error);
             return false;
         }
+    }
+
+    private notifyPersisted(): void {
+        for (const listener of this.persistListeners) {
+            try {
+                listener();
+            } catch (error) {
+                warn('[ConnectTracks] Persist listener failed.', error);
+            }
+        }
+    }
+
+    /** Gọi `listener` sau MỖI lần ghi local thành công (dùng để đẩy lên cloud). Trả về hàm huỷ đăng ký. */
+    onPersisted(listener: () => void): () => void {
+        this.persistListeners.push(listener);
+        return () => {
+            const index = this.persistListeners.indexOf(listener);
+            if (index >= 0) this.persistListeners.splice(index, 1);
+        };
+    }
+
+    /** Mốc ghi gần nhất của document local; 0 nếu chưa từng ghi (hoặc là save cũ chưa có mốc). */
+    getSavedAt(): number {
+        const value = this.load().savedAt;
+        return typeof value === 'number' && Number.isFinite(value) ? value : 0;
+    }
+
+    /** Chuỗi JSON của TOÀN BỘ document hiện tại — dùng làm payload gửi lên cloud. */
+    exportSnapshot(): string {
+        // `legacyConfig` là bản sao của `configuration` — mà snapshot này lại được lưu VÀO configuration
+        // để đồng bộ lên Facebook, nên phải bỏ nó đi để không lồng đệ quy và phình dần theo mỗi lần lưu.
+        const { legacyConfig: _omitted, ...rest } = this.load();
+        return JSON.stringify(rest);
+    }
+
+    /**
+     * Thay TOÀN BỘ document local bằng snapshot lấy từ cloud. Trả về false (và KHÔNG đổi gì) nếu snapshot
+     * không phải document hợp lệ hoặc không ghi được xuống storage. Giữ nguyên `savedAt` của snapshot và
+     * KHÔNG phát `onPersisted` (tránh đẩy ngược đúng bản vừa tải về).
+     */
+    importSnapshot(json: string): boolean {
+        let parsed: unknown;
+        try {
+            parsed = JSON.parse(json);
+        } catch {
+            return false;
+        }
+        if (!parsed || typeof parsed !== 'object') return false;
+        const candidate = parsed as ConnectTracksSaveDocument;
+        if (candidate.version !== 1 || !candidate.sessions || typeof candidate.sessions !== 'object') return false;
+        const keptLegacyConfig = this.load().legacyConfig;
+        if (candidate.legacyConfig === undefined && keptLegacyConfig !== undefined) {
+            candidate.legacyConfig = keptLegacyConfig;
+        }
+        try {
+            sys.localStorage.setItem(KEY, JSON.stringify(candidate));
+        } catch (error) {
+            warn('[ConnectTracks] Cannot store cloud snapshot locally.', error);
+            return false;
+        }
+        this.doc = candidate;
+        return true;
     }
 
     /** Đọc lại KEY từ storage và kiểm tra các field đã migrate khớp với bộ nhớ. */

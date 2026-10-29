@@ -730,10 +730,18 @@ export class ConnectTracksCellView extends Component {
             return;
         }
         const previous = this.questionNodeFor(this.questionDirectionShown);
+        const next = this.questionNodeFor(direction);
+        // BUG đã sửa ("thoát ra vào lại game, ô Track ? hiện đồng thời cả 4 hướng, phải bấm vào ô mới về đúng"): nhánh
+        // này chỉ xử lý `previous` (pop-out) và `next` (pop-in), KHÔNG đụng 3 node hướng còn lại. Ô vừa được dựng lại từ
+        // bản lưu (questionDirectionShown còn null) thì cả 4 node câu hỏi giữ trạng thái active MẶC ĐỊNH của prefab — chỉ
+        // đến lần render kế (bấm vào ô -> direction === questionDirectionShown -> nhánh trên) mới tắt các hướng thừa.
+        // Giờ tắt NGAY mọi node hướng không phải previous (đang pop-out) và không phải next (sắp hiện).
+        for (const node of [this.questionTop, this.questionRight, this.questionBottom, this.questionLeft]) {
+            if (node && node !== previous && node !== next) this.hideInstant(node);
+        }
         if (previous) {
             this.playShrinkExit(previous);
         }
-        const next = this.questionNodeFor(direction);
         if (next) {
             this.playBounceAppear(next);
         }

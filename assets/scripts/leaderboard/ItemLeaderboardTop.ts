@@ -126,7 +126,6 @@ export class ItemLeaderboardTop extends ItemLeaderboardBase {
         const indexRank = this.itemRankInfo?.indexRank ?? 0;
         const rewards = LeaderboardManager.instance?.leaderboardRewards;
         const rewardData = indexRank >= 1 && indexRank <= 3 ? rewards?.[indexRank - 1]?.rewards ?? null : null;
-        console.log('[ItemLeaderboardTop] showGift', { node: this.node?.name, indexRank, rewardsLength: rewards?.length, rewardDataLength: rewardData?.length });
         this.groupReward.initReward(rewardData, indexRank - 1);
     }
 

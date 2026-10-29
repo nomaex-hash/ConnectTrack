@@ -27,14 +27,14 @@ export function findTrackHint(board: Board, truth: SolutionTruth, phaseB: boolea
     const blocked = (c: number, d: Direction) => {
         const n = near(c, d);
         return n === null || (marked(n) && !truth.isSolutionCell(n))
-            || (given(n) && !board.mainTrack.portsAt(n).includes(oppositeOf(d)));
+            || (given(n) && board.mainTrack.portsAt(n).indexOf(oppositeOf(d)) === -1);
     };
     const open = (c: number) => ALL_DIRECTIONS.filter(d => !blocked(c, d));
     const marks = (c: number) => neighbors(c).filter(marked);
     const correct = (c: number) => {
         const expected = truth.correctDirectionsAt(c);
         const actual = given(c) ? board.mainTrack.portsAt(c) : board.linksAt(c);
-        return expected !== null && actual.length === 2 && expected.every(d => actual.includes(d));
+        return expected !== null && actual.length === 2 && expected.every(d => actual.indexOf(d) !== -1);
     };
     const hint = (rule: TrackHint['rule'], action: TrackHint['action'], targets: number[], lifted: number[], text: string, directions: readonly Direction[] = []): TrackHint => Object.freeze({
         rule, action, targets: Object.freeze(targets.slice()), lifted: Object.freeze(Array.from(new Set(lifted))),
@@ -47,7 +47,7 @@ export function findTrackHint(board: Board, truth: SolutionTruth, phaseB: boolea
             if (!ALL_DIRECTIONS.some(d => {
                 const n = near(c, d);
                 return n !== null && track(n) && correct(n)
-                    && (given(n) ? board.mainTrack.portsAt(n) : board.linksAt(n)).includes(oppositeOf(d));
+                    && (given(n) ? board.mainTrack.portsAt(n) : board.linksAt(n)).indexOf(oppositeOf(d)) !== -1;
             })) continue;
             const dirs = truth.correctDirectionsAt(c);
             if (dirs) return hint('B1-preview', 'shape', [c], [c].concat(marks(c)),

@@ -16,5 +16,11 @@ export interface IAdService {
     isRewardedReady(): boolean;
 
     /** Mở quảng cáo có thưởng; resolve khi đóng quảng cáo. */
-    showRewarded(): Promise<RewardedAdResult>;
+    showRewarded(location?: string, buttonName?: string): Promise<RewardedAdResult>;
+
+    /** Có thể hiện quảng cáo xen kẽ ngay bây giờ không (đã nạp xong, đủ giãn cách, chưa mua gỡ QC...). */
+    isInterstitialReady(): boolean;
+
+    /** Hiện quảng cáo xen kẽ nếu được phép; resolve true nếu đã hiện, false nếu bỏ qua/lỗi (không bao giờ ném). */
+    showInterstitial(location?: string, buttonName?: string): Promise<boolean>;
 }

@@ -60,7 +60,7 @@ export function applyBoundaryCrossing(
 
     const fromIsMainTrack = board.mainTrack.portsAt(from).length > 0;
     const fromLinks = board.linksAt(from);
-    if (fromLinks.includes(direction)) {
+    if (fromLinks.indexOf(direction) !== -1) {
         return { kind: 'alreadyConnected', board };
     }
 
@@ -72,18 +72,18 @@ export function applyBoundaryCrossing(
         if (fromLinks.length >= 2) {
             next = redirectAwayFromOldestLink(next, from, size);
         }
-        if (!next.linksAt(from).includes(direction)) {
+        if (next.linksAt(from).indexOf(direction) === -1) {
             next = next.withLink(from, direction);
         }
     }
     if (!targetIsMainTrack) {
-        if (!next.linksAt(to).includes(reciprocal) && next.linksAt(to).length >= 2) {
+        if (next.linksAt(to).indexOf(reciprocal) === -1 && next.linksAt(to).length >= 2) {
             next = redirectAwayFromOldestLink(next, to, size, reciprocal);
         }
         // Defensive: `to` can already hold this exact reciprocal direction (e.g. it was linked
         // from a different crossing that only touched `to`'s side, such as a given `from`) —
         // Board.withLink throws on a duplicate direction, so guard instead of assuming freshness.
-        if (!next.linksAt(to).includes(reciprocal)) {
+        if (next.linksAt(to).indexOf(reciprocal) === -1) {
             next = next.withLink(to, reciprocal);
         }
     }
@@ -104,7 +104,7 @@ function redirectAwayFromOldestLink(board: Board, cell: number, size: BoardSize,
     let next = board.withoutLink(cell, oldDirection);
     if (oldNeighbor !== null && next.mainTrack.portsAt(oldNeighbor).length === 0) {
         const oldReciprocal = oppositeOf(oldDirection);
-        if (next.linksAt(oldNeighbor).includes(oldReciprocal)) {
+        if (next.linksAt(oldNeighbor).indexOf(oldReciprocal) !== -1) {
             next = next.withoutLink(oldNeighbor, oldReciprocal);
         }
     }

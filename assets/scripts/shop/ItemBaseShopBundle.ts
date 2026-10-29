@@ -104,7 +104,6 @@ export class ItemBaseShopBundle extends Component {
         let self = this;
         if(localConfig.instance.envType == ENV_TYPE.TEST_AD){
             const valueIAP: number = this.shopPackageDataConfig.price_amount_cents/ 100;
-            console.log("valueIAP",valueIAP);
 
             // Bundle (hint/placeDog) -> đi qua GameManager.purchasePackage() thật của Dogdoku để
             // charges cộng vào PlayerData.inventory (nguồn dữ liệu gameplay thật sự đọc), thay vì

@@ -59,7 +59,6 @@ export class PGSPlayInstantManager extends Component {
         fetch("https://playinstant.playgameo.com/api/player/", requestOptions)
             .then((response) => response.text())
             .then((result) => {
-                console.log(result);
                 this.isLogin = true;
 
                 // this.GetTopPlayers();
@@ -132,7 +131,7 @@ export class PGSPlayInstantManager extends Component {
 
         fetch("https://playinstant.playgameo.com/api/player/"+Constants.PGS_GAMEID+"/"+FBInstant.player.getID()+"/points", requestOptions)
             .then((response) => response.text())
-            .then((result) => console.log(result))
+            .then((result) => undefined)
             .catch((error) => console.error(error));
     }
 
@@ -368,7 +367,7 @@ export class PGSPlayInstantManager extends Component {
 
         fetch("https://playinstant.playgameo.com/api/player-score/", requestOptions)
         .then((response) => response.text())
-        .then((result) => console.log(result))
+        .then((result) => undefined)
         .catch((error) => console.error(error));
     }
 
@@ -503,7 +502,6 @@ export class PGSPlayInstantManager extends Component {
         fetch("https://playinstant.playgameo.com/api/a2u-notifications/cancel", requestOptions)
             .then((response) => response.text())
             .then((result) => {
-                console.log(result);
 
             })
             .catch((error) => console.error(error));
@@ -540,7 +538,6 @@ export class PGSPlayInstantManager extends Component {
         fetch("https://playinstant.playgameo.com/api/a2u-notifications/", requestOptions)
             .then((response) => response.text())
             .then((result) => {
-                console.log(result);
 
             })
             .catch((error) => console.error(error));
@@ -591,7 +588,6 @@ export class PGSPlayInstantManager extends Component {
         fetch("https://playinstant.playgameo.com/api/track-event/", requestOptions)
             .then((response) => response.text())
             .then((result) => {
-                console.log(result);
             })
             .catch((error) => console.error(error));
     }

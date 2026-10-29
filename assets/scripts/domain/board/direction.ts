@@ -39,7 +39,7 @@ const OPPOSITES: Readonly<Record<Direction, Direction>> = {
 };
 
 export function isDirection(value: number): value is Direction {
-    return ALL_DIRECTIONS.includes(value as Direction);
+    return ALL_DIRECTIONS.indexOf(value as Direction) !== -1;
 }
 
 export function offsetOf(direction: Direction): DirectionOffset {

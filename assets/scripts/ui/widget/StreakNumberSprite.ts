@@ -1,4 +1,5 @@
-import { _decorator, Component, Node, Size, Sprite, SpriteFrame, UITransform } from 'cc';
+import { _decorator, Component, Enum, Node, Size, Sprite, SpriteFrame, UITransform } from 'cc';
+import { DigitAlign, DigitMetrics, layoutDigits } from './streakDigitLayout';
 
 const { ccclass, property } = _decorator;
 
@@ -35,8 +36,24 @@ export class StreakNumberSprite extends Component {
     })
     goldSprites: (SpriteFrame | null)[] = [];
 
-    @property({ tooltip: 'Khoảng cách (px, TRƯỚC khi co giãn vừa khung) giữa 2 chữ số liền kề.' })
+    @property({ tooltip: 'Khoảng cách NHÌN THẤY (px, TRƯỚC khi co giãn vừa khung) giữa 2 nét chữ liền kề — chính xác, không phụ thuộc viền trong suốt của ảnh. Có thể ÂM để các chữ số chồng sát nhau.' })
     digitSpacing = 4;
+
+    @property({
+        min: 0,
+        tooltip:
+            'BUG đã sửa (xác nhận từ user: "giảm digitSpacing xuống rất thấp nhưng 2 số vẫn cách xa ' +
+            'nhau") — nguyên nhân thật: digitSpacing chỉ cộng THÊM khoảng cách, trong khi vị trí mỗi ' +
+            'chữ số vẫn bước đúng theo ĐỘ RỘNG GỐC CHƯA TRIM của sprite (sprite.trim=false, giữ cố ' +
+            'định để không lệch canh lề giữa các chữ số — xem comment setValue()); nếu ảnh gốc mỗi ' +
+            'chữ số có viền trong suốt (padding) 2 bên, khoảng cách NHÌN THẤY giữa 2 chữ số luôn dính ' +
+            'chết phần padding đó dù digitSpacing về 0 hay âm. Field này trừ bớt ĐÚNG số px này ở MỖI ' +
+            'BÊN (trái/phải, px TRƯỚC khi co giãn) khỏi độ rộng dùng để tính khoảng cách/vị trí — ' +
+            'KHÔNG đụng gì tới contentSize/scale thật của sprite (hình chữ số vẫn vẽ đủ, không bị cắt ' +
+            'hay méo gì cả, chỉ các chữ số được XẾP GẦN NHAU HƠN). Tăng dần tới khi 2 chữ số sát đúng ' +
+            'ý muốn.',
+    })
+    digitEdgePadding = 0;
 
     @property({
         tooltip:
@@ -51,6 +68,15 @@ export class StreakNumberSprite extends Component {
     })
     fitSize: Size = new Size(120, 80);
 
+    @property({
+        type: Enum(DigitAlign),
+        tooltip:
+            'Cách canh cả cụm chữ số quanh gốc node (vị trí node trong Editor). LEFT (mặc định): chữ số ĐẦU đứng yên tại ' +
+            'gốc, số có thêm chữ số thì chữ số mới hiện thêm về bên PHẢI, không làm xê dịch chữ số đầu. CENTER: canh giữa ' +
+            '(thêm chữ số thì cả cụm giãn đều 2 bên — hành vi cũ). RIGHT: chữ số cuối đứng yên, chữ số mới thêm về bên trái.',
+    })
+    align: DigitAlign = DigitAlign.Left;
+
     @property({ min: 0.01, tooltip: 'Hệ số nhân THÊM vào scale đã tự tính theo fitSize — chỉnh tay nếu muốn cả cụm to/nhỏ hơn mà không cần đổi fitSize. 1 = giữ nguyên.' })
     sizeScale = 1;
 
@@ -62,46 +88,38 @@ export class StreakNumberSprite extends Component {
         const children = this.node.children;
         for (let i = 0; i < children.length; i++) children[i].active = i < text.length;
 
-        const sizes: { w: number; h: number }[] = [];
+        const metrics: DigitMetrics[] = [];
         for (let i = 0; i < text.length; i++) {
             const digit = text.charCodeAt(i) - 48; // '0'.charCodeAt(0) === 48
             const frame = sprites[digit] ?? null;
             const digitNode = children[i];
             const sprite = digitNode.getComponent(Sprite) ?? digitNode.addComponent(Sprite);
-            // "Các sprite đều không dùng trim" (xác nhận từ user) — Trim bật sẵn sẽ vẽ theo vùng ĐÃ
-            // CẮT bỏ viền trong suốt của riêng từng ảnh, khiến các chữ số có độ đệm trong suốt khác
-            // nhau bị lệch kích thước/canh lề so với nhau dù cùng 1 contentSize.
+            // "Các sprite đều không dùng trim" (xác nhận từ user): Trim=false -> engine hiểu contentSize là kích
+            // thước ẢNH GỐC (originalSize) và tự đặt nét chữ theo viền trim của từng ảnh, nên mọi chữ số cùng canvas.
             sprite.trim = false;
             sprite.spriteFrame = frame;
+            // BUG đã sửa: trước đây contentSize = frame.rect (kích thước ĐÃ TRIM, vd 136x187) trong khi trim=false
+            // cần originalSize (vd 180x256) — mỗi chữ số bị co một tỉ lệ khác nhau và digitSpacing không khớp
+            // khoảng cách nhìn thấy (xem layoutDigits).
+            const original = frame?.originalSize;
             const rect = frame?.rect;
-            const w = rect ? rect.width : 0;
-            const h = rect ? rect.height : 0;
-            (digitNode.getComponent(UITransform) ?? digitNode.addComponent(UITransform)).setContentSize(w, h);
-            sizes.push({ w, h });
+            const canvasW = original ? original.width : 0;
+            const canvasH = original ? original.height : 0;
+            (digitNode.getComponent(UITransform) ?? digitNode.addComponent(UITransform)).setContentSize(canvasW, canvasH);
+            metrics.push({
+                canvasW,
+                canvasH,
+                inkW: rect ? rect.width : 0,
+                inkOffsetX: frame ? frame.offset.x : 0,
+            });
         }
 
-        const totalWidth = sizes.reduce((sum, s, i) => sum + s.w + (i > 0 ? this.digitSpacing : 0), 0);
-        // BUG đã sửa (xác nhận từ user — "chuỗi 2-3 chữ số bị bé hơn hẳn 1 chữ số"): scale phải tính
-        // theo kích thước của 1 CHỮ SỐ ĐƠN LẺ (maxWidth, không phải totalWidth cả cụm cộng lại) —
-        // nếu không, càng nhiều chữ số thì scale càng bị ép nhỏ lại mới vừa fitSize.width, khiến mỗi
-        // chữ số trong số nhiều chữ số số luôn bé hơn hẳn so với số 1 chữ số.
-        const maxWidth = sizes.reduce((max, s) => Math.max(max, s.w), 0);
-        const maxHeight = sizes.reduce((max, s) => Math.max(max, s.h), 0);
-        // BUG đã sửa (xác nhận từ user — "chỉnh fitSize.width to lên nhưng chữ vẫn không rộng ra"):
-        // trước đây dùng CHUNG 1 scale (Math.min của cả 2 tỉ lệ) cho cả X lẫn Y để giữ đúng tỉ lệ
-        // ảnh gốc — nếu height là tỉ lệ nhỏ hơn, nó luôn là "nút thắt cổ chai", tăng fitSize.width
-        // bao nhiêu cũng không có tác dụng. Giờ tính RIÊNG scaleX/scaleY theo ĐÚNG fitSize.width/
-        // height — CHẤP NHẬN MÉO HÌNH nếu tỉ lệ fitSize khác tỉ lệ ảnh gốc (xác nhận từ user: "chấp
-        // nhận bị méo").
-        const scaleX = maxWidth > 0 ? this.fitSize.width / maxWidth : 1;
-        const scaleY = maxHeight > 0 ? this.fitSize.height / maxHeight : 1;
-
-        let x = -totalWidth / 2;
-        for (let i = 0; i < text.length; i++) {
-            const w = sizes[i].w;
-            children[i].setPosition(x + w / 2, 0, 0);
-            x += w + this.digitSpacing;
-        }
+        // Scale tính theo canvas của 1 CHỮ SỐ ĐƠN LẺ (maxCanvas, không phải tổng cả cụm — xem comment đầu file), riêng
+        // scaleX/scaleY theo fitSize.width/height (xác nhận từ user: "chấp nhận bị méo").
+        const layout = layoutDigits(metrics, this.digitSpacing, this.digitEdgePadding, this.align);
+        const scaleX = layout.maxCanvasW > 0 ? this.fitSize.width / layout.maxCanvasW : 1;
+        const scaleY = layout.maxCanvasH > 0 ? this.fitSize.height / layout.maxCanvasH : 1;
+        for (let i = 0; i < text.length; i++) children[i].setPosition(layout.xs[i], 0, 0);
         this.node.setScale(scaleX * this.sizeScale, scaleY * this.sizeScale, 1);
     }
 

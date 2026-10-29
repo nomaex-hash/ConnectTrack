@@ -383,9 +383,6 @@ export class ConnectTracksTutorialController extends Component {
         if (this.board && isValid(this.board.node, true) && this.boardOriginalPosition) {
             this.board.node.setPosition(this.boardOriginalPosition);
         }
-        console.log('[DEBUG ConnectTracksTutorialController] cancel(): restored boardOriginalPosition=',
-            this.boardOriginalPosition ? `${this.boardOriginalPosition.x},${this.boardOriginalPosition.y},${this.boardOriginalPosition.z}` : 'null (nothing to restore)',
-            'board.node.position AFTER restore=', this.board && isValid(this.board.node, true) ? `${this.board.node.position.x},${this.board.node.position.y},${this.board.node.position.z}` : 'no board/invalid');
         this.boardOriginalPosition = null;
         if (isValid(this.node)) this.node.active = false;
     }
@@ -431,10 +428,6 @@ export class ConnectTracksTutorialController extends Component {
             const o = this.boardOffsetOverride;
             this.board.node.setPosition(p.x + o.x, p.y + o.y, p.z + o.z);
         }
-        console.log('[DEBUG ConnectTracksTutorialController] begin(): boardOriginalPosition=',
-            this.boardOriginalPosition ? `${this.boardOriginalPosition.x},${this.boardOriginalPosition.y},${this.boardOriginalPosition.z}` : 'null',
-            'offsetOverride=', `${this.boardOffsetOverride.x},${this.boardOffsetOverride.y},${this.boardOffsetOverride.z}`,
-            'board.node.position AFTER apply=', this.board ? `${this.board.node.position.x},${this.board.node.position.y},${this.board.node.position.z}` : 'no board');
         this.session = new GameSession({
             level: CONNECT_TRACKS_TUTORIAL_LEVEL,
             requiredCells: CONNECT_TRACKS_TUTORIAL_REQUIRED_CELLS,

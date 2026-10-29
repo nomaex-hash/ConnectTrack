@@ -77,7 +77,6 @@ export class ItemShopBundle1 extends ItemBaseShopBundle {
         }
 
         let gameResources_Booster = gameResources_Temp.filter(x => x.Type == RESOURCE_TYPE.BOOSTER);
-        console.log("gameResources_Booster", gameResources_Booster);
 
         this.groupReward_Special.removeAllChildren();
         this.groupReward_Booster.removeAllChildren();

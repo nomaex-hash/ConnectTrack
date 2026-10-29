@@ -76,7 +76,7 @@ export function computeTrackOptionValidity(snapshot: GameSnapshot, cell: number)
             directionOk.set(direction, true);
             continue;
         }
-        const pointsBack = givenPorts.directions.includes(oppositeOf(direction));
+        const pointsBack = givenPorts.directions.indexOf(oppositeOf(direction)) !== -1;
         directionOk.set(direction, pointsBack);
         if (pointsBack) {
             forced.push(direction);

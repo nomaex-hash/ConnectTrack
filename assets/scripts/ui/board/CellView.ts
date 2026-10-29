@@ -338,12 +338,6 @@ export class CellView extends Component {
             waveNode.active = false;
         }
         // LOG TẠM ĐỂ DEBUG — xoá sau khi tìm ra nguyên nhân viền vàng của sóng không hiện.
-        if (this.debugEffects) console.log('[CellView.onLoad] waveOverlay setup', {
-            hasWaveOverlay: !!this.waveOverlay,
-            hasOpacity: !!this.waveOverlayOpacity,
-            waveOverlayNodeName: this.waveOverlay?.node?.name,
-            waveOverlayNodeUuid: this.waveOverlay?.node?.uuid,
-        });
 
         // cc.ParticleSystem mặc định playOnAwake=true — nếu KHÔNG tắt node ngay từ đây, particle
         // sẽ tự bắn NGAY LÚC ô vừa được tạo/kích hoạt (tức MỌI ô trên board, đồng loạt, ngay lúc
@@ -353,11 +347,6 @@ export class CellView extends Component {
         // CHẠY SAU waveOverlay ở trên — nếu log waveOverlay bên trên hiện ra nhưng log này KHÔNG
         // bao giờ chạy, nghĩa là có exception ném ra giữa chừng trong onLoad() (rất có thể đúng
         // nguyên nhân của CẢ 2 bug — sóng lẫn particle — cùng lúc).
-        if (this.debugEffects) console.log('[CellView.onLoad] placeDogParticle setup', {
-            hasParticle: !!this.placeDogParticle,
-            particleNodeActive: this.placeDogParticle?.node?.active,
-            particleNodeName: this.placeDogParticle?.node?.name,
-        });
     }
 
 
@@ -510,7 +499,6 @@ export class CellView extends Component {
         // LOG TẠM ĐỂ DEBUG — bug "đánh dấu lần đầu trong tut bị lag, phải ấn lại". Xoá sau khi
         // tìm ra nguyên nhân.
         if (state === CellState.Mark) {
-            if (this.debugEffects) console.log('[CellView.setState] gọi Mark', { cellIndex: this.cellIndex, animate, prevState: this.state });
         }
         const iconNode = this.icon.node;
         const wasVisible = iconNode.active;
@@ -725,10 +713,6 @@ export class CellView extends Component {
         const spine = this.markSpine;
         // LOG TẠM ĐỂ DEBUG — bug "đánh dấu lần đầu trong tut bị lag, phải ấn lại". Xoá sau khi
         // tìm ra nguyên nhân.
-        if (this.debugEffects) console.log('[CellView.playMarkSpineCorrect] gọi', {
-            cellIndex: this.cellIndex, animate, hasSpine: !!spine,
-            spineNodeActive: spine?.node?.active, spineValid: spine?.node?.isValid,
-        });
         if (!spine) return;
 
         this.applySpineScale(spine.node, this.markSpineDesignSize);
@@ -756,16 +740,9 @@ export class CellView extends Component {
         opacity.opacity = 0;
 
         // LOG TẠM ĐỂ DEBUG — xác nhận tween thật sự start() được gọi + giá trị scale trước/sau.
-        if (this.debugEffects) console.log('[CellView.playMarkSpineCorrect] bắt đầu tween scale', {
-            cellIndex: this.cellIndex,
-            fromScale: { x: finalScale.x * this.markPopFromScale, y: finalScale.y * this.markPopFromScale },
-            toScale: { x: finalScale.x, y: finalScale.y },
-            markPopSeconds: this.markPopSeconds,
-        });
         tween(spine.node)
             .to(this.markPopSeconds, { scale: finalScale }, { easing: 'backOut' })
             .call(() => {
-                if (this.debugEffects) console.log('[CellView.playMarkSpineCorrect] tween scale XONG', { cellIndex: this.cellIndex, finalScale: spine.node.scale });
             })
             .start();
         tween(opacity).to(this.markPopSeconds, { opacity: 255 }).start();
@@ -894,12 +871,6 @@ export class CellView extends Component {
     private playPlaceDogParticle(): void {
         const particle = this.placeDogParticle;
         // LOG TẠM ĐỂ DEBUG — xoá sau khi tìm ra nguyên nhân particle đặt mèo không hiện.
-        if (this.debugEffects) console.log('[CellView.playPlaceDogParticle] gọi', {
-            cellIndex: this.cellIndex,
-            hasParticle: !!particle,
-            nodeActiveBefore: particle?.node?.active,
-            nodeValid: particle?.node?.isValid,
-        });
         if (!particle) return;
 
         this.unschedule(this.hidePlaceDogParticle);
@@ -1308,14 +1279,6 @@ export class CellView extends Component {
 
         if (!this.waveOverlay || !this.waveOverlayOpacity || !waveFrame) {
             // LOG TẠM ĐỂ DEBUG — xoá sau khi tìm ra nguyên nhân viền vàng của sóng không hiện.
-            if (this.debugEffects) console.log('[CellView.playWaveVisit] BỎ QUA — thiếu', {
-                cellIndex: this.cellIndex,
-                hasWaveOverlay: !!this.waveOverlay,
-                hasOpacity: !!this.waveOverlayOpacity,
-                hasWaveFrame: !!waveFrame,
-                waveOverlayNodeUuid: this.waveOverlay?.node?.uuid,
-                thisUuid: this.node?.uuid,
-            });
             return;
         }
 
@@ -1339,17 +1302,6 @@ export class CellView extends Component {
         opacity.opacity = 0;
 
         // LOG TẠM ĐỂ DEBUG — xoá sau khi tìm ra nguyên nhân viền vàng của sóng không hiện.
-        if (this.debugEffects) console.log('[CellView.playWaveVisit] chạy', {
-            cellIndex: this.cellIndex,
-            visualSize: this.visualSize,
-            overlaySizeRatio,
-            contentSize: node.getComponent(UITransform)?.contentSize,
-            nodeActive: node.active,
-            nodeSiblingIndex: node.getSiblingIndex(),
-            spriteFrameName: this.waveOverlay.spriteFrame?.name,
-            spriteType: this.waveOverlay.type,
-            color: this.waveOverlay.color,
-        });
 
         tween(opacity)
             .to(popSeconds, { opacity: 255 })

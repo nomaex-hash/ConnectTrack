@@ -39,7 +39,6 @@ export class ItemLeaderboardGroupReward extends Component {
     }
 
     initReward(_gameResources: GameResource[],_indexRankReward: number): void {
-        console.log('[ItemLeaderboardGroupReward] initReward', this.node?.name, 'len=', _gameResources?.length, 'indexRankReward=', _indexRankReward);
         this.gameResources = _gameResources;
         this.indexRankReward = _indexRankReward;
         this.contentReward.removeAllChildren();

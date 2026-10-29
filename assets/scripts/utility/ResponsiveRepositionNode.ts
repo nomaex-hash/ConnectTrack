@@ -1,4 +1,5 @@
-import { _decorator, Camera, Canvas, Component, Node, Tween, UIOpacity, UITransform, Vec3, screen, tween } from 'cc';
+import { _decorator, Camera, Canvas, Component, Node, UIOpacity, UITransform, Vec3, game, screen } from 'cc';
+import { isWideScreen } from './responsiveWidth';
 
 const { ccclass, property } = _decorator;
 
@@ -37,6 +38,14 @@ export class ResponsiveRepositionNode extends Component {
     widthThreshold = 520;
 
     @property({
+        tooltip:
+            'Bật: màn hình đang XOAY NGANG (rộng > cao) luôn được coi là "rộng" dù chưa vượt ngưỡng chiều ' +
+            'rộng — điện thoại xoay ngang thường chỉ rộng ~640–750px CSS nên chỉ so ngưỡng thì nút không ' +
+            'chuyển vị trí. Tắt: chỉ dựa vào Width Threshold như trước.',
+    })
+    landscapeIsWide = true;
+
+    @property({
         min: 0,
         tooltip:
             'Khoảng cách (px, theo hệ toạ độ node cha) tính từ MÉP PHẢI màn hình thật vào trong — ' +
@@ -64,25 +73,53 @@ export class ResponsiveRepositionNode extends Component {
     private originalPosition: Vec3 | null = null;
     private isWide = false;
     private opacity: UIOpacity | null = null;
-    private transitioning = false;
+    /** Hiệu ứng đổi chỗ chạy bằng lateUpdate + deltaTime (KHÔNG dùng tween): tween có thể bị dừng giữa
+     * chừng (node bị tắt/bật, scene đổi...) làm cờ "đang chuyển" kẹt mãi và nút đứng yên sau khi xoay màn. */
+    private fadePhase: 'idle' | 'out' | 'in' = 'idle';
+    private fadeElapsed = 0;
 
     onLoad(): void {
         this.originalPosition = this.node.position.clone();
         this.opacity = this.node.getComponent(UIOpacity) ?? this.node.addComponent(UIOpacity);
-        // Áp dụng NGAY theo kích thước màn hình hiện tại, không hiệu ứng (tránh chớp mờ ngay lúc
-        // vừa vào màn) — chỉ những lần ĐỔI sau đó (do xoay màn/resize) mới chạy hiệu ứng mờ.
-        this.isWide = this.shouldBeWide();
-        this.applyPosition(this.isWide, false);
+        this.snapToCurrentScreen();
+    }
+
+    onEnable(): void {
+        // Màn hình có thể đã xoay lúc node đang bị tắt (lateUpdate không chạy) — vào lại phải khớp ngay,
+        // không hiệu ứng, không đợi frame sau.
+        if (this.originalPosition) this.snapToCurrentScreen();
+    }
+
+    onDisable(): void {
+        this.fadePhase = 'idle';
+        if (this.opacity) this.opacity.opacity = 255;
     }
 
     lateUpdate(): void {
-        if (this.transitioning) return;
         const wide = this.shouldBeWide();
         if (wide !== this.isWide) {
             this.isWide = wide;
-            this.applyPosition(wide, true);
+            this.startFadeOut();
+        }
+
+        if (this.fadePhase === 'out') {
+            this.fadeElapsed += game.deltaTime;
+            this.setOpacity(1 - this.progress(this.fadeElapsed, this.fadeOutSeconds));
+            if (this.fadeElapsed >= this.fadeOutSeconds) {
+                // Đổi chỗ theo trạng thái HIỆN TẠI (không phải lúc bắt đầu mờ) — màn hình có thể đã đổi tiếp.
+                this.placeForCurrentState();
+                this.fadePhase = 'in';
+                this.fadeElapsed = 0;
+            }
             return;
         }
+
+        if (this.fadePhase === 'in') {
+            this.fadeElapsed += game.deltaTime;
+            this.setOpacity(this.progress(this.fadeElapsed, this.fadeInSeconds));
+            if (this.fadeElapsed >= this.fadeInSeconds) this.fadePhase = 'idle';
+        }
+
         // Đã ở trạng thái "rộng" — tiếp tục bám mép phải MỖI FRAME (không chỉ snap 1 lần lúc vừa
         // chuyển), để màn hình đổi kích thước tiếp tục vẫn luôn đúng, không cần rời/vào lại màn.
         if (this.isWide) {
@@ -91,9 +128,43 @@ export class ResponsiveRepositionNode extends Component {
         }
     }
 
+    private snapToCurrentScreen(): void {
+        this.isWide = this.shouldBeWide();
+        this.fadePhase = 'idle';
+        this.setOpacity(1);
+        this.placeForCurrentState();
+    }
+
+    private placeForCurrentState(): void {
+        const target = this.isWide ? this.computeWidePosition() : this.originalPosition;
+        if (target) this.node.setPosition(target);
+    }
+
+    /** Bắt đầu mờ mất. Nếu đang giữa chừng một hiệu ứng khác thì nối tiếp từ độ mờ hiện tại, không giật. */
+    private startFadeOut(): void {
+        if (this.fadeOutSeconds <= 0) {
+            this.placeForCurrentState();
+            this.fadePhase = 'in';
+            this.fadeElapsed = 0;
+            return;
+        }
+        const current = this.opacity ? this.opacity.opacity / 255 : 1;
+        this.fadePhase = 'out';
+        this.fadeElapsed = this.fadeOutSeconds * (1 - current);
+    }
+
+    private progress(elapsed: number, duration: number): number {
+        return duration <= 0 ? 1 : Math.min(1, Math.max(0, elapsed / duration));
+    }
+
+    private setOpacity(fraction: number): void {
+        if (this.opacity) this.opacity.opacity = Math.round(255 * fraction);
+    }
+
     private shouldBeWide(): boolean {
         const ratio = screen.devicePixelRatio || 1;
-        return screen.windowSize.width / ratio > this.widthThreshold;
+        const size = screen.windowSize;
+        return isWideScreen(size.width / ratio, size.height / ratio, this.widthThreshold, this.landscapeIsWide);
     }
 
     /** Mép PHẢI màn hình thật, quy đổi sang local X đúng trong node cha của node đang gắn component
@@ -140,25 +211,5 @@ export class ResponsiveRepositionNode extends Component {
         }
 
         return new Vec3(rightEdgeX - this.marginRight, y, this.originalPosition?.z ?? 0);
-    }
-
-    private applyPosition(wide: boolean, animate: boolean): void {
-        const target = wide ? this.computeWidePosition() : this.originalPosition;
-        if (!target || !this.opacity) return;
-
-        Tween.stopAllByTarget(this.opacity);
-        if (!animate) {
-            this.node.setPosition(target);
-            this.opacity.opacity = 255;
-            return;
-        }
-
-        this.transitioning = true;
-        tween(this.opacity)
-            .to(this.fadeOutSeconds, { opacity: 0 })
-            .call(() => { if (this.node.isValid) this.node.setPosition(target); })
-            .to(this.fadeInSeconds, { opacity: 255 })
-            .call(() => { this.transitioning = false; })
-            .start();
     }
 }

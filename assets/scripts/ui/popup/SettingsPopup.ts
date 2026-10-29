@@ -152,7 +152,6 @@ export class SettingsPopup extends UIPopup<SettingsData> {
         GameManager.instance?.setTestHighestLevel(levelId);
         const payload: LevelSelectedEventPayload = { context: 'campaign', levelId };
         EventManager.instance.emit(LEVEL_SELECTED_EVENT, payload);
-        console.log(`[SettingsPopup] Nhảy thẳng vào level ${levelId} (test) — progression đã ép như đã thắng hết màn 1..${levelId - 1}.`);
         this.requestClose();
     };
 
@@ -179,7 +178,6 @@ export class SettingsPopup extends UIPopup<SettingsData> {
         if (this.feedbackUrl.length > 0) {
             sys.openURL(this.feedbackUrl);
         } else {
-            console.log('[SettingsPopup] Chưa cấu hình feedbackUrl.');
         }
     }
 
@@ -219,7 +217,6 @@ export class SettingsPopup extends UIPopup<SettingsData> {
         LegacyLeaderboardManager.instance?.resetWeeklyForTesting();
         GameManager.instance?.checkPendingTournamentResult();
         UIManager.instance?.checkTournamentPopupForTesting();
-        console.log('[SettingsPopup] Đã giả lập giải đấu Weekly kết thúc (test).');
     }
 
     /** DÙNG ĐỂ TEST riêng nhánh Top 3 — thay vì phải tự chơi đủ điểm để leo hạng 1 rồi mới bấm
@@ -240,7 +237,6 @@ export class SettingsPopup extends UIPopup<SettingsData> {
         legacy.resetWeeklyForTesting();
 
         this.requestClose();
-        console.log('[SettingsPopup] Đã giả lập hạng 1 (test) — thoát ra Home rồi tự vào Leaderboard để tiếp tục test.');
     }
 
 
@@ -259,7 +255,6 @@ export class SettingsPopup extends UIPopup<SettingsData> {
      * test riêng trong Settings, chỉ nên bật ở build debug. */
     onTapFastForwardOfflineGrowth(): void {
         LegacyLeaderboardManager.instance?.fastForwardOfflineGrowthForTesting(this.fastForwardOfflineGrowthHours);
-        console.log(`[SettingsPopup] Đã tua nhanh ${this.fastForwardOfflineGrowthHours} giờ offline (test) — bot đã tăng điểm.`);
     }
 
 
@@ -276,7 +271,6 @@ export class SettingsPopup extends UIPopup<SettingsData> {
     onTapTestAddPlaceTrack(): void {
         const payload: ConnectTracksPlaceTrackGrantRequestedEventPayload = { amount: this.testAddPlaceTrackAmount };
         EventManager.instance.emit(CONNECT_TRACKS_PLACE_TRACK_GRANT_REQUESTED_EVENT, payload);
-        console.log(`[SettingsPopup] Đã cộng ${this.testAddPlaceTrackAmount} lượt Place Track (test).`);
     }
 
     onSelectLanguage(_event: Event, languageCode: string): void {

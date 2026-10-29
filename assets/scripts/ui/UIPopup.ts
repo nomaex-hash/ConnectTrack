@@ -65,7 +65,6 @@ export abstract class UIPopup<TData = void> extends Component {
      * ở đây. Tự gọi ngay lúc show(); subclass gọi lại TAY nếu cần hiện lại loading giữa chừng. */
     protected showLoading(): void {
         // LOG TẠM ĐỂ DEBUG — xoá sau khi xác định được nguyên nhân thật.
-        console.log('[DEBUG UIPopup]', this.constructor.name, 'showLoading() lúc', performance.now().toFixed(0), 'loadingIcon=', !!this.loadingIcon);
         if (this.loadingIcon) this.loadingIcon.active = true;
     }
 
@@ -74,7 +73,6 @@ export abstract class UIPopup<TData = void> extends Component {
      * nhiều lần / gọi khi chưa từng showLoading(). */
     protected hideLoading(): void {
         // LOG TẠM ĐỂ DEBUG — xoá sau khi xác định được nguyên nhân thật.
-        console.log('[DEBUG UIPopup]', this.constructor.name, 'hideLoading() lúc', performance.now().toFixed(0), new Error().stack);
         if (this.loadingIcon) this.loadingIcon.active = false;
     }
 

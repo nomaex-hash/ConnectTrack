@@ -20,6 +20,37 @@ export class ResponsiveUI extends Component {
     @property({ min: 0 }) marginTop = 0;
     @property({ min: 0 }) marginBottom = 0;
 
+    @property({
+        tooltip:
+            'Thu nhỏ thêm khi màn hình quá hẹp — CHỈ áp dụng cho node NEO CẠNH màn hình ' +
+            '(horizontal=Left/Right hoặc vertical=Top/Bottom). Node để Center cả 2 trục KHÔNG bị ' +
+            'ảnh hưởng, giữ nguyên hiệu ứng fit/pin như cũ.',
+    })
+    shrinkOnNarrowScreen = false;
+
+    @property({
+        visible(this: ResponsiveUI) { return this.shrinkOnNarrowScreen; },
+        min: 0,
+        tooltip:
+            'Ngưỡng chiều rộng màn hình (px) — chiều rộng thật NHỎ HƠN mốc này thì scale node tự ' +
+            'thu nhỏ thêm theo BÌNH PHƯƠNG tỉ lệ (chiều rộng màn hình / ngưỡng này) — thu nhỏ RÕ ' +
+            'ngay khi vừa qua ngưỡng thay vì mờ dần quá chậm, đạt scale gốc bình thường ngay khi ' +
+            'chiều rộng màn hình >= ngưỡng.',
+    })
+    narrowScreenWidth = 500;
+
+    @property({
+        visible(this: ResponsiveUI) { return this.shrinkOnNarrowScreen; },
+        min: 0,
+        max: 1,
+        slide: true,
+        step: 0.01,
+        tooltip:
+            'Mức thu nhỏ TỐI ĐA do màn hình hẹp (tỉ lệ so với scale gốc, 0–1). Vd 0.6 = node chỉ ' +
+            'thu nhỏ tới 60% rồi dừng. 0 = không giới hạn.',
+    })
+    minNarrowScale = 0;
+
     private originalScale = new Vec3(1, 1, 1);
     private last: number[] = [];
     private readonly point = new Vec3();
@@ -44,13 +75,23 @@ export class ResponsiveUI extends Component {
         if (!rect || !parent) return;
         const bounds = this.boundsInParent(parent);
         if (!bounds) return;
+        // Có targetArea thì dùng chiều rộng vùng đó (đơn vị cục bộ); không thì dùng chiều rộng
+        // màn hình theo pixel CSS (windowSize là pixel vật lý nên chia cho devicePixelRatio).
+        const availableWidth = this.targetArea
+            ? bounds.right - bounds.left
+            : screen.windowSize.width / (screen.devicePixelRatio || 1);
+        const narrowRatio = this.narrowScreenRatio(availableWidth);
         const values = [bounds.left, bounds.right, bounds.bottom, bounds.top, rect.width, rect.height,
             rect.anchorX, rect.anchorY, this.horizontal, this.vertical, +this.fitWidth, +this.fitHeight,
-            this.marginLeft, this.marginRight, this.marginTop, this.marginBottom];
+            this.marginLeft, this.marginRight, this.marginTop, this.marginBottom, narrowRatio];
         if (values.some(v => !Number.isFinite(v)) || values.every((v, i) => Math.abs(v - this.last[i]) < .001)) return;
         this.last = values;
+        // narrowRatio nhân THẲNG vào scale GỐC trước khi đưa cho responsiveLayout — để phần tính
+        // vị trí ghim cạnh (align/minX/maxX bên trong responsiveLayout) dùng ĐÚNG kích thước đã
+        // thu nhỏ, không bị lệch khoảng cách tới cạnh do size thật nhỏ hơn size dùng để tính vị trí.
         const result = responsiveLayout({ bounds, width: rect.width, height: rect.height,
-            anchorX: rect.anchorX, anchorY: rect.anchorY, scaleX: this.originalScale.x, scaleY: this.originalScale.y,
+            anchorX: rect.anchorX, anchorY: rect.anchorY,
+            scaleX: this.originalScale.x * narrowRatio, scaleY: this.originalScale.y * narrowRatio,
             x: this.node.position.x, y: this.node.position.y, horizontal: this.horizontal, vertical: this.vertical,
             fitWidth: this.fitWidth, fitHeight: this.fitHeight,
             left: this.marginLeft, right: this.marginRight, top: this.marginTop, bottom: this.marginBottom });
@@ -58,6 +99,31 @@ export class ResponsiveUI extends Component {
             this.node.setScale(result.scaleX, result.scaleY, this.originalScale.z);
         if (this.node.position.x !== result.x || this.node.position.y !== result.y)
             this.node.setPosition(result.x, result.y, this.node.position.z);
+    }
+
+    /** 1 nếu KHÔNG áp dụng thu nhỏ thêm (tắt shrinkOnNarrowScreen, node để Center cả 2 trục, hoặc
+     * vùng khả dụng còn đủ rộng) — ngược lại trả về tỉ lệ (availableWidth / narrowScreenWidth, luôn
+     * < 1) để nhân thêm vào scale gốc.
+     *
+     * `availableWidth` là pixel CSS của màn hình (windowSize / devicePixelRatio) để `narrowScreenWidth`
+     * khớp đúng con số người dùng thấy. KHÔNG dùng bounds cục bộ: khi dùng FIXED_HEIGHT, chiều rộng
+     * đơn vị thiết kế = chiều cao thiết kế × (rộng/cao màn hình), nên ngưỡng sẽ kích hoạt lệch so với
+     * pixel thật. Khi có targetArea thì fit() truyền chiều rộng vùng đó (đơn vị cục bộ).
+     */
+    private narrowScreenRatio(availableWidth: number): number {
+        if (!this.shrinkOnNarrowScreen || !this.isEdgeAnchored() || this.narrowScreenWidth <= 0) return 1;
+        if (availableWidth >= this.narrowScreenWidth) return 1;
+        // Bình phương (thay vì tuyến tính) — ngay khi vừa qua ngưỡng đã thấy thu nhỏ RÕ (vd còn 99%
+        // chiều rộng ngưỡng → scale còn ~98% thay vì ~99%), càng hẹp càng thu nhỏ nhanh hơn nữa.
+        const linear = Math.max(0, availableWidth / this.narrowScreenWidth);
+        return Math.max(linear * linear, Math.min(1, Math.max(0, this.minNarrowScale)));
+    }
+
+    /** true nếu node neo vào ÍT NHẤT 1 cạnh màn hình (horizontal=Left/Right hoặc vertical=Top/Bottom)
+     * — node để Center cả 2 trục (hoặc Keep) trả về false, không bị ảnh hưởng bởi shrinkOnNarrowScreen. */
+    private isEdgeAnchored(): boolean {
+        return this.horizontal === HorizontalPin.Left || this.horizontal === HorizontalPin.Right
+            || this.vertical === VerticalPin.Top || this.vertical === VerticalPin.Bottom;
     }
 
     private boundsInParent(parent: Node): FitRect | null {

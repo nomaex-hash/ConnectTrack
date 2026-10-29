@@ -1354,13 +1354,6 @@ export class BoardView extends Component implements DogSpineProvider {
             previous = now;
             if (frames.length === 12) {
                 this.unschedule(sample);
-                console.log('[FinalDogTiming]', {
-                    cellIndex,
-                    boardSize: this.boardSize,
-                    frameIntervalsMs: frames,
-                    worstIntervalMs: Math.max.apply(Math, frames),
-                    totalMs: Math.round(now - started),
-                });
             }
         };
         this.schedule(sample, 0);
@@ -2338,10 +2331,6 @@ export class BoardView extends Component implements DogSpineProvider {
 
         if (DEBUG_TOUCH) {
             const session = PuzzleSessionHolder.current;
-            console.log(
-                `[BoardView] touch → ô ${cell} | ` +
-                    `session=${session ? session.state : 'NULL'} | cellSize=${this.cellSize}`,
-            );
         }
 
         if (cell < 0) return;

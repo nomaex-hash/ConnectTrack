@@ -1,0 +1,15 @@
+{
+	"instant_games": {
+		"navigation_menu_version": "NAV_BAR",
+		"orientation": "PORTRAIT",
+		"override_web_orientation": "LANDSCAPE",
+		"custom_update_templates": {
+      "invite_ingame": {
+        "example": "Tuzke is solving level 12. Can you reach that level?"
+      },
+	  "tournament_ingame": {
+        "example": "just got a high score 6969. Can you reach that score?"
+      }
+    }
+	}
+}

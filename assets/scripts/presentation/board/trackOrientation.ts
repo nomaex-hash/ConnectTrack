@@ -17,7 +17,7 @@ export function trackOrientationOf(directions: readonly Direction[]): TrackOrien
     if (directions.length !== 2) {
         return null;
     }
-    const has = (direction: Direction): boolean => directions.includes(direction);
+    const has = (direction: Direction): boolean => directions.indexOf(direction) !== -1;
     if (has(Direction.Up) && has(Direction.Down)) {
         return 'straightVertical';
     }

@@ -169,7 +169,6 @@ export class UIManager extends Component implements PopupController {
         // sẽ quay LẠI Gameplay (đúng session cũ, xem GameManager.onNavigate) — mở nốt popup
         // còn treo đó ĐÈ LÊN gameplay lúc này.
         if (payload.to === AppState.Gameplay) {
-            console.log('[DEBUG UIManager] onAppStateChanged to Gameplay, pendingConnectTracksReady=', !!this.pendingConnectTracksReady, 'from=', payload.from);
             this.openPendingResultIfAny();
             // ConnectTracks (xác nhận từ user: thêm lại luồng Streak, giữ đúng thứ tự) — tàu đang
             // hoãn chạy đợi quay lại từ màn Streak (xem notifyConnectTracksReadyForTrain()), đúng
@@ -182,7 +181,6 @@ export class UIManager extends Component implements PopupController {
             return;
         }
         if (payload.from === AppState.DailyStreak) {
-            console.log('[DEBUG UIManager] onAppStateChanged FROM DailyStreak to', payload.to, '(NOT Gameplay — pendingConnectTracksReady sẽ bị xoá, xem block bên dưới)');
         }
 
         // "Mở app" — mốc đầu tiên (còn lại là sau khi thắng màn, xem openResultPopupForWin()) để
@@ -718,8 +716,6 @@ export class UIManager extends Component implements PopupController {
         const ticket = {};
         this.screenLoadingTicket = ticket;
         this.setPopupLoading(true);
-        const startedAt = Date.now();
-        console.log(`[UIManager] Nạp màn lazy '${state}' từ bundle...`);
         const finish = (): void => {
             if (!this.isValid) return;
             if (this.screenLoadingTicket === ticket) this.screenLoadingTicket = null;
@@ -727,7 +723,6 @@ export class UIManager extends Component implements PopupController {
         };
         root.ensureScreenPrefab(state).then(
             () => {
-                console.log(`[UIManager] Màn lazy '${state}' đã nạp sau ${Date.now() - startedAt}ms.`);
                 // Đã có chuyển màn khác chen vào trong lúc đang tải -> bỏ lượt này.
                 if (!this.isValid || this.screenLoadingTicket !== ticket) {
                     console.warn(`[UIManager] Bỏ qua dựng màn '${state}': đã có chuyển màn khác chen vào (currentScreenState=${this.currentScreenState}).`);
@@ -753,17 +748,11 @@ export class UIManager extends Component implements PopupController {
         // Streak có thể xuất hiện trước popup kết quả: màn mới phải nhận được thao tác.
         this.setVictoryInputBlocked(false);
 
-        console.log('[DEBUG UIManager] showScreenNow:', JSON.stringify({
-            targetState: state, currentScreenState: this.currentScreenState,
-            hasCurrentScreen: !!this.currentScreen, hasSuspendedGameplayScreen: !!this.suspendedGameplayScreen,
-            streakPending: StreakPresentation.isPending(),
-        }));
 
         // Quay LẠI Gameplay đúng lúc có 1 bản GameplayScreen đang treo (bị ẩn, không destroy —
         // xem nhánh "tạm ẩn" bên dưới) — dựng lại NGUYÊN VẸN bản đó thay vì instantiate() bản mới
         // tinh (sẽ mất sạch connectTracksSession/victory sequence đang tạm dừng chờ resume()).
         if (state === AppState.Gameplay && this.suspendedGameplayScreen) {
-            console.log('[DEBUG UIManager] showScreenNow: RESUME branch taken');
             this.closeAllPopups();
             this.closeCurrentScreen();
             const screen = this.suspendedGameplayScreen;
@@ -793,7 +782,6 @@ export class UIManager extends Component implements PopupController {
         // trên sẽ hiện lại (active=true) đúng bản này khi quay về Gameplay.
         if (state === AppState.DailyStreak && this.currentScreenState === AppState.Gameplay
             && this.currentScreen && StreakPresentation.isPending()) {
-            console.log('[DEBUG UIManager] showScreenNow: SUSPEND branch taken');
             this.closeAllPopups();
             // PHẢI đặt cờ "đang tạm ẩn" TRƯỚC khi set active=false — Cocos gọi onDisable() của MỌI
             // component active trong node đó NGAY TRONG CÙNG lệnh gán active=false (đồng bộ), không
@@ -804,19 +792,12 @@ export class UIManager extends Component implements PopupController {
             this.currentScreen.node.active = false;
             this.currentScreen = null;
         } else {
-            console.log('[DEBUG UIManager] showScreenNow: ELSE/fresh-instantiate branch taken', JSON.stringify({
-                reason: state !== AppState.DailyStreak ? 'state!=DailyStreak'
-                    : this.currentScreenState !== AppState.Gameplay ? 'currentScreenState!=Gameplay'
-                    : !this.currentScreen ? 'no currentScreen'
-                    : 'StreakPresentation.isPending()=false',
-            }));
             this.closeAllPopups();
             this.closeCurrentScreen();
             // An toàn: nếu có 1 bản GameplayScreen đang treo (suspendedGameplayScreen) mà lần
             // chuyển màn NÀY lại không phải "quay về Gameplay" (vd bấm back ở Streak về MainMenu
             // thay vì "Tiếp tục") — dọn hẳn nó ở đây, tránh rò rỉ node mãi mãi không ai destroy().
             if (this.suspendedGameplayScreen) {
-                console.log('[DEBUG UIManager] showScreenNow: leaking suspendedGameplayScreen cleaned up here');
                 this.suspendedGameplayScreen.close();
                 this.suspendedGameplayScreen.node.destroy();
                 this.suspendedGameplayScreen = null;
@@ -883,8 +864,6 @@ export class UIManager extends Component implements PopupController {
         const ticket = {};
         this.pendingPopupOpens.set(id, ticket);
         this.setPopupLoading(true);
-        const lazyStartedAt = Date.now();
-        if (lazy) console.log(`[UIManager] Nạp popup lazy '${id}' từ bundle...`);
         const present = (): void => {
             // Vẽ loading trước. Không instantiate trong callback AFTER_DRAW vì browser
             // vẫn cần trả quyền điều khiển để trình bày frame vừa vẽ.
@@ -911,7 +890,6 @@ export class UIManager extends Component implements PopupController {
         // gọi (vd sau popup kết quả) không bị kẹt chờ popup không bao giờ mở.
         root.ensurePopupPrefab(id).then(
             () => {
-                console.log(`[UIManager] Popup lazy '${id}' đã nạp sau ${Date.now() - lazyStartedAt}ms.`);
                 if (!this.isValid || this.pendingPopupOpens.get(id) !== ticket) return;
                 present();
             },

@@ -61,7 +61,6 @@ export class ConnectTracksLosePopup extends UIPopup<ConnectTracksLoseData> {
         if (this.adInProgress) return;
         const ads = AdServiceHolder.current;
         if (!ads.isRewardedReady()) {
-            console.log('[ConnectTracksLosePopup] Chưa có quảng cáo sẵn sàng.');
             return;
         }
         this.adInProgress = true;
@@ -69,7 +68,6 @@ export class ConnectTracksLosePopup extends UIPopup<ConnectTracksLoseData> {
         try {
             const result = await ads.showRewarded();
             if (!result.rewarded) {
-                console.log('[ConnectTracksLosePopup] Không nhận thưởng:', result.reason ?? 'đã đóng sớm');
                 return;
             }
             this.data?.onRevive();

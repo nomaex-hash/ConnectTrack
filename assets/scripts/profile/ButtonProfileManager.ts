@@ -38,7 +38,6 @@ export class ButtonProfileManager extends Component {
         let pathAvatar:string = ProfileManager.instance.getPathAvatar();
         MConfigResourceUtils.getProfileSpriteFrame(PROFILE_TAB_TYPE.AVATAR,pathAvatar, (err, spriteFrame) => {
             if(err){
-                console.log(err);
             }else{
                 if(this.iconAvatar == null) return;
                 this.iconAvatar.sizeMode = Sprite.SizeMode.CUSTOM;
@@ -48,7 +47,6 @@ export class ButtonProfileManager extends Component {
         let pathFrame:string = ProfileManager.instance.getPathFrame();
         MConfigResourceUtils.getProfileSpriteFrame(PROFILE_TAB_TYPE.FRAME,pathFrame, (err, spriteFrame) => {
             if(err){
-                console.log(err);
             }else{
                 if(this.iconFrame == null) return;
                 this.iconFrame.sizeMode = Sprite.SizeMode.CUSTOM;

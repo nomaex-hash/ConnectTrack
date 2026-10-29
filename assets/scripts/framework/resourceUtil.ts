@@ -284,7 +284,6 @@ export class resourceUtil {
 
         assetManager.downloader.downloadDomImage(url,{ext:'.jpg'},function (err, res) {
             if(err){
-                console.log(err);
             }else{
                 let imageAsset = new ImageAsset(res as HTMLImageElement);
                 const texture = new Texture2D();
@@ -305,7 +304,6 @@ export class resourceUtil {
         }
         assetManager.downloader.downloadDomImage(url,{ext:'.jpg'},function (err, res) {
             if(err){
-                console.log(err);
                 cb && cb(err, null);
             }else{
                 let imageAsset = new ImageAsset(res as HTMLImageElement);
@@ -337,7 +335,6 @@ export class resourceUtil {
 
         assetManager.downloader.downloadDomImage(url,{ext:'.jpg'},function (err, res) {
             if(err){
-                console.log(err);
                 cb(err,null);
             }else{
                 let imageAsset = new ImageAsset(res as HTMLImageElement);

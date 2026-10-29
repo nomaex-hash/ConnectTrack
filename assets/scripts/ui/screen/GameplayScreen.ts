@@ -1,4 +1,4 @@
-import { _decorator, Color, Label, Node, Prefab, RichText, Sprite, SpriteFrame, Tween, UIOpacity, UITransform, Vec3, Widget, instantiate, tween } from 'cc';
+import { _decorator, Button, Color, Label, Node, Prefab, RichText, Sprite, SpriteFrame, Tween, UIOpacity, UITransform, Vec3, Widget, instantiate, tween } from 'cc';
 import { UIScreen } from '../UIScreen';
 import { AppState } from '../../core/AppState';
 import { CellState } from '../../core/CellState';
@@ -71,6 +71,7 @@ import { ConnectTracksOptionMenuView } from '../../presentation/board/connectTra
 import { ConnectTracksLoseData } from '../popup/ConnectTracksLosePopup';
 import { ConnectTracksTutorialController } from '../tutorial/connectTracksTutorialController';
 import { ConnectTracksHintView } from '../../presentation/board/connectTracksHintView';
+import { ConnectTracksIdleConnectHint } from '../../presentation/board/connectTracksIdleConnectHint';
 import { UIManager } from '../../manager/UIManager';
 import { CocosPointerInput } from '../../presentation/input/cocosPointerInput';
 import { computeTrackOptionValidity, directionsForOrientation, TrackOptionKind } from '../../presentation/board/trackOptions';
@@ -80,7 +81,8 @@ const { ccclass, property } = _decorator;
 /** Hiệu ứng hiện/ẩn của connectTracksHintLabel (xác nhận từ user: scale + opacity). */
 const CONNECT_TRACKS_HINT_FROM_SCALE = 0.85;
 const CONNECT_TRACKS_HINT_POP_SECONDS = 0.18;
-const CONNECT_TRACKS_HINT_VISIBLE_SECONDS = 3;
+/** Thời gian (giây) 2 nút booster mờ dần khi vào giai đoạn nối track — xem applyConnectTracksBoosterLock(). */
+const CONNECT_TRACKS_BOOSTER_LOCK_FADE_SECONDS = 0.25;
 
 @ccclass('GameplayScreen')
 export class GameplayScreen extends UIScreen {
@@ -134,11 +136,29 @@ export class GameplayScreen extends UIScreen {
         tooltip:
             'Label (cụm node) thông báo "cần nối các track lại" — node này nằm ở màn Gameplay (KHÔNG ' +
             'phải trong Board.prefab). Hiện khi mọi ô required đã được xác định là track (TrackPreview/ ' +
-            'Track ?/Track hoàn chỉnh) nhưng CHƯA nối hết thành Track hoàn chỉnh ở mọi ô; tắt ngay khi ' +
-            'tự ẩn sau 3 giây; ẩn sớm khi thắng hoặc không còn đủ điều kiện (xem GameSnapshot.needsConnectionHint). ' +
+            'Track ?/Track hoàn chỉnh) nhưng CHƯA nối hết thành Track hoàn chỉnh ở mọi ô; GIỮ NGUYÊN ' +
+            'cho tới khi người chơi nối xong hết (hoặc thắng/không còn đủ điều kiện) mới ẩn — KHÔNG ' +
+            'còn tự ẩn sau 1 khoảng thời gian cố định nữa (xác nhận từ user). Xem GameSnapshot.needsConnectionHint. ' +
             'Hiệu ứng hiện/ẩn: scale + opacity. Để trống thì bỏ qua, không có label này.',
     })
     connectTracksHintLabel: Node | null = null;
+    @property({
+        tooltip:
+            'connectTracksHintLabel tự định vị CAO HƠN viền trên của board đúng N px (world) mỗi lần ' +
+            'bắt đầu hiện — KHÔNG còn dùng vị trí Y cố định gán sẵn trong Editor nữa (sai lệch khi ' +
+            'board đổi kích thước theo từng level). CHỈ đổi Y, giữ nguyên X đã canh trong Editor.',
+    })
+    connectTracksHintLabelHeightAboveBoard = 40;
+
+    @property({
+        type: ConnectTracksIdleConnectHint,
+        tooltip:
+            'Component ConnectTracksIdleConnectHint — "sau khi tìm hết track preview, nếu 5s người ' +
+            'chơi không thao tác gì thì hiện đường nối (dash + 2 chấm xanh entrance/exit), giống hệt ' +
+            'hiệu ứng step 10b ở Tutorial" (xác nhận từ user). Để trống thì bỏ qua, không có hiệu ứng ' +
+            'này ở gameplay thật.',
+    })
+    connectTracksIdleConnectHint: ConnectTracksIdleConnectHint | null = null;
 
     @property({
         type: RuleFrameIntro,
@@ -165,6 +185,25 @@ export class GameplayScreen extends UIScreen {
 
     @property(ConnectTracksHintView)
     connectTracksBoosterHint: ConnectTracksHintView | null = null;
+
+    @property({
+        type: Button,
+        tooltip:
+            'Nút booster Hint (cả cụm icon + hintLabel) — khi người chơi tìm được track preview ' +
+            'CUỐI CÙNG (vào giai đoạn nối track), nút này tự ẩn qua opacity + khoá tương tác ' +
+            '(interactable=false), GIỮ NGUYÊN ẩn xuyên suốt tới khi màn kế tiếp tải xong (xác nhận ' +
+            'từ user) — không tự hiện lại dù quay về trạng thái "chưa cần nối" (ví dụ tap lại 1 ô ' +
+            'về Empty/X). Để trống thì bỏ qua, không khoá booster này.',
+    })
+    connectTracksHintBoosterButton: Button | null = null;
+
+    @property({
+        type: Button,
+        tooltip:
+            'Nút booster Place Track (cả cụm icon + connectTracksPlaceTrackLabel) — cùng ý nghĩa và ' +
+            'thời điểm ẩn với connectTracksHintBoosterButton ở trên.',
+    })
+    connectTracksPlaceTrackBoosterButton: Button | null = null;
 
     @property({
         type: RichText,
@@ -416,9 +455,10 @@ export class GameplayScreen extends UIScreen {
     /** Tránh phát lại tween hiện/ẩn connectTracksHintLabel mỗi lần refresh nếu trạng thái không đổi. */
     private connectTracksHintVisible = false;
     private connectTracksHintEligible = false;
-    private readonly expireConnectTracksHint = (): void => {
-        this.animateConnectTracksHint(false);
-    };
+    /** True ngay sau khi 2 booster (Hint/Place Track) đã bị khoá lúc vào giai đoạn nối track — chỉ
+     * đặt lại false ở resetConnectTracksBoosterLockInstant() (lúc tải màn kế tiếp/đóng màn), KHÔNG
+     * bao giờ tự false khi needsConnectionHint quay lại false (xác nhận từ user: ẩn tới màn sau). */
+    private connectTracksBoostersLocked = false;
     /** Ô đang mở Track option menu (xác nhận từ user), hoặc null — gương lại đúng BoardView's
      * selectedCell qua setSelectedCellChangedHandler, chỉ để đổ dữ liệu/hiện cụm option CỐ ĐỊNH. */
     private connectTracksOptionsSelectedCell: number | null = null;
@@ -441,6 +481,9 @@ export class GameplayScreen extends UIScreen {
         this.warnIfMissing(this.connectTracksVictory, 'connectTracksVictory');
         this.warnIfMissing(this.connectTracksTutorial, 'connectTracksTutorial');
         this.warnIfMissing(this.connectTracksHintLabel, 'connectTracksHintLabel');
+        this.warnIfMissing(this.connectTracksHintBoosterButton, 'connectTracksHintBoosterButton');
+        this.warnIfMissing(this.connectTracksPlaceTrackBoosterButton, 'connectTracksPlaceTrackBoosterButton');
+        this.warnIfMissing(this.connectTracksIdleConnectHint, 'connectTracksIdleConnectHint');
         this.warnIfMissing(this.connectTracksOptionMenu, 'connectTracksOptionMenu');
         this.warnIfMissing(this.connectTracksPlaceTrackLabel, 'connectTracksPlaceTrackLabel');
         this.warnIfMissing(this.connectTracksTrackCountLabel, 'connectTracksTrackCountLabel');
@@ -538,6 +581,8 @@ export class GameplayScreen extends UIScreen {
             this.connectTracksOptionMenu?.setOptionSelectedHandler(null);
             this.connectTracksOptionsSelectedCell = null;
             this.hideConnectTracksHintInstant();
+            this.resetConnectTracksBoosterLockInstant();
+            this.connectTracksIdleConnectHint?.hideInstant();
             this.connectTracksOptionMenu?.hideInstant();
         }
     }
@@ -554,16 +599,10 @@ export class GameplayScreen extends UIScreen {
         // dưới) sẽ HUỶ MẤT ván vừa thắng, buộc người chơi chơi lại từ đầu. Cùng context+puzzleId,
         // instant=true, không phải tutorial => chỉ là "thông báo lại", không làm gì cả, để luồng ăn
         // mừng đang tạm dừng tự tiếp tục.
-        console.log('[DEBUG GameplayScreen] onPuzzleReady:', JSON.stringify({
-            instant: payload.instant, payloadContext: payload.context, payloadPuzzleId: payload.puzzleId,
-            currentContext: this.currentContext, currentPuzzleId: this.currentPuzzleId,
-        }));
         if (payload.instant && payload.context !== 'tutorial'
             && payload.context === this.currentContext && payload.puzzleId === this.currentPuzzleId) {
-            console.log('[DEBUG GameplayScreen] onPuzzleReady: GUARD HIT -> return early (no reload)');
             return;
         }
-        console.log('[DEBUG GameplayScreen] onPuzzleReady: guard MISSED -> will proceed to cancel()/loadConnectTracksLevel()');
         // BUG đã sửa (báo lỗi của user — "booster/back/settings bị ẩn sau khi sang level thật từ
         // tut"): ConnectTracksVictoryView.collectHud() quét MỌI node con không được bảo vệ của
         // gameplayRoot (gồm TopBar/BtnBack/BottomToolbar — nơi chứa nút back/settings/2 booster) rồi
@@ -678,10 +717,6 @@ export class GameplayScreen extends UIScreen {
      * token chặn kết quả trễ của 1 lần load CŨ (màn đã đóng hoặc đã mở level khác) ghi đè session.
      */
     private async loadConnectTracksLevel(levelId: string): Promise<void> {
-        console.log('[DEBUG GameplayScreen] loadConnectTracksLevel() start, levelId=', levelId,
-            'connectTracksBoard.node.position=', this.connectTracksBoard
-                ? `${this.connectTracksBoard.node.position.x},${this.connectTracksBoard.node.position.y},${this.connectTracksBoard.node.position.z}`
-                : 'no board');
         this.saveConnectTracksProgress();
         this.connectTracksProgressKey = null;
         this.connectTracksInput?.unbind();
@@ -726,6 +761,8 @@ export class GameplayScreen extends UIScreen {
             this.connectTracksOptionsSelectedCell = null;
             this.connectTracksWonNotified = false;
             this.hideConnectTracksHintInstant();
+            this.resetConnectTracksBoosterLockInstant();
+            this.connectTracksIdleConnectHint?.hideInstant();
             this.connectTracksOptionMenu?.hideInstant();
             this.refreshConnectTracksBoard();
             // "Nối lại node encourage đầu game" (xác nhận từ user — port từ luồng Dogdoku cũ,
@@ -762,7 +799,7 @@ export class GameplayScreen extends UIScreen {
         if (after.mistakes > before.mistakes) this.connectTracksScoreStreak = 0;
         let gained = 0;
         after.cellStates.forEach((state, i) => {
-            if (after.mainTrackCells.includes(i)) return;
+            if (after.mainTrackCells.indexOf(i) !== -1) return;
             if (state !== 'Track' && state !== 'TrackPreview') return;
             const previous = before.cellStates[i];
             if (previous === 'Track' || previous === 'TrackPreview') return;
@@ -814,7 +851,7 @@ export class GameplayScreen extends UIScreen {
         if (!this.connectTracksTrackCountLabel) return;
         let found = 0;
         snapshot.cellStates.forEach((state, i) => {
-            if (snapshot.mainTrackCells.includes(i)) return;
+            if (snapshot.mainTrackCells.indexOf(i) !== -1) return;
             if (state === 'Track' || state === 'TrackPreview') found++;
         });
         this.connectTracksTrackCountLabel.string =
@@ -840,6 +877,15 @@ export class GameplayScreen extends UIScreen {
         // đã sai (đếm XUÔI từ 0) — phải trừ ngược lại, nếu không tim sẽ hiện sai chiều hoàn toàn.
         this.heartsView?.set(snapshot.maxMistakes - snapshot.mistakes, snapshot.maxMistakes);
         this.applyConnectTracksHint(snapshot.needsConnectionHint);
+        // Khoá khi vào giai đoạn nối; mở lại (animated) khi KHÔNG còn trong giai đoạn đó NHƯNG vẫn
+        // đang Active (restart/reset...) — KHÔNG mở lại nếu đã Won (needsConnectionHint cũng false
+        // lúc đó, nhưng phải GIỮ khoá tới màn sau, xem applyConnectTracksBoosterLock()).
+        if (snapshot.needsConnectionHint) {
+            this.applyConnectTracksBoosterLock(true);
+        } else if (snapshot.phase !== GamePhase.Won) {
+            this.unlockConnectTracksBoostersAnimated();
+        }
+        this.connectTracksIdleConnectHint?.refresh(this.connectTracksBoard, session);
 
         // Thua (đủ 3 mistake) → mở ConnectTracksLosePopup RIÊNG (xác nhận từ user: thay thế hoàn
         // toàn ResultPopup cho ConnectTracks). Chỉ mở 1 lần cho mỗi lần thua, không lặp lại ở các
@@ -924,14 +970,14 @@ export class GameplayScreen extends UIScreen {
     /**
      * Hiện/ẩn connectTracksHintLabel bằng scale + opacity (xác nhận từ user) theo
      * snapshot.needsConnectionHint — "đã tìm hết track đúng nhưng chưa nối thành đường liên mạch".
-     * Chỉ phát tween khi trạng thái THỰC SỰ đổi — refresh có thể gọi lại nhiều lần không đổi gì.
+     * GIỮ NGUYÊN cho tới khi needsConnectionHint tự chuyển false (người chơi nối xong hết, hoặc
+     * thắng, hoặc không còn đủ điều kiện nữa) — KHÔNG tự ẩn theo thời gian (xác nhận từ user). Chỉ
+     * phát tween khi trạng thái THỰC SỰ đổi — refresh có thể gọi lại nhiều lần không đổi gì.
      */
     private applyConnectTracksHint(visible: boolean): void {
         if (visible === this.connectTracksHintEligible) return;
         this.connectTracksHintEligible = visible;
-        this.unschedule(this.expireConnectTracksHint);
         this.animateConnectTracksHint(visible);
-        if (visible) this.scheduleOnce(this.expireConnectTracksHint, CONNECT_TRACKS_HINT_VISIBLE_SECONDS);
     }
 
     private animateConnectTracksHint(visible: boolean): void {
@@ -944,6 +990,7 @@ export class GameplayScreen extends UIScreen {
         Tween.stopAllByTarget(node);
         Tween.stopAllByTarget(opacity);
         if (visible) {
+            this.positionConnectTracksHintLabelAboveBoard(node);
             node.active = true;
             node.setScale(CONNECT_TRACKS_HINT_FROM_SCALE, CONNECT_TRACKS_HINT_FROM_SCALE, 1);
             opacity.opacity = 0;
@@ -966,9 +1013,22 @@ export class GameplayScreen extends UIScreen {
         }
     }
 
+    /** Định vị connectTracksHintLabel CAO HƠN viền trên của board đúng
+     * connectTracksHintLabelHeightAboveBoard px (world), CHỈ đổi Y — giữ nguyên X/Z hiện tại (đã
+     * canh ngang sẵn trong Editor). Không làm gì nếu thiếu board hoặc node không có node cha. */
+    private positionConnectTracksHintLabelAboveBoard(node: Node): void {
+        if (!this.connectTracksBoard || !node.parent) return;
+        const parentUI = node.parent.getComponent(UITransform);
+        if (!parentUI) return;
+        const targetWorldY = this.connectTracksBoard.getTopEdgeWorldY() + this.connectTracksHintLabelHeightAboveBoard;
+        const worldPoint = node.worldPosition.clone();
+        worldPoint.y = targetWorldY;
+        const localPoint = parentUI.convertToNodeSpaceAR(worldPoint);
+        node.setPosition(node.position.x, localPoint.y, node.position.z);
+    }
+
     /** Tắt NGAY (không tween) — dùng khi đóng màn hoặc đổi level, tránh hiệu ứng ẩn chạy lố. */
     private hideConnectTracksHintInstant(): void {
-        this.unschedule(this.expireConnectTracksHint);
         this.connectTracksHintEligible = false;
         this.connectTracksHintVisible = false;
         const node = this.connectTracksHintLabel;
@@ -982,6 +1042,60 @@ export class GameplayScreen extends UIScreen {
             opacity.opacity = 0;
         }
         node.active = false;
+    }
+
+    /**
+     * "Khi người chơi tìm được track preview cuối cùng (vào giai đoạn nối), ẩn 2 booster kiểu
+     * opacity để không tương tác được nữa cho tới màn sau; nếu restart hoặc bất kỳ thao tác gì đưa
+     * màn về trạng thái chưa vào giai đoạn nối thì phải mở lại kiểu opacity" (xác nhận từ user).
+     * Gọi cùng lúc với unlockConnectTracksBoostersAnimated() mỗi lần refreshConnectTracksBoard() —
+     * CHỈ khoá khi `shouldLock` true; việc MỞ LẠI do unlockConnectTracksBoostersAnimated() đảm
+     * nhiệm (xem đó để biết lý do tách riêng, không gộp vào đây).
+     */
+    private applyConnectTracksBoosterLock(shouldLock: boolean): void {
+        if (!shouldLock || this.connectTracksBoostersLocked) return;
+        this.connectTracksBoostersLocked = true;
+        for (const button of [this.connectTracksHintBoosterButton, this.connectTracksPlaceTrackBoosterButton]) {
+            if (!button) continue;
+            button.interactable = false;
+            const opacity = button.node.getComponent(UIOpacity) ?? button.node.addComponent(UIOpacity);
+            Tween.stopAllByTarget(opacity);
+            tween(opacity).to(CONNECT_TRACKS_BOOSTER_LOCK_FADE_SECONDS, { opacity: 0 }).start();
+        }
+    }
+
+    /**
+     * Mở lại 2 booster bằng cách mờ dần NGƯỢC LẠI (opacity -> 255) — dùng khi restart hoặc bất kỳ
+     * thao tác nào đưa màn (VẪN ĐANG mở, người chơi còn nhìn thấy) về trạng thái CHƯA vào giai đoạn
+     * nối (xác nhận từ user). KHÁC hẳn resetConnectTracksBoosterLockInstant() (tắt NGAY không
+     * tween, dùng lúc đóng màn/tải màn mới — người chơi không còn nhìn thấy nữa nên không cần hiệu
+     * ứng). Không làm gì nếu đang không bị khoá (tránh phát tween thừa mỗi lần refresh).
+     */
+    private unlockConnectTracksBoostersAnimated(): void {
+        if (!this.connectTracksBoostersLocked) return;
+        this.connectTracksBoostersLocked = false;
+        for (const button of [this.connectTracksHintBoosterButton, this.connectTracksPlaceTrackBoosterButton]) {
+            if (!button) continue;
+            button.interactable = true;
+            const opacity = button.node.getComponent(UIOpacity) ?? button.node.addComponent(UIOpacity);
+            Tween.stopAllByTarget(opacity);
+            tween(opacity).to(CONNECT_TRACKS_BOOSTER_LOCK_FADE_SECONDS, { opacity: 255 }).start();
+        }
+    }
+
+    /** Tắt NGAY (không tween) + mở khoá lại — dùng khi đóng màn hoặc tải màn kế tiếp, cùng mốc với
+     * hideConnectTracksHintInstant(). */
+    private resetConnectTracksBoosterLockInstant(): void {
+        this.connectTracksBoostersLocked = false;
+        for (const button of [this.connectTracksHintBoosterButton, this.connectTracksPlaceTrackBoosterButton]) {
+            if (!button) continue;
+            button.interactable = true;
+            const opacity = button.node.getComponent(UIOpacity);
+            if (opacity) {
+                Tween.stopAllByTarget(opacity);
+                opacity.opacity = 255;
+            }
+        }
     }
 
     /**
@@ -1054,7 +1168,6 @@ export class GameplayScreen extends UIScreen {
 
         const ads = AdServiceHolder.current;
         if (!ads.isRewardedReady()) {
-            console.log('[GameplayScreen] Chưa có quảng cáo sẵn sàng.');
             return;
         }
 
@@ -1063,7 +1176,6 @@ export class GameplayScreen extends UIScreen {
         try {
             const result = await ads.showRewarded();
             if (!result.rewarded) {
-                console.log('[GameplayScreen] Không nhận thưởng:', result.reason ?? 'đã đóng sớm');
                 return;
             }
 
@@ -1617,7 +1729,6 @@ export class GameplayScreen extends UIScreen {
 
         const ads = AdServiceHolder.current;
         if (!ads.isRewardedReady()) {
-            console.log('[GameplayScreen] Chưa có quảng cáo sẵn sàng.');
             return;
         }
 
@@ -1626,7 +1737,6 @@ export class GameplayScreen extends UIScreen {
         try {
             const result = await ads.showRewarded();
             if (!result.rewarded) {
-                console.log('[GameplayScreen] Không nhận thưởng:', result.reason ?? 'đã đóng sớm');
                 return;
             }
 
@@ -1645,7 +1755,6 @@ export class GameplayScreen extends UIScreen {
 
         const ads = AdServiceHolder.current;
         if (!ads.isRewardedReady()) {
-            console.log('[GameplayScreen] Chưa có quảng cáo sẵn sàng.');
             return;
         }
 
@@ -1654,7 +1763,6 @@ export class GameplayScreen extends UIScreen {
         try {
             const result = await ads.showRewarded();
             if (!result.rewarded) {
-                console.log('[GameplayScreen] Không nhận thưởng:', result.reason ?? 'đã đóng sớm');
                 return;
             }
 

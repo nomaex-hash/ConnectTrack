@@ -381,9 +381,6 @@ export class DailyStreakScreen extends UIScreen {
 
     private render(celebrate: boolean): void {
         const board = this.readBoard();
-        console.log('[DEBUG DailyStreakScreen] render() celebrate=', celebrate, 'board=', JSON.stringify({
-            streak: board.streak, playedToday: board.playedToday, rewardReady: board.rewardReady,
-        }));
         this.buildDayRow(board);
         this.fillLabels(board);
         this.setupBottomButton(board, celebrate);
@@ -776,10 +773,6 @@ export class DailyStreakScreen extends UIScreen {
     private setupBottomButton(board: StreakBoard, pendingResult: boolean): void {
         this.playNowMode = board.streak === 0 || !board.playedToday;
         this.pendingResult = pendingResult;
-        console.log('[DEBUG DailyStreakScreen] setupBottomButton:', JSON.stringify({
-            streak: board.streak, playedToday: board.playedToday, rewardReady: board.rewardReady,
-            rewardClaimed: board.rewardClaimed, playNowMode: this.playNowMode, pendingResult,
-        }));
 
         if (this.homeButtonLabel) {
             const key = this.playNowMode
@@ -919,8 +912,6 @@ export class DailyStreakScreen extends UIScreen {
         // bình thường/đã thắp/chưa thắp đều không cho bấm — đúng thiết kế, không phải lỗi) hoặc đã
         // bấm rồi (sunTapped=true, chỉ bấm được 1 lần). sunAnimation=null nghĩa là CHƯA gán
         // component Animation vào property này trong Inspector.
-        console.log('[DEBUG DailyStreakScreen] onTapSun(): awaitingSunTap=', this.awaitingSunTap,
-            'sunTapped=', this.sunTapped, 'sunAnimation=', !!this.sunAnimation);
         if (!this.awaitingSunTap || this.sunTapped) return;
         this.sunTapped = true;
         this.awaitingSunTap = false;
@@ -953,10 +944,8 @@ export class DailyStreakScreen extends UIScreen {
     };
 
     onTapHome(): void {
-        console.log('[DEBUG DailyStreakScreen] onTapHome: playNowMode=', this.playNowMode, 'pendingResult=', this.pendingResult);
         if (this.playNowMode) {
             const levelId = ProgressionHolder.current?.getCurrentLevel() ?? 1;
-            console.log('[DEBUG DailyStreakScreen] playNowMode branch -> LEVEL_SELECTED_EVENT levelId=', levelId);
             const payload: LevelSelectedEventPayload = { context: 'campaign', levelId };
             EventManager.instance.emit(LEVEL_SELECTED_EVENT, payload);
             return;

@@ -281,7 +281,6 @@ export class ProfileEditPopup extends BasePopup {
         MConfigResourceUtils.getProfileSpriteFrame(PROFILE_TAB_TYPE.AVATAR,pathAvatar, (err, spriteFrame) =>{
             this.endIconLoad();
             if(err){
-                console.log(err);
             }else{
                 if (this.iconAvatar) {
                     this.iconAvatar.sizeMode = Sprite.SizeMode.CUSTOM;
@@ -295,7 +294,6 @@ export class ProfileEditPopup extends BasePopup {
         MConfigResourceUtils.getProfileSpriteFrame(PROFILE_TAB_TYPE.FRAME,pathFrame, (err, spriteFrame) =>{
             this.endIconLoad();
             if(err){
-                console.log(err);
             }else{
                 if (this.iconFrame) {
                     this.iconFrame.sizeMode = Sprite.SizeMode.CUSTOM;

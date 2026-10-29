@@ -96,13 +96,11 @@ export class LeaderboardGroupWeek extends LeaderboarBaseGroup {
 
         // LOG TẠM ĐỂ DEBUG (báo lỗi của user — "icon tắt quá nhanh, leaderboard còn chưa hiện") —
         // xoá sau khi xác định được nguyên nhân thật từ log console thực tế.
-        console.log('[DEBUG nodeLoading] showGroup() called, token sẽ là', this.loadToken + 1, 'lúc', performance.now().toFixed(0));
         if (this.nodeLoading) this.nodeLoading.active = true;
         this.readyPromise = new Promise<void>((resolve) => { this.readyResolve = resolve; });
         this.readyCallbacks = [];
         super.showGroup();
         if (!LeaderboardManager.instance) return;
-        console.log("LeaderboardGroupWeek.showGroup",LeaderboardManager.instance.leaderboardRewards);
         this.leaderBoardGroupManager?.initRewards(LeaderboardManager.instance.leaderboardRewards);
         this.preloadRewardIcons(LeaderboardManager.instance.leaderboardRewards);
 
@@ -234,15 +232,11 @@ export class LeaderboardGroupWeek extends LeaderboarBaseGroup {
         if (myRow) myRow.node.active = false;
 
         const token = ++this.loadToken;
-        console.log('[DEBUG nodeLoading] bắt đầu đợi', loads.length, 'promise, token=', token, 'lúc', performance.now().toFixed(0));
         Promise.all(loads).then(() => {
             // LOG TẠM ĐỂ DEBUG — xoá sau khi xác định được nguyên nhân thật.
-            console.log('[DEBUG nodeLoading] Promise.all RESOLVED, token=', token, 'this.loadToken=', this.loadToken,
-                'node hợp lệ=', isValid(this.node, true), 'lúc', performance.now().toFixed(0));
             // Người chơi có thể đã đổi tab/đóng Leaderboard trong lúc chờ — chỉ "mở" nếu đây vẫn là
             // lần mở MỚI NHẤT (tránh 1 lần tải cũ hiện đè lên lần mở sau).
             if (token !== this.loadToken || !isValid(this.node, true)) {
-                console.log('[DEBUG nodeLoading] BỊ HUỶ (token lệch hoặc node invalid) — KHÔNG reveal, KHÔNG tắt nodeLoading ở lần này.');
                 return;
             }
             // BUG đã sửa (báo lỗi của user — "mất hiệu ứng hiện lên của các node"): TOP3/scrollview
@@ -261,7 +255,6 @@ export class LeaderboardGroupWeek extends LeaderboarBaseGroup {
             for (const callback of this.readyCallbacks) callback();
             this.readyCallbacks = [];
             // LOG TẠM ĐỂ DEBUG — xoá sau khi xác định được nguyên nhân thật.
-            console.log('[DEBUG nodeLoading] REVEAL xong (TOP3/scrollview/myRow đã active, readyCallbacks đã chạy) — TẮT nodeLoading NGAY BÂY GIỜ, lúc', performance.now().toFixed(0));
             if (this.nodeLoading) this.nodeLoading.active = false;
             this.readyResolve?.();
             this.readyResolve = null;

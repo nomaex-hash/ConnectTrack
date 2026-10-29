@@ -9,7 +9,13 @@ export class FBInstantManager implements IFBInstantManager {
         if (typeof FBInstant === 'undefined') {
             throw new Error('[FBInstantManager] FBInstant SDK chưa được nạp.');
         }
-        await FBInstant.startGameAsync();
+        // FBInstantManager dùng chung (common/) cũng gọi startGameAsync() — lần gọi trùng có thể bị từ chối,
+        // không được làm sập boot.
+        try {
+            await FBInstant.startGameAsync();
+        } catch {
+            // đã được khởi động bởi luồng kia
+        }
         this.ready = true;
     }
 

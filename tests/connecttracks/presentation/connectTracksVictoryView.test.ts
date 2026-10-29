@@ -40,6 +40,7 @@ vi.mock('cc', () => {
     class Button { static EventType = { CLICK: 'click' }; node = new Node('next'); interactable = true; isValid = true; }
     class ChainableTween {
         to() { return this; } delay() { return this; } call(fn?: () => void) { fn?.(); return this; } start() { return this; }
+        repeatForever() { return this; }
     }
     return {
         _decorator: { ccclass: () => (target: unknown) => target, property: () => () => {} },

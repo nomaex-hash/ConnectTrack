@@ -84,7 +84,7 @@ export class Board {
             throw new RangeError('A connection cannot point outward past the board border.');
         }
         const current = this.linksAt(index);
-        if (current.includes(direction)) {
+        if (current.indexOf(direction) !== -1) {
             throw new RangeError(`Cell ${index} already has a link ${direction}.`);
         }
         if (current.length >= 2) {
@@ -119,7 +119,7 @@ export class Board {
         this.assertInBounds(index);
         this.assertNotLocked(index);
         const current = this.linksAt(index);
-        if (!current.includes(direction)) {
+        if (current.indexOf(direction) === -1) {
             throw new RangeError(`Cell ${index} has no link ${direction} to remove.`);
         }
         const next = Object.freeze(current.filter((existing) => existing !== direction));

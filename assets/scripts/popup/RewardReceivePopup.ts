@@ -139,7 +139,6 @@ export class RewardReceivePopup extends BasePopup {
 
         const ads = AdServiceHolder.current;
         if (!ads.isRewardedReady()) {
-            console.log('[RewardReceivePopup] Chưa có quảng cáo sẵn sàng.');
             return;
         }
 
@@ -152,7 +151,6 @@ export class RewardReceivePopup extends BasePopup {
             const result = await ads.showRewarded();
             if (!this.node?.isValid) return;
             if (!result.rewarded) {
-                console.log('[RewardReceivePopup] Không nhận thưởng x2:', result.reason ?? 'đã đóng sớm');
                 if (this.btnWatchAdX2) this.btnWatchAdX2.interactable = true;
                 if (this.btnClaim) this.btnClaim.interactable = true;
                 return;

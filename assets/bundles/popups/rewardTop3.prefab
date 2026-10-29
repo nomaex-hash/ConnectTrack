@@ -374,8 +374,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 540,
-      "height": 60
+      "width": 700,
+      "height": 58.4
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -413,12 +413,12 @@
     "_string": "You've won 1st place 01 time",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 41,
+    "_actualFontSize": 40,
     "_fontSize": 40,
     "_fontFamily": "Arial",
     "_lineHeight": 40,
     "_overflow": 2,
-    "_enableWrapText": true,
+    "_enableWrapText": false,
     "_font": {
       "__uuid__": "6552b1f7-2d23-4eac-865b-431d3e208bf0",
       "__expectedType__": "cc.TTFFont"
@@ -536,7 +536,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 540,
+      "width": 700,
       "height": 75.6
     },
     "_anchorPoint": {
@@ -563,7 +563,7 @@
       "__id__": 21
     },
     "_lineHeight": 60,
-    "_string": "<color=#00ff00>Rich</color><color=#0fffff>Text</color>",
+    "_string": "You've won 1st place<color=#4CD137>01</color>time",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_fontSize": 40,
@@ -574,7 +574,7 @@
       "b": 81,
       "a": 255
     },
-    "_maxWidth": 540,
+    "_maxWidth": 700,
     "_fontFamily": "Arial",
     "_font": {
       "__uuid__": "6552b1f7-2d23-4eac-865b-431d3e208bf0",

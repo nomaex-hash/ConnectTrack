@@ -87,9 +87,7 @@ export class LeaderboardPopup extends UIPopup<void> {
         // LeaderboardGroupWeek — đổi sang onLeaderboardReady() (callback đồng bộ, chạy CÙNG lệnh).
         // LOG TẠM ĐỂ DEBUG (báo lỗi của user — "icon tắt quá nhanh, leaderboard còn chưa hiện") —
         // xoá sau khi xác định được nguyên nhân thật từ log console thực tế.
-        console.log('[DEBUG LeaderboardPopup] onShow() xong, đăng ký onLeaderboardReady lúc', performance.now().toFixed(0));
         this.leaderboardGroup?.onLeaderboardReady(() => {
-            console.log('[DEBUG LeaderboardPopup] onLeaderboardReady callback chạy — hideLoading() CỦA POPUP ngay bây giờ, lúc', performance.now().toFixed(0));
             this.hideLoading();
         });
     }

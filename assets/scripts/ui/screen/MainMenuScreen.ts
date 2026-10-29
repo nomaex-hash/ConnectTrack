@@ -544,7 +544,6 @@ export class MainMenuScreen extends UIScreen {
         LegacyLeaderboardManager.instance?.resetWeeklyForTesting();
         GameManager.instance?.checkPendingTournamentResult();
         UIManager.instance?.checkTournamentPopupForTesting();
-        console.log('[MainMenuScreen] Đã giả lập giải đấu Weekly kết thúc (test) — popup sẽ tự hiện.');
     }
 
     /** DÙNG ĐỂ TEST — hiện THẲNG RewardReceivePopup với đúng phần thưởng Streak cấu hình

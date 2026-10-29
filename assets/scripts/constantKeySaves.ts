@@ -69,6 +69,9 @@ export class ConstantKeySaves {
     public static PLAYER_INFO:string = "pi";
 
     public static TUTORIAL_OBJ:string = "to";
+
+    /** Toàn bộ document lưu local của ConnectTracks (chuỗi JSON) — đồng bộ lên Facebook qua configuration. */
+    public static CONNECTTRACKS_SAVE:string = "ctsv";
 }
 
 

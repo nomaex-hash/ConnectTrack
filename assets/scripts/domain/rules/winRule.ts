@@ -30,7 +30,7 @@ export function hasCompleteRailPath(board: Board, truth: SolutionTruth): boolean
         visited.add(cell);
         const main = board.mainTrack.portsAt(cell);
         const ports = main.length ? main : board.linksAt(cell);
-        if (ports.length !== 2 || !ports.includes(enteredFrom)) return false;
+        if (ports.length !== 2 || ports.indexOf(enteredFrom) === -1) return false;
         const leaving = ports.find(port => port !== enteredFrom)!;
         if (cell === path[path.length - 1]) {
             return leaving === truth.level.outwardEnd && visited.size === path.length;

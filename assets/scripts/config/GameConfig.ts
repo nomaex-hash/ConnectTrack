@@ -25,12 +25,12 @@ export const GameConfig = {
     scoreStreakBaseTier: 450,
     scoreStreakTierStep: 130,
 
-    /** "Đặt đúng đến track thứ 10 thì hiện mức đầu [của praise combo], cứ cách 3 track đúng lại
-     * hiện mức tiếp theo" (xác nhận từ user) — streak (connectTracksScoreStreak) >= praiseStreakStart
-     * VÀ (streak - praiseStreakStart) chia hết cho praiseStreakStep mới kích hoạt
+    /** "Đặt đúng đến track thứ 5 thì hiện mức đầu [của praise combo], cứ cách 2 track đúng lại
+     * hiện mức tiếp theo" (xác nhận từ user, đổi từ 10/3) — streak (connectTracksScoreStreak) >=
+     * praiseStreakStart VÀ (streak - praiseStreakStart) chia hết cho praiseStreakStep mới kích hoạt
      * ConnectTracksBoardView.spawnPraiseEffect(), xem GameplayScreen.spawnScorePopupsForTrackChanges(). */
-    praiseStreakStart: 10,
-    praiseStreakStep: 3,
+    praiseStreakStart: 5,
+    praiseStreakStep: 2,
 
   
     scoreSpeedBonusMax: 100,
